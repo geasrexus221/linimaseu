@@ -1,0 +1,10 @@
+Nama Halaman	Kategori Fitur	Deskripsi Fungsional Fitur
+Menu Autentikasi (Daftar & Masuk)	Autentikasi	Layar login dan registrasi bagi Pengguna dengan pilihan peran sebagai Siswa atau Guru.
+Menu Beranda Utama (Dashboard Siswa)	Halaman Utama	Dasbor beranda bagi Siswa untuk memantau kelas virtual aktif, misi harian, dan ringkasan progres belajar.
+Menu Jelajah Materi (Story Mode)	Jelajah Materi	Peta jalur pembelajaran sejarah/sains interaktif yang memadukan materi bacaan, teka-teki visual fisika, dan novel visual.
+Menu Kuis Interaktif (Quiz Hub)	Kuis Interaktif	Pusat evaluasi mandiri bertema pelajaran sekolah serta pengerjaan tugas kuis yang diberikan oleh guru.
+Menu Arena Bermain (Game Arcade)	Arena Bermain	Menu beranda untuk mengakses pilihan permainan mini edukatif bertema kompetisi sejarah dan sains.
+Menu Toko (Shop)	Toko & Inventori	Tempat membelanjakan poin Bintang untuk membeli kotak peti harta karun koleksi artefak dan kartu aksi bantuan permainan.
+Menu Profil (Profile)	Profil Siswa	Layar pemantau statistik pencapaian XP/Level, pergantian avatar, serta galeri museum koleksi artefak sejarah.
+Menu Pengaturan (Settings)	Pengaturan	Menu penyesuaian volume audio suara, pemilihan tema gelap/terang, dan aktivasi mode pengembang.
+Menu Dasbor Guru (Teacher Dashboard)	Dasbor Guru	Layar panel terpadu bagi Guru untuk mengelola ruang kelas, catatan rekam murid, serta menyusun dan merilis kuis tugas.

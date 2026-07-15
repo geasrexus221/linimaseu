@@ -1,0 +1,573 @@
+{
+  "name": "Map1",
+  "tiles": [
+    {
+      "id": 11,
+      "type": "jejak",
+      "x": 9,
+      "y": 11,
+      "owner": null,
+      "next": [
+        17
+      ]
+    },
+    {
+      "id": 12,
+      "type": "peti",
+      "x": 8,
+      "y": 11,
+      "owner": null,
+      "next": [
+        11,
+        47
+      ]
+    },
+    {
+      "id": 13,
+      "type": "kartu",
+      "x": 7,
+      "y": 11,
+      "owner": null,
+      "next": [
+        12
+      ]
+    },
+    {
+      "id": 14,
+      "type": "base",
+      "x": 6,
+      "y": 11,
+      "owner": 3,
+      "next": [
+        13
+      ]
+    },
+    {
+      "id": 17,
+      "type": "jebakan",
+      "x": 10,
+      "y": 11,
+      "owner": null,
+      "next": [
+        18
+      ]
+    },
+    {
+      "id": 18,
+      "type": "peti",
+      "x": 11,
+      "y": 11,
+      "owner": null,
+      "next": [
+        19
+      ]
+    },
+    {
+      "id": 19,
+      "type": "angin",
+      "x": 12,
+      "y": 11,
+      "owner": null,
+      "next": [
+        89
+      ]
+    },
+    {
+      "id": 21,
+      "type": "angin",
+      "x": 5,
+      "y": 10,
+      "owner": null,
+      "next": [
+        83
+      ]
+    },
+    {
+      "id": 22,
+      "type": "peti",
+      "x": 5,
+      "y": 9,
+      "owner": null,
+      "next": [
+        21
+      ]
+    },
+    {
+      "id": 23,
+      "type": "jebakan",
+      "x": 5,
+      "y": 8,
+      "owner": null,
+      "next": [
+        22,
+        61
+      ]
+    },
+    {
+      "id": 24,
+      "type": "jejak",
+      "x": 5,
+      "y": 7,
+      "owner": null,
+      "next": [
+        23
+      ]
+    },
+    {
+      "id": 25,
+      "type": "peti",
+      "x": 5,
+      "y": 6,
+      "owner": null,
+      "next": [
+        24
+      ]
+    },
+    {
+      "id": 26,
+      "type": "kartu",
+      "x": 5,
+      "y": 5,
+      "owner": null,
+      "next": [
+        25
+      ]
+    },
+    {
+      "id": 27,
+      "type": "base",
+      "x": 5,
+      "y": 4,
+      "owner": 2,
+      "next": [
+        26
+      ]
+    },
+    {
+      "id": 40,
+      "type": "angin",
+      "x": 13,
+      "y": 4,
+      "owner": null,
+      "next": [
+        81
+      ]
+    },
+    {
+      "id": 41,
+      "type": "peti",
+      "x": 13,
+      "y": 5,
+      "owner": null,
+      "next": [
+        40
+      ]
+    },
+    {
+      "id": 42,
+      "type": "jebakan",
+      "x": 13,
+      "y": 6,
+      "owner": null,
+      "next": [
+        41,
+        79
+      ]
+    },
+    {
+      "id": 43,
+      "type": "jejak",
+      "x": 13,
+      "y": 7,
+      "owner": null,
+      "next": [
+        42
+      ]
+    },
+    {
+      "id": 44,
+      "type": "peti",
+      "x": 13,
+      "y": 8,
+      "owner": null,
+      "next": [
+        43
+      ]
+    },
+    {
+      "id": 45,
+      "type": "kartu",
+      "x": 13,
+      "y": 9,
+      "owner": null,
+      "next": [
+        44
+      ]
+    },
+    {
+      "id": 46,
+      "type": "base",
+      "x": 13,
+      "y": 10,
+      "owner": 4,
+      "next": [
+        45
+      ]
+    },
+    {
+      "id": 47,
+      "type": "penjaga",
+      "x": 8,
+      "y": 10,
+      "owner": null,
+      "next": [
+        48
+      ]
+    },
+    {
+      "id": 48,
+      "type": "angin",
+      "x": 8,
+      "y": 9,
+      "owner": null,
+      "next": [
+        49
+      ]
+    },
+    {
+      "id": 49,
+      "type": "jejak",
+      "x": 9,
+      "y": 9,
+      "owner": null,
+      "next": [
+        50
+      ]
+    },
+    {
+      "id": 50,
+      "type": "peti",
+      "x": 10,
+      "y": 9,
+      "owner": null,
+      "next": [
+        91,
+        51
+      ]
+    },
+    {
+      "id": 51,
+      "type": "kartu",
+      "x": 10,
+      "y": 10,
+      "owner": null,
+      "next": [
+        17
+      ]
+    },
+    {
+      "id": 57,
+      "type": "penjaga",
+      "x": 6,
+      "y": 6,
+      "owner": null,
+      "next": [
+        25
+      ]
+    },
+    {
+      "id": 58,
+      "type": "angin",
+      "x": 7,
+      "y": 6,
+      "owner": null,
+      "next": [
+        59,
+        57
+      ]
+    },
+    {
+      "id": 59,
+      "type": "jejak",
+      "x": 7,
+      "y": 7,
+      "owner": null,
+      "next": [
+        60
+      ]
+    },
+    {
+      "id": 60,
+      "type": "peti",
+      "x": 7,
+      "y": 8,
+      "owner": null,
+      "next": [
+        84
+      ]
+    },
+    {
+      "id": 61,
+      "type": "kartu",
+      "x": 6,
+      "y": 8,
+      "owner": null,
+      "next": [
+        60
+      ]
+    },
+    {
+      "id": 62,
+      "type": "angin",
+      "x": 6,
+      "y": 3,
+      "owner": null,
+      "next": [
+        88
+      ]
+    },
+    {
+      "id": 63,
+      "type": "peti",
+      "x": 7,
+      "y": 3,
+      "owner": null,
+      "next": [
+        62
+      ]
+    },
+    {
+      "id": 64,
+      "type": "jebakan",
+      "x": 8,
+      "y": 3,
+      "owner": null,
+      "next": [
+        63
+      ]
+    },
+    {
+      "id": 65,
+      "type": "jejak",
+      "x": 9,
+      "y": 3,
+      "owner": null,
+      "next": [
+        64
+      ]
+    },
+    {
+      "id": 66,
+      "type": "peti",
+      "x": 10,
+      "y": 3,
+      "owner": null,
+      "next": [
+        65,
+        74
+      ]
+    },
+    {
+      "id": 67,
+      "type": "kartu",
+      "x": 11,
+      "y": 3,
+      "owner": null,
+      "next": [
+        66
+      ]
+    },
+    {
+      "id": 68,
+      "type": "base",
+      "x": 12,
+      "y": 3,
+      "owner": 1,
+      "next": [
+        67
+      ]
+    },
+    {
+      "id": 69,
+      "type": "kartu",
+      "x": 8,
+      "y": 4,
+      "owner": null,
+      "next": [
+        64
+      ]
+    },
+    {
+      "id": 70,
+      "type": "peti",
+      "x": 8,
+      "y": 5,
+      "owner": null,
+      "next": [
+        69,
+        90
+      ]
+    },
+    {
+      "id": 72,
+      "type": "jejak",
+      "x": 9,
+      "y": 5,
+      "owner": null,
+      "next": [
+        70
+      ]
+    },
+    {
+      "id": 73,
+      "type": "angin",
+      "x": 10,
+      "y": 5,
+      "owner": null,
+      "next": [
+        72
+      ]
+    },
+    {
+      "id": 74,
+      "type": "penjaga",
+      "x": 10,
+      "y": 4,
+      "owner": null,
+      "next": [
+        73
+      ]
+    },
+    {
+      "id": 75,
+      "type": "peti",
+      "x": 11,
+      "y": 6,
+      "owner": null,
+      "next": [
+        87
+      ]
+    },
+    {
+      "id": 76,
+      "type": "jejak",
+      "x": 11,
+      "y": 7,
+      "owner": null,
+      "next": [
+        75
+      ]
+    },
+    {
+      "id": 77,
+      "type": "angin",
+      "x": 11,
+      "y": 8,
+      "owner": null,
+      "next": [
+        76,
+        78
+      ]
+    },
+    {
+      "id": 78,
+      "type": "penjaga",
+      "x": 12,
+      "y": 8,
+      "owner": null,
+      "next": [
+        44
+      ]
+    },
+    {
+      "id": 79,
+      "type": "kartu",
+      "x": 12,
+      "y": 6,
+      "owner": null,
+      "next": [
+        75
+      ]
+    },
+    {
+      "id": 81,
+      "type": "kartu",
+      "x": 12,
+      "y": 4,
+      "owner": null,
+      "next": [
+        68
+      ]
+    },
+    {
+      "id": 83,
+      "type": "kartu",
+      "x": 6,
+      "y": 10,
+      "owner": null,
+      "next": [
+        14
+      ]
+    },
+    {
+      "id": 84,
+      "type": "jebakan",
+      "x": 8,
+      "y": 8,
+      "owner": null,
+      "next": [
+        48
+      ]
+    },
+    {
+      "id": 87,
+      "type": "jebakan",
+      "x": 10,
+      "y": 6,
+      "owner": null,
+      "next": [
+        73
+      ]
+    },
+    {
+      "id": 88,
+      "type": "kartu",
+      "x": 5,
+      "y": 3,
+      "owner": null,
+      "next": [
+        27
+      ]
+    },
+    {
+      "id": 89,
+      "type": "kartu",
+      "x": 13,
+      "y": 11,
+      "owner": null,
+      "next": [
+        46
+      ]
+    },
+    {
+      "id": 90,
+      "type": "jebakan",
+      "x": 7,
+      "y": 5,
+      "owner": null,
+      "next": [
+        58
+      ]
+    },
+    {
+      "id": 91,
+      "type": "jebakan",
+      "x": 11,
+      "y": 9,
+      "owner": null,
+      "next": [
+        77
+      ]
+    }
+  ]
+}

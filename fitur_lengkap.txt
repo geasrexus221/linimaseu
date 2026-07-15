@@ -1,0 +1,41 @@
+Nama Halaman	Kategori Fitur	Deskripsi Fungsional Fitur
+Halaman Pemilihan Peran	Autentikasi	Gerbang masuk awal untuk memilih login/registrasi sebagai peran Siswa atau peran Guru.
+Halaman Daftar Akun	Autentikasi	Formulir pendaftaran akun baru bagi Siswa maupun Guru menggunakan nama pengguna, nama lengkap, dan kata sandi.
+Halaman Masuk Akun	Autentikasi	Akses masuk ke dalam aplikasi menggunakan nama pengguna dan kata sandi yang telah terdaftar.
+Dasbor Utama Siswa	Beranda Siswa	Halaman utama bagi Siswa yang memuat pintasan ke ruang kelas aktif, grafik perolehan XP mingguan, dan papan pengumuman guru.
+Misi Harian	Beranda Siswa	Tantangan harian interaktif bagi Siswa untuk mengumpulkan poin bonus XP dengan melakukan aktivitas belajar.
+Peta Jelajah Materi	Jelajah Materi	Peta jalur belajar bertingkat (Candy Crush Style) untuk mengakses modul belajar secara berurutan.
+Halaman Materi Interaktif	Jelajah Materi	Penyajian teks bacaan materi formal IPS/Sejarah yang dilengkapi visualisasi representatif.
+Teka-Teki Cahaya Merambat Lurus	Jelajah Materi	Simulasi fisika sejajarkan 3 celah karton (menggeser 3 slider independen) untuk memancarkan cahaya senter ke bunga target.
+Teka-Teki Cahaya Dibiaskan	Jelajah Materi	Simulasi fisika seret-lepas pensil (drag and drop bebas) ke dalam gelas air untuk memicu efek pensil patah (refraksi).
+Kuis Node Bab	Jelajah Materi	Uji pemahaman kuis di akhir modul belajar untuk membuka akses ke peta ubin pelajaran berikutnya.
+Halaman Novel Visual (VN)	Jelajah Materi	Dialog naratif interaktif bersama tokoh pahlawan perjuangan (Raden Dewi Sartika) dengan navigasi ketuk layar.
+Lobby Kuis Hub	Kuis Interaktif	Pusat navigasi utama kuis dengan pilihan menu Kuis Utama (Misi), masuk kelas virtual, atau tugas khusus pengajar.
+Pilih Pilar Ilmu & Filter Kelas	Kuis Interaktif	Menyajikan 4 rumpun keilmuan (IPAS, Matematika, Bahasa Indonesia, Pend. Pancasila) dengan penyaringan filter kelas (Kelas 4, 5, 6).
+Pilih Tema Kuis Mandiri	Kuis Interaktif	Memilih sub-tema spesifik dari rumpun ilmu yang terpilih untuk memulai pengerjaan kuis.
+Lobby Kelas Virtual	Kuis Interaktif	Menampilkan nama kelas terdaftar, daftar peringkat skor siswa di kelas virtual, dan progres belajar kelompok.
+Daftar Tugas PR dari Guru	Kuis Interaktif	Menampilkan daftar tugas kuis pekerjaan rumah (PR) aktif yang ditugaskan oleh Guru beserta batas waktu pengumpulannya.
+Halaman Pengerjaan Kuis	Kuis Interaktif	Sesi menjawab kuis dengan 5 tipe variasi soal (Pilihan Ganda Klasik, Anagram Susun Huruf, Menjodohkan, Pengelompokan Kategori, dan Isi Rumpang).
+Sistem Nyawa Kuis	Kuis Interaktif	Mekanisme pembatas nyawa (5 unit hearts) yang berkurang jika siswa salah menjawab pertanyaan kuis.
+Kartu Aksi Kuis	Kuis Interaktif	Penggunaan kartu bantuan (seperti Kompas untuk eliminasi pilihan salah, atau Jam Pasir untuk menambah waktu kuis).
+Halaman Hasil Kuis	Kuis Interaktif	Tampilan ringkasan perolehan akurasi jawaban, skor total, perolehan Poin Bintang, dan penambahan poin XP siswa.
+Lobby Arena Bermain	Arena Bermain	Beranda pemilihan jenis permainan mini edukatif (Jelajah Nusantara vs Adu Cendekiawan) dilengkapi tombol panduan bermain.
+Jelajah Nusantara - Intro	Jelajah Nusantara	Layar penjelasan awal mengenai aturan bermain game papan 3D sebelum memulai sesi.
+Jelajah Nusantara - Setup	Jelajah Nusantara	Pengaturan sesi game papan (pemilihan karakter Budi/Wati, era sejarah peta kuis, dan level tingkat kesulitan bot AI lawan).
+Jelajah Nusantara - Papan 3D	Jelajah Nusantara	Arena permainan papan 3D dengan dadu simulasi fisika nyata, bidak pemain melompat, dan ubin dinamis.
+Jelajah Nusantara - Ubin Peristiwa	Jelajah Nusantara	Pemicu petak dinamis saat bidak mendarat (Ubin Jejak kuis, Ubin Peti kartu bantuan, dan Ubin Rintangan kurangi energi).
+Jelajah Nusantara - Board Maker	Jelajah Nusantara	Modul editor kreatif bagi pemain untuk merancang, mengedit, dan menyimpan peta papan 3D buatan sendiri.
+Adu Cendekiawan - Setup	Adu Cendekiawan	Pengaturan deck kartu aksi dan tema soal kuis sebelum masuk arena duel tarik tambang.
+Adu Cendekiawan - Tarik Tambang	Adu Cendekiawan	Arena duel kuis cepat 1v1 bertema papan tulis kelas melawan bot AI atau teman setempat.
+Adu Cendekiawan - Taktik Aksi	Adu Cendekiawan	Pemilihan mode taktis (Mode Serang kurangi darah lawan vs Mode Pulih/Heal tambah darah sendiri) saat menjawab soal.
+Adu Cendekiawan - Darah/HP Duel	Adu Cendekiawan	Mekanisme batas 10 unit darah (HP) dalam duel kuis, di mana duel berakhir jika HP salah satu pihak habis (nilai 0).
+Toko Utama (Shop)	Toko & Inventori	Penukaran poin Bintang yang dikumpulkan siswa untuk membeli Peti Harta karun gacha dan isi ulang kartu bantuan kuis.
+Halaman Buka Peti Gacha	Toko & Inventori	Animasi gacha membuka kotak peti harta karun untuk mendapatkan kartu koleksi artefak sejarah nasional.
+Halaman Statistik & Lencana	Profil Siswa	Halaman pemantau level akun siswa, grafik perolehan XP, dan deretan lencana pencapaian belajar.
+Kustomisasi Profil	Profil Siswa	Fitur mengganti pakaian skin avatar karakter (Budi/Wati), bingkai foto profil, dan melengkapi pin lencana.
+Museum Galeri Artefak	Profil Siswa	Galeri penyimpanan kartu artefak sejarah (seperti Keris, Miniatur Candi), lengkap dengan deskripsi teks narasi sejarah edukatif.
+Pengaturan Setelan	Pengaturan	Pengaturan volume musik latar, volume efek suara, pemilihan tema gelap/terang, dan tombol aktivasi Mode Pengembang (Dev Mode).
+Dasbor Overview Guru	Dasbor Guru	Layar ringkasan jumlah kelas virtual pengajar, murid aktif, daftar kelas terdaftar, serta CRUD tambah/hapus kelas.
+Manajemen Murid Guru	Dasbor Guru	Daftar rekam seluruh profil siswa, absensi kehadiran siswa di kelas virtual, dan input catatan guru pengajar.
+Bank Soal Guru	Dasbor Guru	Tempat penyusunan kuis (5 variasi tipe soal), penyimpanan bank soal kuis, dan perilisan tugas PR kuis ke kelas virtual murid.
+Setelan Guru	Dasbor Guru	Halaman penyesuaian profil akun pengajar dan informasi data mengajar guru.

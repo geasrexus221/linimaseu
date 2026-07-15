@@ -1,0 +1,657 @@
+/* Global Nunito Font & Outfit Aliasing */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDLshRTM.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDGUmRTM.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDFwmRTM.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDDsmRTM.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDBImRTM.ttf) format('truetype');
+}
+
+/* Map Outfit to Nunito so hardcoded Outfit fonts render as Nunito */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDLshRTM.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDGUmRTM.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDFwmRTM.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDDsmRTM.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDBImRTM.ttf) format('truetype');
+}
+
+:root {
+  --primary-color: #f4c365;
+  --primary-color-dark: #d1a54c;
+  --secondary-color: #1cb0f6;
+  --background-color: #faf9f6; /* Soft Cream, not pure white */
+  --card-bg: #ffffff;
+  --text-color: #4b4b4b;
+  --text-muted: #737373; /* Darker gray for better contrast in light mode */
+  --accent-color: #58cc02;
+  --border-color: #e5e5e5;
+  --font-main: 'Nunito', 'Outfit', system-ui, sans-serif;
+  --header-height: 55px;
+  --tabbar-height: 75px;
+  
+  /* Sidebar Colors (Light Mode) */
+  --sidebar-bg: #49CAE3; /* Custom Teal requested by user */
+  --sidebar-border: #3ab2c9; /* Slightly darker teal for border */
+  
+  /* Semantic state colors (Light Mode) */
+  --success-bg: #ECFDF5;
+  --success-text: #10B981;
+  --warning-bg: #FEF3C7;
+  --warning-text: #D97706;
+  --danger-bg: #FEF2F2;
+  --danger-text: #EF4444;
+  --primary-bg-light: #EEF2F6;
+  --primary-text: #3B82F6;
+
+  /* Fluid Layout Tokens */
+  --max-content-width: 900px;
+  --sidebar-width: 300px;
+  --right-panel-width: 300px;
+  --container-padding: 24px;
+  --shop-bg: #9BD2FE; /* Slightly darker sky blue for shop background */
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --container-padding: 16px;
+  }
+}
+
+[data-theme='dark'] {
+  --background-color: #1e1e2d; /* Deep Navy, not pure black */
+  --card-bg: #2a2a3d;
+  --text-color: #e0e0e0;
+  --text-muted: #888899;
+  --border-color: #3a3a4d;
+  --primary-color: #cc7800;
+  --primary-color-dark: #a36000;
+  --sidebar-bg: var(--card-bg);
+  --sidebar-border: var(--border-color);
+  --shop-bg: var(--background-color);
+
+  /* Semantic state colors (Dark Mode) */
+  --success-bg: rgba(16, 185, 129, 0.15);
+  --success-text: #10B981;
+  --warning-bg: rgba(245, 158, 11, 0.15);
+  --warning-text: #F59E0B;
+  --danger-bg: rgba(239, 68, 68, 0.15);
+  --danger-text: #EF4444;
+  --primary-bg-light: rgba(59, 130, 246, 0.15);
+  --primary-text: #60A5FA;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden; /* Main viewport remains locked */
+  font-family: var(--font-main);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none; /* Cegah teks terseleksi saat scroll di mobile */
+  user-select: none;
+}
+
+input, textarea, select {
+  -webkit-user-select: auto;
+  user-select: auto;
+  pointer-events: auto;
+}
+
+/* Custom Scrollbar (Duolingo Style) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 10px;
+  border: 2px solid var(--background-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.app-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--background-color);
+}
+
+/* Header Styles */
+.header {
+  height: var(--header-height);
+  background-color: var(--primary-color);
+  border-bottom: 4px solid var(--primary-color-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 100;
+  color: white;
+}
+
+.header-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+}
+
+/* TabBar Styles */
+.tabbar {
+  height: var(--tabbar-height);
+  background-color: var(--card-bg);
+  border-top: 3px solid var(--border-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tab-item:active {
+  transform: scale(0.85);
+}
+
+/* Characters Grid (Double-Ring Style) */
+.story-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  padding-bottom: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  justify-items: center;
+  background-color: var(--background-color);
+  scrollbar-width: none;
+}
+
+.story-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.char-node-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Outer Ring (Progress style) */
+.char-ring {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 6px solid #e5e5e5;
+  /* Inactive color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.char-ring.active {
+  border-color: #ffc800;
+  /* Active yellow ring */
+  animation: float-soft 3s ease-in-out infinite;
+}
+
+/* Inner Circle (The character node) */
+.char-node {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--border-color);
+  border: 4px solid var(--card-bg);
+  /* Gap effect */
+}
+
+.char-node.active {
+  background-color: #ffc800;
+  /* Warna tema aktif, bukan putih */
+  box-shadow: 0 6px 0 #d1a54c;
+  border: 4px solid white;
+  /* Tetap pertahankan jarak putih tipis di pinggir */
+}
+
+.char-node.active:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 transparent;
+}
+
+.char-node.locked {
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+.char-label {
+  margin-top: 15px;
+  font-weight: 800;
+  color: var(--text-color);
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Small Crown Badge */
+.crown-badge {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: 10;
+  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.1));
+}
+
+@keyframes float-soft {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Floating Badges (Start Screen etc) */
+.btn-primary {
+  font-family: var(--font-main);
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  border-radius: 20px;
+  font-weight: 900;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--primary-color-dark);
+  transition: all 0.1s;
+}
+
+.btn-primary:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 transparent;
+}
+
+.start-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+}
+
+/* Chapter Screen Styles */
+.chapter-container {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--background-color);
+  padding-bottom: 100px;
+  scrollbar-width: none;
+}
+
+.chapter-container::-webkit-scrollbar {
+  display: none;
+}
+
+.chapter-banner {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 24px 16px;
+  border-bottom: 4px solid var(--primary-color-dark);
+  position: relative;
+}
+
+.unit-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.unit-desc {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.notebook-btn {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 2px solid white;
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Zig-zag Path for Chapters */
+.chapter-path {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  padding: 40px 0;
+}
+
+.chapter-node-pos-1 {
+  transform: translateX(-80px);
+}
+
+.chapter-node-pos-2 {
+  transform: translateX(100px);
+}
+
+.chapter-node-pos-3 {
+  transform: translateX(-0px);
+}
+
+.chapter-node-pos-4 {
+  transform: translateX(-130px);
+}
+
+.chapter-node-pos-5 {
+  transform: translateX(80px);
+}
+
+/* Start Bubble */
+.start-bubble {
+  position: absolute;
+  top: -45px;
+  background: white;
+  color: var(--primary-color);
+  padding: 6px 16px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 0 var(--border-color);
+  border: 2px solid var(--border-color);
+}
+
+/* Visual Novel Styles */
+.vn-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: var(--font-main);
+}
+
+.vn-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.5s ease;
+  z-index: -1;
+}
+
+.vn-character-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 20px;
+}
+
+.vn-sprite {
+  width: 80%;
+  max-width: 300px;
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.dialogue-box-container {
+  padding: 20px;
+  padding-bottom: 40px;
+  z-index: 10;
+}
+
+.dialogue-box {
+  background: var(--card-bg);
+  border: 4px solid var(--primary-color);
+  border-radius: 24px;
+  padding: 20px;
+  min-height: 150px;
+  box-shadow: 0 10px 0 var(--primary-color-dark);
+  position: relative;
+}
+
+.speaker-name {
+  position: absolute;
+  top: -20px;
+  left: 30px;
+  background: var(--primary-color);
+  color: white;
+  padding: 6px 20px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 0 var(--primary-color-dark);
+}
+
+.dialogue-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.tap-indicator {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  animation: pulse 1.5s infinite;
+}
+
+/* Quiz Screen Styles */
+.quiz-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: var(--background-color);
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.question-card {
+  width: 100%;
+  background: var(--card-bg);
+  border: 4px solid var(--border-color);
+  border-radius: 24px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 8px 0 var(--border-color);
+}
+
+.question-text {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+
+.options-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.option-btn {
+  width: 100%;
+  background: var(--card-bg);
+  border: 4px solid var(--border-color);
+  padding: 20px;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-color);
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--border-color);
+  transition: all 0.1s;
+  text-align: left;
+}
+
+.option-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 transparent;
+}
+
+.option-btn.correct {
+  background-color: #d7ffb8;
+  border-color: var(--accent-color);
+  color: #2b7d00;
+  box-shadow: 0 6px 0 var(--accent-color);
+}
+
+.option-btn.wrong {
+  background-color: #ffdfe0;
+  border-color: var(--accent-color-red, #ff4b4b);
+  color: #a52a2a;
+  box-shadow: 0 6px 0 var(--accent-color-red, #ff4b4b);
+}
+
+/* --- ADAPTIVE UTILITIES --- */
+
+.content-container {
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: var(--container-padding);
+}
+
+.adaptive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .adaptive-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+}
+
+/* Duolingo Hover Effect (PC Only) */
+@media (hover: hover) {
+  .btn-hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 var(--primary-color-dark);
+  }
+  
+  .btn-hover-lift:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 transparent;
+  }
+}

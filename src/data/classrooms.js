@@ -1,0 +1,60 @@
+export const MOCK_CLASSROOMS = {
+  'KELAS1': {
+    id: 'c1',
+    name: 'Kelas 4-A',
+    teacher: '-',
+    chalkboardMessage: 'Tugas Bab 1 LKS: Kerjakan kuis pahlawan wanita dengan teliti untuk mendapatkan skor maksimal!',
+    students: [
+      { id: 's1', name: 'Aditya Pratama', avatar: '👦', score: 1250, crowns: 12, streak: 5 },
+      { id: 's2', name: 'Azzahra Putri', avatar: '👧', score: 1100, crowns: 10, streak: 3 },
+      { id: 's3', name: 'Rizky Ramadhan', avatar: '👦', score: 1400, crowns: 15, streak: 7 },
+      { id: 's4', name: 'Fauzan Ahmad', avatar: '👦', score: 950, crowns: 8, streak: 2 },
+      { id: 's5', name: 'Naura Syifa', avatar: '👧', score: 1300, crowns: 14, streak: 6 },
+      { id: 's6', name: 'Dimas Aditya', avatar: '👦', score: 1050, crowns: 9, streak: 4 },
+      { id: 's7', name: 'Amanda Keysha', avatar: '👧', score: 800, crowns: 5, streak: 1 },
+      { id: 's8', name: 'Farhan Hidayat', avatar: '👦', score: 1550, crowns: 18, streak: 10 },
+      { id: 's9', name: 'Syifa Nuraini', avatar: '👧', score: 1200, crowns: 11, streak: 5 },
+      { id: 's10', name: 'Gilang Permana', avatar: '👦', score: 1150, crowns: 10, streak: 3 },
+      { id: 's11', name: 'Hafiz Al-Fatih', avatar: '👦', score: 900, crowns: 7, streak: 2 },
+      { id: 's12', name: 'Indah Permata', avatar: '👧', score: 1350, crowns: 14, streak: 8 },
+      { id: 's13', name: 'Kevin Sanjaya', avatar: '👦', score: 750, crowns: 4, streak: 1 },
+      { id: 's14', name: 'Larasati Putri', avatar: '👧', score: 1450, crowns: 16, streak: 9 },
+      { id: 's15', name: 'Muhammad Rafli', avatar: '👦', score: 1000, crowns: 9, streak: 3 },
+      { id: 's16', name: 'Nabila Azzahra', avatar: '👧', score: 1280, crowns: 13, streak: 6 },
+      { id: 's17', name: 'Oky Kurniawan', avatar: '👦', score: 1120, crowns: 10, streak: 4 },
+      { id: 's18', name: 'Putu Gede', avatar: '👦', score: 850, crowns: 6, streak: 2 },
+      { id: 's19', name: 'Queenandra', avatar: '👧', score: 1480, crowns: 17, streak: 11 },
+      { id: 's20', name: 'Rangga Saputra', avatar: '👦', score: 920, crowns: 8, streak: 2 },
+      { id: 's21', name: 'Salsabila', avatar: '👧', score: 1180, crowns: 11, streak: 5 },
+      { id: 's22', name: 'Taufik Hidayat', avatar: '👦', score: 1320, crowns: 14, streak: 7 },
+      { id: 's23', name: 'Utami Dewi', avatar: '👧', score: 700, crowns: 3, streak: 0 },
+      { id: 's24', name: 'Vano Ardiansyah', avatar: '👦', score: 1260, crowns: 12, streak: 5 },
+      { id: 's25', name: 'Wulan Sari', avatar: '👧', score: 1080, crowns: 10, streak: 4 },
+      { id: 's26', name: 'Yusuf Mansur', avatar: '👦', score: 1420, crowns: 15, streak: 8 },
+      { id: 's27', name: 'Zahra Amelia', avatar: '👧', score: 1510, crowns: 17, streak: 12 },
+      { id: 's28', name: 'Andhika Pratama', avatar: '👦', score: 1230, crowns: 11, streak: 5 },
+      { id: 's29', name: 'Bunga Citra', avatar: '👧', score: 1370, crowns: 15, streak: 7 },
+      { id: 's30', name: 'Catur Pamungkas', avatar: '👦', score: 980, crowns: 8, streak: 3 },
+    ],
+    maxDesks: 36,
+    assignments: [
+      { id: 't1', title: 'Kuis Mingguan: Pahlawan Wanita', type: 'quiz', themeId: 't1', dueDate: '18 Jun 2026, 23:59' },
+      { id: 'ipas-1', title: 'Latihan IPAS: Cahaya & Sifatnya', type: 'quiz', themeId: 'ipas-cahaya-01', dueDate: '20 Jun 2026, 23:59', xpReward: 500, durationLimit: 60 }
+    ]
+  },
+  'KELAS2': {
+    id: 'c2',
+    name: 'Kelas 5-B',
+    teacher: '-',
+    chalkboardMessage: 'Pelajari bab 2 sejarah kemerdekaan nasional!',
+    students: [
+      { id: 's201', name: 'Bambang Pamungkas', avatar: '👦', score: 1420, crowns: 16, streak: 8 },
+      { id: 's202', name: 'Citra Lestari', avatar: '👧', score: 1280, crowns: 13, streak: 6 },
+      { id: 's203', name: 'Dian Sastro', avatar: '👧', score: 1350, crowns: 15, streak: 7 },
+      { id: 's204', name: 'Eko Prasetyo', avatar: '👦', score: 1000, crowns: 9, streak: 3 },
+      { id: 's205', name: 'Fitriani', avatar: '👧', score: 1150, crowns: 11, streak: 4 },
+    ],
+    maxDesks: 36,
+    assignments: []
+  }
+};
