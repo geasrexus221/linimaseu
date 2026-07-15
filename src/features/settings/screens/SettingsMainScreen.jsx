@@ -30,14 +30,14 @@ export default function SettingsMainScreen() {
         <section className="settings-group">
           <h3 className="group-title">Tampilan</h3>
           <div className="theme-toggle-container">
-            <div 
+            <div
               className={`theme-card ${theme === 'light' ? 'active' : ''}`}
               onClick={() => setTheme('light')}
             >
               <Sun size={24} />
               <span>Terang</span>
             </div>
-            <div 
+            <div
               className={`theme-card ${theme === 'dark' ? 'active' : ''}`}
               onClick={() => setTheme('dark')}
             >
@@ -54,11 +54,11 @@ export default function SettingsMainScreen() {
             <SettingItem icon={User} label="Profil Saya" color="#58CC02" value="Siswa" />
             <SettingItem icon={Bell} label="Notifikasi" color="#f4c265" />
             <SettingItem icon={Shield} label="Privasi & Keamanan" color="#FF4B4B" />
-            <SettingItem 
-              icon={LogOut} 
-              label="Keluar Akun" 
-              color="#EF4444" 
-              onClick={() => setHasStarted(false)} 
+            <SettingItem
+              icon={LogOut}
+              label="Keluar Akun"
+              color="#EF4444"
+              onClick={() => setHasStarted(false)}
             />
           </div>
         </section>
@@ -68,7 +68,7 @@ export default function SettingsMainScreen() {
           <h3 className="group-title">Tentang</h3>
           <div className="items-container">
             <SettingItem icon={Info} label="Tentang Lini Masa" color="#1CB0F6" value="v1.0.4" />
-            
+
             {isDevMode && (
               <div className="dev-entry" onClick={() => setShowDevMode(!showDevMode)}>
                 <div className="dev-entry-left">
@@ -84,7 +84,7 @@ export default function SettingsMainScreen() {
         {/* --- HAPUS BAGIAN INI SAAT PRODUKSI --- */}
         {isDevMode && showDevMode && <DevModeSection />}
         {/* -------------------------------------- */}
-        
+
         <div className="footer-credits">
           <p>© 2026 Project Lini Masa</p>
         </div>

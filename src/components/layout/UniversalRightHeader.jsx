@@ -97,10 +97,13 @@ export default function UniversalRightHeader() {
           font-size: 0.8rem;
           color: white;
         }
+        .stat-item span {
+          color: white !important;
+        }
 
-        .stat-item.heart { color: white; border-color: rgba(255, 75, 75, 0.6); background: rgba(255, 75, 75, 0.2); }
-        .stat-item.streak { color: white; border-color: rgba(239, 68, 68, 0.6); background: rgba(239, 68, 68, 0.2); }
-        .stat-item.crown { color: white; border-color: rgba(255, 215, 0, 0.6); background: rgba(255, 215, 0, 0.2); }
+        .stat-item.heart { border-color: rgba(255, 75, 75, 0.6); background: rgba(255, 75, 75, 0.2); }
+        .stat-item.streak { border-color: rgba(239, 68, 68, 0.6); background: rgba(239, 68, 68, 0.2); }
+        .stat-item.crown { border-color: rgba(255, 215, 0, 0.6); background: rgba(255, 215, 0, 0.2); }
       `}</style>
     </div>
   );

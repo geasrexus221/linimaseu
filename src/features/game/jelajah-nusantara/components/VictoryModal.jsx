@@ -49,7 +49,7 @@ export default function VictoryModal() {
   };
 
   const getCharacterName = (player) => {
-    return player?.characterId === 2 ? 'Wati' : 'Budi';
+    return player?.characterId === 2 ? 'Marsha' : 'Riri';
   };
 
   const isLocalPlayer = (player) => player?.id === 'player-1';

@@ -24,7 +24,16 @@ export default function ReflectLightAnimation({ onComplete }) {
       
       <div className="animation-area">
         {/* Flashlight */}
-        <div className="flashlight">🔦</div>
+        <div className="flashlight">
+          <svg width="52" height="52" viewBox="0 0 24 24" style={{ display: 'block' }}>
+            <rect x="3" y="10" width="11" height="4" rx="1" fill="#4B5563" stroke="#374151" strokeWidth="0.8" />
+            <line x1="6" y1="10" x2="6" y2="14" stroke="#9CA3AF" strokeWidth="0.8" />
+            <line x1="9" y1="10" x2="9" y2="14" stroke="#9CA3AF" strokeWidth="0.8" />
+            <rect x="7" y="8.5" width="2" height="1.5" rx="0.5" fill="#EF4444" />
+            <path d="M14 9 L19 6 L21 6 L21 18 L19 18 L14 15 Z" fill="#9CA3AF" stroke="#374151" strokeWidth="0.8" />
+            <ellipse cx="21" cy="12" rx="1" ry="6" fill="#FDE047" opacity="0.8" />
+          </svg>
+        </div>
 
         {/* Target Star */}
         <div className={`target-star ${isHit ? 'lit' : 'dark'}`}>⭐</div>
@@ -119,11 +128,10 @@ export default function ReflectLightAnimation({ onComplete }) {
         }
 
         .flashlight {
-          font-size: 3rem;
           position: absolute;
-          left: -15px;
+          left: -20px;
           top: 50%;
-          transform: translateY(-50%) rotate(90deg); /* point right */
+          transform: translateY(-50%);
           z-index: 10;
         }
 

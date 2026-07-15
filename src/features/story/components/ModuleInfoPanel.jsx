@@ -44,8 +44,6 @@ export default function ModuleInfoPanel() {
         <h3 style={{ marginTop: 0, color: 'var(--text-color)', fontWeight: 800, fontSize: '1.1rem', marginBottom: '12px' }}>Tentang Pelajaran Ini</h3>
         <p style={{ color: 'var(--text-muted)', lineHeight: '1.6', fontSize: '0.95rem', margin: 0, fontWeight: 500, position: 'relative', zIndex: 1 }}>
           Dalam modul ini, kamu akan berpetualang dan mempelajari berbagai keajaiban cahaya! Mulai dari bagaimana cahaya <strong style={{ color: '#f4c265' }}>merambat lurus</strong>, kemampuannya <strong style={{ color: '#58CC02' }}>menembus benda bening</strong>, hingga proses cahaya <strong style={{ color: '#CE82FF' }}>dipantulkan</strong> dan <strong style={{ color: '#FF4B4B' }}>dibiaskan</strong>.
-          <br /><br />
-          Selesaikan materi, jawab kuisnya dengan benar, dan buktikan bahwa kamu adalah ilmuwan sejati! 🌟
         </p>
       </div>
     </div>

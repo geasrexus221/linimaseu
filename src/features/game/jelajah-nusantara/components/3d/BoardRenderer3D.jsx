@@ -116,9 +116,6 @@ const BoardRenderer3D = React.memo(({ mapData, players = [] }) => {
           alt=""
           style={{
             position: 'absolute',
-            // TIPS MEMBESARKAN / MENGGESER:
-            // 1. Membesarkan: Ganti '135%' menjadi lebih besar, atau ubah nilai 'scale(1.0)' di bawah (misal scale(1.3)).
-            // 2. Menggeser: Ubah nilai 'top' dan 'left' (misal top: -170, left: -170).
             width: '130%',
             height: '130%',
             top: -450,

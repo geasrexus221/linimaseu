@@ -407,7 +407,7 @@ export default function SetupScreen() {
             </div>
 
             <label style={{ fontSize: '0.75rem', fontWeight: 900, marginBottom: '8px', display: 'block', textAlign: 'left', color: isDark ? '#bfcdff' : '#6B7280' }}>PILIH KARAKTER</label>
-            <div className="char-selection-grid" style={{ marginBottom: '16px' }}>
+            <div className="char-selection-grid" style={{ marginBottom: '12px' }}>
               <div 
                 className={`char-card ${editCharId === 1 ? 'selected' : ''}`}
                 style={{ padding: '8px' }}
@@ -416,7 +416,7 @@ export default function SetupScreen() {
                 <div className="char-preview-box" style={{ height: '60px' }}>
                   <img src={character1iso} alt="Karakter 1" className="char-preview-img" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 </div>
-                <span className="char-name">Karakter 1</span>
+                <span className="char-name">Riri (K1)</span>
               </div>
               <div 
                 className={`char-card ${editCharId === 2 ? 'selected' : ''}`}
@@ -426,7 +426,41 @@ export default function SetupScreen() {
                 <div className="char-preview-box" style={{ height: '60px' }}>
                   <img src={character2iso} alt="Karakter 2" className="char-preview-img" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 </div>
-                <span className="char-name">Karakter 2</span>
+                <span className="char-name">Marsha (K2)</span>
+              </div>
+            </div>
+
+            {/* CHARACTER STATS PANEL */}
+            <div style={{
+              background: isDark ? '#1a0d3b' : '#F9FAFB',
+              border: `2px solid ${isDark ? '#2e1957' : '#E5E7EB'}`,
+              borderRadius: '16px',
+              padding: '10px 12px',
+              marginBottom: '16px',
+              textAlign: 'left'
+            }}>
+              <div style={{ fontSize: '0.65rem', fontWeight: 900, color: isDark ? '#bfcdff' : '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                📊 STATS JELAJAH: <span style={{ color: isDark ? '#FFF' : '#1F2937', fontWeight: 955 }}>{editCharId === 1 ? 'RIRI' : 'MARSHA'}</span>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
+                <div style={{ background: isDark ? '#25134f' : '#FFFFFF', border: `1.5px solid ${isDark ? '#3e2475' : '#E5E7EB'}`, borderRadius: '10px', padding: '4px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '0.55rem', fontWeight: 800, color: '#9CA3AF' }}>🗡️ SERANG</div>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 900, color: '#FF4B4B', marginTop: '1px' }}>
+                    {editCharId === 1 ? '+2' : '+0'}
+                  </div>
+                </div>
+                <div style={{ background: isDark ? '#25134f' : '#FFFFFF', border: `1.5px solid ${isDark ? '#3e2475' : '#E5E7EB'}`, borderRadius: '10px', padding: '4px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '0.55rem', fontWeight: 800, color: '#9CA3AF' }}>🛡️ BERTAHAN</div>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 900, color: '#58CC02', marginTop: '1px' }}>
+                    {editCharId === 1 ? '+1' : '+2'}
+                  </div>
+                </div>
+                <div style={{ background: isDark ? '#25134f' : '#FFFFFF', border: `1.5px solid ${isDark ? '#3e2475' : '#E5E7EB'}`, borderRadius: '10px', padding: '4px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '0.55rem', fontWeight: 800, color: '#9CA3AF' }}>💨 LINCAH</div>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 900, color: editCharId === 1 ? '#FF4B4B' : '#1CB0F6', marginTop: '1px' }}>
+                    {editCharId === 1 ? '-1' : '+1'}
+                  </div>
+                </div>
               </div>
             </div>
 

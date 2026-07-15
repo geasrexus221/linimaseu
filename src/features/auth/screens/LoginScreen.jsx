@@ -21,10 +21,12 @@ export default function LoginScreen({ onLogin, onNavigateToRegister }) {
       if (formData.identifier === 'dev1' && formData.password === 'dev1') {
         setIsDevMode(true);
         loggedInRole = 'teacher';
-      } else {
-        // Default prototype teacher account
+      } else if (formData.identifier === 'guru1' && formData.password === 'guru1') {
         setIsDevMode(false);
         loggedInRole = 'teacher';
+      } else {
+        alert("Kode Akun atau Kata Sandi salah! (Petunjuk: gunakan guru1 / guru1)");
+        return;
       }
     } else if (modalType === 'student') {
       if (formData.identifier === 'dev1' && formData.password === 'dev1') {
@@ -34,10 +36,14 @@ export default function LoginScreen({ onLogin, onNavigateToRegister }) {
         setIsDevMode(false);
         loggedInRole = 'student';
       } else {
-        setIsDevMode(false);
-        loggedInRole = 'student';
+        alert("Kode Akun atau Kata Sandi salah! (Petunjuk: gunakan murid1 / murid1)");
+        return;
       }
     } else {
+      if (!formData.password) {
+        alert("Kata Sandi tidak boleh kosong!");
+        return;
+      }
       setIsDevMode(false);
       loggedInRole = 'student';
     }
@@ -51,13 +57,18 @@ export default function LoginScreen({ onLogin, onNavigateToRegister }) {
     setFormData({ identifier: '', password: '' });
   };
 
+  const handleTesterLogin = () => {
+    setIsDevMode(false);
+    onLogin('student');
+  };
+
   return (
     <div className="login-page">
       <div className="login-container">
         {/* Header */}
         <div className="auth-header">
           <img src={LinimasaLogo} alt="Linimasa Logo" className="auth-logo-img" />
-          <p className="auth-subtitle">Silakan masuk untuk mengakses akun belajar Anda.</p>
+          <p className="auth-subtitle">Belajar tanpa batas waktu</p>
         </div>
 
         {/* Login Options */}
@@ -84,6 +95,10 @@ export default function LoginScreen({ onLogin, onNavigateToRegister }) {
               <h3>GURU</h3>
             </div>
           </div>
+
+          <button className="login-btn tester-btn" onClick={handleTesterLogin}>
+            <span>Masuk sebagai Tester</span>
+          </button>
         </div>
 
         {/* Footer */}
@@ -197,6 +212,12 @@ export default function LoginScreen({ onLogin, onNavigateToRegister }) {
           background: #FFFFFF; color: #4B4B4B; border: 2px solid #E5E5E5; border-bottom: 6px solid #E5E5E5;
         }
         .email-main:active { transform: translateY(4px); border-bottom-width: 2px; }
+
+        .tester-btn { 
+          background: #4B4B4B; color: #FFFFFF; border: 2px solid #333333; border-bottom: 6px solid #333333;
+          margin-top: 5px;
+        }
+        .tester-btn:active { transform: translateY(4px); border-bottom-width: 2px; }
 
         .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .role-card {
