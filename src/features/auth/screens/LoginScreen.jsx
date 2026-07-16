@@ -7,7 +7,7 @@ import Karakter1 from '../../../assets/UI/Character/karakter1.svg';
 
 export default function LoginScreen({ onLogin, onNavigateToRegister }) {
   const { setIsDevMode } = useStore();
-  const [modalType, setModalType] = useState(null); // 'email', 'student', 'teacher'
+  const [modalType, setModalType] = useState(null); 
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ identifier: '', password: '' });
 
@@ -16,7 +16,7 @@ export default function LoginScreen({ onLogin, onNavigateToRegister }) {
 
     let loggedInRole = 'student';
 
-    // Auth Logic
+    
     if (modalType === 'teacher') {
       if (formData.identifier === 'dev1' && formData.password === 'dev1') {
         setIsDevMode(true);
@@ -65,21 +65,21 @@ export default function LoginScreen({ onLogin, onNavigateToRegister }) {
   return (
     <div className="login-page">
       <div className="login-container">
-        {/* Header */}
+        
         <div className="auth-header">
           <img src={LinimasaLogo} alt="Linimasa Logo" className="auth-logo-img" />
           <p className="auth-subtitle">Belajar tanpa batas waktu</p>
         </div>
 
-        {/* Login Options */}
+        
         <div className="login-options">
-          {/* Email Option (Top) */}
+          
           <button className="login-btn email-main" onClick={() => setModalType('email')}>
             <Mail size={24} />
             <span>Masuk dengan Email</span>
           </button>
 
-          {/* Role Options (Bottom Grid) */}
+          
           <div className="role-grid">
             <div className="role-card student" onClick={() => setModalType('student')}>
               <div className="role-icon">
@@ -101,13 +101,13 @@ export default function LoginScreen({ onLogin, onNavigateToRegister }) {
           </button>
         </div>
 
-        {/* Footer */}
+        
         <div className="auth-footer">
           <p>Belum punya akun? <span onClick={onNavigateToRegister}>Coba daftar</span></p>
         </div>
       </div>
 
-      {/* Modals */}
+      
       <AnimatePresence>
         {modalType && (
           <div className="modal-overlay">

@@ -36,7 +36,7 @@ export default function LandscapeWrapper({ children, disableRotation = false }) 
       background: '#07071a',
       zIndex: 1000
     }}>
-      {/* Main Content Area */}
+      
       <div style={{
         width: isPortrait ? '100vh' : '100vw',
         height: isPortrait ? '100vw' : '100vh',

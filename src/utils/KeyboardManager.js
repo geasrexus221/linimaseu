@@ -1,7 +1,4 @@
-/**
- * KeyboardManager handles global keyboard shortcuts for PC users.
- * Allows components to register/unregister listeners for specific keys.
- */
+
 class KeyboardManager {
   constructor() {
     this.listeners = new Map();
@@ -16,7 +13,7 @@ class KeyboardManager {
   }
 
   handleKeyDown(event) {
-    // Avoid triggering shortcuts when typing in inputs
+    
     if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.isContentEditable) {
       return;
     }

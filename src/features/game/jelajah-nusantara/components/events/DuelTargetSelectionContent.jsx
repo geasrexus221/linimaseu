@@ -16,7 +16,7 @@ export default function DuelTargetSelectionContent({ onSelectTarget }) {
     return charId === 2 ? character2podium1 : character1podium1;
   };
 
-  // AI Challenger automatically picks after a delay
+  
   useEffect(() => {
     if (challenger?.type === 'ai') {
       const timer = setTimeout(() => {
@@ -31,7 +31,7 @@ export default function DuelTargetSelectionContent({ onSelectTarget }) {
 
   return (
     <div className="orange-juice-duel">
-      {/* TOP HEADER */}
+      
       <div className="duel-header-retro">
         <div className="action-banner announce-banner">
           {challenger.type === 'ai' 
@@ -41,7 +41,7 @@ export default function DuelTargetSelectionContent({ onSelectTarget }) {
         </div>
       </div>
 
-      {/* MAIN CHOICE VIEW */}
+      
       <div className="defense-select-view">
         {challenger.type === 'ai' ? (
           <div className="ai-thinking-box">

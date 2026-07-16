@@ -26,14 +26,14 @@ export default function VisualNovelScreen({ chapterData, onComplete }) {
 
   return (
     <div className="vn-container" onClick={handleNext}>
-      {/* Background & Illustration Placeholder */}
+      
       <div 
         className="vn-background" 
         style={{ background: currentScene.background || '#fdf6e3' }}
       >
         <div className="bg-pattern" />
         
-        {/* Illustration Placeholder */}
+        
         <AnimatePresence mode="wait">
           <motion.div 
             key={currentScene.illustration || 'none'}
@@ -54,9 +54,9 @@ export default function VisualNovelScreen({ chapterData, onComplete }) {
         </AnimatePresence>
       </div>
 
-      {/* Characters Area */}
+      
       <div className="vn-character-area">
-        {/* Bimo (Left) */}
+        
         <motion.div
           animate={{ 
             scale: isBimoSpeaking ? 1.2 : 0.95,
@@ -70,7 +70,7 @@ export default function VisualNovelScreen({ chapterData, onComplete }) {
           {isBimoSpeaking && <motion.div layoutId="speaker-glow" className="speaker-glow" />}
         </motion.div>
 
-        {/* Santi (Right) */}
+        
         <motion.div
           animate={{ 
             scale: isSantiSpeaking ? 1.2 : 0.95,
@@ -85,7 +85,7 @@ export default function VisualNovelScreen({ chapterData, onComplete }) {
         </motion.div>
       </div>
 
-      {/* Dialogue Box */}
+      
       <div className="dialogue-box-container">
         <motion.div 
           key={currentSceneIndex}

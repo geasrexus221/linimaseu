@@ -38,7 +38,7 @@ export default function PawnAvatar({ player, size = 48 }) {
       return;
     }
 
-    // Reset baseline triggers on turn entry to prevent catch-up celebration of old events
+    
     if (!wasActiveRef.current) {
       wasActiveRef.current = true;
       prevTriggersRef.current = {
@@ -55,7 +55,7 @@ export default function PawnAvatar({ player, size = 48 }) {
     const hasPijarLoss = pijarLoseTrigger > prevTriggersRef.current.pijarLose;
     const hasTekadLoss = tekadLoseTrigger > prevTriggersRef.current.tekadLose;
 
-    // Always update baseline values immediately to prevent infinite triggers
+    
     prevTriggersRef.current = {
       pijar: pijarFlyTrigger,
       tekad: tekadFlyTrigger,
@@ -84,7 +84,7 @@ export default function PawnAvatar({ player, size = 48 }) {
     };
   }, [pijarFlyTrigger, tekadFlyTrigger, pijarLoseTrigger, tekadLoseTrigger, isActive]);
 
-  // Determine character assets based on player's chosen characterId and direction facingY
+  
   const isChar2 = player.characterId === 2;
   const isUp = player.facingY === 'up';
 
@@ -116,7 +116,7 @@ export default function PawnAvatar({ player, size = 48 }) {
       overflow: 'visible',
       transformStyle: 'preserve-3d',
     }}>
-      {/* Floating Name Badge above head */}
+      
       <div style={{
         position: 'absolute',
         top: '18px', 
@@ -137,7 +137,7 @@ export default function PawnAvatar({ player, size = 48 }) {
         {player.name || 'Pemain'}
       </div>
 
-      {/* Floating Body */}
+      
       <div style={{
         width: '100%',
         position: 'relative',
@@ -172,7 +172,7 @@ export default function PawnAvatar({ player, size = 48 }) {
         </div>
       </div>
 
-      {/* Neon Player Color Indicator Ring */}
+      
       <div style={{
         position: 'absolute',
         bottom: 63, 

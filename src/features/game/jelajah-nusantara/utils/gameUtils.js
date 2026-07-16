@@ -1,13 +1,11 @@
-/** 
- * Utility functions for Jelajah Nusantara 
- */
+
 
 export const getPlayerColor = (id) => {
   const colors = {
-    1: '#22C55E', // Green (Hijau)
-    2: '#A855F7', // Purple (Ungu)
-    3: '#FACC15', // Yellow (Kuning)
-    4: '#3B82F6', // Blue (Biru)
+    1: '#22C55E', 
+    2: '#A855F7', 
+    3: '#FACC15', 
+    4: '#3B82F6', 
   };
   return colors[id] || '#FFFFFF';
 };

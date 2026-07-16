@@ -5,7 +5,7 @@ import {
   Map as MapIcon, Image as ImageIcon 
 } from 'lucide-react';
 
-// Helper function to map teacher's raw question schema into interactive playing formats
+
 function mapQuestionToPlayFormat(q) {
   if (!q) return null;
   const type = q.questionType || 'CLASSIC';
@@ -31,7 +31,7 @@ function mapQuestionToPlayFormat(q) {
       };
     });
     const rightOptions = pairs.map(p => ({ id: p.rightId, text: p.rightText }));
-    // Shuffle right options for authentic testing
+    
     const shuffledRightOptions = [...rightOptions].sort(() => Math.random() - 0.5);
     return {
       id: q.id,
@@ -85,7 +85,7 @@ function mapQuestionToPlayFormat(q) {
       explanation: `Kalimat lengkap yang benar: "${q.text.replace('____', q.options[q.correctAnswerIndex])}"`
     };
   } else {
-    // CLASSIC MCQ
+    
     return {
       id: q.id,
       type: 'choice',
@@ -109,22 +109,22 @@ export default function DevTestingOverlay({
   const [testingShowFeedback, setTestingShowFeedback] = useState(false);
   const [testingIsCorrect, setTestingIsCorrect] = useState(false);
 
-  // States for interactive layouts
+  
   const [matchingLeftSelected, setMatchingLeftSelected] = useState(null);
   const [matchingPairsDone, setMatchingPairsDone] = useState([]);
   const [hasMatchingError, setHasMatchingError] = useState(false);
-  const [matchingWrongPair, setMatchingWrongPair] = useState(null); // { leftId, rightId }
+  const [matchingWrongPair, setMatchingWrongPair] = useState(null); 
   const [categorizationCurrentItemIdx, setCategorizationCurrentItemIdx] = useState(0);
   const [anagramLetters, setAnagramLetters] = useState([]);
   const [anagramSelected, setAnagramSelected] = useState([]);
   const [matchingLines, setMatchingLines] = useState([]);
 
-  // Map raw question schema to play schema
+  
   const currentMappedQuestion = useMemo(() => {
     return mapQuestionToPlayFormat(testingQuestion);
   }, [testingQuestion]);
 
-  // Sync / Reset states when testingQuestion changes
+  
   useEffect(() => {
     setTestingSelectedOption(null);
     setMatchingLeftSelected(null);
@@ -149,7 +149,7 @@ export default function DevTestingOverlay({
     }
   }, [testingQuestion, currentMappedQuestion]);
 
-  // Hook to calculate matched pair coordinate lines
+  
   useEffect(() => {
     if (currentMappedQuestion && currentMappedQuestion.type === 'matching') {
       const updateLines = () => {
@@ -206,7 +206,7 @@ export default function DevTestingOverlay({
     setTestingShowFeedback(true);
   };
 
-  // Click Handlers
+  
   const handleChoiceAnswer = (index) => {
     if (testingShowFeedback) return;
     setTestingSelectedOption(index);
@@ -312,7 +312,7 @@ export default function DevTestingOverlay({
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
+        
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid var(--border-color)', paddingBottom: '12px' }}>
           <div>
             <div style={{ fontSize: '0.7rem', color: '#10B981', fontWeight: '900', letterSpacing: '1px', textTransform: 'uppercase' }}>
@@ -333,7 +333,7 @@ export default function DevTestingOverlay({
           </button>
         </div>
 
-        {/* Progress Bar (if collection) */}
+        
         {testingCollection && (
           <div style={{ marginBottom: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '700', marginBottom: '6px' }}>
@@ -351,9 +351,9 @@ export default function DevTestingOverlay({
           </div>
         )}
 
-        {/* Quiz Content Area */}
+        
         {testingCollection && testingQuestionIndex >= testingCollection.questions.length ? (
-          // Quiz Completed Screen
+          
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, textAlign: 'center', gap: '16px', padding: '20px 0' }}>
             <div style={{ background: '#10B98122', padding: '16px', borderRadius: '50%', color: '#10B981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Trophy size={64} />
@@ -392,7 +392,7 @@ export default function DevTestingOverlay({
             </div>
           </div>
         ) : (
-          // Question Testing screen
+          
           <div style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: '16px' }}>
             
             <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
@@ -403,7 +403,7 @@ export default function DevTestingOverlay({
               {currentMappedQuestion.type !== 'blanks' && currentMappedQuestion.question}
             </div>
 
-            {/* Render Interactive Templates */}
+            
             {currentMappedQuestion.type === 'choice' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
                 {currentMappedQuestion.options.map((opt, oIdx) => {
@@ -481,7 +481,7 @@ export default function DevTestingOverlay({
 
             {currentMappedQuestion.type === 'matching' && (
               <div style={{ display: 'flex', gap: '20px', marginTop: '10px', position: 'relative' }} id="matching-container">
-                {/* SVG lines overlay connecting pairs */}
+                
                 <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 5 }}>
                   {matchingLines.map(line => (
                     <line 
@@ -496,7 +496,7 @@ export default function DevTestingOverlay({
                     />
                   ))}
                 </svg>
-                {/* Left Column */}
+                
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {currentMappedQuestion.pairs.map(pair => {
                     const isSelected = matchingLeftSelected === pair.leftId;
@@ -532,7 +532,7 @@ export default function DevTestingOverlay({
                   })}
                 </div>
 
-                {/* Right Column */}
+                
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {currentMappedQuestion.rightOptions.map(opt => {
                     const isDone = matchingPairsDone.some(leftId => currentMappedQuestion.pairs.find(p => p.leftId === leftId)?.rightId === opt.id);
@@ -667,7 +667,7 @@ export default function DevTestingOverlay({
 
             {currentMappedQuestion.type === 'anagram' && (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginTop: '10px' }}>
-                {/* Spelled letters slots */}
+                
                 <div style={{ 
                   display: 'flex', 
                   gap: '8px', 
@@ -710,7 +710,7 @@ export default function DevTestingOverlay({
                   })}
                 </div>
 
-                {/* Letter pool to pick from */}
+                
                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '400px' }}>
                   {anagramLetters.map((letter) => {
                     const isPicked = anagramSelected.some(l => l.id === letter.id);
@@ -767,7 +767,7 @@ export default function DevTestingOverlay({
               </div>
             )}
 
-            {/* Feedback Panel */}
+            
             {testingShowFeedback && (
               <div 
                 style={{ 
@@ -791,14 +791,14 @@ export default function DevTestingOverlay({
                 <button
                   onClick={() => {
                     if (testingCollection) {
-                      // Go to next question or end
+                      
                       const nextIdx = testingQuestionIndex + 1;
                       setTestingQuestionIndex(nextIdx);
                       if (nextIdx < testingCollection.questions.length) {
                         setTestingQuestion(testingCollection.questions[nextIdx]);
                       }
                     } else {
-                      // Close modal
+                      
                       setTestingQuestion(null);
                     }
                   }}

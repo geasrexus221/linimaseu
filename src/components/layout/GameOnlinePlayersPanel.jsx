@@ -4,7 +4,7 @@ import { useStore } from '../../store/useStore';
 import { useNavigationStore } from '../../store/useNavigationStore';
 import { soundManager } from '../../utils/SoundManager';
 
-// Mock Online Players - In real app, this would come from a websocket/API
+
 const MOCK_ONLINE_PLAYERS = [
   { id: 'u1', name: 'Ahmad_Gamer', avatar: '👨‍🎓', status: 'Lobby', level: 12 },
   { id: 'u2', name: 'Siti_Sejarah', avatar: '👩‍🏫', status: 'Bermain', level: 25 },
@@ -28,7 +28,7 @@ export default function GameOnlinePlayersPanel() {
     soundManager.play('click', 0.5);
     setInvitedIds([...invitedIds, id]);
     
-    // Simulate sending invite
+    
     setTimeout(() => {
       soundManager.play('success', 0.4);
     }, 500);

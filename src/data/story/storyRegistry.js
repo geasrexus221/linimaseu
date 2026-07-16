@@ -8,7 +8,7 @@ export const STORY_REGISTRY = {
     bio: dewiSartikaBio,
     quiz: dewiSartikaQuiz
   },
-  // Add more heroes here as they are developed
+  
   patti: null,
   hasan: null,
   kartini: null,

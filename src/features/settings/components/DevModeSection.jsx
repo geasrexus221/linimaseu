@@ -70,7 +70,7 @@ export default function DevModeSection() {
       </div>
 
       <div className="dev-controls-group">
-        {/* Kontrol Bintang */}
+        
         <div className="control-box">
           <div className="control-header">
             <Star size={16} color="#FFD700" fill="#FFD700" />
@@ -87,7 +87,7 @@ export default function DevModeSection() {
           </div>
         </div>
 
-        {/* Kontrol Obor/Streak */}
+        
         <div className="control-box">
           <div className="control-header">
             <Flame size={16} color="#f4c265" fill="#f4c265" />
@@ -102,7 +102,7 @@ export default function DevModeSection() {
           </div>
         </div>
 
-        {/* Kontrol Nyawa/Hearts */}
+        
         <div className="control-box">
           <div className="control-header">
             <Heart size={16} color="#FF4B4B" fill="#FF4B4B" />

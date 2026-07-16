@@ -11,12 +11,12 @@ export default function ClassroomLobbyScreen() {
   const [isPresent, setIsPresent] = useState(false);
   if (!activeClass) return null;
 
-  // 1. We'll show you (ME) and a subset of friends (e.g. 8 friends)
+  
   const classmatesToShow = (activeClass.students || []).slice(0, 8);
   
-  // 2. Desk mapping: 
-  // Desk 1: ME
-  // Other desks: Classmates
+  
+  
+  
   const desksWithPeople = [
     { id: 1, name: userName + ' (Kamu)', avatar: '⭐', isMe: true },
     ...classmatesToShow.map((s, idx) => ({ ...s, deskId: idx + 2 }))
@@ -27,7 +27,7 @@ export default function ClassroomLobbyScreen() {
 
   return (
     <div className="classroom-container">
-      {/* 1. Header & Papan Tulis */}
+      
       <div className="chalkboard-area">
         <button className="leave-class-btn" onClick={() => {
           setActiveClass(null);
@@ -59,9 +59,9 @@ export default function ClassroomLobbyScreen() {
         </div>
       </div>
 
-      {/* 2. Visual Classroom Area */}
+      
       <div className="classroom-visual">
-        {/* Meja Guru */}
+        
         <div className="teacher-desk-section">
           <div className="student-avatar-bubble teacher-pos">
             <span className="avatar-emoji">👩‍🏫</span>
@@ -75,11 +75,11 @@ export default function ClassroomLobbyScreen() {
           </div>
         </div>
 
-        {/* Meja Murid Grid */}
+        
         <div className="students-grid">
           {deskIds.map(id => {
-            const occupant = desksWithPeople.find(p => p.deskId === id || p.id === id); // Combined check
-            // Fix: the mapping above assigned deskId for classmates. Let's use it properly.
+            const occupant = desksWithPeople.find(p => p.deskId === id || p.id === id); 
+            
             const person = desksWithPeople.find(p => p.isMe ? id === 1 : p.deskId === id);
 
             return (
@@ -103,7 +103,7 @@ export default function ClassroomLobbyScreen() {
         </div>
       </div>
 
-      {/* 3. Task Panel */}
+      
       <div className="classroom-footer">
         {activeClass.assignments && activeClass.assignments.length > 0 && (
           <div className="task-banner">

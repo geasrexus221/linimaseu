@@ -8,7 +8,7 @@ export default function CompactInventory({ inventory = [] }) {
   const theme = useStore(state => state.theme);
   const isDark = theme === 'dark';
 
-  // Selalu tampilkan 3 slot
+  
   const slots = [0, 1, 2];
 
   return (

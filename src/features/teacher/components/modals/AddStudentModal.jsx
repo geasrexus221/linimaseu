@@ -3,7 +3,7 @@ import { X, Copy, Check, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function AddStudentModal({ isOpen, onClose, onAddStudent, activeClassroom }) {
-  const [activeTab, setActiveTab] = useState('manual'); // 'manual' | 'invite'
+  const [activeTab, setActiveTab] = useState('manual'); 
   const [studentName, setStudentName] = useState('');
   const [studentNis, setStudentNis] = useState('');
   const [copied, setCopied] = useState(false);
@@ -19,14 +19,14 @@ export default function AddStudentModal({ isOpen, onClose, onAddStudent, activeC
       nis: studentNis.trim()
     });
 
-    // Reset form
+    
     setStudentName('');
     setStudentNis('');
   };
 
   const handleCopyCode = () => {
-    // In real app, write to clipboard
-    // navigator.clipboard.writeText('LMS-5A-DEV');
+    
+    
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -49,7 +49,7 @@ export default function AddStudentModal({ isOpen, onClose, onAddStudent, activeC
           <p>Tambahkan murid ke kelas <strong>{activeClassroom.name}</strong></p>
         </div>
 
-        {/* Tab Navigation */}
+        
         <div style={{ display: 'flex', gap: '8px', borderBottom: '2px solid var(--border-color)', marginBottom: '20px', paddingBottom: '10px' }}>
           <button 
             onClick={() => setActiveTab('manual')}

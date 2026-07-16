@@ -1,6 +1,6 @@
 import { useStore } from '../../../../store/useStore';
 
-// Static Imports for reliability in Vite
+
 import moveSfx from '../../../../assets/game/sfx/move.mp3';
 import landSfx from '../../../../assets/game/sfx/land.mp3';
 import eventOpenSfx from '../../../../assets/game/sfx/event_open.mp3';
@@ -12,7 +12,7 @@ import cardUseSfx from '../../../../assets/game/sfx/card_use.wav';
 import turnStartSfx from '../../../../assets/game/sfx/turn_start.mp3';
 import buttonSfx from '../../../../assets/game/sfx/button.mp3';
 
-// Dice sounds from main assets
+
 import diceRollSfx from '../../../../assets/audio/dice/rolling dice.mp3';
 import dice1Sfx from '../../../../assets/audio/dice/satu.mp3';
 import dice2Sfx from '../../../../assets/audio/dice/dua.mp3';
@@ -21,7 +21,7 @@ import dice4Sfx from '../../../../assets/audio/dice/empat.mp3';
 import dice5Sfx from '../../../../assets/audio/dice/lima.mp3';
 import dice6Sfx from '../../../../assets/audio/dice/enam.mp3';
 
-// Music
+
 import adventureTheme from '../../../../assets/game/music/Pixel Picnic Parade.mp3';
 import squasbSfx from '../../../../assets/audio/squasb.mp3';
 import glassSfx from '../../../../assets/audio/glass.mp3';
@@ -31,10 +31,7 @@ import correctSfx from '../../../../assets/audio/correct.mp3';
 import clickSfx from '../../../../assets/audio/click.wav';
 import successSfx from '../../../../assets/audio/success.mp3';
 
-/**
- * SoundEngine - Managing SFX and Music for Jelajah Nusantara
- * Use soundEngine.playSound('key') to trigger sounds.
- */
+
 class SoundEngine {
   constructor() {
     this.sounds = {};
@@ -74,7 +71,7 @@ class SoundEngine {
   init() {
     if (this.initialized) return;
     
-    // Pre-create Audio objects
+    
     Object.entries(this.soundList).forEach(([key, url]) => {
       const audio = new Audio(url);
       audio.preload = 'auto';
@@ -85,15 +82,12 @@ class SoundEngine {
     console.log('[SoundEngine] Initialized with dynamic src/assets paths');
   }
 
-  /**
-   * Play a specific sound effect
-   * @param {string} key - The key from soundList
-   */
+  
   playSound(key) {
     const { soundEnabled, sfxVolume } = useStore.getState();
     if (!soundEnabled) return;
 
-    // Use soundList to get the latest URL
+    
     const url = this.soundList[key];
     if (url) {
       const audio = new Audio(url);
@@ -106,18 +100,12 @@ class SoundEngine {
     }
   }
 
-  /**
-   * Play the voice/sound for a specific dice result
-   * @param {number} value - Dice value (1-6)
-   */
+  
   playDiceResult(value) {
     this.playSound(`dice_${value}`);
   }
 
-  /**
-   * Play background music
-   * @param {string} url - Path to music file
-   */
+  
   playMusic(url) {
     const { soundEnabled, musicVolume } = useStore.getState();
     const musicUrl = url || adventureTheme;
@@ -137,9 +125,7 @@ class SoundEngine {
     }
   }
 
-  /**
-   * Update volumes dynamically when settings change
-   */
+  
   syncSettings() {
     const { musicVolume, soundEnabled } = useStore.getState();
     if (this.music) {

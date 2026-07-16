@@ -96,10 +96,10 @@ export default function ModulePathScreen({ moduleId = 'cahaya' }) {
   };
 
   const handleDrag = (event, info) => {
-    // 1. Tidak bisa di-stretch ke bawah (dragDistance >= 0)
+    
     const dragDistance = Math.max(0, -info.offset.y);
 
-    // 2. Ujung stretch mengikuti posisi kursor (tinggi karakter = 200px)
+    
     const newScaleY = 1 + dragDistance / 200;
     const newScaleX = Math.max(0.45, 1 - (newScaleY - 1) * 0.45);
 
@@ -114,37 +114,37 @@ export default function ModulePathScreen({ moduleId = 'cahaya' }) {
 
   const isDark = theme === 'dark';
 
-  // Space nodes vertically across loops of path.svg (each loop is 772.4px high)
+  
   const numLoops = 2;
   const totalHeight = useMemo(() => {
     if (!pathData.length) return 772.4 * numLoops;
     const lastNodeY = 80 + (pathData.length - 1) * 110;
-    const bottomPadding = 90; // Ruang bernafas di bawah node terakhir
+    const bottomPadding = 90; 
     return lastNodeY + bottomPadding;
   }, [pathData]);
 
   const nodePositions = useMemo(() => {
     return pathData.map((node, index) => {
-      // Space nodes vertically closer (110 units spacing instead of 135)
+      
       const y = 80 + index * 110;
       const yMod = y % 772.4;
 
-      // Follow the road path coordinates from path.svg
+      
       let x = 100;
       if (yMod < 80) {
-        x = 136 - (yMod / 80) * 26; // 136 -> 110
+        x = 136 - (yMod / 80) * 26; 
       } else if (yMod < 200) {
-        x = 110 - ((yMod - 80) / 120) * 70; // 110 -> 40
+        x = 110 - ((yMod - 80) / 120) * 70; 
       } else if (yMod < 320) {
-        x = 40 + ((yMod - 200) / 120) * 15; // 40 -> 55
+        x = 40 + ((yMod - 200) / 120) * 15; 
       } else if (yMod < 450) {
-        x = 55 + ((yMod - 320) / 130) * 65; // 55 -> 120
+        x = 55 + ((yMod - 320) / 130) * 65; 
       } else if (yMod < 580) {
-        x = 120 + ((yMod - 450) / 130) * 30; // 120 -> 150
+        x = 120 + ((yMod - 450) / 130) * 30; 
       } else if (yMod < 720) {
-        x = 150 + ((yMod - 580) / 140) * 25; // 150 -> 175
+        x = 150 + ((yMod - 580) / 140) * 25; 
       } else {
-        x = 175 + ((yMod - 720) / 52.4) * 15; // 175 -> 190
+        x = 175 + ((yMod - 720) / 52.4) * 15; 
       }
       return { x, y };
     });
@@ -213,7 +213,7 @@ export default function ModulePathScreen({ moduleId = 'cahaya' }) {
             aspectRatio: `201.68 / ${totalHeight}`
           }}
         >
-          {/* Draw Repeating Vector Road */}
+          
           <RepeatingRoad numLoops={numLoops} totalHeight={totalHeight} />
 
           {pathData.map((node, index) => {
@@ -257,7 +257,7 @@ export default function ModulePathScreen({ moduleId = 'cahaya' }) {
                   {node.type === 'material' ? 'Materi' : node.type === 'quiz' ? 'Kuis' : 'Hadiah'}
                 </div>
 
-                {/* Character standing next to Materi 2 */}
+                
                 {node.title === 'Sifat: Merambat Lurus' && (
                   <motion.div
                     className="npc-container"
@@ -289,7 +289,7 @@ export default function ModulePathScreen({ moduleId = 'cahaya' }) {
                   </motion.div>
                 )}
 
-                {/* Character sitting next to Reward Node */}
+                
                 {node.type === 'reward' && (
                   <div className="npc-container" style={{ right: '-140px', bottom: '20px' }}>
                     <img
@@ -301,7 +301,7 @@ export default function ModulePathScreen({ moduleId = 'cahaya' }) {
                   </div>
                 )}
 
-                {/* Duolingo style popup card */}
+                
                 <AnimatePresence>
                   {isSelected && !isClaimed && (
                     <div className={`popup-positioner ${node.type}`}>
@@ -327,7 +327,7 @@ export default function ModulePathScreen({ moduleId = 'cahaya' }) {
             );
           })}
 
-          {/* Bush Foreground Overlay placed inside the road container to scale and scroll with it */}
+          
           <div className="bottom-bush-overlay">
             <img src={BushSvg} alt="Bush Foreground" />
           </div>
@@ -335,7 +335,7 @@ export default function ModulePathScreen({ moduleId = 'cahaya' }) {
         </div>
       </div>
 
-      {/* Reward Modal */}
+      
       <AnimatePresence>
         {showRewardModal && rewardInfo && (
           <motion.div

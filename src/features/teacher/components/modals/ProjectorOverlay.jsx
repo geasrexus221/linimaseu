@@ -18,16 +18,16 @@ const THEMES = {
   },
   KELAS: {
     name: 'Ruang Kelas',
-    overlayBg: '#DEB887', // Dinding kayu/krem
-    questionBg: '#2F4F4F', // Papan tulis hijau gelap
-    questionBorder: '12px solid #8B4513', // Bingkai kayu
-    questionTextColor: '#F8F9FA', // Kapur putih
+    overlayBg: '#DEB887', 
+    questionBg: '#2F4F4F', 
+    questionBorder: '12px solid #8B4513', 
+    questionTextColor: '#F8F9FA', 
     questionPadding: '40px',
-    optionBg: '#FFFDF0', // Kertas putih gading
-    optionTextColor: '#111', // Tinta hitam
+    optionBg: '#FFFDF0', 
+    optionTextColor: '#111', 
     optionBorder: '1px solid #CBD5E1',
     optionShadow: '4px 4px 15px rgba(0,0,0,0.15)',
-    optionRadius: '4px' // Sudut kertas tajam
+    optionRadius: '4px' 
   },
   LAUT: {
     name: 'Bawah Air',
@@ -91,7 +91,7 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
   const theme = THEMES[initialThemeKey] || THEMES.MODERN;
   const activeThemeKey = initialThemeKey;
 
-  // Safeguard against missing questions
+  
   if (!collection || !collection.questions || collection.questions.length === 0) {
     return (
       <div style={{ ...overlayStyle, background: theme.overlayBg }}>
@@ -207,12 +207,12 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
                 transform = 'scale(1.05)';
               }
 
-              // Rotasi acak sedikit untuk efek kertas pada mode KELAS
+              
               const rotateStr = activeThemeKey === 'KELAS' && !isCorrect && !isEliminated 
                 ? `rotate(${idx % 2 === 0 ? '-2deg' : '2deg'})` 
                 : 'rotate(0deg)';
 
-              // Efek melayang perlahan untuk laut
+              
               const floatAnimation = activeThemeKey === 'LAUT' && !isCorrect && !isEliminated
                 ? { y: [0, -5, 0], transition: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: idx * 0.2 } }
                 : {};
@@ -247,7 +247,7 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
                     overflow: 'hidden'
                   }}
                 >
-                  {/* Efek garis buku untuk mode KELAS */}
+                  
                   {activeThemeKey === 'KELAS' && !isCorrect && (
                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none', 
                       backgroundImage: 'repeating-linear-gradient(transparent, transparent 29px, #CBD5E1 29px, #CBD5E1 30px)',
@@ -260,7 +260,7 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
                       opacity: 0.8
                     }} />
                   )}
-                  {/* Efek gelembung untuk mode LAUT */}
+                  
                   {activeThemeKey === 'LAUT' && !isEliminated && (
                     <div style={{ position: 'absolute', top: '10px', left: '15px', width: '15px', height: '10px', borderRadius: '50%', background: 'rgba(255,255,255,0.6)', transform: 'rotate(-20deg)', pointerEvents: 'none' }} />
                   )}
@@ -306,7 +306,7 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
         </div>
       </div>
 
-      {/* Header and Close Button (Placed at the end of DOM to avoid being covered) */}
+      
       <div style={{ position: 'absolute', top: '24px', left: '32px', display: 'flex', alignItems: 'center', gap: '12px', color: activeThemeKey === 'KELAS' ? '#4A3000' : 'white', zIndex: 99999, transition: 'color 0.5s ease', pointerEvents: 'none' }}>
         <MonitorPlay size={28} />
         <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '800' }}>Mode Proyektor: {collection.title}</h2>
@@ -329,7 +329,7 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
         </button>
       </div>
 
-      {/* Decorative Classroom Elements */}
+      
       <AnimatePresence>
         {activeThemeKey === 'KELAS' && (
           <motion.div 
@@ -339,7 +339,7 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
             transition={{ type: 'spring', stiffness: 100, damping: 20 }}
             style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '120px', pointerEvents: 'none', zIndex: 2 }}
           >
-            {/* Meja / Desk */}
+            
             <div style={{ 
               position: 'absolute', bottom: 0, left: 0, width: '100%', height: '80px', 
               background: 'linear-gradient(to bottom, #A0522D, #8B4513)', 
@@ -347,55 +347,55 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
               boxShadow: '0 -10px 20px rgba(0,0,0,0.3)' 
             }} />
             
-            {/* Apel (Red Apple) */}
+            
             <div style={{ 
               position: 'absolute', bottom: '70px', right: '15%', width: '60px', height: '60px', 
               background: 'radial-gradient(circle at 30% 30%, #FF6B6B, #DC2626)', 
               borderRadius: '50%', boxShadow: '10px 10px 15px rgba(0,0,0,0.4)',
               transformOrigin: 'bottom center'
             }}>
-              {/* Tangkai Apel */}
+              
               <div style={{ position: 'absolute', top: '-10px', left: '26px', width: '6px', height: '16px', background: '#5C4033', borderRadius: '3px', transform: 'rotate(15deg)' }} />
-              {/* Daun Apel */}
+              
               <div style={{ position: 'absolute', top: '-6px', left: '30px', width: '22px', height: '12px', background: '#22C55E', borderRadius: '12px 0 12px 0', transform: 'rotate(-15deg)', boxShadow: 'inset 2px 2px 4px rgba(255,255,255,0.3)' }} />
-              {/* Kilauan (Highlight) */}
+              
               <div style={{ position: 'absolute', top: '10px', left: '12px', width: '15px', height: '10px', background: 'rgba(255,255,255,0.4)', borderRadius: '50%', transform: 'rotate(-30deg)' }} />
             </div>
 
-            {/* Pensil (Yellow Pencil) */}
+            
             <div style={{ 
               position: 'absolute', bottom: '74px', right: '28%', width: '140px', height: '16px', 
               display: 'flex', transform: 'rotate(-10deg)', boxShadow: '5px 8px 12px rgba(0,0,0,0.3)' 
             }}>
-              {/* Penghapus */}
+              
               <div style={{ width: '18px', height: '100%', background: '#FCA5A5', borderRadius: '4px 0 0 4px', border: '1px solid #F87171' }} />
-              {/* Besi Pensil */}
+              
               <div style={{ width: '12px', height: '100%', background: 'linear-gradient(to bottom, #9CA3AF, #D1D5DB, #9CA3AF)' }} />
-              {/* Badan Pensil Kuning */}
+              
               <div style={{ flex: 1, background: 'linear-gradient(to bottom, #FBBF24, #F59E0B, #D97706)', borderTop: '1px solid #FCD34D', borderBottom: '1px solid #B45309' }}>
-                 {/* Garis kayu */}
+                 
                  <div style={{ width: '100%', height: '33%', background: 'rgba(0,0,0,0.05)', marginTop: '25%' }} />
               </div>
-              {/* Ujung Kayu */}
+              
               <div style={{ width: '30px', height: '100%', background: '#FDE68A', clipPath: 'polygon(0 0, 100% 50%, 0 100%)', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-                 {/* Mata Pensil */}
+                 
                  <div style={{ width: '8px', height: '4px', background: '#374151', marginRight: '0', clipPath: 'polygon(0 0, 100% 50%, 0 100%)' }} />
               </div>
             </div>
 
-            {/* Penggaris (Blue Ruler) */}
+            
             <div style={{ 
               position: 'absolute', bottom: '65px', left: '18%', width: '220px', height: '35px', 
               background: 'linear-gradient(to bottom, #93C5FD, #60A5FA)', border: '1px solid #3B82F6', 
               borderRadius: '2px', transform: 'rotate(4deg)', display: 'flex', flexDirection: 'column', 
               justifyContent: 'flex-start', padding: '0 8px', boxShadow: '5px 8px 12px rgba(0,0,0,0.3)'
             }}>
-              {/* Garis ukur penggaris */}
+              
               <div style={{ width: '100%', height: '8px', backgroundImage: 'repeating-linear-gradient(to right, #1E3A8A, #1E3A8A 2px, transparent 2px, transparent 15px)', marginTop: '2px' }} />
               <div style={{ width: '100%', height: '4px', backgroundImage: 'repeating-linear-gradient(to right, #1E3A8A, #1E3A8A 1px, transparent 1px, transparent 5px)' }} />
             </div>
             
-            {/* Buku Catatan (Notebook) */}
+            
             <div style={{ 
               position: 'absolute', bottom: '60px', left: '35%', width: '150px', height: '40px', 
               background: '#F8FAFC', borderRadius: '4px 4px 0 0', transform: 'rotate(-2deg)', 
@@ -412,7 +412,7 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
         )}
       </AnimatePresence>
 
-      {/* Decorative Underwater Elements */}
+      
       <AnimatePresence>
         {activeThemeKey === 'LAUT' && (
           <motion.div 
@@ -422,14 +422,14 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
             transition={{ duration: 1 }}
             style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '150px', pointerEvents: 'none', zIndex: 2 }}
           >
-            {/* Dasar Pasir Laut */}
+            
             <div style={{ 
               position: 'absolute', bottom: 0, left: '-5%', width: '110%', height: '80px', 
               background: '#FDE047', borderRadius: '50% 50% 0 0 / 20px 20px 0 0',
               boxShadow: 'inset 0 10px 20px rgba(0,0,0,0.1)'
             }} />
             
-            {/* Rumput Laut Kiri */}
+            
             <motion.div 
               animate={{ skewX: [-2, 2, -2] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
@@ -441,31 +441,31 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
               style={{ position: 'absolute', bottom: '65px', left: '12%', width: '12px', height: '60px', background: '#22C55E', borderRadius: '20px 20px 0 0', transformOrigin: 'bottom center' }} 
             />
 
-            {/* Rumput Laut Kanan */}
+            
             <motion.div 
               animate={{ skewX: [2, -2, 2] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               style={{ position: 'absolute', bottom: '70px', right: '15%', width: '18px', height: '110px', background: '#15803D', borderRadius: '20px 20px 0 0', transformOrigin: 'bottom center' }} 
             />
 
-            {/* Ikan Kecil */}
+            
             <motion.div 
               animate={{ x: [-50, 100, -50], y: [0, -10, 0] }}
               transition={{ x: { duration: 15, repeat: Infinity, ease: 'linear' }, y: { duration: 3, repeat: Infinity, ease: 'easeInOut' } }}
               style={{ position: 'absolute', bottom: '100px', left: '25%', display: 'flex', alignItems: 'center' }}
             >
-              {/* Ekor Ikan */}
+              
               <div style={{ width: '15px', height: '20px', background: '#F97316', clipPath: 'polygon(100% 0, 0 50%, 100% 100%)' }} />
-              {/* Badan Ikan */}
+              
               <div style={{ width: '30px', height: '20px', background: '#FB923C', borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}>
-                {/* Mata */}
+                
                 <div style={{ position: 'absolute', right: '5px', top: '5px', width: '4px', height: '4px', background: 'white', borderRadius: '50%' }}>
                    <div style={{ width: '2px', height: '2px', background: 'black', borderRadius: '50%', margin: '1px' }} />
                 </div>
               </div>
             </motion.div>
 
-            {/* Gelembung */}
+            
             <motion.div animate={{ y: [0, -200], opacity: [0, 0.5, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeOut', delay: 0.5 }} style={{ position: 'absolute', bottom: '90px', right: '20%', width: '10px', height: '10px', borderRadius: '50%', border: '2px solid rgba(255,255,255,0.5)' }} />
             <motion.div animate={{ y: [0, -300], opacity: [0, 0.6, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeOut', delay: 2 }} style={{ position: 'absolute', bottom: '80px', left: '12%', width: '15px', height: '15px', borderRadius: '50%', border: '2px solid rgba(255,255,255,0.5)' }} />
             <motion.div animate={{ y: [0, -150], opacity: [0, 0.4, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeOut', delay: 1 }} style={{ position: 'absolute', bottom: '70px', left: '40%', width: '8px', height: '8px', borderRadius: '50%', border: '2px solid rgba(255,255,255,0.5)' }} />
@@ -474,40 +474,40 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
         )}
       </AnimatePresence>
 
-      {/* Decorative Space Elements */}
+      
       <AnimatePresence>
         {activeThemeKey === 'ANGKASA' && (
           <motion.div 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}
             style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '150px', pointerEvents: 'none', zIndex: 2 }}
           >
-            {/* Permukaan Bulan */}
+            
             <div style={{ position: 'absolute', bottom: '-40px', left: '-5%', width: '110%', height: '100px', background: '#475569', borderRadius: '50% 50% 0 0 / 100% 100% 0 0', boxShadow: 'inset 0 10px 20px rgba(0,0,0,0.5)' }}>
-              {/* Kawah */}
+              
               <div style={{ position: 'absolute', top: '20px', left: '15%', width: '30px', height: '15px', background: '#334155', borderRadius: '50%', boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.5)' }} />
               <div style={{ position: 'absolute', top: '35px', left: '45%', width: '45px', height: '20px', background: '#334155', borderRadius: '50%', boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.5)' }} />
               <div style={{ position: 'absolute', top: '15px', right: '25%', width: '20px', height: '10px', background: '#334155', borderRadius: '50%', boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.5)' }} />
             </div>
 
-            {/* Roket */}
+            
             <motion.div animate={{ y: [-5, 5, -5] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }} style={{ position: 'absolute', bottom: '80px', left: '20%' }}>
               <div style={{ width: '30px', height: '60px', background: '#E2E8F0', borderRadius: '50% 50% 10px 10px', position: 'relative' }}>
                 <div style={{ position: 'absolute', top: '15px', left: '10px', width: '10px', height: '10px', background: '#1E293B', border: '2px solid #94A3B8', borderRadius: '50%' }} />
                 <div style={{ position: 'absolute', bottom: '-5px', left: '-10px', width: '15px', height: '20px', background: '#EF4444', clipPath: 'polygon(100% 0, 100% 100%, 0 100%)' }} />
                 <div style={{ position: 'absolute', bottom: '-5px', right: '-10px', width: '15px', height: '20px', background: '#EF4444', clipPath: 'polygon(0 0, 100% 100%, 0 100%)' }} />
-                {/* Api */}
+                
                 <motion.div animate={{ scaleY: [1, 1.3, 1] }} transition={{ duration: 0.1, repeat: Infinity }} style={{ position: 'absolute', bottom: '-15px', left: '8px', width: '14px', height: '20px', background: '#F59E0B', borderRadius: '0 0 50% 50%', transformOrigin: 'top center' }}>
                    <div style={{ position: 'absolute', bottom: '2px', left: '3px', width: '8px', height: '10px', background: '#FDE047', borderRadius: '0 0 50% 50%' }} />
                 </motion.div>
               </div>
             </motion.div>
 
-            {/* Planet Kecil */}
+            
             <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }} style={{ position: 'absolute', bottom: '100px', right: '15%', width: '40px', height: '40px', background: 'radial-gradient(circle at 30% 30%, #8B5CF6, #4C1D95)', borderRadius: '50%', boxShadow: '0 0 15px rgba(139,92,246,0.4)' }}>
               <div style={{ position: 'absolute', top: '15px', left: '-10px', width: '60px', height: '10px', border: '2px solid rgba(255,255,255,0.3)', borderRadius: '50%', transform: 'rotate(20deg)' }} />
             </motion.div>
             
-            {/* Bintang */}
+            
             {[...Array(8)].map((_, i) => (
               <motion.div key={i} animate={{ opacity: [0.2, 1, 0.2] }} transition={{ duration: 1.5 + (i * 0.5), repeat: Infinity, delay: i * 0.2 }} style={{ position: 'absolute', top: `${(i * 15) % 80}px`, left: `${10 + (i * 12)}%`, width: '3px', height: '3px', background: 'white', borderRadius: '50%', boxShadow: '0 0 5px white' }} />
             ))}
@@ -515,27 +515,27 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
         )}
       </AnimatePresence>
 
-      {/* Decorative Forest Elements */}
+      
       <AnimatePresence>
         {activeThemeKey === 'HUTAN' && (
           <motion.div 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}
             style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '150px', pointerEvents: 'none', zIndex: 2 }}
           >
-            {/* Rumput */}
+            
             <div style={{ position: 'absolute', bottom: 0, left: '-5%', width: '110%', height: '50px', background: '#065F46', clipPath: 'polygon(0 100%, 100% 100%, 100% 0, 95% 10px, 90% 0, 85% 10px, 80% 0, 75% 10px, 70% 0, 65% 10px, 60% 0, 55% 10px, 50% 0, 45% 10px, 40% 0, 35% 10px, 30% 0, 25% 10px, 20% 0, 15% 10px, 10% 0, 5% 10px, 0 0)' }} />
             
-            {/* Pohon Kiri */}
+            
             <div style={{ position: 'absolute', bottom: '20px', left: '10%', width: '25px', height: '120px', background: '#451A03' }}>
               <motion.div animate={{ rotate: [0, 2, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} style={{ position: 'absolute', top: '-40px', left: '-35px', width: '90px', height: '90px', background: '#15803D', borderRadius: '50%', boxShadow: 'inset -10px -10px 0 rgba(0,0,0,0.2)' }} />
             </div>
 
-            {/* Pohon Kanan (Lebih kecil) */}
+            
             <div style={{ position: 'absolute', bottom: '20px', right: '15%', width: '15px', height: '80px', background: '#451A03' }}>
               <motion.div animate={{ rotate: [0, -3, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }} style={{ position: 'absolute', top: '-30px', left: '-25px', width: '60px', height: '60px', background: '#16A34A', borderRadius: '50%', boxShadow: 'inset -5px -5px 0 rgba(0,0,0,0.2)' }} />
             </div>
 
-            {/* Jamur */}
+            
             <div style={{ position: 'absolute', bottom: '30px', left: '30%' }}>
               <div style={{ width: '10px', height: '20px', background: '#FEF3C7', margin: '0 auto' }} />
               <div style={{ width: '30px', height: '15px', background: '#EF4444', borderRadius: '15px 15px 0 0', position: 'absolute', top: '-5px', left: '-10px' }}>
@@ -544,7 +544,7 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
               </div>
             </div>
             
-            {/* Kunang-kunang */}
+            
             {[...Array(6)].map((_, i) => (
               <motion.div key={i} animate={{ opacity: [0, 1, 0], x: [0, (i%2===0?20:-20), 0], y: [0, -10, 0] }} transition={{ duration: 2 + i, repeat: Infinity, ease: 'easeInOut' }} style={{ position: 'absolute', bottom: `${40 + (i*15)}px`, left: `${20 + (i*10)}%`, width: '4px', height: '4px', background: '#FDE047', borderRadius: '50%', boxShadow: '0 0 8px #FDE047' }} />
             ))}
@@ -552,40 +552,40 @@ export default function ProjectorOverlay({ collection, initialThemeKey = 'MODERN
         )}
       </AnimatePresence>
 
-      {/* Decorative Desert Elements */}
+      
       <AnimatePresence>
         {activeThemeKey === 'GURUN' && (
           <motion.div 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}
             style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '180px', pointerEvents: 'none', zIndex: 2 }}
           >
-            {/* Matahari Terbenam */}
+            
             <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', width: '120px', height: '60px', background: '#FDE047', borderRadius: '60px 60px 0 0', boxShadow: '0 0 40px #FDE047' }} />
 
-            {/* Bukit Pasir Belakang */}
+            
             <div style={{ position: 'absolute', bottom: '0', left: '-10%', width: '70%', height: '80px', background: '#D97706', borderRadius: '50% 50% 0 0 / 100% 100% 0 0' }} />
             <div style={{ position: 'absolute', bottom: '0', right: '-10%', width: '60%', height: '100px', background: '#B45309', borderRadius: '50% 50% 0 0 / 100% 100% 0 0' }} />
 
-            {/* Bukit Pasir Depan */}
+            
             <div style={{ position: 'absolute', bottom: '0', left: '-5%', width: '110%', height: '50px', background: '#F59E0B', borderRadius: '50% 50% 0 0 / 30px 30px 0 0' }} />
 
-            {/* Kaktus */}
+            
             <div style={{ position: 'absolute', bottom: '30px', left: '20%' }}>
-              {/* Batang Utama */}
+              
               <div style={{ width: '16px', height: '60px', background: '#16A34A', borderRadius: '8px 8px 0 0' }}>
-                 {/* Garis tekstur */}
+                 
                  <div style={{ position: 'absolute', top: '0', left: '4px', width: '2px', height: '100%', background: '#15803D' }} />
                  <div style={{ position: 'absolute', top: '0', right: '4px', width: '2px', height: '100%', background: '#15803D' }} />
               </div>
-              {/* Lengan Kiri */}
+              
               <div style={{ position: 'absolute', bottom: '25px', left: '-12px', width: '12px', height: '20px', borderBottom: '16px solid #16A34A', borderLeft: '16px solid #16A34A', borderRadius: '0 0 0 8px' }} />
               <div style={{ position: 'absolute', bottom: '45px', left: '-12px', width: '16px', height: '15px', background: '#16A34A', borderRadius: '8px 8px 0 0' }} />
-              {/* Lengan Kanan */}
+              
               <div style={{ position: 'absolute', bottom: '15px', right: '-12px', width: '12px', height: '20px', borderBottom: '16px solid #16A34A', borderRight: '16px solid #16A34A', borderRadius: '0 0 8px 0' }} />
               <div style={{ position: 'absolute', bottom: '35px', right: '-12px', width: '16px', height: '15px', background: '#16A34A', borderRadius: '8px 8px 0 0' }} />
             </div>
 
-            {/* Tengkorak / Batu / Tumbleweed */}
+            
             <motion.div animate={{ rotate: 360, x: [0, 500] }} transition={{ duration: 15, repeat: Infinity, ease: 'linear' }} style={{ position: 'absolute', bottom: '30px', left: '-50px', width: '25px', height: '25px', border: '3px dashed #B45309', borderRadius: '50%' }} />
 
           </motion.div>

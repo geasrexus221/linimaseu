@@ -4,19 +4,19 @@ import { useStore } from '../../../../store/useStore';
 
 import { quizBanks } from '../../jelajah-nusantara/data/questions';
 
-// CONSTANTS
+
 const GRAVITY = 0.4;
 const JUMP = -7;
 const PIPE_SPEED = 3.5;
-const PIPE_WIDTH = 80; // px
-const GAP_SIZE = 220; // px
-const PIPE_SPAWN_RATE = 140; // frames
-const INVINCIBILITY_FRAMES = 120; // 2 seconds at 60fps
+const PIPE_WIDTH = 80; 
+const GAP_SIZE = 220; 
+const PIPE_SPAWN_RATE = 140; 
+const INVINCIBILITY_FRAMES = 120; 
 const BOT_NAMES = ['Budi', 'Siti', 'Andi'];
 const BOT_COLORS = ['#FF4B4B', '#58CC02', '#FFD700'];
 
 export default function LayanganGameScreen({ config, onBack }) {
-  const [phase, setPhase] = useState('intro'); // intro, playing, gameover
+  const [phase, setPhase] = useState('intro'); 
   const [introCount, setIntroCount] = useState(3);
   const [score, setScore] = useState(0);
   const [quizScore, setQuizScore] = useState(0);
@@ -28,7 +28,7 @@ export default function LayanganGameScreen({ config, onBack }) {
 
   useEffect(() => {
     if (phase === 'gameover') {
-      // 10 stars per pipe, 20 extra per correct quiz
+      
       const reward = (score * 10) + (quizScore * 20);
       setEarnedStars(reward);
       if (reward > 0) {
@@ -37,7 +37,7 @@ export default function LayanganGameScreen({ config, onBack }) {
     }
   }, [phase]);
   
-  // Convert 4-option questions to 2-option questions dynamically
+  
   const gameQuestions = React.useMemo(() => {
     const themeId = config?.quizThemeId || 'ipas_4_5';
     const bank = quizBanks[themeId] || quizBanks.sejarah_umum;
@@ -131,11 +131,11 @@ export default function LayanganGameScreen({ config, onBack }) {
     const id = Date.now();
 
     if (isFork) {
-      // Fork Pipe (2 gaps)
+      
       const gap1Top = Math.random() * 50 + 50; 
       const gap1Bot = gap1Top + GAP_SIZE;
       
-      const gap2Top = gap1Bot + 80 + Math.random() * 50; // At least 80px pillar between gaps
+      const gap2Top = gap1Bot + 80 + Math.random() * 50; 
       const gap2Bot = gap2Top + GAP_SIZE;
 
       const q = stateRef.current.activeQuestion;
@@ -152,7 +152,7 @@ export default function LayanganGameScreen({ config, onBack }) {
         trapActivated: false
       });
     } else {
-      // Normal Pipe
+      
       const minHeight = 100;
       const maxHeight = Math.max(minHeight, h - GAP_SIZE - 100);
       const topHeight = Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
@@ -191,63 +191,63 @@ export default function LayanganGameScreen({ config, onBack }) {
       const willBeFork = (s.pipesSpawned + 1) % 5 === 0;
       
       if (willBeFork && !s.isQuestionRevealed) {
-        // Reveal question NOW to give time to read
+        
         const q = gameQuestions[Math.floor(Math.random() * gameQuestions.length)];
         s.activeQuestion = q;
         setActiveQuestion(q);
         s.isQuestionRevealed = true;
-        // Delay spawning the actual fork pipe by 240 frames (4 seconds)
+        
         s.spawnTimer = 240;
       } else {
         spawnPipe(h, w, willBeFork);
         s.isQuestionRevealed = false;
-        // Next pipe
+        
         s.spawnTimer = PIPE_SPAWN_RATE;
       }
     }
 
-    // Move pipes
+    
     for (let i = s.pipes.length - 1; i >= 0; i--) {
       const p = s.pipes[i];
       p.x -= PIPE_SPEED;
       
-      // Clear HUD Question when fork pipe is close to center
+      
       if (p.isFork && p.x < w / 2 && s.activeQuestion) {
         s.activeQuestion = null;
         setActiveQuestion(null);
       }
 
-      // Activate trap visually
+      
       if (p.isFork && p.x + PIPE_WIDTH/2 < 120 + 15 && !p.trapActivated) {
         p.trapActivated = true;
-        setPipesState([...s.pipes]); // trigger render
+        setPipesState([...s.pipes]); 
       }
 
-      // Check collision
+      
       s.players.forEach(player => {
         if (!player.alive || player.invinc > 0) return;
         
-        const px = 120; // Kite X
-        const r = 15; // Hitbox Radius
+        const px = 120; 
+        const r = 15; 
         let isHit = false;
 
         if (p.x < px + r && p.x + PIPE_WIDTH > px - r) {
           if (p.isFork) {
-            // Collision with Top Ceiling
+            
             if (player.y - r < p.gap1Top) isHit = true;
-            // Collision with Middle Pillar
+            
             else if (player.y + r > p.gap1Bot && player.y - r < p.gap2Top) isHit = true;
-            // Collision with Floor
+            
             else if (player.y + r > p.gap2Bot) isHit = true;
 
-            // Collision with Wrong Path Dead-End Wall (located at the back of the wrong gap)
+            
             if (p.x + PIPE_WIDTH/2 < px + r) {
                if (!p.topCorrect && player.y > p.gap1Top && player.y < p.gap1Bot) isHit = true;
                if (p.topCorrect && player.y > p.gap2Top && player.y < p.gap2Bot) isHit = true;
             }
 
           } else {
-            // Normal Pipe Collision
+            
             if (player.y - r < p.topHeight || player.y + r > p.bottomY) isHit = true;
           }
         }
@@ -270,7 +270,7 @@ export default function LayanganGameScreen({ config, onBack }) {
         }
       });
 
-      // Pass pipe
+      
       if (!p.passed && p.x + PIPE_WIDTH < 120) {
         p.passed = true;
         s.score++;
@@ -287,7 +287,7 @@ export default function LayanganGameScreen({ config, onBack }) {
       }
     }
 
-    // Move players
+    
     let nextPipe = s.pipes.find(p => p.x + PIPE_WIDTH > 120 && !p.passed);
     
     s.players.forEach(player => {
@@ -306,7 +306,7 @@ export default function LayanganGameScreen({ config, onBack }) {
       player.v += GRAVITY;
       player.y += player.v;
 
-      // Boundaries
+      
       if (player.y > h - 20) {
         if (player.invinc > 0) {
           player.y = h - 20;
@@ -328,10 +328,10 @@ export default function LayanganGameScreen({ config, onBack }) {
       }
       if (player.y < 0) { player.y = 0; player.v = 0; }
 
-      // Bot AI
+      
       if (player.isBot && player.invinc === 0 && nextPipe) {
         if (nextPipe.isFork) {
-          // Go to correct gap
+          
           if (nextPipe.topCorrect) {
             player.targetY = nextPipe.gap1Top + GAP_SIZE/2;
           } else {
@@ -379,7 +379,7 @@ export default function LayanganGameScreen({ config, onBack }) {
 
   return (
     <div className="layangan-game-screen" onClick={handleScreenClick}>
-      {/* Backgrounds */}
+      
       <div className="sky-bg">
         <div className="clouds-layer" />
         <div className="mountains-layer" />
@@ -387,7 +387,7 @@ export default function LayanganGameScreen({ config, onBack }) {
         <div className="ground-layer" />
       </div>
 
-      {/* HUD */}
+      
       <div className="hud">
         <button className="quit-btn" onClick={onBack}><X size={20} /></button>
         
@@ -403,7 +403,7 @@ export default function LayanganGameScreen({ config, onBack }) {
         </div>
       </div>
 
-      {/* Floating HUD Question */}
+      
       {activeQuestion && phase === 'playing' && (
         <div className="floating-question">
           <div className="q-tag">PERSIAPKAN JAWABANMU!</div>
@@ -421,7 +421,7 @@ export default function LayanganGameScreen({ config, onBack }) {
         </div>
       )}
 
-      {/* Physics Container */}
+      
       <div className="physics-container" ref={containerRef}>
         <div className="pipes-container">
           {pipesState.map(p => (
@@ -432,7 +432,7 @@ export default function LayanganGameScreen({ config, onBack }) {
                   <div className="pipe" style={{ top: p.gap1Bot, height: p.gap2Top - p.gap1Bot }} />
                   <div className="pipe" style={{ top: p.gap2Bot, bottom: 0 }} />
                   
-                  {/* Dead End Wall inside wrong gap */}
+                  
                   {!p.topCorrect && <div className={`dead-end-block ${p.trapActivated ? 'active' : ''}`} style={{ top: p.gap1Top, height: GAP_SIZE }} />}
                   {p.topCorrect && <div className={`dead-end-block ${p.trapActivated ? 'active' : ''}`} style={{ top: p.gap2Top, height: GAP_SIZE }} />}
                 </>

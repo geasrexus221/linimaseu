@@ -11,7 +11,7 @@ export default function TarikTambangLobbyScreen({ onStart }) {
 
   return (
     <div className="game-intro-container">
-      {/* Dynamic Background */}
+      
       <div className="bg-map-pattern" />
       <div className="floating-clouds">
         <div className="cloud c1">☁️</div>
@@ -19,7 +19,7 @@ export default function TarikTambangLobbyScreen({ onStart }) {
         <div className="cloud c3">☁️</div>
       </div>
 
-      {/* Header Area */}
+      
       <header className="intro-header">
         <button className="back-btn-3d" onClick={() => setGameSubView('arcade')}>
           <ChevronLeft size={24} />
@@ -35,7 +35,7 @@ export default function TarikTambangLobbyScreen({ onStart }) {
       </header>
 
       <div className="intro-main-scrollable">
-        {/* Title & Badge Section */}
+        
         <div className="title-section-pop">
           <div className="game-category-tag">DUEL PENGETAHUAN</div>
           <h1 className="game-main-title">
@@ -45,7 +45,7 @@ export default function TarikTambangLobbyScreen({ onStart }) {
           <div className="title-underline" />
         </div>
 
-        {/* Hero Visual Section */}
+        
         <div className="adventure-hero-box">
           <div className="hero-island-platform">
             <div className="rope-container">
@@ -60,7 +60,7 @@ export default function TarikTambangLobbyScreen({ onStart }) {
             </div>
           </div>
           
-          {/* Game Description */}
+          
           <div className="game-description-box">
             <p>
               "Jawab pertanyaan dengan cepat dan tepat! Kumpulkan skor tarikan ke arahmu untuk menjatuhkan lawan dan menjadi juara!"
@@ -68,7 +68,7 @@ export default function TarikTambangLobbyScreen({ onStart }) {
           </div>
         </div>
 
-        {/* Main Actions */}
+        
         <div className="primary-actions-stack">
           <button className="giant-play-btn" onClick={() => onStart('normal')}>
             <div className="play-btn-face">
@@ -100,7 +100,7 @@ export default function TarikTambangLobbyScreen({ onStart }) {
         </div>
       </div>
 
-      {/* Help Modal */}
+      
       {showHelp && (
         <div className="modal-overlay">
           <div className="modal-card">

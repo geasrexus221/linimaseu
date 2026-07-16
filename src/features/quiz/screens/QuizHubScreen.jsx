@@ -11,12 +11,12 @@ export default function QuizHubScreen() {
   const { lastQuizResult, activeClass, setActiveClass } = useStore();
   const { setQuizSubView } = useNavigationStore();
   
-  // Register Desktop Stats Panel for this screen
+  
   useRegisterRightPanel(DesktopStatsPanel, 'quiz-hub');
   
   const [showClassModal, setShowClassModal] = useState(false);
   const [classCode, setClassCode] = useState('');
-  const [pendingIntent, setPendingIntent] = useState(null); // 'classroom' | 'teacherTasks'
+  const [pendingIntent, setPendingIntent] = useState(null); 
 
   const handleJoinClass = () => {
     const cls = MOCK_CLASSROOMS[classCode];
@@ -30,7 +30,7 @@ export default function QuizHubScreen() {
     }
   };
 
-  // Fetch fresh assignments directly from source to avoid cached stale state
+  
   const freshClass = activeClass ? MOCK_CLASSROOMS[activeClass.id] : null;
   const pendingAssignments = freshClass?.assignments || activeClass?.assignments || [];
   const hasTasks = pendingAssignments.length > 0;
@@ -44,10 +44,10 @@ export default function QuizHubScreen() {
 
       <div className="quiz-hub-grid">
         
-        {/* KOLOM KIRI: Mode Permainan */}
+        
         <div className="hub-main-col">
           
-          {/* Hero Banner: Misi Utama */}
+          
           <div className="hero-mode-card" onClick={() => setQuizSubView('missions')}>
             <div className="hero-content">
               <h3>Kuis Utama</h3>
@@ -62,7 +62,7 @@ export default function QuizHubScreen() {
             </div>
           </div>
 
-          {/* Pintu Masuk Ruang Kelas */}
+          
           <div className="secondary-mode-card class-entry" onClick={() => { setPendingIntent('classroom'); setShowClassModal(true); }} style={{ marginBottom: '16px' }}>
             <div className="sec-icon-box" style={{ background: '#7c3aed' }}>
               <LogIn size={36} color="white" />
@@ -76,7 +76,7 @@ export default function QuizHubScreen() {
             </div>
           </div>
 
-          {/* Secondary Mode: Tugas Guru */}
+          
           <div className="secondary-mode-card" onClick={() => setQuizSubView('teacherTasks')}>
             <div className="sec-icon-box">
               <GraduationCap size={36} color="white" />
@@ -99,10 +99,10 @@ export default function QuizHubScreen() {
 
         </div>
 
-        {/* KOLOM KANAN: Statistik & Kelas */}
+        
         <div className="hub-side-col">
 
-          {/* Riwayat Terakhir */}
+          
           <div className="last-result-card">
             <div className="last-result-header">
               <Target size={16} color="var(--text-muted)" />
@@ -139,7 +139,7 @@ export default function QuizHubScreen() {
         </div>
       </div>
 
-      {/* Join Class Modal */}
+      
       {showClassModal && (
         <div className="class-modal-overlay">
           <div className="class-modal-content">

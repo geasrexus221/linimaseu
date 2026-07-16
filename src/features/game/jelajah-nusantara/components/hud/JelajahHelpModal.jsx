@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, HelpCircle, Star, Heart, Coins, Sparkles, Swords, Briefcase } from 'lucide-react';
 
-// Import official game assets as illustrations
+
 import markasImg from '../../../../../assets/game/tiles/markas_p1.png';
 import petiImg from '../../../../../assets/game/tiles/peti.png';
 import jejakImg from '../../../../../assets/game/tiles/jejak.png';
@@ -41,7 +41,7 @@ export default function JelajahHelpModal({ isOpen, onClose }) {
             exit={{ scale: 0.85, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 250 }}
           >
-            {/* Header */}
+            
             <div className="help-modal-header">
               <div className="title-group">
                 <HelpCircle size={22} className="help-title-icon" />
@@ -52,7 +52,7 @@ export default function JelajahHelpModal({ isOpen, onClose }) {
               </button>
             </div>
 
-            {/* Body Content */}
+            
             <div className="help-modal-body">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -208,7 +208,7 @@ export default function JelajahHelpModal({ isOpen, onClose }) {
               </AnimatePresence>
             </div>
 
-            {/* Footer Controls */}
+            
             <div className="help-modal-footer">
               <button
                 className={`nav-btn prev-btn ${currentPage === 0 ? 'disabled' : ''}`}
@@ -219,7 +219,7 @@ export default function JelajahHelpModal({ isOpen, onClose }) {
                 <span>Sebelumnya</span>
               </button>
 
-              {/* Pagination Dots */}
+              
               <div className="dots-row">
                 {Array.from({ length: totalPages }).map((_, idx) => (
                   <div

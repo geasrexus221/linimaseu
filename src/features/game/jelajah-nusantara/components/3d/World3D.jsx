@@ -3,9 +3,7 @@ import BoardRenderer3D from './BoardRenderer3D';
 import { TILE_STEP, TILE_SIZE } from './Tile3D';
 import { useGameStore } from '../../../../../store/useGameStore';
 
-/**
- * Hitung scale agar board (setelah rotasi isometrik) selalu muat di viewport.
- */
+
 function calcFitScale(tiles, viewW, viewH) {
   if (!tiles || tiles.length === 0) return 1;
 
@@ -59,28 +57,28 @@ export default function World3D({
     zoomRef.current = userZoom;
   }, [userZoom]);
 
-  // 1. Target Player
+  
   const currentPlayer = players[turnIdx];
   const isEventActive = phase === 'SHOWING_EVENT';
   const movingPlayer = players.find(p => p.isMoving) || (isChoosingPath || isEventActive ? currentPlayer : null);
   const activeTile = tiles.find(t => t.id === (movingPlayer ? movingPlayer.positionTileId : currentPlayer.positionTileId));
 
-  // 2. Base Fit Scale
+  
   const baseScale = useMemo(() => calcFitScale(tiles, viewW, viewH), [tiles, viewW, viewH]);
 
-  // 3. Kalkulasi Target Zoom & Offset
+  
   const isMobile = viewW < 600;
   const minIdleScale = isMobile ? 1.35 : 1.2;
   const minFocusScale = isMobile ? 2.0 : 1.65;
   const autoFocusScale = Math.max(baseScale * 2.2, minFocusScale);
 
-  // Scale follows userZoom directly as absolute scale unless auto-focusing on a moving player or active turn player
+  
   const currentScale = isAutoZoomEnabled
     ? (movingPlayer ? autoFocusScale : Math.max(userZoom, minIdleScale))
     : userZoom;
 
   let followOffset = { x: 0, y: 0 };
-  // Kamera selalu "mengikuti" posisi player aktif jika fitur Auto Zoom aktif
+  
   if (isAutoZoomEnabled && activeTile) {
     const minX = Math.min(...tiles.map(t => t.x));
     const minY = Math.min(...tiles.map(t => t.y));
@@ -100,11 +98,11 @@ export default function World3D({
   const activePointers = React.useRef([]);
   const prevDiff = React.useRef(-1);
 
-  // 4. Input Handlers
+  
   const handleWheel = (e) => {
     if (movingPlayer) return;
     
-    // Auto-disable auto-zoom focus lock on scroll zoom
+    
     if (isAutoZoomEnabled) {
       setAutoZoomEnabled(false);
     }
@@ -117,12 +115,12 @@ export default function World3D({
   const handlePointerDown = (e) => {
     if (movingPlayer) return;
     
-    // If in teleport mode and clicking a tile, let click pass through to click handler
+    
     if (isTeleportMode && e.target.closest('.tile-teleport-target')) {
       return;
     }
     
-    // Add current pointer to tracking list
+    
     activePointers.current.push({ id: e.pointerId, x: e.clientX, y: e.clientY });
     
     isDraggingRef.current = true;
@@ -137,16 +135,16 @@ export default function World3D({
   const handlePointerMove = (e) => {
     if (!isDragging || movingPlayer || phase === 'ROLLING') return;
 
-    // Update tracked pointer coordinates
+    
     const pointer = activePointers.current.find(p => p.id === e.pointerId);
     if (pointer) {
       pointer.x = e.clientX;
       pointer.y = e.clientY;
     }
 
-    // 2-Finger Pinch Zooming
+    
     if (activePointers.current.length === 2) {
-      // Auto-disable auto-zoom focus lock on pinch zoom
+      
       if (isAutoZoomEnabled) {
         setAutoZoomEnabled(false);
       }
@@ -158,7 +156,7 @@ export default function World3D({
       const dist = Math.sqrt(dx * dx + dy * dy);
 
       if (prevDiff.current > 0) {
-        // Direct smooth 1-to-1 pinch scaling via refs and direct DOM updates
+        
         const factor = dist / prevDiff.current;
         const minZoom = Math.min(0.4, baseScale);
         const newZoom = Math.max(minZoom, Math.min(zoomRef.current * factor, 3.5));
@@ -170,19 +168,19 @@ export default function World3D({
         }
       }
       prevDiff.current = dist;
-      return; // Skip panning when pinch zooming
+      return; 
     }
 
-    // 1-Finger Panning
+    
     if (activePointers.current.length === 1) {
       const deltaX = e.clientX - lastPointer.current.x;
       const deltaY = e.clientY - lastPointer.current.y;
       const pixelDist = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-      // Ignore tiny touch jitters/taps (less than 8px) to prevent accidental unlocks
+      
       if (pixelDist < 8) return;
 
-      // Auto-disable auto-zoom focus lock if user starts dragging the camera manually
+      
       if (isAutoZoomEnabled) {
         setAutoZoomEnabled(false);
       }
@@ -194,7 +192,7 @@ export default function World3D({
       const rx = dx * Math.cos(angle) - dy * Math.sin(angle);
       const ry = dx * Math.sin(angle) + dy * Math.cos(angle);
 
-      // PEMBATAS PANNING: Batasi agar tidak keluar dari area background
+      
       const panLimit = viewW < 1024 ? 400 : 800; 
       const newX = Math.max(-panLimit, Math.min(panRef.current.x + rx, panLimit));
       const newY = Math.max(-panLimit, Math.min(panRef.current.y + ry, panLimit));
@@ -212,7 +210,7 @@ export default function World3D({
   };
 
   const handlePointerUp = (e) => {
-    // Remove pointer from tracking list
+    
     activePointers.current = activePointers.current.filter(p => p.id !== e.pointerId);
     
     if (activePointers.current.length < 2) {
@@ -253,10 +251,10 @@ export default function World3D({
         perspective: '1200px',
       }}
     >
-      {/* ZOOM CONTAINER */}
+      
 
 
-      {/* LAYER 2: BOARD (Zoom Penuh 100%) */}
+      
       <div
         id="world-zoom-container"
         style={{

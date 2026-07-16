@@ -9,7 +9,7 @@ export default function ConfirmModal({
   onCancel,
   confirmText = 'Ya, Lanjutkan',
   cancelText = 'Batal',
-  type = 'danger' // danger, warning, info
+  type = 'danger' 
 }) {
   if (!isOpen) return null;
 

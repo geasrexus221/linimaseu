@@ -4,10 +4,7 @@ import { actionCards } from '../data/cards';
 import { GUARDIANS } from '../data/guardians';
 import { useGameStore } from '../../../../store/useGameStore';
 
-/**
- * Handlers for each tile type
- * Returns a partial state to be applied to the store
- */
+
 export const tileHandlers = {
   base: (player, tile) => {
     if (tile.owner !== player.playerNum) return null;
@@ -25,7 +22,7 @@ export const tileHandlers = {
   },
 
   peti: (player) => {
-    const coinReward = (Math.floor(Math.random() * 4) + 2) * 10; // +20, 30, 40, or 50 Koin Emas
+    const coinReward = (Math.floor(Math.random() * 4) + 2) * 10; 
     const tekadHeal = 10;
     
     return {
@@ -74,7 +71,7 @@ export const tileHandlers = {
   },
 
   jebakan: (player) => {
-    const penalty = (Math.floor(Math.random() * 3) + 2) * 10; // 20, 30, or 40 Tekad
+    const penalty = (Math.floor(Math.random() * 3) + 2) * 10; 
     const newTekad = Math.max(0, player.tekad - penalty);
     const isFainted = newTekad <= 0;
     return {
@@ -96,7 +93,7 @@ export const tileHandlers = {
   },
 
   jebakan_mundur: (player) => {
-    const backSteps = Math.floor(Math.random() * 3) + 1; // 1, 2, or 3 steps back
+    const backSteps = Math.floor(Math.random() * 3) + 1; 
     return {
       activeEvent: {
         type: 'jebakan_mundur',

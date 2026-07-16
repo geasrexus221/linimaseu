@@ -15,10 +15,10 @@ export default function TeacherTaskListScreen() {
     const freshClass = Object.values(MOCK_CLASSROOMS).find(c => c.id === activeClass.id);
     assignments = freshClass?.assignments || activeClass.assignments || [];
   } else {
-    // If no active class, aggregate all assignments from all classrooms
+    
     Object.values(MOCK_CLASSROOMS).forEach(cls => {
       if (cls.assignments && cls.assignments.length > 0) {
-        // Tag with class name for context
+        
         const taggedAssignments = cls.assignments.map(a => ({
           ...a,
           className: cls.name

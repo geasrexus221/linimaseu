@@ -12,10 +12,10 @@ export default function StoryScreen() {
   const { lastModuleId, selectedGrade, setSelectedGrade, selectedSubject, setSelectedSubject, setLastModuleId } = useStore();
   const { setSelectedHero, setCurrentView } = useNavigationStore();
   
-  // Register Desktop Stats Panel for this screen
+  
   useRegisterRightPanel(DesktopStatsPanel, 'story-main');
   
-  const [portalConfig, setPortalConfig] = useState(null); // { color, hero }
+  const [portalConfig, setPortalConfig] = useState(null); 
 
   const lastModule = useMemo(() => ALL_MODULES.find(m => m.id === lastModuleId), [lastModuleId]);
   const filteredModules = useMemo(() => ALL_MODULES.filter(m => m.grade === selectedGrade && m.subject === selectedSubject), [selectedGrade, selectedSubject]);
@@ -24,7 +24,7 @@ export default function StoryScreen() {
   const triggerPortalTransition = (module) => {
     soundManager.play('click', 0.5);
     setLastModuleId(module.id);
-    setSelectedHero(module); // we use selectedHero to store active module
+    setSelectedHero(module); 
     setCurrentView('path');
   };
 
@@ -38,7 +38,7 @@ export default function StoryScreen() {
 
   return (
     <div className="story-screen-gallery content-container" style={{ '--era-theme': activeSubjectData?.color || '#1CB0F6' }}>
-      {/* 0. Portal Overlay */}
+      
       {portalConfig && (
         <TimePortalOverlay 
           color={portalConfig.color} 
@@ -46,10 +46,10 @@ export default function StoryScreen() {
         />
       )}
 
-      {/* Background Glow */}
+      
       <div className="era-glow-backdrop" />
 
-      {/* 1. Featured Hero - The Spotlight */}
+      
       {lastModule && (
         <section className="featured-hero-section">
           <div className="featured-card" onClick={() => triggerPortalTransition(lastModule)}>
@@ -76,11 +76,11 @@ export default function StoryScreen() {
         </section>
       )}
 
-      {/* 2. Dual Filters: Grade and Subject */}
+      
       <nav className="era-nav-gallery">
         <h3 className="gallery-section-title">Eksplorasi Modul</h3>
         
-        {/* Filter Kelas */}
+        
         <div className="era-scroll-box" style={{ marginBottom: '10px' }}>
           {GRADES.map((grade) => (
             <button 
@@ -94,7 +94,7 @@ export default function StoryScreen() {
           ))}
         </div>
 
-        {/* Filter Pelajaran */}
+        
         <div className="era-scroll-box">
           {SUBJECTS.map((subject) => (
             <button 
@@ -110,7 +110,7 @@ export default function StoryScreen() {
         </div>
       </nav>
 
-      {/* 4. The Module Grid - Pop Out Style */}
+      
       <div className="hero-grid-pop">
         {filteredModules.map((module, index) => (
           <div 

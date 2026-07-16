@@ -25,7 +25,7 @@ export default function AvatarCustomizerScreen() {
   const filteredItems = ownedCosmetics.filter(item => item.type === activeTab);
   const isTransformable = ['hat', 'accessory'].includes(activeTab);
 
-  // Drag logic
+  
   const isDragging = useRef(false);
   const startPos = useRef({ x: 0, y: 0 });
 
@@ -86,7 +86,7 @@ export default function AvatarCustomizerScreen() {
   };
 
   const handlePhotoUpload = () => {
-    // Simulasi mengganti foto dengan placeholder atau hapus
+    
     if (avatarBaseImage) {
       setAvatarBaseImage(null);
     } else {
@@ -96,7 +96,7 @@ export default function AvatarCustomizerScreen() {
 
   return (
     <div className="wardrobe-container">
-      {/* HEADER */}
+      
       <header className="wardrobe-header">
         <button className="back-btn" onClick={() => setProfileSubView('main')}>
           <ChevronLeft size={28} />
@@ -109,7 +109,7 @@ export default function AvatarCustomizerScreen() {
       </header>
 
       <div className="wardrobe-body">
-        {/* PREVIEW STAGE */}
+        
         <section className="preview-stage">
           <div className="stage-glow" />
           
@@ -139,7 +139,7 @@ export default function AvatarCustomizerScreen() {
           )}
         </section>
 
-        {/* SELECTOR PANEL */}
+        
         <section className="selector-panel">
           <div className="tabs-row">
             {tabs.map(tab => (
@@ -156,7 +156,7 @@ export default function AvatarCustomizerScreen() {
 
           <div className="items-container">
             <div className="items-grid">
-              {/* DEFAULT OPTION */}
+              
               <div 
                 className={`item-card ${!equippedItems[activeTab] ? 'selected' : ''}`}
                 onClick={() => equipItem(activeTab, null)}
@@ -170,7 +170,7 @@ export default function AvatarCustomizerScreen() {
                 </div>
               </div>
 
-              {/* OWNED ITEMS */}
+              
               {filteredItems.map(item => (
                 <div 
                   key={item.id} 

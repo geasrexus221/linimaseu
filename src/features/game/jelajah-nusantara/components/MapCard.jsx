@@ -6,7 +6,7 @@ export default function MapCard({ map, isSelected, onClick, onDelete }) {
       className={`map-card ${isSelected ? 'selected' : ''} ${map.locked ? 'locked' : ''}`}
       onClick={() => !map.locked && onClick()}
     >
-      {/* DELETE BUTTON (For Custom Maps) */}
+      
       {onDelete && (
         <button 
           className="delete-map-btn"

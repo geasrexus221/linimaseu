@@ -33,7 +33,7 @@ export default function BattleContent({ player, guardian, playerRoll, isRolling,
   return (
     <div className="battle-container">
       <div className="battle-stats">
-        {/* PLAYER SIDE (LEFT) */}
+        
         <div className={`stat-column player ${loser === 'player' ? 'defeated' : ''}`}>
           <div className="player-wrapper">
             <img src={getPlayerSprite()} alt="Player" className="player-podium-sprite" />
@@ -41,7 +41,7 @@ export default function BattleContent({ player, guardian, playerRoll, isRolling,
           <span className="side-label">KAMU</span>
         </div>
 
-        {/* CENTER COLUMN (DICE / VS) */}
+        
         <div className="center-column">
           <div className="vs-badge">VS</div>
           <div className="battle-dice-container">
@@ -53,7 +53,7 @@ export default function BattleContent({ player, guardian, playerRoll, isRolling,
           </div>
         </div>
 
-        {/* GUARDIAN SIDE (RIGHT) */}
+        
         <div className={`stat-column guardian ${loser === 'guardian' ? 'defeated' : ''}`}>
            <div className="battle-avatar-wrapper guardian-avatar">
              <span className="avatar-emoji">{guardian.emoji || '👹'}</span>

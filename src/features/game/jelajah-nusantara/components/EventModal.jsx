@@ -4,7 +4,7 @@ import { aiEngine } from '../logic/aiEngine';
 import { getEventColor } from '../utils/gameUtils';
 import { useStore } from '../../../../store/useStore';
 import { soundEngine } from '../logic/soundEngine';
-// Sub-components
+
 import QuizContent from './events/QuizContent';
 import BattleContent from './events/BattleContent';
 import ChoiceContent from './events/ChoiceContent';
@@ -28,7 +28,7 @@ export default function EventModal() {
   const currentPlayer = players[turnIdx];
   const isAI = currentPlayer?.type === 'ai';
 
-  // AI BOT AUTO-CHOICE LOGIC
+  
   useEffect(() => {
     if (!activeEvent || !isAI) return;
 
@@ -40,7 +40,7 @@ export default function EventModal() {
       }, 2000);
     } else if (activeEvent.type === 'base_purchase') {
       timer = setTimeout(() => {
-        // AI always buys treasure if they can afford it
+        
         handleBasePurchase('yes');
       }, 2000);
     } else if (activeEvent.type === 'jejak' && activeEvent.status === 'PENDING') {
@@ -54,11 +54,11 @@ export default function EventModal() {
       }, 2000);
     } else if (activeEvent.type === 'duel_invitation') {
       timer = setTimeout(() => {
-        // AI 50% chance to challenge
+        
         handleDuelChoice(Math.random() > 0.5 ? 'challenge' : 'ignore');
       }, 2000);
     } else if (activeEvent.status === 'RESOLVED' || ['base', 'peti', 'jebakan', 'kartu', 'base_storage', 'base_purchase_success'].includes(activeEvent.type)) {
-      // Auto close for AI turn OR if the opponent in a duel was an AI
+      
       const isDuelWithAI = (activeEvent.type === 'duel_battle' || activeEvent.type === 'duel_defense_selection') && activeEvent.opponent?.type === 'ai';
       
       if (isAI || isDuelWithAI) {
@@ -106,18 +106,18 @@ export default function EventModal() {
   return (
     <div className="event-sheet-overlay">
       <div className="event-sheet-container">
-        {/* DRAG HANDLE VISUAL */}
+        
         <div className="sheet-handle" />
 
         <div className="sheet-layout">
-          {/* CENTERED: TITLE & SUBTITLE */}
+          
           <div className="sheet-header" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', width: '100%', marginBottom: '8px' }}>
             <div className="title-stack" style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
               <h2 className="event-title" style={{ fontSize: '1.4rem', fontWeight: 950, color: '#4A2E1B', margin: 0, textTransform: 'uppercase', letterSpacing: '1px', textShadow: '0 1px 0 rgba(255,255,255,0.5)' }}>{activeEvent.title}</h2>
               <p className="event-msg">{activeEvent.message}</p>
             </div>
             
-            {/* Desktop-only graphic card to fill space */}
+            
             <div className="desktop-graphic-card">
               <div className="glowing-orb" style={{ '--glow-color': graphic.color }}>
                 <span className="floating-emoji">{graphic.emoji}</span>
@@ -125,7 +125,7 @@ export default function EventModal() {
             </div>
           </div>
 
-          {/* CENTER/RIGHT: CONTENT */}
+          
           <div className="sheet-body">
             {isBattle && (
               <BattleContent 
@@ -193,7 +193,7 @@ export default function EventModal() {
               <DuelBattleContent />
             )}
 
-            {/* ACTION BUTTON - Moved inside sheet-body for consistent positioning */}
+            
             {!isBaseChoice && !isPending && !['duel_invitation', 'base_purchase', 'duel_target_selection'].includes(activeEvent.type) && (
               <div className="sheet-footer content-integrated">
                 <button className="sheet-confirm-btn" onClick={() => { soundEngine.playSound('click'); closeEvent(); }}>

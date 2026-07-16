@@ -31,24 +31,24 @@ export default function TeacherDashboard({ onLogout }) {
     setShowDevMode(isDevMode);
   }, [isDevMode]);
   const [selectedStudent, setSelectedStudent] = useState(null);
-  const [selectedClassroom, setSelectedClassroom] = useState(null); // KELAS1, KELAS2, etc.
+  const [selectedClassroom, setSelectedClassroom] = useState(null); 
   const [classroomsState, setClassroomsState] = useState(MOCK_CLASSROOMS);
 
-  // Modal states for CRUD operations
+  
   const [showAddModal, setShowAddModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(null); // Will store classKey being edited
+  const [showEditModal, setShowEditModal] = useState(null); 
   const [showAddStudentModal, setShowAddStudentModal] = useState(false);
   const [newClassName, setNewClassName] = useState('');
   const [editClassName, setEditClassName] = useState('');
 
-  // Interactive student attendance and notes state
+  
   const [studentRecords, setStudentRecords] = useState({});
 
   const [showAnnouncementModal, setShowAnnouncementModal] = useState(false);
   const [announcementInput, setAnnouncementInput] = useState('');
   const [selectedTargetClassId, setSelectedTargetClassId] = useState('ALL');
 
-  // Quizzes/Bank Soal States
+  
   const [quizCollections, setQuizCollections] = useState([
     IPAS_QUIZ_DATA,
     {
@@ -132,7 +132,7 @@ export default function TeacherDashboard({ onLogout }) {
   ]);
   const [selectedCollectionId, setSelectedCollectionId] = useState(null);
 
-  // Add collection form state
+  
   const [showAddCollectionModal, setShowAddCollectionModal] = useState(false);
   const [newCollectionTitle, setNewCollectionTitle] = useState('');
   const [newCollectionTargetClassId, setNewCollectionTargetClassId] = useState('ALL');
@@ -140,7 +140,7 @@ export default function TeacherDashboard({ onLogout }) {
   const [newCollectionDescription, setNewCollectionDescription] = useState('');
   const [newCollectionXpReward, setNewCollectionXpReward] = useState(200);
 
-  // Add/Edit question form state
+  
   const [showAddQuestionForm, setShowAddQuestionForm] = useState(false);
   const [editingQuestionId, setEditingQuestionId] = useState(null);
   const [newQuestionText, setNewQuestionText] = useState('');
@@ -150,25 +150,25 @@ export default function TeacherDashboard({ onLogout }) {
   const [newQuestionCorrectIndex, setNewQuestionCorrectIndex] = useState(0);
   const [newQuestionType, setNewQuestionType] = useState('CLASSIC');
 
-  // Testing States for Dev Mode
+  
   const [testingQuestion, setTestingQuestion] = useState(null);
   const [testingCollection, setTestingCollection] = useState(null);
 
   const [selectedDiagnosticClassId, setSelectedDiagnosticClassId] = useState('ALL');
   const [selectedDiagnosticTopicIndex, setSelectedDiagnosticTopicIndex] = useState(0);
 
-  // State & logic for Quiz Activation
+  
   const [activeQuizModalCol, setActiveQuizModalCol] = useState(null);
 
-  // State for Projector Mode
-  const [projectorModalCol, setProjectorModalCol] = useState(null); // Collection chosen to be projected
-  const [projectorCollection, setProjectorCollection] = useState(null); // Active projection
-  const [projectorTheme, setProjectorTheme] = useState('MODERN'); // Selected theme
+  
+  const [projectorModalCol, setProjectorModalCol] = useState(null); 
+  const [projectorCollection, setProjectorCollection] = useState(null); 
+  const [projectorTheme, setProjectorTheme] = useState('MODERN'); 
 
   const handleActivateQuiz = (collectionId, durationMinutes) => {
     const activeUntil = Date.now() + durationMinutes * 60 * 1000;
 
-    // Update quizCollections state
+    
     setQuizCollections(prev => prev.map(col => {
       if (col.id === collectionId) {
         return {
@@ -181,11 +181,11 @@ export default function TeacherDashboard({ onLogout }) {
       return col;
     }));
 
-    // Find the collection to get target details
+    
     const col = quizCollections.find(c => c.id === collectionId);
     if (!col) return;
 
-    // Add assignment to target classrooms in classroomsState
+    
     const updatedClassrooms = { ...classroomsState };
     const targetClassId = col.targetClassId;
 
@@ -221,7 +221,7 @@ export default function TeacherDashboard({ onLogout }) {
     const updatedClassrooms = { ...classroomsState };
     const room = updatedClassrooms[selectedClassroom];
     
-    // Generate a simple unique ID and mock login ID
+    
     const newId = `student-${Date.now()}`;
     const newStudent = {
       id: newId,
@@ -244,7 +244,7 @@ export default function TeacherDashboard({ onLogout }) {
   };
 
   const handleDeactivateQuiz = (collectionId) => {
-    // Update quizCollections state
+    
     setQuizCollections(prev => prev.map(col => {
       if (col.id === collectionId) {
         return {
@@ -257,7 +257,7 @@ export default function TeacherDashboard({ onLogout }) {
       return col;
     }));
 
-    // Remove assignment from classroomsState
+    
     const updatedClassrooms = { ...classroomsState };
     Object.keys(updatedClassrooms).forEach(key => {
       if (updatedClassrooms[key].assignments) {
@@ -327,15 +327,15 @@ export default function TeacherDashboard({ onLogout }) {
           }
         ];
       default:
-        // Hash the classId to generate deterministic mock data for that class
+        
         let hash = 0;
         for (let i = 0; i < classId.length; i++) {
           hash = (hash * 31 + classId.charCodeAt(i)) & 0xFFFFFFFF;
         }
-        const acc1 = 30 + Math.abs(hash % 30); // 30-59
-        const acc2 = 45 + Math.abs((hash >> 2) % 25); // 45-69
-        const acc3 = 60 + Math.abs((hash >> 4) % 25); // 60-84
-        const acc4 = 75 + Math.abs((hash >> 6) % 25); // 75-99
+        const acc1 = 30 + Math.abs(hash % 30); 
+        const acc2 = 45 + Math.abs((hash >> 2) % 25); 
+        const acc3 = 60 + Math.abs((hash >> 4) % 25); 
+        const acc4 = 75 + Math.abs((hash >> 6) % 25); 
 
         const studentsInClass = classroomsState[classId]?.students?.map(s => s.name) || [];
         const underperforming1 = studentsInClass.slice(0, Math.ceil(studentsInClass.length * 0.4));
@@ -411,7 +411,7 @@ export default function TeacherDashboard({ onLogout }) {
     }));
   };
 
-  // Load genuine student data from classroomsState dynamically based on selection
+  
   const classroomKeys = Object.keys(classroomsState);
   const activeClassroom = selectedClassroom ? classroomsState[selectedClassroom] : null;
   const students = activeClassroom?.students || [];
@@ -432,16 +432,16 @@ export default function TeacherDashboard({ onLogout }) {
   };
 
   const sortedStudents = React.useMemo(() => {
-    // 1. Map to include the mocked/calculated attributes first so we can sort by them
+    
     const mapped = students.map((student, idx) => {
-      // Deterministic pseudo-random 7-digit ID Akun using hash
+      
       let hash = 0;
       for (let i = 0; i < student.id.length; i++) {
         hash = (hash * 31 + student.id.charCodeAt(i)) & 0xFFFFFFFF;
       }
       const mockID = (Math.abs(hash % 9000000) + 1000000).toString();
 
-      // Mock NIS/NISN (9 digits)
+      
       const mockNIS = student.nis || `009248${(idx + 10).toString().padStart(3, '0')}`;
 
       const isOnline = student.streak > 2;
@@ -456,7 +456,7 @@ export default function TeacherDashboard({ onLogout }) {
       };
     });
 
-    // 2. Sort if sortConfig is active
+    
     if (sortConfig.key) {
       mapped.sort((a, b) => {
         let aVal = a[sortConfig.key];
@@ -488,7 +488,7 @@ export default function TeacherDashboard({ onLogout }) {
     return mapped;
   }, [students, sortConfig]);
 
-  // Calculate dynamic stats across all classrooms for dashboard
+  
   const totalStudents = Object.values(classroomsState).reduce((acc, curr) => acc + (curr.students?.length || 0), 0);
   const totalScore = Object.values(classroomsState).reduce((acc, curr) => {
     return acc + (curr.students?.reduce((sAcc, sCurr) => sAcc + (sCurr.score || 0), 0) || 0);
@@ -497,7 +497,7 @@ export default function TeacherDashboard({ onLogout }) {
 
   return (
     <div className="teacher-container">
-      {/* DESKTOP SIDEBAR - Only visible on Desktop */}
+      
       <aside className="teacher-sidebar desktop-only">
         <div className="sidebar-brand">
           <div 
@@ -522,7 +522,7 @@ export default function TeacherDashboard({ onLogout }) {
             className={`menu-item ${activeMenu === 'students' ? 'active' : ''}`}
             onClick={() => {
               setActiveMenu('students');
-              setSelectedClassroom(null); // Reset class selection when clicking tab
+              setSelectedClassroom(null); 
             }}
           >
             <Users size={20} />
@@ -552,9 +552,9 @@ export default function TeacherDashboard({ onLogout }) {
         </div>
       </aside>
 
-      {/* Main Content Area */}
+      
       <main className="teacher-main">
-        {/* MOBILE HEADER - Only visible on Mobile */}
+        
         <header className="teacher-mobile-header mobile-only">
           <div className="mobile-brand">
             <Sparkles size={18} color="#10B981" fill="#10B981" />
@@ -569,12 +569,12 @@ export default function TeacherDashboard({ onLogout }) {
           </div>
         </header>
 
-        {/* DESKTOP HEADER - Only visible on Desktop */}
+        
         <header className="teacher-header desktop-only">
           <div className="header-welcome" />
         </header>
 
-        {/* Content Viewport */}
+        
         <div className="content-viewport">
           <AnimatePresence mode="wait">
             {activeMenu === 'dashboard' && (
@@ -671,7 +671,7 @@ export default function TeacherDashboard({ onLogout }) {
           </AnimatePresence>
         </div>
 
-        {/* Announcement Modal Popup */}
+        
         <AnimatePresence>
           {showAnnouncementModal && (
             <AnnouncementModal
@@ -688,7 +688,7 @@ export default function TeacherDashboard({ onLogout }) {
           )}
         </AnimatePresence>
 
-        {/* Classroom Modal Popups (Add & Edit) */}
+        
         <ClassroomModal
           showAddModal={showAddModal}
           setShowAddModal={setShowAddModal}
@@ -702,7 +702,7 @@ export default function TeacherDashboard({ onLogout }) {
           setEditClassName={setEditClassName}
         />
 
-        {/* Quiz Collection Modal Popup */}
+        
         <QuizCollectionModal
           showAddCollectionModal={showAddCollectionModal}
           setShowAddCollectionModal={setShowAddCollectionModal}
@@ -721,7 +721,7 @@ export default function TeacherDashboard({ onLogout }) {
           setQuizCollections={setQuizCollections}
         />
 
-        {/* Add Student Modal */}
+        
         <AddStudentModal
           isOpen={showAddStudentModal}
           onClose={() => setShowAddStudentModal(false)}
@@ -729,7 +729,7 @@ export default function TeacherDashboard({ onLogout }) {
           onAddStudent={handleAddStudent}
         />
 
-        {/* Student Detail Modal Popup */}
+        
         <AnimatePresence>
           {selectedStudent && (
             <StudentDetailModal
@@ -760,7 +760,7 @@ export default function TeacherDashboard({ onLogout }) {
           )}
         </AnimatePresence>
 
-        {/* Activate Quiz Modal Popup */}
+        
         <AnimatePresence>
           {activeQuizModalCol && (
             <ActivateQuizModal
@@ -772,7 +772,7 @@ export default function TeacherDashboard({ onLogout }) {
           )}
         </AnimatePresence>
 
-        {/* Developer Testing Modal Overlay */}
+        
         <AnimatePresence>
           {testingQuestion && (
             <DevTestingOverlay
@@ -784,7 +784,7 @@ export default function TeacherDashboard({ onLogout }) {
           )}
         </AnimatePresence>
 
-        {/* Projector Mode Theme Selection Modal */}
+        
         <AnimatePresence>
           {projectorModalCol && (
             <ProjectorThemeModal
@@ -799,7 +799,7 @@ export default function TeacherDashboard({ onLogout }) {
           )}
         </AnimatePresence>
 
-        {/* Projector Mode Overlay */}
+        
         <AnimatePresence>
           {projectorCollection && (
             <ProjectorOverlay
@@ -810,7 +810,7 @@ export default function TeacherDashboard({ onLogout }) {
           )}
         </AnimatePresence>
 
-        {/* MOBILE BOTTOM NAVIGATION - Styled like student pop tabbar */}
+        
         <nav className="teacher-mobile-tabbar mobile-only">
           <div className="mobile-tab-items">
             <div
@@ -827,7 +827,7 @@ export default function TeacherDashboard({ onLogout }) {
               className={`mobile-tab-item ${activeMenu === 'students' ? 'active' : ''}`}
               onClick={() => {
                 setActiveMenu('students');
-                setSelectedClassroom(null); // Reset class selection
+                setSelectedClassroom(null); 
               }}
             >
               <div className="icon-wrapper">
@@ -860,7 +860,7 @@ export default function TeacherDashboard({ onLogout }) {
         </nav>
       </main>
 
-      {/* DESKTOP RIGHT SIDEBAR */}
+      
       <aside className="teacher-sidebar-right desktop-only">
         <div className="right-sidebar-header">
           <div className="action-badge">

@@ -1,30 +1,30 @@
 import { create } from 'zustand';
 
 export const useNavigationStore = create((set) => ({
-  // Core State
+  
   hasStarted: false,
-  currentView: 'grid', // grid, chapter, vn, quiz
+  currentView: 'grid', 
   activeChapter: null,
   selectedHero: null,
   
-  // Quiz Navigation State
-  quizSubView: 'hub', // hub, missions, themes, play, classroom
+  
+  quizSubView: 'hub', 
   selectedPillar: null,
   activeQuizTheme: null,
   quizQuestionCount: 10,
-  selectedKelas: 'Semua', // 'Semua', 4, 5, 6
+  selectedKelas: 'Semua', 
 
-  // Game Navigation State
-  gameSubView: 'arcade', // arcade, jelajah
+  
+  gameSubView: 'arcade', 
   tarikTambangPlay: false,
   selectedGameId: null,
-  jelajahSubView: 'intro', // intro, setup, playing
-  profileSubView: 'main', // main, collection, avatar
-  shopSubView: 'main', // main, opening
-  shopCategory: 'cosmetic', // cosmetic, gacha, refill
+  jelajahSubView: 'intro', 
+  profileSubView: 'main', 
+  shopSubView: 'main', 
+  shopCategory: 'cosmetic', 
   shopGachaCount: 1,
   
-  // Actions
+  
   setSelectedKelas: (kelas) => set({ selectedKelas: kelas }),
   setHasStarted: (val) => set({ hasStarted: val }),
   
@@ -56,14 +56,14 @@ export const useNavigationStore = create((set) => ({
     quizSubView: 'play'
   }),
 
-  // Game Actions
+  
   setGameSubView: (view) => set({ gameSubView: view }),
   setTarikTambangPlay: (val) => set({ tarikTambangPlay: val }),
   setJelajahSubView: (view) => set({ jelajahSubView: view }),
   setProfileSubView: (view) => set({ profileSubView: view }),
   setSelectedGameId: (id) => set({ selectedGameId: id }),
 
-  // Navigation Helpers
+  
   goBackToHeroGrid: () => set({ 
     currentView: 'grid',
     selectedHero: null,

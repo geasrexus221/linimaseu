@@ -21,7 +21,7 @@ export default function RecoveryOverlay() {
   const isRecoveryPhase = phase === 'RECOVERY_WAITING' || phase === 'RECOVERY_ROLLING' || phase === 'RECOVERY_RESULT';
   const player = players && players[turnIdx];
 
-  // Auto-confirm effect for AI Bot
+  
   React.useEffect(() => {
     if (phase === 'RECOVERY_RESULT' && player && player.type === 'ai') {
       const timer = setTimeout(() => {
@@ -51,11 +51,11 @@ export default function RecoveryOverlay() {
   return (
     <div className="event-sheet-overlay recovery-overlay-sheet">
       <div className="event-sheet-container">
-        {/* DRAG HANDLE VISUAL */}
+        
         <div className="sheet-handle" />
 
         <div className="sheet-layout">
-          {/* CENTERED: TITLE & CHARACTER SPRITE */}
+          
           <div className="sheet-header" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', width: '100%', marginBottom: '8px' }}>
             <div className="title-stack" style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
               <h2 className="event-title" style={{ fontSize: '1.4rem', color: '#EF4444', fontWeight: 950, letterSpacing: '1px', textShadow: '0 0 10px rgba(239, 68, 68, 0.4)' }}>TUMBANG!</h2>
@@ -80,10 +80,10 @@ export default function RecoveryOverlay() {
             </div>
           </div>
 
-          {/* CENTER/RIGHT: CONTENT */}
+          
           <div className="sheet-body">
             <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '10px' }}>
-              {/* Target Dice visual horizontal bar */}
+              
               <div style={{ 
                 background: isDark ? '#1F2937' : '#F3F4F6', 
                 padding: '8px 12px', 
@@ -140,7 +140,7 @@ export default function RecoveryOverlay() {
                 </div>
               </div>
 
-              {/* Turn attempt box */}
+              
               <div style={{ 
                 background: '#3B82F6', 
                 padding: '8px 12px', 
@@ -158,10 +158,10 @@ export default function RecoveryOverlay() {
               </div>
             </div>
 
-            {/* Conditional Info Banner / Result Banner Box */}
+            
             <div style={{ marginBottom: '10px' }}>
               {phase === 'RECOVERY_RESULT' ? (
-                /* Result Banner */
+                
                 <div 
                   className="result-banner"
                   style={{
@@ -189,7 +189,7 @@ export default function RecoveryOverlay() {
                   </div>
                 </div>
               ) : (
-                /* Instruction / Info Banner */
+                
                 <div 
                   className="info-banner"
                   style={{
@@ -214,7 +214,7 @@ export default function RecoveryOverlay() {
               )}
             </div>
 
-            {/* Dice render area */}
+            
             <div style={{ height: '70px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '8px' }}>
               {(isRolling || diceValue > 0) ? (
                 <Dice3D value={diceValue} isRolling={isRolling} size={52} />
@@ -223,7 +223,7 @@ export default function RecoveryOverlay() {
               )}
             </div>
 
-            {/* Footer and Buttons */}
+            
             <div className="sheet-footer">
               {phase === 'RECOVERY_RESULT' ? (
                 <button 

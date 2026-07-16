@@ -34,7 +34,7 @@ export default function AduCendekiawanHelpModal({ isOpen, onClose }) {
             exit={{ scale: 0.85, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 250 }}
           >
-            {/* Header */}
+            
             <div className="help-modal-header">
               <div className="title-group">
                 <HelpCircle size={22} className="help-title-icon" />
@@ -45,7 +45,7 @@ export default function AduCendekiawanHelpModal({ isOpen, onClose }) {
               </button>
             </div>
 
-            {/* Body Content */}
+            
             <div className="help-modal-body">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -184,7 +184,7 @@ export default function AduCendekiawanHelpModal({ isOpen, onClose }) {
               </AnimatePresence>
             </div>
 
-            {/* Footer Controls */}
+            
             <div className="help-modal-footer">
               <button 
                 className={`nav-btn prev-btn ${currentPage === 0 ? 'disabled' : ''}`} 
@@ -195,7 +195,7 @@ export default function AduCendekiawanHelpModal({ isOpen, onClose }) {
                 <span>Sebelumnya</span>
               </button>
 
-              {/* Pagination Dots */}
+              
               <div className="dots-row">
                 {Array.from({ length: totalPages }).map((_, idx) => (
                   <div 

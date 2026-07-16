@@ -1,5 +1,5 @@
 export const wanitaPejuangQuestions = [
-  // --- RADEN DEWI SARTIKA (1-10) ---
+  
   {
     id: 'q1',
     type: 'choice',
@@ -82,7 +82,7 @@ export const wanitaPejuangQuestions = [
     explanation: 'Beliau meninggal di Cineam, Tasikmalaya saat masa perang kemerdekaan.'
   },
 
-  // --- RA KARTINI (11-20) ---
+  
   {
     id: 'q11',
     type: 'choice',
@@ -165,7 +165,7 @@ export const wanitaPejuangQuestions = [
     explanation: 'Beliau menginginkan agar perempuan bumiputera mendapatkan hak pendidikan yang layak.'
   },
 
-  // --- CUT NYAK DIEN & CUT MEUTIA (21-30) ---
+  
   {
     id: 'q21',
     type: 'choice',
@@ -247,7 +247,7 @@ export const wanitaPejuangQuestions = [
     explanation: 'Masyarakat Sumedang memanggil beliau "Ibu Perbu" karena kearifannya.'
   },
 
-  // --- MARTHA CHRISTINA & MARIA WALANDA (31-40) ---
+  
   {
     id: 'q31',
     type: 'choice',
@@ -325,7 +325,7 @@ export const wanitaPejuangQuestions = [
     explanation: 'Julukan "Singa Betina" diberikan karena kegigihannya dalam pertempuran.'
   },
 
-  // --- MIXED & THEMATIC (41-50) ---
+  
   {
     id: 'q41',
     type: 'choice',

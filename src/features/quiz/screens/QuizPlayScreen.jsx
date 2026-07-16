@@ -31,18 +31,18 @@ export default function QuizPlayScreen({
   const [userOrder, setUserOrder] = useState([]);
   const [isFinished, setIsFinished] = useState(false);
   
-  // States for new interactive types
+  
   const [matchingLeftSelected, setMatchingLeftSelected] = useState(null);
-  const [matchingPairsDone, setMatchingPairsDone] = useState([]); // Array of IDs
+  const [matchingPairsDone, setMatchingPairsDone] = useState([]); 
   const [hasMatchingError, setHasMatchingError] = useState(false);
-  const [matchingWrongPair, setMatchingWrongPair] = useState(null); // { leftId, rightId }
+  const [matchingWrongPair, setMatchingWrongPair] = useState(null); 
   const [categorizationCurrentItemIdx, setCategorizationCurrentItemIdx] = useState(0);
-  const [categorizationResults, setCategorizationResults] = useState({}); // itemIdx -> catId
+  const [categorizationResults, setCategorizationResults] = useState({}); 
   const [anagramLetters, setAnagramLetters] = useState([]);
   const [anagramSelected, setAnagramSelected] = useState([]);
   const [matchingLines, setMatchingLines] = useState([]);
 
-  // Initialize and Shuffle Questions
+  
   useEffect(() => {
     let rawQuestions = customQuestions || (theme && ALL_QUIZ_QUESTIONS[theme.id]);
 
@@ -55,9 +55,9 @@ export default function QuizPlayScreen({
 
     if (!rawQuestions) rawQuestions = [];
     
-    // Normalize questions schema
+    
     rawQuestions = rawQuestions.map(q => {
-      // If already normalized, return as is
+      
       if (q.type && q.question) return q;
       
       const type = q.questionType || 'CLASSIC';
@@ -140,7 +140,7 @@ export default function QuizPlayScreen({
 
     if (!rawQuestions) rawQuestions = [];
     
-    // Fisher-Yates Shuffle
+    
     const shuffled = [...rawQuestions];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -206,7 +206,7 @@ export default function QuizPlayScreen({
     }
   }, [currentIndex, currentQuestion]);
 
-  // Hook to calculate matched pair coordinate lines
+  
   useEffect(() => {
     if (currentQuestion && currentQuestion.type === 'matching') {
       const updateLines = () => {
@@ -389,11 +389,11 @@ export default function QuizPlayScreen({
     setLives(5);
     setIsFinished(false);
     setShowFeedback(false);
-    // Re-shuffle would happen because of useEffect on theme.id, but let's force it if needed
-    // For now, it will use the same shuffled set or we can trigger re-shuffle
+    
+    
   };
 
-  // Keyboard Shortcuts
+  
   useEffect(() => {
     const onKeyDown = (e) => {
       if (showFeedback) {
@@ -452,7 +452,7 @@ export default function QuizPlayScreen({
           onRetry={handleRetry}
         />
       )}
-      {/* Header */}
+      
       <div className="quiz-play-header">
         <button className="quit-btn" onClick={() => {
           if (onQuit) onQuit();
@@ -547,7 +547,7 @@ export default function QuizPlayScreen({
 
         {currentQuestion.type === 'matching' && (
           <div className="matching-area" id="matching-container" style={{ position: 'relative' }}>
-            {/* SVG lines overlay connecting pairs */}
+            
             <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 5 }}>
               {matchingLines.map(line => (
                 <line 
@@ -655,7 +655,7 @@ export default function QuizPlayScreen({
 
         {currentQuestion.type === 'anagram' && (
           <div className="anagram-area" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginTop: '20px' }}>
-            {/* Spelled letters slots */}
+            
             <div style={{ display: 'flex', gap: '8px', minHeight: '50px', flexWrap: 'wrap', justifyContent: 'center', background: 'rgba(0,0,0,0.15)', padding: '12px', borderRadius: '16px', border: '2px dashed var(--border-color)', minWidth: '280px' }}>
               {Array.from({ length: currentQuestion.wordAnswer.length }).map((_, idx) => {
                 const filledLetter = anagramSelected[idx];
@@ -687,7 +687,7 @@ export default function QuizPlayScreen({
               })}
             </div>
 
-            {/* Letter pool to pick from */}
+            
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '400px' }}>
               {anagramLetters.map((letter) => {
                 const isPicked = anagramSelected.some(l => l && l.id === letter.id);
@@ -767,39 +767,39 @@ export default function QuizPlayScreen({
         </div>
       )}
 
-      {/* Chalkboard Background Textures & Scribbles */}
+      
       {equippedTheme === 'theme-kelas' && (
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
-          {/* Erased chalk dust spots */}
+          
           <div style={{ position: 'absolute', top: '20%', left: '15%', width: '150px', height: '100px', background: 'white', opacity: 0.05, filter: 'blur(30px)', borderRadius: '50%' }} />
           <div style={{ position: 'absolute', top: '50%', right: '20%', width: '200px', height: '120px', background: 'white', opacity: 0.04, filter: 'blur(40px)', borderRadius: '50%' }} />
           <div style={{ position: 'absolute', bottom: '30%', left: '40%', width: '180px', height: '80px', background: 'white', opacity: 0.04, filter: 'blur(35px)', borderRadius: '50%' }} />
           
-          {/* Chalk scribbles / text */}
+          
           <div style={{ position: 'absolute', top: '15%', left: '8%', opacity: 0.15, transform: 'rotate(-15deg)', fontFamily: '"Comic Sans MS", "Chalkboard SE", sans-serif', fontSize: '1.4rem', color: 'white', letterSpacing: '2px' }}>x + y = 10</div>
           <div style={{ position: 'absolute', top: '25%', right: '12%', opacity: 0.12, transform: 'rotate(10deg)', fontFamily: '"Comic Sans MS", "Chalkboard SE", sans-serif', fontSize: '2rem', color: 'white', fontWeight: 'bold' }}>1945</div>
           <div style={{ position: 'absolute', bottom: '45%', left: '5%', opacity: 0.1, transform: 'rotate(-5deg)', fontFamily: '"Comic Sans MS", "Chalkboard SE", sans-serif', fontSize: '1.2rem', color: 'white' }}>Sejarah Nusantara</div>
           <div style={{ position: 'absolute', bottom: '35%', right: '8%', opacity: 0.15, transform: 'rotate(15deg)', fontFamily: '"Comic Sans MS", "Chalkboard SE", sans-serif', fontSize: '1.6rem', color: 'white' }}>A, B, C...</div>
           
-          {/* Faint chalk lines */}
+          
           <div style={{ position: 'absolute', top: '40%', left: '20%', width: '120px', height: '2px', background: 'white', opacity: 0.1, transform: 'rotate(-25deg)', borderRadius: '2px', borderBottom: '1px dashed rgba(255,255,255,0.5)' }} />
           <div style={{ position: 'absolute', top: '65%', right: '25%', width: '90px', height: '3px', background: 'white', opacity: 0.08, transform: 'rotate(45deg)', borderRadius: '2px' }} />
           <div style={{ position: 'absolute', bottom: '20%', left: '35%', width: '150px', height: '2px', background: 'white', opacity: 0.06, transform: 'rotate(-5deg)', borderRadius: '2px', borderBottom: '2px dotted rgba(255,255,255,0.4)' }} />
         </div>
       )}
 
-      {/* Decorative Classroom Elements for Student View */}
+      
       {equippedTheme === 'theme-kelas' && (
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '80px', pointerEvents: 'none', zIndex: 1, overflow: 'hidden' }}>
           <div style={{ transform: 'scale(0.8) translateY(10px)', transformOrigin: 'bottom center', width: '100%', height: '100%', position: 'absolute', bottom: 0 }}>
-             {/* Apel */}
+             
              <div style={{ position: 'absolute', bottom: '25px', right: '5%', width: '60px', height: '60px', background: 'radial-gradient(circle at 30% 30%, #FF6B6B, #DC2626)', borderRadius: '50%', boxShadow: '10px 10px 15px rgba(0,0,0,0.4)' }}>
                <div style={{ position: 'absolute', top: '-10px', left: '26px', width: '6px', height: '16px', background: '#5C4033', borderRadius: '3px', transform: 'rotate(15deg)' }} />
                <div style={{ position: 'absolute', top: '-6px', left: '30px', width: '22px', height: '12px', background: '#22C55E', borderRadius: '12px 0 12px 0', transform: 'rotate(-15deg)', boxShadow: 'inset 2px 2px 4px rgba(255,255,255,0.3)' }} />
                <div style={{ position: 'absolute', top: '10px', left: '12px', width: '15px', height: '10px', background: 'rgba(255,255,255,0.4)', borderRadius: '50%', transform: 'rotate(-30deg)' }} />
              </div>
 
-             {/* Pensil */}
+             
              <div style={{ position: 'absolute', bottom: '30px', right: '25%', width: '140px', height: '16px', display: 'flex', transform: 'rotate(-10deg)', boxShadow: '5px 8px 12px rgba(0,0,0,0.3)' }}>
                <div style={{ width: '18px', height: '100%', background: '#FCA5A5', borderRadius: '4px 0 0 4px', border: '1px solid #F87171' }} />
                <div style={{ width: '12px', height: '100%', background: 'linear-gradient(to bottom, #9CA3AF, #D1D5DB, #9CA3AF)' }} />
@@ -811,7 +811,7 @@ export default function QuizPlayScreen({
                </div>
              </div>
 
-             {/* Penggaris */}
+             
              <div style={{ position: 'absolute', bottom: '20px', left: '10%', width: '180px', height: '35px', background: 'linear-gradient(to bottom, #93C5FD, #60A5FA)', border: '1px solid #3B82F6', borderRadius: '2px', transform: 'rotate(4deg)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', padding: '0 8px', boxShadow: '5px 8px 12px rgba(0,0,0,0.3)' }}>
                <div style={{ width: '100%', height: '8px', backgroundImage: 'repeating-linear-gradient(to right, #1E3A8A, #1E3A8A 2px, transparent 2px, transparent 15px)', marginTop: '2px' }} />
                <div style={{ width: '100%', height: '4px', backgroundImage: 'repeating-linear-gradient(to right, #1E3A8A, #1E3A8A 1px, transparent 1px, transparent 5px)' }} />
@@ -820,34 +820,34 @@ export default function QuizPlayScreen({
         </div>
       )}
 
-      {/* THEME: LAUTAN */}
+      
       {equippedTheme === 'theme-lautan' && (
         <>
           <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden', background: 'linear-gradient(to bottom, #006994, #003366)' }}>
-            {/* Bubbles */}
+            
             <div style={{ position: 'absolute', bottom: '-20px', left: '10%', width: '20px', height: '20px', border: '2px solid rgba(255,255,255,0.4)', borderRadius: '50%', animation: 'floatUp 8s infinite ease-in' }} />
             <div style={{ position: 'absolute', bottom: '-40px', left: '30%', width: '40px', height: '40px', border: '2px solid rgba(255,255,255,0.3)', borderRadius: '50%', animation: 'floatUp 12s infinite ease-in 2s' }} />
             <div style={{ position: 'absolute', bottom: '-30px', right: '20%', width: '30px', height: '30px', border: '2px solid rgba(255,255,255,0.4)', borderRadius: '50%', animation: 'floatUp 10s infinite ease-in 1s' }} />
             <div style={{ position: 'absolute', bottom: '-50px', right: '40%', width: '50px', height: '50px', border: '2px solid rgba(255,255,255,0.2)', borderRadius: '50%', animation: 'floatUp 15s infinite ease-in 3s' }} />
 
-            {/* Light rays from top */}
+            
             <div style={{ position: 'absolute', top: 0, left: '20%', width: '100px', height: '100%', background: 'linear-gradient(to bottom, rgba(255,255,255,0.15), transparent)', transform: 'skewX(-20deg)' }} />
             <div style={{ position: 'absolute', top: 0, right: '30%', width: '150px', height: '100%', background: 'linear-gradient(to bottom, rgba(255,255,255,0.1), transparent)', transform: 'skewX(15deg)' }} />
 
-            {/* Fish / underwater life silhouette */}
+            
             <div style={{ position: 'absolute', top: '30%', right: '10%', opacity: 0.2, fontSize: '3rem', transform: 'scaleX(-1)' }}>🐟</div>
             <div style={{ position: 'absolute', top: '50%', left: '15%', opacity: 0.15, fontSize: '2.5rem' }}>🐠</div>
             <div style={{ position: 'absolute', bottom: '15%', right: '25%', opacity: 0.2, fontSize: '4rem', transform: 'scaleX(-1)' }}>🦑</div>
           </div>
 
           <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '60px', pointerEvents: 'none', zIndex: 1, overflow: 'hidden' }}>
-            {/* Seabed with sand and coral */}
+            
             <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '40px', background: '#e1c699', borderTop: '4px solid #c2a878', borderRadius: '100% 100% 0 0 / 20px 20px 0 0' }}>
-              {/* Seaweeds */}
+              
               <div style={{ position: 'absolute', bottom: '20px', left: '10%', width: '10px', height: '60px', background: '#2e8b57', borderRadius: '10px', transform: 'rotate(-10deg)', transformOrigin: 'bottom' }} />
               <div style={{ position: 'absolute', bottom: '20px', left: '12%', width: '12px', height: '40px', background: '#3cb371', borderRadius: '10px', transform: 'rotate(5deg)', transformOrigin: 'bottom' }} />
               <div style={{ position: 'absolute', bottom: '20px', right: '15%', width: '15px', height: '50px', background: '#20b2aa', borderRadius: '10px', transform: 'rotate(15deg)', transformOrigin: 'bottom' }} />
-              {/* Starfish */}
+              
               <div style={{ position: 'absolute', bottom: '5px', left: '40%', fontSize: '1.5rem', transform: 'rotate(20deg)' }}>⭐</div>
             </div>
           </div>

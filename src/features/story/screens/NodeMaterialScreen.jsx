@@ -98,7 +98,7 @@ export default function NodeMaterialScreen() {
             )}
           </motion.div>
         ))}
-        {/* Spacer for floating footer */}
+        
         <div style={{ height: '100px' }}></div>
       </div>
 

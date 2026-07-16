@@ -11,7 +11,7 @@ export default function ResponsiveLayout({ children, activeTab, onTabChange, isF
 
   return (
     <div className={`app-responsive-wrapper ${isFullscreen ? 'is-fullscreen' : ''}`}>
-      {/* MOBILE HEADER - Only visible on small screens */}
+      
       {!isFullscreen && (
         <div className="mobile-only-header">
           <Header />
@@ -19,7 +19,7 @@ export default function ResponsiveLayout({ children, activeTab, onTabChange, isF
       )}
 
       <div className="main-layout-grid">
-        {/* DESKTOP SIDEBAR - Left Column */}
+        
         <aside className="desktop-sidebar-nav">
           <div className="nav-logo">
             <div
@@ -33,12 +33,12 @@ export default function ResponsiveLayout({ children, activeTab, onTabChange, isF
           <TabBar isVertical={true} activeTab={activeTab} onTabChange={onTabChange} />
         </aside>
 
-        {/* MAIN CONTENT AREA - Middle Column */}
+        
         <main className="main-content-scrollable">
           {children}
         </main>
 
-        {/* RIGHT CONTEXT PANEL - Dynamic content registered by each screen */}
+        
         <aside className="desktop-right-panel">
           <UniversalRightHeader />
           <div className="dynamic-panel-content">
@@ -47,7 +47,7 @@ export default function ResponsiveLayout({ children, activeTab, onTabChange, isF
         </aside>
       </div>
 
-      {/* MOBILE TABBAR - Only visible on small screens */}
+      
       {!isFullscreen && (
         <div className="mobile-only-tabbar">
           <TabBar isVertical={false} activeTab={activeTab} onTabChange={onTabChange} />

@@ -5,11 +5,11 @@ import PawnAvatar from '../PawnAvatar';
 import PathSelectionOverlay from '../PathSelectionOverlay';
 import arena1Platform from '../../../../../assets/UI/Arena/arena1.svg';
 
-/** Arrow colours by connection type */
+
 const ARROW_COLOR_DEFAULT = 'rgba(255,255,255,0.75)';
 const ARROW_COLOR_WARP = 'rgba(167,139,250,0.9)';
 
-/** Draw an arrowhead polygon at (ex,ey) pointing from (sx,sy) */
+
 function arrowHead(sx, sy, ex, ey, size = 10) {
   const angle = Math.atan2(ey - sy, ex - sx);
   const a1 = angle - Math.PI / 6;
@@ -17,7 +17,7 @@ function arrowHead(sx, sy, ex, ey, size = 10) {
   return `${ex},${ey} ${ex - size * Math.cos(a1)},${ey - size * Math.sin(a1)} ${ex - size * Math.cos(a2)},${ey - size * Math.sin(a2)}`;
 }
 
-/** Shorten a line segment so the arrow starts/ends at tile edge not centre */
+
 function shortenLine(sx, sy, ex, ey, trimPx) {
   const dx = ex - sx;
   const dy = ey - sy;
@@ -41,7 +41,7 @@ const BoardRenderer3D = React.memo(({ mapData, players = [] }) => {
   const isLowGraphics = useGameStore(state => state.isLowGraphics);
   const tiles = Array.isArray(mapData) ? mapData : (mapData?.tiles ?? []);
 
-  // Bounding box untuk board
+  
   const { minX, maxX, minY, maxY } = useMemo(() => {
     if (!tiles.length) return { minX: 0, maxX: 0, minY: 0, maxY: 0 };
     return tiles.reduce((acc, t) => ({
@@ -52,7 +52,7 @@ const BoardRenderer3D = React.memo(({ mapData, players = [] }) => {
     }), { minX: Infinity, maxX: -Infinity, minY: Infinity, maxY: -Infinity });
   }, [tiles]);
 
-  // Offset tiles agar dimulai dari (0,0)
+  
   const normalizedTiles = useMemo(
     () => tiles.map(t => ({ ...t, x: t.x - minX, y: t.y - minY })),
     [tiles, minX, minY]
@@ -63,14 +63,14 @@ const BoardRenderer3D = React.memo(({ mapData, players = [] }) => {
   const boardW = rangeX * TILE_STEP;
   const boardH = rangeY * TILE_STEP;
 
-  // Tile lookup untuk koneksi dan posisi pawn
+  
   const tileMap = useMemo(() => {
     const m = {};
     normalizedTiles.forEach(t => { m[t.id] = t; });
     return m;
   }, [normalizedTiles]);
 
-  // Bangun koneksi SVG
+  
   const connections = useMemo(() => {
     const lines = [];
     normalizedTiles.forEach(tile => {
@@ -99,7 +99,7 @@ const BoardRenderer3D = React.memo(({ mapData, players = [] }) => {
   const svgH = boardH + TILE_STEP + TILE_DEPTH + 20;
 
   return (
-    /* Container ini yang di-rotate isometrik — tiles tetap kotak biasa */
+    
     <div
       style={{
         position: 'relative',
@@ -109,7 +109,7 @@ const BoardRenderer3D = React.memo(({ mapData, players = [] }) => {
         overflow: 'visible',
       }}
     >
-      {/* Background Platform Raksasa (Menopang seluruh lintasan board) */}
+      
       {!isLowGraphics && (
         <img
           src={arena1Platform}
@@ -120,15 +120,15 @@ const BoardRenderer3D = React.memo(({ mapData, players = [] }) => {
             height: '130%',
             top: -450,
             left: -450,
-            zIndex: -100, // Menggunakan zIndex negatif yang besar agar berada di bawah tile dengan zIndex 0
+            zIndex: -100, 
             pointerEvents: 'none',
-            // Menerjemahkan Z lebih dalam ke bawah (-350px) sebelum rotasi untuk menghindari perpotongan 3D dengan ubin di kejauhan
+            
             transform: 'translate3d(0, 0, -350px) rotateZ(-45deg) rotateX(-45deg) scale(1.0)',
             transformOrigin: 'center center',
           }}
         />
       )}
-      {/* SVG Connection Arrows — sama-sama di-rotate bersama container */}
+      
       <svg
         style={{
           position: 'absolute',
@@ -147,7 +147,7 @@ const BoardRenderer3D = React.memo(({ mapData, players = [] }) => {
           const glowColor = isWarp ? 'rgba(167, 139, 250, 0.45)' : 'rgba(255, 255, 255, 0.3)';
           return (
             <g key={key}>
-              {/* Riak Cahaya Belakang (Fake Glow) - Menghindari bug filter menghilang saat zoom */}
+              
               <line
                 x1={sx} y1={sy} x2={ex} y2={ey}
                 stroke={glowColor} strokeWidth={isWarp ? 8 : 6}
@@ -166,7 +166,7 @@ const BoardRenderer3D = React.memo(({ mapData, players = [] }) => {
         })}
       </svg>
 
-      {/* Tiles */}
+      
       {normalizedTiles.map(tile => (
         <Tile3D
           key={tile.id}
@@ -176,12 +176,12 @@ const BoardRenderer3D = React.memo(({ mapData, players = [] }) => {
         />
       ))}
 
-      {/* Players Pawns */}
+      
       {players.map((p, idx) => {
         const tile = tileMap[p.positionTileId];
         if (!tile) return null;
 
-        // Spread multiple players on same tile slightly to avoid heavy overlapping
+        
         const sharingPlayers = players.filter(other => other.positionTileId === p.positionTileId);
         const offset = sharingPlayers.length > 1
           ? { x: (idx % 2) * 44 - 22, y: Math.floor(idx / 2) * 44 - 22 }
@@ -207,12 +207,12 @@ const BoardRenderer3D = React.memo(({ mapData, players = [] }) => {
               pointerEvents: 'none',
             }}
           >
-            {/* Middle container to animate Z-axis bounce without rotation interference */}
+            
             <div
               style={{ transformStyle: 'preserve-3d', overflow: 'visible' }}
               className={p.isMoving ? 'pawn-jumping-active' : isLanding ? 'pawn-stepped-on' : ''}
             >
-              {/* Kita membatalkan rotasi isometrik khusus untuk Pawn agar menghadap layar (billboarding) */}
+              
               <div style={{
                 transform: isLowGraphics ? 'translateZ(25px)' : 'rotateZ(-45deg) rotateX(-45deg) translateZ(25px)',
                 overflow: 'visible',

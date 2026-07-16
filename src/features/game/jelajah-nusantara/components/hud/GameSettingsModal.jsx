@@ -18,7 +18,7 @@ export default function GameSettingsModal({ isOpen, onClose, onSurrender }) {
   const handleSfxChange = (e) => {
     const val = parseFloat(e.target.value);
     setSfxVolume(val);
-    // Optional: play a small test sound when changing SFX volume
+    
     soundEngine.playSound('button');
   };
 
@@ -41,7 +41,7 @@ export default function GameSettingsModal({ isOpen, onClose, onSurrender }) {
             </div>
 
             <div className="settings-body">
-              {/* Music Slider */}
+              
               <div className="setting-row">
                 <div className="label">
                   <Music size={18} />
@@ -56,7 +56,7 @@ export default function GameSettingsModal({ isOpen, onClose, onSurrender }) {
                 />
               </div>
 
-              {/* Sound Effect Slider */}
+              
               <div className="setting-row">
                 <div className="label">
                   <Volume2 size={18} />
@@ -73,7 +73,7 @@ export default function GameSettingsModal({ isOpen, onClose, onSurrender }) {
 
               <div className="divider" />
               
-              {/* Auto Zoom Toggle */}
+              
               <div className="setting-row-flex">
                 <div className="label">
                   <Eye size={18} />
@@ -92,7 +92,7 @@ export default function GameSettingsModal({ isOpen, onClose, onSurrender }) {
 
               <div className="divider" />
 
-              {/* Low Graphics Toggle */}
+              
               <div className="setting-row-flex">
                 <div className="label">
                   <Cpu size={18} />
@@ -111,7 +111,7 @@ export default function GameSettingsModal({ isOpen, onClose, onSurrender }) {
 
               <div className="divider" />
 
-              {/* Surrender Button */}
+              
               <button className="surrender-btn" onClick={onSurrender}>
                 <LogOut size={18} />
                 <span>MENYERAH</span>

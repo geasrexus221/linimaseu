@@ -1,23 +1,23 @@
 import { create } from 'zustand';
 
 export const useMakerStore = create((set, get) => ({
-  // Map Data
+  
   mapName: 'Peta Baru Saya',
   tiles: [],
-  connections: [], // Redundant with tiles.next but kept for legacy sync if needed
+  connections: [], 
   
-  // UI State
+  
   selectedId: null,
   activeTileType: 'jejak',
-  tool: 'place', // place, connect, erase
+  tool: 'place', 
   zoom: 1,
   botCount: 0,
   history: [],
   
-  // Actions
+  
   pushHistory: () => {
     const { tiles, history } = get();
-    // Save a deep clone of the tiles to history
+    
     set({ history: [...history.slice(-30), JSON.parse(JSON.stringify(tiles))] });
   },
 

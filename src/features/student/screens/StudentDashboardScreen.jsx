@@ -8,10 +8,10 @@ import MascotMelambai from '../../../assets/UI/Character/melambai1.svg';
 export default function StudentDashboardScreen() {
   const { stars, streak, maxStreak, hearts, globalAnnouncements, setActiveTab, lastQuizResult } = useStore();
 
-  // Register the right panel (Sidebar Kanan)
+  
   useRegisterRightPanel(DesktopStatsPanel, 'student-dashboard');
 
-  // Dynamic greeting based on streak
+  
   const greetingText = streak < 2 
     ? "Budi, yuk selamatkan apimu!"
     : "Halo Budi! Siap berpetualang?";
@@ -70,11 +70,11 @@ export default function StudentDashboardScreen() {
 
   return (
     <div className="page-container dashboard-bg">
-      {/* Scrollable Container */}
+      
       <div className="scroll-wrapper">
         <div className="dashboard-grid">
           
-          {/* PENGUMUMAN (News Ticker Bar) */}
+          
           {globalAnnouncements.length > 0 && (
             <div className="announcement-ticker-container">
               <div className="ticker-badge">
@@ -90,7 +90,7 @@ export default function StudentDashboardScreen() {
                       {idx < globalAnnouncements.length - 1 && <span className="ticker-separator">•</span>}
                     </span>
                   ))}
-                  {/* Duplikasi data untuk scroll tanpa putus */}
+                  
                   {globalAnnouncements.map((ann, idx) => (
                     <span key={`dup-${ann.id}`} className="ticker-item" aria-hidden="true">
                       <span className="ticker-class">[{ann.className}]</span>
@@ -104,15 +104,15 @@ export default function StudentDashboardScreen() {
             </div>
           )}
 
-          {/* PERJALANAN API (MOBILE ONLY - Bawah Pengumuman) */}
+          
           <div className="mobile-only-streak">
             {streakTrackerMarkup}
           </div>
 
-          {/* KOLOM KIRI (Main Column) */}
+          
           <div className="grid-col-main">
             
-            {/* Header Ucapan Selamat Datang (Tanpa Foto) + Mascot */}
+            
             <div className="welcome-banner">
               <img src={MascotMelambai} alt="Mascot" className="welcome-mascot" />
               <div className="welcome-top">
@@ -130,7 +130,7 @@ export default function StudentDashboardScreen() {
 
 
 
-            {/* 1. Misi Harian (Daily Quests) */}
+            
             <div className="section-title">
               <Target size={20} />
               <h2>Misi Harian</h2>
@@ -164,15 +164,15 @@ export default function StudentDashboardScreen() {
             </div>
           </div>
 
-          {/* KOLOM KANAN (Side Column) */}
+          
           <div className="grid-col-side">
             
-            {/* 1. Perjalanan Api (Streak Tracker) - DESKTOP ONLY */}
+            
             <div className="desktop-only-streak">
               {streakTrackerMarkup}
             </div>
 
-            {/* 2. Aktivitas Terakhir (Last Quiz) */}
+            
             <div className="section-title">
               <Clock size={20} />
               <h2>Aktivitas Terakhir</h2>
@@ -216,7 +216,7 @@ export default function StudentDashboardScreen() {
 
           </div>
         </div>
-        <div style={{ height: 100 }} /> {/* Spacer for tab bar */}
+        <div style={{ height: 100 }} /> 
       </div>
 
       <style jsx>{`

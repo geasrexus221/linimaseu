@@ -4,10 +4,10 @@ import LayanganLobbyScreen from './screens/LayanganLobbyScreen';
 import LayanganGameScreen from './screens/LayanganGameScreen';
 
 export default function LayanganRouter() {
-  const [phase, setPhase] = useState('lobby'); // lobby, playing, gameover
+  const [phase, setPhase] = useState('lobby'); 
   const [gameConfig, setGameConfig] = useState(null);
 
-  // Example handler
+  
   const handleStartGame = (config) => {
     setGameConfig(config);
     setPhase('playing');
@@ -27,6 +27,6 @@ export default function LayanganRouter() {
     );
   }
 
-  // Default: Lobby
+  
   return <LayanganLobbyScreen onStart={handleStartGame} />;
 }

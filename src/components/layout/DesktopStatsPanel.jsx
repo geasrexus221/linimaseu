@@ -35,7 +35,7 @@ export default function DesktopStatsPanel() {
 
   return (
     <div className="stats-panel-content">
-      {/* Mini Leaderboard */}
+      
       <section className="mini-leaderboard">
         <div className="leaderboard-header">
           <h4 className="section-label">PERINGKAT KELAS</h4>

@@ -6,7 +6,7 @@ import { soundManager } from '../../utils/SoundManager';
 export default function TabBar({ isVertical = false, activeTab: propActiveTab, onTabChange }) {
   const { activeTab: storeActiveTab, setActiveTab, soundEnabled } = useStore();
   
-  // Support both controlled (props) and uncontrolled (store)
+  
   const currentTab = propActiveTab || storeActiveTab;
   const handleTabClick = (tabId) => {
     if (currentTab !== tabId) {

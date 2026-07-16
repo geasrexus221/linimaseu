@@ -8,7 +8,7 @@ import { soundEngine } from '../features/game/jelajah-nusantara/logic/soundEngin
 import { useStore } from './useStore';
 
 export const useGameStore = create((set, get) => ({
-  // ── Session State ──────────────────────────────────────────────────
+  
   mapData: null,
   players: [],
   turnIdx: 0,
@@ -16,29 +16,29 @@ export const useGameStore = create((set, get) => ({
   phase: 'IDLE',
   diceValue: 1,
   activeEvent: null,
-  recoveryResult: null, // 'WIN' | 'LOSE' | 'TIE'
-  pendingOpponentIds: [], // Queue for consecutive duels
+  recoveryResult: null, 
+  pendingOpponentIds: [], 
   isChoosingPath: false,
   isTeleportMode: false,
   activeJumpingTileId: null,
   remainingSteps: 0,
-  winner: null, // Stores the winning player object
+  winner: null, 
   gameLogs: ['Selamat datang di Jelajah Nusantara!'],
   activeUsedCard: null,
-  isAutoZoomEnabled: true, // Default: Auto zoom is ON
+  isAutoZoomEnabled: true, 
   isLowGraphics: false,
   quizThemeId: 'ipas_4_5',
   toastKoinCukup: false,
-  pijarFlyTrigger: 0, // Used for gold coin gain animations
+  pijarFlyTrigger: 0, 
   tekadFlyTrigger: 0,
-  pijarLoseTrigger: 0, // Used for gold coin loss animations
+  pijarLoseTrigger: 0, 
   tekadLoseTrigger: 0,
   triggerPijarFly: () => set({ pijarFlyTrigger: get().pijarFlyTrigger + 1 }),
   triggerTekadFly: () => set({ tekadFlyTrigger: get().tekadFlyTrigger + 1 }),
   triggerPijarLose: () => set({ pijarLoseTrigger: get().pijarLoseTrigger + 1 }),
   triggerTekadLose: () => set({ tekadLoseTrigger: get().tekadLoseTrigger + 1 }),
 
-  // ── Actions ────────────────────────────────────────────────────────
+  
 
   initGame: (mapData, selectedPlayers, quizThemeId = 'ipas_4_5') => {
     if (!mapData || !selectedPlayers) return;
@@ -56,8 +56,8 @@ export const useGameStore = create((set, get) => ({
           playerNum: ownerId,
           positionTileId: startTile?.id || (tiles[0]?.id),
           tekad: 100,
-          koin: 0, // Unlimited Gold Coins
-          artifacts: 0, // Stored in base chest (0/3)
+          koin: 0, 
+          artifacts: 0, 
           inventory: (p.equippedArtifacts || [])
             .filter(art => art !== null)
             .map(art => ({
@@ -132,17 +132,17 @@ export const useGameStore = create((set, get) => ({
       const currentTile = tiles.find(t => t.id === player.positionTileId);
       if (!currentTile || !currentTile.next || currentTile.next.length === 0) break;
 
-      // DETEKSI PERSIMPANGAN
+      
       if (currentTile.next.length > 1) {
         currentPlayers[turnIdx] = { ...player, isMoving: false };
         set({
           players: [...currentPlayers],
           isChoosingPath: true,
           remainingSteps: steps - i,
-          pathChoiceEndTurn: shouldEndTurn // Store the flag for choice
+          pathChoiceEndTurn: shouldEndTurn 
         });
 
-        // AUTO-CHOICE UNTUK AI
+        
         if (player.type === 'ai') {
           setTimeout(() => {
             const randomNext = currentTile.next[Math.floor(Math.random() * currentTile.next.length)];
@@ -185,7 +185,7 @@ export const useGameStore = create((set, get) => ({
       soundEngine.playSound('move');
       set({ players: [...currentPlayers] });
       
-      // Delay tile bounce to align with landing (approx 400ms)
+      
       const thisNextId = nextId;
       setTimeout(() => {
         set({ activeJumpingTileId: thisNextId });
@@ -196,7 +196,7 @@ export const useGameStore = create((set, get) => ({
         }, 800);
       }, 400);
 
-      // --- DUEL PENJELAJAH DETECTION ---
+      
       const opponentsOnTile = currentPlayers.filter(p => p.id !== player.id && p.positionTileId === nextId && !p.isFainted);
       if (opponentsOnTile.length > 0) {
         currentPlayers[turnIdx] = { ...player, isMoving: false };
@@ -204,13 +204,13 @@ export const useGameStore = create((set, get) => ({
           players: [...currentPlayers],
           pendingOpponentIds: opponentsOnTile.map(o => o.id),
           remainingSteps: steps - (i + 1),
-          duelEndTurn: shouldEndTurn // Store the flag
+          duelEndTurn: shouldEndTurn 
         });
         get().startDuelInvitation();
         return;
       }
 
-      // BASE choice interruption
+      
       const isLastStep = (i === steps - 1);
       if (nextTile?.type === 'base' && nextTile.owner === player.playerNum && !isLastStep) {
         currentPlayers[turnIdx] = { ...player, isMoving: false };
@@ -281,7 +281,7 @@ export const useGameStore = create((set, get) => ({
       isChoosingPath: false,
     });
 
-    // Delay tile bounce to align with landing (approx 400ms)
+    
     const thisNextId = nextTileId;
     setTimeout(() => {
       set({ activeJumpingTileId: thisNextId });
@@ -333,13 +333,13 @@ export const useGameStore = create((set, get) => ({
         activeEvent: null
       });
 
-      // Check win condition
+      
       if (newArtifacts >= GAME_CONFIG.WIN_ARTIFACTS_GOAL) {
         get().checkWinner();
         return;
       }
 
-      // Show storage success modal
+      
       set({
         phase: 'EVENT',
         activeEvent: {
@@ -351,7 +351,7 @@ export const useGameStore = create((set, get) => ({
         }
       });
     } else {
-      // Choose "no" -> just heal +50 Tekad
+      
       const heal = GAME_CONFIG.BASE_HEAL_AMOUNT;
       player.tekad = Math.min(100, player.tekad + heal);
       updatedPlayers[turnIdx] = player;
@@ -399,7 +399,7 @@ export const useGameStore = create((set, get) => ({
       soundEngine.playSound('move');
       set({ players: [...currentPlayers] });
       
-      // Delay tile bounce to align with landing (approx 400ms)
+      
       const thisPrevId = prevTile.id;
       setTimeout(() => {
         set({ activeJumpingTileId: thisPrevId });
@@ -436,7 +436,7 @@ export const useGameStore = create((set, get) => ({
 
     const handler = tileHandlers[tile.type];
     if (handler) {
-      // BASE STORAGE LOGIC
+      
       if (tile.type === 'base' && tile.owner === player.playerNum) {
         const cost = player.artifacts === 0 ? GAME_CONFIG.CHEST_COST_1 : player.artifacts === 1 ? GAME_CONFIG.CHEST_COST_2 : GAME_CONFIG.CHEST_COST_3;
         if (player.koin >= cost && player.artifacts < 3) {
@@ -483,7 +483,7 @@ export const useGameStore = create((set, get) => ({
           const updatedPlayers = [...players];
           let finalUpdate = { ...result.playerUpdate };
 
-          // Trigger particle animations for gold gain
+          
           const isKoinGain = (finalUpdate.koin !== undefined && finalUpdate.koin > player.koin) || 
                               (tile.type === 'peti' && result.activeEvent?.icon === '🪙');
           if (isKoinGain) {
@@ -508,7 +508,7 @@ export const useGameStore = create((set, get) => ({
             get().triggerPijarLose();
           }
 
-          // Check if player just reached the koin threshold for next chest
+          
           if (finalUpdate.koin !== undefined) {
             const nextCost = player.artifacts === 0 ? GAME_CONFIG.CHEST_COST_1 : player.artifacts === 1 ? GAME_CONFIG.CHEST_COST_2 : GAME_CONFIG.CHEST_COST_3;
             if (player.koin < nextCost && finalUpdate.koin >= nextCost && player.artifacts < 3) {
@@ -525,7 +525,7 @@ export const useGameStore = create((set, get) => ({
           get().checkWinner();
         }
 
-        // CHEST OR TRAP TILE: Skip showing pop-up modal, resolve immediately
+        
         if (tile.type === 'peti' || tile.type === 'jebakan' || tile.type === 'jebakan_mundur' || tile.type === 'jebakan_pijar') {
           set({ gameLogs: [`${result.activeEvent.message}`, ...get().gameLogs] });
           if (tile.type === 'jebakan_mundur') {
@@ -559,7 +559,7 @@ export const useGameStore = create((set, get) => ({
       }
     }
 
-    // Default: Wait and Next Turn or Return to Roll
+    
     setTimeout(() => {
       if (shouldEndTurn) {
         get().nextTurn();
@@ -612,10 +612,10 @@ export const useGameStore = create((set, get) => ({
     const { activeEvent, players, turnIdx } = get();
     if (!activeEvent || activeEvent.isRolling) return;
     
-    // 1. Tentukan angka dadu di AWAL agar animasi sinkron
+    
     const playerRoll = Math.floor(Math.random() * 6) + 1;
     
-    // 2. Mulai animasi putar dengan angka yang sudah fix
+    
     set({ activeEvent: { ...activeEvent, isRolling: true, playerRoll } });
 
     setTimeout(() => {
@@ -695,7 +695,7 @@ export const useGameStore = create((set, get) => ({
     const player = players[turnIdx];
 
     if (player.inventory.length >= 3) {
-      // Picu event buang kartu
+      
       set({
         phase: 'EVENT',
         activeEvent: {
@@ -725,14 +725,14 @@ export const useGameStore = create((set, get) => ({
     const updatedPlayers = [...players];
     const player = { ...updatedPlayers[turnIdx] };
 
-    // Jika yang dibuang adalah kartu baru, kita tidak merubah inventory
+    
     if (instanceIdToDiscard === activeEvent.newCard.instanceId) {
       set({ activeEvent: null });
       get().nextTurn();
       return;
     }
 
-    // Buang dari inventory lama dan tambahkan yang baru
+    
     const filteredInventory = player.inventory.filter(c => c.instanceId !== instanceIdToDiscard);
     player.inventory = [...filteredInventory, activeEvent.newCard];
 
@@ -749,26 +749,26 @@ export const useGameStore = create((set, get) => ({
     const card = player.inventory.find(c => c.instanceId === instanceId);
     if (!card) return;
 
-    // Check cost: Player must have more than the cost (cannot reach 0)
+    
     const cost = card.cost || 0;
     if (player.tekad <= cost) {
       set({ gameLogs: [`Tekad kurang (butuh > ${cost})!`] });
       return;
     }
 
-    // 1. Trigger Animation
+    
     console.log("[DEBUG] Triggering animation for card:", card.name);
     soundEngine.playSound('card_use');
     set({ activeUsedCard: card });
     get().setAutoZoomEnabled(true);
 
-    // 2. Wait for animation (e.g., 1.8s)
+    
     await new Promise(resolve => setTimeout(resolve, 1800));
 
     const updatedPlayers = [...players];
     const updatedPlayer = { ...updatedPlayers[turnIdx] };
 
-    // 3. Subtract cost and remove card after animation
+    
     updatedPlayer.tekad -= cost;
     if (updatedPlayer.tekad <= 0) {
       updatedPlayer.isFainted = true;
@@ -788,18 +788,18 @@ export const useGameStore = create((set, get) => ({
     set({ 
       players: updatedPlayers, 
       gameLogs: [`${updatedPlayer.name} pakai ${card.name} (-${cost} Tekad)`],
-      activeUsedCard: null // Clear animation state
+      activeUsedCard: null 
     });
 
     if (card.action === 'MOVE_FORWARD') {
       await get().startMoving(card.value, false);
     } else if (card.action === 'MOVE_BACKWARD') {
-      // DARI KARTU: Trigger event di petak tujuan
+      
       await get().moveBackward(card.value, false, true);
     } else if (card.action === 'TELEPORT_MODE') {
       set({ isTeleportMode: true });
     } else {
-      // For non-movement items, ensure we stay in WAITING_ROLL
+      
       set({ phase: 'WAITING_ROLL' });
     }
   },
@@ -813,7 +813,7 @@ export const useGameStore = create((set, get) => ({
 
     set({ activeEvent: null });
 
-    // Jika ada duel yang tertunda (consecutive duel), lanjut ke lawan berikutnya
+    
     if (pendingOpponentIds.length > 0) {
       get().startDuelInvitation();
       return;
@@ -825,12 +825,12 @@ export const useGameStore = create((set, get) => ({
     }
 
     if (moveBack) {
-      // DARI PENALTI/TRAP: Jangan trigger event lagi di petak tujuan
+      
       await get().moveBackward(moveBack, shouldEndTurn, false);
       return;
     }
 
-    // Jika baru selesai duel, resolve petak tempat berhenti
+    
     if (activeEvent?.type === 'duel_question') {
       get().resolveTile(shouldEndTurn);
       return;
@@ -843,7 +843,7 @@ export const useGameStore = create((set, get) => ({
     }
   },
 
-  // --- DUEL PENJELAJAH ACTIONS ---
+  
   startDuelInvitation: () => {
     const { players, pendingOpponentIds } = get();
     if (pendingOpponentIds.length === 0) return get().nextTurn();
@@ -881,9 +881,9 @@ export const useGameStore = create((set, get) => ({
         }
       }
     } else {
-      // TANTANG: Hentikan langkah dan masuk ke pemilihan target duel
+      
       set({
-        remainingSteps: 0, // Berhenti
+        remainingSteps: 0, 
         activeEvent: {
           ...activeEvent,
           type: 'duel_target_selection',
@@ -902,7 +902,7 @@ export const useGameStore = create((set, get) => ({
         ...activeEvent,
         type: 'duel_defense_selection',
         stage: 'DEFENSE_SELECT',
-        duelRewardType: targetType, // 'koin' or 'tekad'
+        duelRewardType: targetType, 
         challenger: players[turnIdx],
         opponent: activeEvent.opponent,
         status: 'PENDING',
@@ -1008,7 +1008,7 @@ export const useGameStore = create((set, get) => ({
           stolenAmount = 0;
           message = `Gagal merebut koin! Pertahanan kokoh.`;
         } else {
-          damage = 10; // chip damage
+          damage = 10; 
           message = `10 Damage (Chip Damage)`;
         }
       } else {
@@ -1016,7 +1016,7 @@ export const useGameStore = create((set, get) => ({
           stolenAmount = 0;
           message = `Gagal merebut koin! Lawan menghindar.`;
         } else {
-          damage = 0; // successfully evaded
+          damage = 0; 
           message = `0 Damage`;
         }
       }
@@ -1109,7 +1109,7 @@ export const useGameStore = create((set, get) => ({
 
   handleRecoveryRoll: () => {
     const { players, turnIdx, phase } = get();
-    // Proteksi: Jangan jalankan jika sedang memutar
+    
     if (phase === 'RECOVERY_ROLLING' || phase === 'RECOVERY_RESULT') return;
 
     const player = players[turnIdx];
@@ -1117,7 +1117,7 @@ export const useGameStore = create((set, get) => ({
     const targets = [5, 3, 1];
     const target = targets[attemptIdx] || 1;
 
-    // Tentukan hasil dadu segera agar Dice3D tahu target rotasinya sejak awal putaran
+    
     const roll = Math.floor(Math.random() * 6) + 1;
     let result = 'LOSE';
     if (roll > target) result = 'WIN';
@@ -1134,14 +1134,14 @@ export const useGameStore = create((set, get) => ({
     });
 
     setTimeout(() => {
-      // Play sound feedback based on result
+      
       if (result === 'WIN') {
         soundEngine.playSound('success');
       } else if (result === 'LOSE') {
         soundEngine.playSound('blink');
       }
 
-      // Ubah fase ke RESULT agar banner hasil muncul setelah animasi dadu selesai
+      
       set({
         phase: 'RECOVERY_RESULT',
         gameLogs: [
@@ -1151,7 +1151,7 @@ export const useGameStore = create((set, get) => ({
           ...get().gameLogs
         ]
       });
-    }, 1500); // 1.5 detik putaran dadu
+    }, 1500); 
   },
 
   confirmRecoverySuccess: () => {
@@ -1259,12 +1259,12 @@ export const useGameStore = create((set, get) => ({
       gameLogs: [`[TEST] Teleport ke petak ${tileId}`, ...get().gameLogs]
     });
 
-    // --- DUEL PENJELAJAH DETECTION ON TELEPORT ---
+    
     const opponentsOnTile = updatedPlayers.filter(p => p.id !== player.id && p.positionTileId === tileId && !p.isFainted);
     if (opponentsOnTile.length > 0) {
       set({
         pendingOpponentIds: opponentsOnTile.map(o => o.id),
-        remainingSteps: 0 // Stop at destination
+        remainingSteps: 0 
       });
       get().startDuelInvitation();
       return;
@@ -1278,7 +1278,7 @@ export const useGameStore = create((set, get) => ({
     const winner = players.find(p => p.artifacts >= GAME_CONFIG.WIN_ARTIFACTS_GOAL);
     if (winner) {
       set({ winner, phase: 'WIN' });
-      // Award 400 stars if human player (playerNum === 1) wins!
+      
       if (winner.playerNum === 1) {
         useStore.getState().addStars(400);
       }
@@ -1316,7 +1316,7 @@ export const useGameStore = create((set, get) => ({
     const updatedPlayers = [...players];
     const player = { ...updatedPlayers[turnIdx] };
 
-    // Remap 'pijar' to 'koin' for compatibility with any old references
+    
     const activeStat = stat === 'pijar' ? 'koin' : stat;
     const oldVal = player[activeStat] || 0;
     player[activeStat] = val;

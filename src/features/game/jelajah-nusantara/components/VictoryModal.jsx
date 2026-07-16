@@ -29,7 +29,7 @@ export default function VictoryModal() {
     setJelajahSubView('setup');
   };
 
-  // Sort players: winner first, then by artifacts, koin, tekad
+  
   const sortedRanks = [...players].sort((a, b) => {
     if (a.id === winner.id) return -1;
     if (b.id === winner.id) return 1;
@@ -60,7 +60,7 @@ export default function VictoryModal() {
 
       <div className="victory-popup animate-pop">
 
-        {/* Header Trophy */}
+        
         <div className="popup-header">
           <div className="trophy-badge">
             <Trophy size={36} color="#FFD700" />
@@ -71,10 +71,10 @@ export default function VictoryModal() {
           </p>
         </div>
 
-        {/* Podium — 2-1-3 layout */}
+        
         <div className="podium-row">
 
-          {/* Rank 2 */}
+          
           {rank2 && (
             <div className="podium-col col-rank-2 animate-rise-2">
               <div className="podium-avatar-wrap silver-ring">
@@ -91,7 +91,7 @@ export default function VictoryModal() {
             </div>
           )}
 
-          {/* Rank 1 */}
+          
           {rank1 && (
             <div className="podium-col col-rank-1 animate-rise-1">
               <div className="winner-crown">👑</div>
@@ -109,7 +109,7 @@ export default function VictoryModal() {
             </div>
           )}
 
-          {/* Rank 3 */}
+          
           {rank3 && (
             <div className="podium-col col-rank-3 animate-rise-3">
               <div className="podium-avatar-wrap bronze-ring">
@@ -127,7 +127,7 @@ export default function VictoryModal() {
           )}
         </div>
 
-        {/* Score strips */}
+        
         <div className="score-strips">
           {sortedRanks.map((p, i) => (
             <div key={p.id} className={`score-strip ${isLocalPlayer(p) ? 'is-you' : ''}`}>
@@ -152,13 +152,13 @@ export default function VictoryModal() {
           ))}
         </div>
 
-        {/* Reward box (rank 1) */}
+        
         <div className="reward-box">
           <Star size={18} color="#D97706" fill="#FACC15" />
           <span>+400 Bintang untuk <strong>{rank1?.name}</strong>!</span>
         </div>
 
-        {/* Action buttons */}
+        
         <div className="action-row">
           <button className="action-btn restart-btn" onClick={handleRestart}>
             <RotateCcw size={18} />

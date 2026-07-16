@@ -6,7 +6,7 @@ export default function QuizScreen({ quizData, onComplete }) {
   const [isCorrect, setIsCorrect] = useState(null);
 
   const handleOptionClick = (option) => {
-    if (selectedOption) return; // Prevent multiple clicks
+    if (selectedOption) return; 
 
     setSelectedOption(option);
     if (option.isCorrect) {

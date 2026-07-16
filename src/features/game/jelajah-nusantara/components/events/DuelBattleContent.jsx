@@ -29,7 +29,7 @@ export default function DuelBattleContent() {
   const isOpponentAI = opponent.type === 'ai';
   const isChallengerAI = challenger.type === 'ai';
 
-  // Determine player sprites based on characterId and battle stage outcome
+  
   const getChallengerSprite = () => {
     const charId = challenger.characterId || 1;
     if (stage === 'CHALLENGER_ROLL' && isRolling) {
@@ -62,7 +62,7 @@ export default function DuelBattleContent() {
     return charId === 2 ? character2podium1 : character1podium1;
   };
 
-  // AI Automation Effect
+  
   useEffect(() => {
     let timer;
 
@@ -88,7 +88,7 @@ export default function DuelBattleContent() {
 
   return (
     <div className="orange-juice-duel">
-      {/* TOP HEADER */}
+      
       <div className="duel-header-retro">
         {stage === 'DEFENSE_SELECT' && (
           <div className="action-banner announce-banner">
@@ -103,9 +103,9 @@ export default function DuelBattleContent() {
         {stage === 'RESULT' && <div className="action-banner">HASIL PERTEMPURAN</div>}
       </div>
 
-      {/* MAIN VIEW */}
+      
       {stage === 'DEFENSE_SELECT' ? (
-        /* DEDICATED DEFENSE STRATEGY SELECTION VIEW (Defender Centered) */
+        
         <div className="defense-select-view">
           <div className="defender-centered-card">
             <div className="fighter-name-label">{opponent.name}</div>
@@ -123,9 +123,9 @@ export default function DuelBattleContent() {
           </div>
         </div>
       ) : (
-        /* STANDARD 3-COLUMN FIGHT STAGE */
+        
         <div className="duel-stage">
-          {/* CHALLENGER (LEFT FIGHTER) */}
+          
           <div className={`fighter-container left-side ${stage === 'CHALLENGER_ROLL' ? 'active-turn' : ''} ${activeEvent.result === 'WIN' && stage === 'RESULT' ? 'winner-pulse' : ''}`}>
             <div className="fighter-name-label">{challenger.name}</div>
             {activeEvent.duelRewardType && (
@@ -136,7 +136,7 @@ export default function DuelBattleContent() {
             <img src={getChallengerSprite()} alt={challenger.name} className="fighter-sprite-retro" />
             {stage === 'RESULT' && activeEvent.result === 'WIN' && <div className="victory-text">MENANG!</div>}
             
-            {/* CHALLENGER SCORE BUBBLE */}
+            
             {challengerRoll !== null && !(stage === 'CHALLENGER_ROLL' && isRolling) && (
               <div className="arena-score-bubble challenger-bubble">
                 <span className="bubble-lbl">SKOR</span>
@@ -145,7 +145,7 @@ export default function DuelBattleContent() {
             )}
           </div>
 
-          {/* CENTER ACTION AREA */}
+          
           <div className="center-action-zone">
             {(stage === 'CHALLENGER_ROLL' || stage === 'DEFENDER_ROLL') && (
               <div className="dice-roll-zone">
@@ -208,18 +208,18 @@ export default function DuelBattleContent() {
             )}
           </div>
 
-          {/* DEFENDER (RIGHT FIGHTER) - FLIPPED sprite */}
+          
           <div className={`fighter-container right-side ${stage === 'DEFENDER_ROLL' ? 'active-turn' : ''} ${activeEvent.result === 'LOSE' && stage === 'RESULT' ? 'winner-pulse' : ''}`}>
             <div className="fighter-name-label">{opponent.name}</div>
             
-            {/* STRATEGY CHOSEN INDICATOR BADGE */}
+            
             {defenderStrategy && (
               <div className={`strategy-chosen-badge ${defenderStrategy}`}>
                 {defenderStrategy === 'defend' ? '🛡️ BERTAHAN' : '💨 MENGHINDAR'}
               </div>
             )}
 
-            {/* FALLING TEKAD PARTICLES EFFECT (Splash Burst) */}
+            
             {stage === 'RESULT' && damageDealt > 0 && (
               <div className="falling-particles-container">
                 {Array.from({ length: 10 }).map((_, idx) => {
@@ -253,7 +253,7 @@ export default function DuelBattleContent() {
             </div>
             {stage === 'RESULT' && activeEvent.result === 'LOSE' && <div className="victory-text">MENANG!</div>}
 
-            {/* DEFENDER SCORE BUBBLE */}
+            
             {defenderRoll !== null && !(stage === 'DEFENDER_ROLL' && isRolling) && (
               <div className="arena-score-bubble defender-bubble">
                 <span className="bubble-lbl">SKOR</span>
@@ -264,9 +264,9 @@ export default function DuelBattleContent() {
         </div>
       )}
 
-      {/* BOTTOM HUD PANEL */}
+      
       <div className="duel-hud-row">
-        {/* CHALLENGER HUD */}
+        
         <div className="hud-panel left-hud">
           <div className="hud-hp-circle">
             <span className="hp-label">TEKAD</span>
@@ -288,7 +288,7 @@ export default function DuelBattleContent() {
           </div>
         </div>
 
-        {/* DEFENDER HUD */}
+        
         <div className="hud-panel right-hud">
           <div className="hud-stats-pill">
             <div className="stat-col">

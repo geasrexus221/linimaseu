@@ -12,7 +12,7 @@ export default function NodeQuizScreen() {
   };
 
   const handleComplete = (score, correctCount) => {
-    // Unlock next node
+    
     if (activeChapter?.id) {
       const parts = activeChapter.id.split('-');
       const nextId = `${parts[0]}-${parts[1]}-${parseInt(parts[2]) + 1}`;
@@ -27,7 +27,7 @@ export default function NodeQuizScreen() {
 
   if (!activeChapter?.quizData) return <div>Loading...</div>;
 
-  // Format the quiz data so it can be ingested by QuizPlayScreen
+  
   const customQuestions = [{
     id: activeChapter.id,
     questionType: 'CLASSIC',

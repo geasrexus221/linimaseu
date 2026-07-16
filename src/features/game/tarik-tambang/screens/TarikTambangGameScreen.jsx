@@ -20,7 +20,7 @@ import character2podium4 from '../../../../assets/UI/Character/character2podium4
 import character2podium5 from '../../../../assets/UI/Character/character2podium5.svg';
 import character2podium6 from '../../../../assets/UI/Character/character2podium6.svg';
 
-// Constants
+
 const MAX_SCORE = 10;
 
 export default function TarikTambangGameScreen({ config, onBack }) {
@@ -31,38 +31,38 @@ export default function TarikTambangGameScreen({ config, onBack }) {
   const MAX_TIME = config.timeLimit || 20;
   const totalQuestions = config.questionCount || (config.difficulty === 'mudah' ? 10 : config.difficulty === 'normal' ? 15 : 20);
 
-  // --- Game State ---
-  const [phase, setPhase] = useState('category_intro'); // 'category_intro', 'countdown', 'prep', 'playing', 'resolving', 'gameover'
+  
+  const [phase, setPhase] = useState('category_intro'); 
   const [introCount, setIntroCount] = useState(3);
   const [playerHP, setPlayerHP] = useState(10);
   const [botHP, setBotHP] = useState(10);
   const [playerMaxHP, setPlayerMaxHP] = useState(10);
   const [botMaxHP, setBotMaxHP] = useState(10);
-  const [playerActionMode, setPlayerActionMode] = useState('attack'); // 'attack' or 'heal'
-  const [botActionMode, setBotActionMode] = useState('attack'); // 'attack' or 'heal'
+  const [playerActionMode, setPlayerActionMode] = useState('attack'); 
+  const [botActionMode, setBotActionMode] = useState('attack'); 
   const [qIndex, setQIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(MAX_TIME);
   const [questions, setQuestions] = useState([]);
 
-  const [playerAction, setPlayerAction] = useState(null); // { timeTaken, answerIdx, isCorrect, points }
+  const [playerAction, setPlayerAction] = useState(null); 
   const [botAction, setBotAction] = useState(null);
 
-  const [winner, setWinner] = useState(null); // 'player', 'bot', 'tie'
-  const [playerAnimState, setPlayerAnimState] = useState('idle'); // 'idle', 'correct', 'incorrect', 'attacked'
+  const [winner, setWinner] = useState(null); 
+  const [playerAnimState, setPlayerAnimState] = useState('idle'); 
   const [answerCount, setAnswerCount] = useState(0);
   const [botCharacterId, setBotCharacterId] = useState(() => Math.random() < 0.5 ? 1 : 2);
-  const [botAnimState, setBotAnimState] = useState('idle'); // 'idle', 'correct', 'incorrect', 'attacked'
+  const [botAnimState, setBotAnimState] = useState('idle'); 
 
-  // Bot item tracking
+  
   const botItemIdsRef = useRef(config?.botItemIds || []);
-  const botUsedItemsRef = useRef({}); // tracks which bot items have been used
+  const botUsedItemsRef = useRef({}); 
 
-  // --- Score Plaque & Floating Notifications ---
-  const [playerFloatingText, setPlayerFloatingText] = useState(null); // { text, type: 'gain' | 'lose' | 'info' }
+  
+  const [playerFloatingText, setPlayerFloatingText] = useState(null); 
   const [botFloatingText, setBotFloatingText] = useState(null);
 
-  // --- Item States ---
-  const [activeItem, setActiveItem] = useState(null); // null, '50_50', 'double', 'shield', 'hourglass', 'magnet', 'stun', 'heal_potion', 'book_bomb', 'telescope'
+  
+  const [activeItem, setActiveItem] = useState(null); 
   const [usedItems, setUsedItems] = useState(() => {
     const initial = { 
       '50_50': true, 
@@ -92,7 +92,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
   });
   const [eliminatedIndices, setEliminatedIndices] = useState([]);
 
-  // Animation states for next-turn card activation
+  
   const [queuedItem, setQueuedItem] = useState(null);
   const [isShowingCardAnim, setIsShowingCardAnim] = useState(false);
   const [activeCard, setActiveCard] = useState(null);
@@ -101,7 +101,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
   const startTimeRef = useRef(null);
   const botTimerRef = useRef(null);
 
-  // Refs for async callbacks
+  
   const phaseRef = useRef(phase);
   useEffect(() => { phaseRef.current = phase; }, [phase]);
 
@@ -117,25 +117,25 @@ export default function TarikTambangGameScreen({ config, onBack }) {
   const queuedItemRef = useRef(queuedItem);
   useEffect(() => { queuedItemRef.current = queuedItem; }, [queuedItem]);
 
-  // Audio refs (mocked visually for now)
+  
   const isCritical = playerHP <= 2 || botHP <= 2;
 
-  // --- Initialization ---
+  
   useEffect(() => {
-    // Load questions based on config.theme
+    
     const themeData = tarikTambangDuelThemes.find(t => t.id === config.theme) || tarikTambangDuelThemes[0];
 
-    // Determine categories needed
+    
     const categoriesNeeded = totalQuestions / 5;
 
-    // Pick random categories
+    
     const shuffledCats = [...(themeData.categories || [])].sort(() => 0.5 - Math.random());
 
     let pool = [];
     for (let i = 0; i < categoriesNeeded; i++) {
       const cat = shuffledCats[i] || themeData.categories[0];
       if (cat && cat.questions) {
-        // Pick 5 random questions from this category and shuffle their options
+        
         const catQuestions = [...cat.questions]
           .sort(() => 0.5 - Math.random())
           .slice(0, 5)
@@ -159,18 +159,18 @@ export default function TarikTambangGameScreen({ config, onBack }) {
     setQuestions(pool);
   }, [config, totalQuestions]);
 
-  // Handle Category Intro announcement popup timer
+  
   useEffect(() => {
     if (phase === 'category_intro') {
       const timer = setTimeout(() => {
         setPhase('countdown');
         setIntroCount(3);
-      }, 2500); // Show popup for 2.5 seconds
+      }, 2500); 
       return () => clearTimeout(timer);
     }
   }, [phase]);
 
-  // Handle Countdown timer
+  
   useEffect(() => {
     if (phase === 'countdown') {
       let count = 3;
@@ -189,7 +189,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
     }
   }, [phase]);
 
-  // --- Timer & Bot Logic ---
+  
   const startQuestion = () => {
     setPlayerAction(null);
     setBotAction(null);
@@ -203,7 +203,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
     if (botTimerRef.current) clearTimeout(botTimerRef.current);
 
     if (queuedItemRef.current) {
-      // Find the detailed card for animation
+      
       const itemDetails = aduCendekiawanItems.find(i => {
         if (queuedItemRef.current === '50_50') return i.id === 'tt_compas';
         if (queuedItemRef.current === 'double') return i.id === 'tt_weight';
@@ -220,9 +220,9 @@ export default function TarikTambangGameScreen({ config, onBack }) {
       setIsShowingCardAnim(true);
       setActiveCard(itemDetails || { name: queuedItemRef.current, icon: '🎴', color: '#1CB0F6' });
       setPhase('playing');
-      soundManager.play('chest_open', 0.6); // 🔊 Kartu aksi reveal!
+      soundManager.play('chest_open', 0.6); 
 
-      // Play reveal animation for 2 seconds before starting the timer & player interaction
+      
       setTimeout(() => {
         setIsShowingCardAnim(false);
         setActiveCard(null);
@@ -230,7 +230,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
         const activeId = queuedItemRef.current;
         setActiveItem(activeId);
 
-        // Apply instant card effects (like 50:50)
+        
         if (activeId === '50_50') {
           const currentQ = questionsRef.current[qIndexRef.current];
           const correctIdx = currentQ.correct;
@@ -249,7 +249,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
 
         startTimeRef.current = Date.now();
 
-        // Start countdown timer
+        
         let ticks = 0;
         timerRef.current = setInterval(() => {
           if (activeItemRef.current === 'hourglass') {
@@ -278,7 +278,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
     }
   };
 
-  // Watch for timeout independently
+  
   useEffect(() => {
     if (phase === 'playing' && timeLeft <= 0 && !isShowingCardAnim) {
       if (timerRef.current) clearInterval(timerRef.current);
@@ -287,7 +287,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
   }, [timeLeft, phase, isShowingCardAnim]);
 
   const scheduleBotAnswer = (itemOverride) => {
-    // Difficulty presets scaled for 15s timer
+    
     let reactionTimeMin, reactionTimeMax, accuracy;
     if (config.difficulty === 'mudah') {
       reactionTimeMin = 7000; reactionTimeMax = 14000; accuracy = 0.5;
@@ -306,7 +306,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
       return;
     }
 
-    // Magnet Pengacau (Bot Delay): delay bot response by 4 seconds (4000ms)
+    
     if (currentItem === 'magnet') {
       reactTime += 4000;
     }
@@ -317,7 +317,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
       if (phaseRef.current === 'playing') {
         const isCorrect = Math.random() < accuracy;
         const currentQ = questionsRef.current[qIndexRef.current];
-        const ansIdx = isCorrect ? currentQ.correct : (currentQ.correct + 1) % 4; // Mock wrong answer
+        const ansIdx = isCorrect ? currentQ.correct : (currentQ.correct + 1) % 4; 
         const timeTaken = reactTime / 1000;
         const ratio = Math.max(0, 1 - (timeTaken / MAX_TIME));
 
@@ -330,21 +330,21 @@ export default function TarikTambangGameScreen({ config, onBack }) {
           points = -1;
         }
 
-        // --- Bot Item Usage Logic ---
-        // Bot picks an unused item from its pool and applies it
+        
+        
         const availableBotItems = (botItemIdsRef.current || []).filter(id => !botUsedItemsRef.current[id]);
         let botActivatedItem = null;
         if (availableBotItems.length > 0) {
           const shouldUseItem =
-            config.difficulty === 'sulit' ? true :   // Cendekiawan: always use if available
-            config.difficulty === 'normal' ? Math.random() < 0.4 : // Normal: 40% chance
-            false; // Santai: never use
+            config.difficulty === 'sulit' ? true :   
+            config.difficulty === 'normal' ? Math.random() < 0.4 : 
+            false; 
 
           if (shouldUseItem) {
-            // Cendekiawan picks strategically, Normal picks randomly
+            
             let chosenItemId;
             if (config.difficulty === 'sulit') {
-              // Prefer offensive items when winning, defensive when losing
+              
               const offensiveItems = availableBotItems.filter(id => ['tt_book_bomb', 'tt_stun', 'tt_magnet', 'tt_weight'].includes(id));
               const defensiveItems = availableBotItems.filter(id => ['tt_heal_potion', 'tt_shield'].includes(id));
               const botIsLosing = botHP < playerHP;
@@ -360,13 +360,13 @@ export default function TarikTambangGameScreen({ config, onBack }) {
           }
         }
 
-        // --- Bot mode strategy ---
+        
         let botMode = 'attack';
         if (config.difficulty === 'sulit') {
-          // Cendekiawan: heal when HP < 50%, attack when ahead
+          
           botMode = (botHP <= botMaxHP * 0.5) ? 'heal' : 'attack';
         } else {
-          // Normal/Santai: 30% heal if damaged
+          
           if (botHP < botMaxHP && Math.random() < 0.3) botMode = 'heal';
         }
 
@@ -376,11 +376,11 @@ export default function TarikTambangGameScreen({ config, onBack }) {
     }, reactTime);
   };
 
-  // --- Handling Answers & Items ---
+  
   const handleUseItem = (itemId) => {
     if (phase !== 'playing' || playerAction) return;
 
-    // If clicking the currently queued item, cancel/unselect it (refund)
+    
     if (queuedItem === itemId) {
       setQueuedItem(null);
       setUsedItems(prev => ({ ...prev, [itemId]: false }));
@@ -388,7 +388,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
       return;
     }
 
-    // If clicking a different item, refund previous item and queue the new one
+    
     const prevQueued = queuedItem;
     setQueuedItem(itemId);
     setUsedItems(prev => {
@@ -399,7 +399,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
       updated[itemId] = true;
       return updated;
     });
-    soundManager.play('click', 0.5); // 🔊 Kartu dipilih
+    soundManager.play('click', 0.5); 
   };
 
   const changePlayerMode = (mode) => {
@@ -415,10 +415,10 @@ export default function TarikTambangGameScreen({ config, onBack }) {
   const handlePlayerAnswer = (ansIdx) => {
     if (phase !== 'playing' || isShowingCardAnim) return;
 
-    // Play squash SFX on answer select/change
+    
     soundManager.play('squash');
 
-    // Increment click count to trigger key change and replay animation
+    
     setAnswerCount(prev => prev + 1);
 
     const timeTaken = (Date.now() - startTimeRef.current) / 1000;
@@ -431,7 +431,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
       else if (ratio >= 0.51) points = 2;
       else points = 1;
 
-      // Apply Anchor (Double Weight) Item Card!
+      
       if (activeItem === 'double') {
         points = points * 2;
       }
@@ -444,7 +444,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
   };
 
   const handleTimeOut = () => {
-    // Force missing actions to timeout penalty
+    
     setPlayerAction(prev => {
       if (!prev) return { timeTaken: 15, answerIdx: -1, isCorrect: false, points: -1, mode: playerActionMode };
       return prev;
@@ -455,25 +455,25 @@ export default function TarikTambangGameScreen({ config, onBack }) {
     });
   };
 
-  // Resolve when both have acted — SEQUENTIAL REVEAL
+  
   useEffect(() => {
     let resolveDelayId;
     if (phase === 'playing' && playerAction && botAction) {
       if (timerRef.current) clearInterval(timerRef.current);
       if (botTimerRef.current) clearTimeout(botTimerRef.current);
 
-      // Jeda 800ms sebelum setPhase('resolving') agar animasi menjawab pemain terakhir selesai dimainkan
+      
       resolveDelayId = setTimeout(() => {
         setPhase('resolving');
 
-        // Determine who answered first (smaller timeTaken)
+        
         const playerFirst = playerAction.timeTaken <= botAction.timeTaken;
 
-        // Pre-calculate all HP changes ONCE up front (before any setState delays) in correct order
+        
         let nextPlayerHP = playerHP;
         let nextBotHP = botHP;
 
-        // Apply passive character/bot bonuses
+        
         let finalPlayerPoints = playerAction.points;
         if (playerAction.isCorrect) {
           if (config.characterId === 1 && playerAction.mode === 'attack') finalPlayerPoints += 1;
@@ -490,7 +490,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
         let botFloatPayload = null;
 
         if (playerFirst) {
-          // Pre-compute Player first
+          
           if (playerAction.isCorrect) {
             if (playerAction.mode === 'attack') {
               nextBotHP = Math.max(0, nextBotHP - finalPlayerPoints);
@@ -504,7 +504,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             playerFloatPayload = { text: '-1', type: 'lose' };
           }
 
-          // Pre-compute Bot second
+          
           if (activeItem === 'stun') {
             botFloatPayload = { text: '⚡ Stun', type: 'info' };
           } else if (botAction.isCorrect) {
@@ -525,7 +525,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             botFloatPayload = { text: '-1', type: 'lose' };
           }
         } else {
-          // Pre-compute Bot first
+          
           if (activeItem === 'stun') {
             botFloatPayload = { text: '⚡ Stun', type: 'info' };
           } else if (botAction.isCorrect) {
@@ -546,7 +546,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             botFloatPayload = { text: '-1', type: 'lose' };
           }
 
-          // Pre-compute Player second
+          
           if (playerAction.isCorrect) {
             if (playerAction.mode === 'attack') {
               nextBotHP = Math.max(0, nextBotHP - finalPlayerPoints);
@@ -561,18 +561,18 @@ export default function TarikTambangGameScreen({ config, onBack }) {
           }
         }
 
-        // ─────────────────────────────────────────
-        // STEP 1 (t=0): Brief dramatic pause — both idle
-        // ─────────────────────────────────────────
+        
+        
+        
         setPlayerAnimState('idle');
         setBotAnimState('idle');
 
         if (playerFirst) {
-          // ─────────────────────────────────────────
-          // PLAYER RESOLVES FIRST, THEN BOT
-          // ─────────────────────────────────────────
           
-          // STEP 2 (t=500ms): Player's OWN reaction
+          
+          
+          
+          
           setTimeout(() => {
             if (playerAction.isCorrect) {
               setPlayerAnimState('correct');
@@ -584,7 +584,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             if (playerFloatPayload) setPlayerFloatingText(playerFloatPayload);
           }, 500);
 
-          // STEP 2b (t=1500ms): Bot reacts to Player's action + HP Update
+          
           setTimeout(() => {
             const playerAttackedBot = playerAction.isCorrect && playerAction.mode === 'attack';
             const stunHit = activeItem === 'stun';
@@ -597,7 +597,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
               soundManager.play('heal', 0.6);
             }
 
-            // Apply Player's action HP change to state immediately
+            
             if (playerAction.isCorrect) {
               if (playerAction.mode === 'attack') {
                 setBotHP(prev => Math.max(0, prev - finalPlayerPoints));
@@ -609,7 +609,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             }
           }, 1500);
 
-          // STEP 3 (t=2700ms): Bot's OWN reaction
+          
           setTimeout(() => {
             if (activeItem === 'stun') {
               setBotAnimState('attacked');
@@ -623,7 +623,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             if (botFloatPayload) setBotFloatingText(botFloatPayload);
           }, 2700);
 
-          // STEP 3b (t=3700ms): Player reacts to Bot's action + HP Update
+          
           setTimeout(() => {
             const botAttackedPlayer = botAction.isCorrect && botAction.mode === 'attack' && activeItem !== 'shield';
             if (botAttackedPlayer) {
@@ -635,11 +635,11 @@ export default function TarikTambangGameScreen({ config, onBack }) {
               soundManager.play('heal', 0.4);
             }
 
-            // Apply Bot's action HP change to state immediately
+            
             if (activeItem !== 'stun') {
               if (botAction.isCorrect) {
                 if (activeItem === 'shield' && !playerAction.isCorrect) {
-                  // Blocked
+                  
                 } else {
                   if (botAction.mode === 'attack') {
                     setPlayerHP(prev => Math.max(0, prev - finalBotPoints));
@@ -654,11 +654,11 @@ export default function TarikTambangGameScreen({ config, onBack }) {
           }, 3700);
 
         } else {
-          // ─────────────────────────────────────────
-          // BOT RESOLVES FIRST, THEN PLAYER
-          // ─────────────────────────────────────────
+          
+          
+          
 
-          // STEP 2 (t=500ms): Bot's OWN reaction
+          
           setTimeout(() => {
             if (activeItem === 'stun') {
               setBotAnimState('attacked');
@@ -672,7 +672,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             if (botFloatPayload) setBotFloatingText(botFloatPayload);
           }, 500);
 
-          // STEP 2b (t=1500ms): Player reacts to Bot's action + HP Update
+          
           setTimeout(() => {
             const botAttackedPlayer = botAction.isCorrect && botAction.mode === 'attack' && activeItem !== 'shield';
             if (botAttackedPlayer) {
@@ -684,11 +684,11 @@ export default function TarikTambangGameScreen({ config, onBack }) {
               soundManager.play('heal', 0.4);
             }
 
-            // Apply Bot's action HP change to state immediately
+            
             if (activeItem !== 'stun') {
               if (botAction.isCorrect) {
                 if (activeItem === 'shield' && !playerAction.isCorrect) {
-                  // Blocked
+                  
                 } else {
                   if (botAction.mode === 'attack') {
                     setPlayerHP(prev => Math.max(0, prev - finalBotPoints));
@@ -702,7 +702,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             }
           }, 1500);
 
-          // STEP 3 (t=2700ms): Player's OWN reaction
+          
           setTimeout(() => {
             if (playerAction.isCorrect) {
               setPlayerAnimState('correct');
@@ -714,7 +714,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             if (playerFloatPayload) setPlayerFloatingText(playerFloatPayload);
           }, 2700);
 
-          // STEP 3b (t=3700ms): Bot reacts to Player's action + HP Update
+          
           setTimeout(() => {
             const playerAttackedBot = playerAction.isCorrect && playerAction.mode === 'attack';
             const stunHit = activeItem === 'stun';
@@ -727,7 +727,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
               soundManager.play('heal', 0.6);
             }
 
-            // Apply Player's action HP change to state immediately
+            
             if (playerAction.isCorrect) {
               if (playerAction.mode === 'attack') {
                 setBotHP(prev => Math.max(0, prev - finalPlayerPoints));
@@ -740,9 +740,9 @@ export default function TarikTambangGameScreen({ config, onBack }) {
           }, 3700);
         }
 
-        // ─────────────────────────────────────────
-        // STEP 4 (t=4800ms): HP bars update + clear floats
-        // ─────────────────────────────────────────
+        
+        
+        
         setTimeout(() => {
           setPlayerHP(nextPlayerHP);
           setBotHP(nextBotHP);
@@ -750,11 +750,11 @@ export default function TarikTambangGameScreen({ config, onBack }) {
           setBotFloatingText(null);
         }, 4800);
 
-        // ─────────────────────────────────────────
-        // STEP 5 (t=5200ms): Advance to next question
-        // ─────────────────────────────────────────
+        
+        
+        
         setTimeout(() => {
-          // Check Win Condition
+          
           if (nextPlayerHP === 0 && nextBotHP === 0) {
             setWinner('tie');
             setPhase('gameover');
@@ -765,7 +765,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             setWinner('player');
             setPhase('gameover');
           } else {
-            // Next Question or End of Questions
+            
             if (qIndex + 1 >= totalQuestions) {
               if (nextPlayerHP > nextBotHP) {
                 setWinner('player');
@@ -795,7 +795,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
     };
   }, [playerAction, botAction, phase]);
 
-  // --- Rendering Helpers ---
+  
   const currentQ = questions[qIndex];
 
   const getRopeOffset = () => {
@@ -805,10 +805,10 @@ export default function TarikTambangGameScreen({ config, onBack }) {
   return (
     <div className={`game-container ${isCritical ? 'critical-danger' : ''}`}>
       {isShowingCardAnim && <CardBurningOverlay activeCard={activeCard} />}
-      {/* Classroom Background */}
+      
       <div className="classroom-bg">
         <div className="chalkboard">
-          {/* Gantungan Dinding */}
+          
           <div className="chalkboard-hanger left" />
           <div className="chalkboard-hanger right" />
 
@@ -821,7 +821,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             </>
           )}
 
-          {/* Tatakan Kapur & Penghapus */}
+          
           <div className="chalk-tray">
             <span className="chalk-eraser" />
             <span className="chalk white-chalk" />
@@ -831,16 +831,16 @@ export default function TarikTambangGameScreen({ config, onBack }) {
         <div className="window-light" />
       </div>
 
-      {/* Settings Button */}
+      
       <button className="quit-btn" onClick={() => setSettingsOpen(true)}><Settings size={20} /></button>
 
-      {/* Help Button */}
+      
       <button className="game-help-btn" onClick={() => setHelpOpen(true)} title="Panduan"><HelpCircle size={20} /></button>
 
-      {/* Help Modal */}
+      
       <AduCendekiawanHelpModal isOpen={helpOpen} onClose={() => setHelpOpen(false)} />
 
-      {/* Settings Modal Popup */}
+      
       <AnimatePresence>
         {settingsOpen && (
           <div className="settings-overlay">
@@ -859,7 +859,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
               </div>
 
               <div className="settings-body">
-                {/* Music Volume Slider */}
+                
                 <div className="setting-row">
                   <div className="label">
                     <Music size={18} />
@@ -874,7 +874,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
                   />
                 </div>
 
-                {/* Sound Effect Slider */}
+                
                 <div className="setting-row">
                   <div className="label">
                     <Volume2 size={18} />
@@ -894,7 +894,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
 
                 <div className="divider" />
 
-                {/* Surrender Button */}
+                
                 <button className="surrender-btn" onClick={() => {
                   setSettingsOpen(false);
                   onBack();
@@ -909,9 +909,9 @@ export default function TarikTambangGameScreen({ config, onBack }) {
         )}
       </AnimatePresence>
 
-      {/* === ARENA: Duel Stage === */}
+      
       <div className="arena-section">
-        {/* Left Podium (Player) */}
+        
         <div className="podium player-podium">
           <div 
             key={playerAnimState === 'answered' ? `answered-${answerCount}` : playerAnimState}
@@ -970,7 +970,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
           </div>
         </div>
 
-        {/* Right Podium (Bot) */}
+        
         <div className="podium bot-podium">
           <div className={`character bot-char ${
             botAnimState === 'idle' ? 'char-stretch-idle' :
@@ -1026,9 +1026,9 @@ export default function TarikTambangGameScreen({ config, onBack }) {
         </div>
       </div>
 
-      {/* Fighting Game Style HP Bar Container */}
+      
       <div className="hp-fighting-container">
-        {/* Player HP Bar */}
+        
         <div className="hp-bar-side player-side">
           <div className="hp-label-row">
             <span className="hp-side-name">Kamu</span>
@@ -1047,7 +1047,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
           )}
         </div>
 
-        {/* Center Badge / Stopwatch Timer */}
+        
         <div className={`clash-vs-badge stopwatch-timer ${timeLeft <= 3 ? 'stopwatch-danger' : ''}`}>
           <span>{timeLeft}s</span>
           {phase === 'playing' && playerAction && !botAction && (
@@ -1064,7 +1064,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
           )}
         </div>
 
-        {/* Bot HP Bar */}
+        
         <div className="hp-bar-side bot-side">
           <div className="hp-label-row">
             <span className="hp-side-val">{botHP}/{botMaxHP} HP</span>
@@ -1084,10 +1084,10 @@ export default function TarikTambangGameScreen({ config, onBack }) {
         </div>
       </div>
 
-      {/* === QUIZ PANEL === */}
+      
       {(phase === 'playing' || phase === 'resolving') && currentQ && (
         <div className="quiz-panel animate-slide-up">
-          {/* Timer Bar */}
+          
           <div className="timer-wrapper">
             <div
               className={`timer-bar ${timeLeft / MAX_TIME > 0.7 ? 'pts-3-bar' :
@@ -1098,12 +1098,12 @@ export default function TarikTambangGameScreen({ config, onBack }) {
                 transition: 'width 1s linear'
               }}
             />
-            {/* Zone Dividers */}
+            
             <div className="timer-divider div-50" />
             <div className="timer-divider div-70" />
           </div>
 
-          {/* Speed Points Indicator Legend */}
+          
           <div className="timer-points-legend">
             <span className={`legend-segment pts-1 ${timeLeft / MAX_TIME <= 0.5 ? 'active' : ''}`}>
               1+
@@ -1116,7 +1116,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             </span>
           </div>
 
-          {/* Question */}
+          
           <div className="question-box">
             <h2>{currentQ.text}</h2>
             {activeItem && (
@@ -1136,7 +1136,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             )}
           </div>
 
-          {/* Action Mode Selector (Always visible, disabled once answered) */}
+          
           <div className="action-mode-selector">
             <button
               className={`action-mode-btn attack ${playerActionMode === 'attack' ? 'active' : ''}`}
@@ -1154,7 +1154,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             </button>
           </div>
 
-          {/* Answer Options */}
+          
           <div className="options-grid">
             {currentQ.options.map((opt, idx) => {
               const isEliminated = eliminatedIndices.includes(idx);
@@ -1185,7 +1185,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             })}
           </div>
 
-          {/* Continuous Bantuan Items Area below Answer Options */}
+          
           {config.equippedItems && config.equippedItems.length > 0 && (
             <div className="items-bar-bottom">
               <div className="items-bar-title">Gunakan Bantuan Kartu (Sekali Pakai):</div>
@@ -1229,7 +1229,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
         </div>
       )}
 
-      {/* Category Intro Announcement Overlay */}
+      
       {phase === 'category_intro' && questions[qIndex] && (
         <div className="category-intro-overlay">
           <div className="category-card animate-pop">
@@ -1240,7 +1240,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
         </div>
       )}
 
-      {/* Countdown overlay */}
+      
       {phase === 'countdown' && (
         <div className="intro-overlay">
           <div className="intro-badge">SIAP?</div>
@@ -1248,13 +1248,13 @@ export default function TarikTambangGameScreen({ config, onBack }) {
         </div>
       )}
 
-      {/* Game Over */}
+      
       {phase === 'gameover' && (
         <div className="gameover-overlay">
 
 
           <div className="gameover-card animate-pop">
-            {/* Header banner with badge */}
+            
             <div className="go-header-accent" style={{ background: winner === 'player' ? 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)' : winner === 'bot' ? 'linear-gradient(135deg, #FF6B6B 0%, #E60000 100%)' : 'linear-gradient(135deg, #9CA3AF 0%, #4B5563 100%)' }}>
               <div className="go-trophy-circle">
                 {winner === 'player' ? <Trophy size={32} color="#FFA500" fill="#FFD700" /> : <AlertCircle size={32} color="#E60000" />}
@@ -1264,7 +1264,7 @@ export default function TarikTambangGameScreen({ config, onBack }) {
             <div className="go-body">
               <h2>{winner === 'player' ? 'KAMU MENANG!' : winner === 'bot' ? 'KAMU KALAH!' : 'PERTANDINGAN SERI'}</h2>
               
-              {/* Winner showcase profile */}
+              
               <div className="winner-showcase">
                 <div className={`winner-avatar-ring ${winner === 'player' ? 'gold' : winner === 'bot' ? 'red' : 'gray'}`}>
                   <div className="avatar-crop">

@@ -13,13 +13,13 @@ export default function LightIntroAnimation({ onComplete }) {
     setIsOn(!isOn);
   };
 
-  // Generate some photons
+  
   const photons = Array.from({ length: 8 });
 
   return (
     <div className={`light-animation-container ${isOn ? 'on' : 'off'}`}>
       
-      {/* Click Indicator */}
+      
       {!isOn && (
         <motion.div 
           className="click-indicator"
@@ -30,7 +30,7 @@ export default function LightIntroAnimation({ onComplete }) {
         </motion.div>
       )}
 
-      {/* 1. Flashlight */}
+      
       <motion.div 
         className="flashlight-wrapper" 
         onClick={toggleLight}
@@ -49,7 +49,7 @@ export default function LightIntroAnimation({ onComplete }) {
         </div>
       </motion.div>
 
-      {/* 2. Light Beam & Photons */}
+      
       <AnimatePresence>
         {isOn && (
           <motion.div
@@ -61,7 +61,7 @@ export default function LightIntroAnimation({ onComplete }) {
           >
             <div className="light-beam" />
             
-            {/* Photons */}
+            
             <div className="photons-container">
               {photons.map((_, i) => (
                 <motion.div
@@ -86,7 +86,7 @@ export default function LightIntroAnimation({ onComplete }) {
         )}
       </AnimatePresence>
 
-      {/* 3. The Object */}
+      
       <motion.div 
         className="receiver-object"
         animate={{ filter: isOn ? 'brightness(1)' : 'brightness(0.1)' }}

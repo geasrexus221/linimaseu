@@ -6,21 +6,21 @@ import { availableSubjects, availableClasses, quizBanks } from '../../jelajah-nu
 export default function LayanganLobbyScreen({ onStart }) {
   const { setGameSubView } = useNavigationStore();
   const [showHelp, setShowHelp] = useState(false);
-  const [selectedMode, setSelectedMode] = useState('solo'); // 'solo', 'vs_bot'
+  const [selectedMode, setSelectedMode] = useState('solo'); 
   const [selectedSubject, setSelectedSubject] = useState('ipas'); 
   const [selectedClass, setSelectedClass] = useState('kelas_4_5'); 
 
-  // Compute final theme ID (e.g. 'ipas_kelas_4_5' or 'sejarah_umum')
-  // We match it against the existing quizBanks keys
+  
+  
   let computedThemeId = `${selectedSubject}_${selectedClass}`;
   if (!quizBanks[computedThemeId]) {
-    // Fallback logic if the specific combination doesn't exist
+    
     computedThemeId = selectedSubject === 'sejarah' ? 'sejarah_umum' : 'ipas_4_5';
   }
 
   return (
     <div className="layangan-intro-container">
-      {/* Sky Background */}
+      
       <div className="sky-gradient" />
       <div className="floating-clouds">
         <div className="cloud c1">☁️</div>
@@ -29,7 +29,7 @@ export default function LayanganLobbyScreen({ onStart }) {
         <div className="cloud c4">☁️</div>
       </div>
 
-      {/* Header Area */}
+      
       <header className="intro-header">
         <button className="back-btn-3d" onClick={() => setGameSubView('arcade')}>
           <ChevronLeft size={24} />
@@ -45,7 +45,7 @@ export default function LayanganLobbyScreen({ onStart }) {
       </header>
 
       <div className="intro-main-scrollable">
-        {/* Title Section */}
+        
         <div className="title-section-pop">
           <div className="game-category-tag">KETANGKASAN & FOKUS</div>
           <h1 className="game-main-title">
@@ -55,7 +55,7 @@ export default function LayanganLobbyScreen({ onStart }) {
           <div className="title-underline" />
         </div>
 
-        {/* Hero Visual Section */}
+        
         <div className="adventure-hero-box">
           <div className="hero-sky-platform">
             <div className="kite-container">
@@ -68,7 +68,7 @@ export default function LayanganLobbyScreen({ onStart }) {
             </div>
           </div>
           
-          {/* Game Description */}
+          
           <div className="game-description-box">
             <p>
               "Terbang setinggi mungkin melewati rintangan! Jawab kuis di setiap pos untuk mendapatkan hembusan angin ekstra!"
@@ -76,7 +76,7 @@ export default function LayanganLobbyScreen({ onStart }) {
           </div>
         </div>
 
-        {/* Main Actions */}
+        
         <div className="primary-actions-stack">
           
           <div className="mode-selector-box">
@@ -146,7 +146,7 @@ export default function LayanganLobbyScreen({ onStart }) {
         </div>
       </div>
 
-      {/* Help Modal */}
+      
       {showHelp && (
         <div className="modal-overlay">
           <div className="modal-card">

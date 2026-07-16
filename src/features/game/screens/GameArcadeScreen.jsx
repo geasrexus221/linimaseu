@@ -25,7 +25,7 @@ export default function GameArcadeScreen() {
     setInvitedPlayer(player);
   };
 
-  // Register Desktop Stats Panel for this screen
+  
   useRegisterRightPanel(DesktopStatsPanel, 'game-arcade');
 
   const GAMES = [
@@ -120,7 +120,7 @@ export default function GameArcadeScreen() {
 
   return (
     <div className="game-arcade-wrapper">
-      {/* Arcade Gaming Background */}
+      
       <div className="arcade-bg">
         <div className="grid-overlay"></div>
         <div className="glow-orb purple"></div>
@@ -284,7 +284,7 @@ export default function GameArcadeScreen() {
         </div>
       )}
 
-      {/* Modals */}
+      
       {showOnlineModal && (
         <OnlinePlayersModal 
           onClose={() => setShowOnlineModal(false)} 

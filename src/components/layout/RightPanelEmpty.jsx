@@ -1,10 +1,7 @@
 import React from 'react';
 import { PanelRight } from 'lucide-react';
 
-/**
- * Shown in the right sidebar when no screen has registered a panel.
- * This is a clean, minimal state — not an error.
- */
+
 export default function RightPanelEmpty() {
   return (
     <div className="right-panel-empty">

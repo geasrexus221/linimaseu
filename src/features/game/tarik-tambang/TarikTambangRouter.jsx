@@ -4,7 +4,7 @@ import TarikTambangGameScreen from './screens/TarikTambangGameScreen';
 import { useNavigationStore } from '../../../store/useNavigationStore';
 
 export default function TarikTambangRouter() {
-  const [subView, setSubView] = useState('setup'); // 'setup', 'play'
+  const [subView, setSubView] = useState('setup'); 
   const [gameConfig, setGameConfig] = useState(null);
   const { setGameSubView, setTarikTambangPlay } = useNavigationStore();
   

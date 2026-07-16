@@ -4,17 +4,13 @@ const CUSTOM_MAPS_KEY = 'nusantara_custom_maps';
 const TEST_MAP_KEY = 'nusantara_test_map';
 
 export const mapManager = {
-  /**
-   * Mengambil semua peta yang tersedia (Resmi + Buatan User)
-   */
+  
   getAllMaps: () => {
     const customMaps = mapManager.getCustomMaps();
     return [...OFFICIAL_MAPS, ...customMaps];
   },
 
-  /**
-   * Mengambil peta buatan user dari LocalStorage
-   */
+  
   getCustomMaps: () => {
     try {
       const saved = localStorage.getItem(CUSTOM_MAPS_KEY);
@@ -32,9 +28,7 @@ export const mapManager = {
     }
   },
 
-  /**
-   * Menyimpan peta baru ke LocalStorage
-   */
+  
   saveCustomMap: (name, boardData) => {
     try {
       const customMaps = mapManager.getCustomMaps();
@@ -56,9 +50,7 @@ export const mapManager = {
     }
   },
 
-  /**
-   * Menyimpan peta sementara untuk mode Test 3D dari Board Maker
-   */
+  
   saveTestMap: (boardData) => {
     try {
       localStorage.setItem(TEST_MAP_KEY, JSON.stringify(boardData));
@@ -69,9 +61,7 @@ export const mapManager = {
     }
   },
 
-  /**
-   * Mengambil peta sementara untuk mode Test 3D
-   */
+  
   getTestMap: () => {
     try {
       const saved = localStorage.getItem(TEST_MAP_KEY);
@@ -83,9 +73,7 @@ export const mapManager = {
     }
   },
 
-  /**
-   * Menghapus peta kustom
-   */
+  
   deleteCustomMap: (id) => {
     try {
       const customMaps = mapManager.getCustomMaps();

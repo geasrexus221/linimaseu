@@ -12,7 +12,7 @@ export default function DiceTestScreen() {
   const rollDice = () => {
     if (isRolling) return;
     
-    // Angka acak 1-6
+    
     const newValue = Math.floor(Math.random() * 6) + 1;
     setDiceValue(newValue);
     setIsRolling(true);
@@ -20,7 +20,7 @@ export default function DiceTestScreen() {
 
   const handleRollComplete = () => {
     setIsRolling(false);
-    setHistory(prev => [diceValue, ...prev].slice(0, 5)); // Simpan 5 histori terakhir
+    setHistory(prev => [diceValue, ...prev].slice(0, 5)); 
   };
 
   return (

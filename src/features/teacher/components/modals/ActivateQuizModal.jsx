@@ -8,7 +8,7 @@ export default function ActivateQuizModal({
   onConfirm,
   quizTitle
 }) {
-  const [selectedDuration, setSelectedDuration] = useState(60); // Default 60 minutes
+  const [selectedDuration, setSelectedDuration] = useState(60); 
   const [isCustom, setIsCustom] = useState(false);
   const [customValue, setCustomValue] = useState(30);
 

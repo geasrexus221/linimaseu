@@ -1,7 +1,4 @@
-/**
- * Database Kartu Aksi Jelajah Nusantara
- * Anda bisa menambah kartu baru di sini dengan mudah.
- */
+
 export const actionCards = [
   {
     id: 'bekal_tekad',

@@ -14,7 +14,7 @@ export default function Header() {
       const now = Date.now();
       const thirtyMinutes = 30 * 60 * 1000;
 
-      // Obor Timer
+      
       if (streak >= maxStreak) {
         setTimeLeft('');
       } else {
@@ -25,7 +25,7 @@ export default function Header() {
         setTimeLeft(`${mins}:${secs < 10 ? '0' : ''}${secs}`);
       }
 
-      // Heart Timer
+      
       if (hearts >= maxHearts) {
         setHeartTimeLeft('');
       } else {
@@ -42,7 +42,7 @@ export default function Header() {
     return () => clearInterval(timer);
   }, [streak, maxStreak, lastRegenTime, hearts, maxHearts, lastHeartRegenTime]);
 
-  // Calculate dynamic rank
+  
   const baseClassmates = MOCK_CLASSROOMS['KELAS1'].students;
   const allInClass = [
     ...baseClassmates,

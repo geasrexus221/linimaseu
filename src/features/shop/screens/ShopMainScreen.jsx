@@ -20,7 +20,7 @@ export default function ShopMainScreen() {
   const { stars, setStars, addCosmetic, ownedCosmetics, addHearts, setStreak } = useStore();
   const { setShopSubView, setShopGachaCount, shopCategory, setShopCategory } = useNavigationStore();
 
-  // Register Desktop Stats Panel for this screen
+  
   useRegisterRightPanel(DesktopStatsPanel, 'shop-main');
 
   const SUB_CATEGORIES = [
@@ -80,7 +80,7 @@ export default function ShopMainScreen() {
 
   return (
     <div className="shop-main-container">
-      {/* Stripe Awning (Tenda Toko) */}
+      
       <div className="shop-awning">
         {Array.from({ length: 12 }).map((_, idx) => (
           <div key={`stripe-${idx}`} className="awning-stripe" />
@@ -92,12 +92,12 @@ export default function ShopMainScreen() {
         </div>
       </div>
 
-      {/* Cloud Decoration */}
+      
       <div className="sky-cloud cloud-1">☁️</div>
       <div className="sky-cloud cloud-2">☁️</div>
       <div className="sky-cloud cloud-3">☁️</div>
 
-      {/* Dynamic Panggung (Stage) */}
+      
       <div className="shop-stage">
         <div className="stage-light" />
         <div className="stage-platform">
@@ -145,7 +145,7 @@ export default function ShopMainScreen() {
         {shopCategory === 'cosmetic' && (
           <>
 
-            {/* SUB-CATEGORY PILLS */}
+            
             <div className="sub-category-bar">
               {SUB_CATEGORIES.map(sub => (
                 <button
@@ -232,7 +232,7 @@ export default function ShopMainScreen() {
         )}
       </div>
 
-      {/* GACHA CATALOG MODAL */}
+      
       {showCatalog && (
         <div className="gacha-catalog-overlay" onClick={() => setShowCatalog(false)}>
           <div className="gacha-catalog-modal" onClick={e => e.stopPropagation()}>
@@ -263,7 +263,7 @@ export default function ShopMainScreen() {
         </div>
       )}
 
-      {/* WARNING TOAST */}
+      
       <div className={`warning-toast-container ${showWarning ? 'active' : ''}`}>
         <div className="warning-toast-mini">
           <div className="w-mini-icon">⚠️</div>
@@ -271,7 +271,7 @@ export default function ShopMainScreen() {
         </div>
       </div>
 
-      {/* CONFIRMATION MODAL */}
+      
       <AnimatePresence>
         {confirmItem && (
           <div className="confirm-modal-overlay">

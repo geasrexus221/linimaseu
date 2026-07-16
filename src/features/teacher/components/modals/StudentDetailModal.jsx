@@ -28,7 +28,7 @@ export default function StudentDetailModal({
     }));
   };
 
-  // States for adding and editing academic records inline
+  
   const [editingAcademicIndex, setEditingAcademicIndex] = useState(null);
   const [editSubjectName, setEditSubjectName] = useState('');
   const [editSubjectScore, setEditSubjectScore] = useState('');
@@ -43,7 +43,7 @@ export default function StudentDetailModal({
   const [newSubjectDateShared, setNewSubjectDateShared] = useState('');
   const [newSubjectDateCompleted, setNewSubjectDateCompleted] = useState('');
 
-  // Sync edits when selected student changes
+  
   useEffect(() => {
     if (selectedStudent) {
       setEditStudentName(selectedStudent.name || '');
@@ -55,13 +55,13 @@ export default function StudentDetailModal({
 
   const record = getStudentRecord(selectedStudent.id, selectedStudent.score);
 
-  // 1. STATISTIK UTAMA (Bagian Atas)
+  
   const maxQuizzes = 50;
   const correctQuizzes = Math.min(maxQuizzes, Math.round((selectedStudent.score / 1550) * 45));
   const accuracy = Math.min(100, Math.round((selectedStudent.score / 1550) * 40 + 55));
   const lastQuizTime = `${Math.max(1, 12 - Math.round(selectedStudent.score / 200))} jam yang lalu`;
 
-  // 2. TABEL ABSENSI MANDIRI GURU (Bagian Tengah)
+  
   const weeks = ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4', 'Minggu 5'];
   const attendanceCounts = weeks.reduce((acc, w) => {
     const status = record.attendance[w] || 'Hadir';
@@ -111,9 +111,9 @@ export default function StudentDetailModal({
 
         <div className="modal-body-section modal-body-grid" style={{ flex: 1, overflowY: 'auto', paddingRight: '8px', marginBottom: '12px' }}>
           
-          {/* COLUMN LEFT */}
+          
           <div className="modal-column-left">
-            {/* STATISTIK UTAMA (COLLAPSIBLE) */}
+            
             <div style={{ margin: '10px 0' }}>
               <div 
                 onClick={() => toggleSection('stats')}
@@ -154,7 +154,7 @@ export default function StudentDetailModal({
 
             <div className="divider-line"></div>
 
-            {/* RINGKASAN GURU / TUGAS MURID */}
+            
             <div style={{ margin: '15px 0' }}>
               <div 
                 onClick={() => toggleSection('tasks')}
@@ -177,7 +177,7 @@ export default function StudentDetailModal({
 
               {openSections.tasks && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', padding: '10px 5px' }}>
-                  {/* Sub-Section 1: Tugas Manual */}
+                  
                   <div>
                     <h4 style={{ margin: '0 0 8px', fontSize: '0.95rem', fontWeight: '800', color: 'var(--text-muted)' }}>Tugas Manual (Input Guru)</h4>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -406,7 +406,7 @@ export default function StudentDetailModal({
                     </div>
                   </div>
 
-                  {/* Sub-Section 2: Tugas Otomatis */}
+                  
                   <div style={{ marginTop: '10px' }}>
                     <h4 style={{ margin: '0 0 8px', fontSize: '0.95rem', fontWeight: '800', color: 'var(--text-muted)' }}>Tugas Otomatis (Aktivitas Sistem)</h4>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -441,9 +441,9 @@ export default function StudentDetailModal({
             </div>
           </div>
 
-          {/* COLUMN RIGHT */}
+          
           <div className="modal-column-right">
-            {/* TABEL ABSENSI INTERAKTIF */}
+            
             <div style={{ margin: '10px 0' }}>
               <div 
                 onClick={() => toggleSection('attendance')}
@@ -542,7 +542,7 @@ export default function StudentDetailModal({
 
             <div className="divider-line"></div>
 
-            {/* CATATAN JURNAL GURU */}
+            
             <div style={{ margin: '15px 0' }}>
               <div 
                 onClick={() => toggleSection('journal')}
@@ -588,7 +588,7 @@ export default function StudentDetailModal({
 
             <div className="divider-line"></div>
 
-            {/* REFERENSI LOG KUIS (ACCORDION) */}
+            
             <div style={{ margin: '15px 0' }}>
               <div 
                 onClick={() => toggleSection('quizLog')}

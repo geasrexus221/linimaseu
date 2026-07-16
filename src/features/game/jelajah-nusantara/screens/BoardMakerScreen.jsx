@@ -5,7 +5,7 @@ import { useMakerStore } from '../../../../store/useMakerStore';
 import { useRegisterRightPanel } from '../../../../hooks/useRegisterRightPanel';
 import BoardMakerSidebarPanel from '../../../../components/layout/BoardMakerSidebarPanel';
 
-// ── Tile Config (warna harus sama dengan Tile3D.jsx) ──────────────────
+
 const TILE_TYPES = {
   base:    { name: 'Markas',          color: '#FFFFFF', border: '#F59E0B', textColor: '#92400E' },
   jejak:   { name: 'Jejak Masa Lalu', color: '#3B82F6', border: '#1D4ED8', textColor: '#fff'    },
@@ -21,13 +21,13 @@ const TILE_TYPES = {
   biasa:   { name: 'Petak Biasa',     color: '#4B5563', border: '#1F2937', textColor: '#fff'    },
 };
 
-const CELL_SIZE  = 64;  // Slightly larger for better PC editing
+const CELL_SIZE  = 64;  
 const GRID_COLS  = 20;
 const GRID_ROWS  = 15;
 const CANVAS_W   = GRID_COLS * CELL_SIZE;
 const CANVAS_H   = GRID_ROWS * CELL_SIZE;
 
-// ── Arrow helpers ──────────────────────────────────────────────────────
+
 function arrowHead(sx, sy, ex, ey, size = 9) {
   const angle = Math.atan2(ey - sy, ex - sx);
   const a1 = angle - Math.PI / 6;
@@ -49,7 +49,7 @@ export default function BoardMakerScreen() {
     tool, activeTileType, zoom, setZoom
   } = useMakerStore();
 
-  // Register 'Editor Peta' in the right sidebar while in map maker mode
+  
   useRegisterRightPanel(BoardMakerSidebarPanel, 'board-maker');
 
   const [connectFrom, setConnectFrom] = useState(null);
@@ -57,7 +57,7 @@ export default function BoardMakerScreen() {
   const viewportRef = useRef(null);
   const touchState = useRef({ initialDist: 0, initialZoom: 1, isPinching: false });
 
-  // Pinch to Zoom Logic
+  
   useEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport) return;
@@ -85,12 +85,12 @@ export default function BoardMakerScreen() {
     };
   }, [zoom, setZoom]);
 
-  // Reset maker on unmount
+  
   useEffect(() => {
     return () => {
-      // Optional: useMakerStore.getState().resetMaker(); 
-      // User might want to keep it while switching views, 
-      // but let's keep it safe.
+      
+      
+      
     };
   }, []);
 
@@ -138,7 +138,7 @@ export default function BoardMakerScreen() {
   const startPos = useRef({ x: 0, y: 0, left: 0, top: 0 });
   const [isSpacePressed, setIsSpacePressed] = useState(false);
 
-  // Keyboard listener for Space (Panning)
+  
   useEffect(() => {
     const handleKeyDown = (e) => { if (e.code === 'Space') setIsSpacePressed(true); };
     const handleKeyUp = (e) => { if (e.code === 'Space') setIsSpacePressed(false); };
@@ -151,12 +151,12 @@ export default function BoardMakerScreen() {
   }, []);
 
   const handleMouseDown = (e) => {
-    // Panning is allowed for:
-    // 1. Middle mouse click (button 1)
-    // 2. Right mouse click (button 2)
-    // 3. Left mouse click (button 0) with Space pressed
-    // 4. Left mouse click (button 0) directly on empty background (viewport / centering / svg)
-    // 5. Left mouse click (button 0) anywhere if the current tool is 'pan'
+    
+    
+    
+    
+    
+    
     const isBackground = e.target.classList.contains('canvas-viewport') || 
                          e.target.classList.contains('canvas-centering') || 
                          e.target.tagName === 'svg';
@@ -216,7 +216,7 @@ export default function BoardMakerScreen() {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          onContextMenu={(e) => e.preventDefault()} // Block context menu for right-click drag
+          onContextMenu={(e) => e.preventDefault()} 
           style={{ cursor: (isSpacePressed || tool === 'pan') ? 'grab' : 'auto' }}
         >
           <div className="canvas-centering">
@@ -229,11 +229,11 @@ export default function BoardMakerScreen() {
               }}
             >
               <svg className="canvas-svg-layer">
-                {/* Guide lines */}
+                
                 <line x1={CANVAS_W/2} y1={0} x2={CANVAS_W/2} y2={CANVAS_H} stroke="rgba(59,130,246,0.15)" strokeDasharray="5 5" />
                 <line x1={0} y1={CANVAS_H/2} x2={CANVAS_W} y2={CANVAS_H/2} stroke="rgba(59,130,246,0.15)" strokeDasharray="5 5" />
 
-                {/* Grid cells */}
+                
                 {Array.from({ length: GRID_ROWS }).map((_, r) => 
                   Array.from({ length: GRID_COLS }).map((_, c) => (
                     <rect 
@@ -247,7 +247,7 @@ export default function BoardMakerScreen() {
                   ))
                 ).flat()}
 
-                {/* Connections */}
+                
                 {tiles.map(t => (t.next || []).map(nextId => {
                   const target = tiles.find(tt => tt.id === nextId);
                   if (!target) return null;
@@ -267,7 +267,7 @@ export default function BoardMakerScreen() {
                 })).flat()}
               </svg>
 
-              {/* Tiles */}
+              
               {tiles.map(tile => {
                 const cfg = TILE_TYPES[tile.type] || TILE_TYPES.biasa;
                 const isConnecting = connectFrom === tile.id;
@@ -291,9 +291,9 @@ export default function BoardMakerScreen() {
           </div>
         </div>
         
-        {/* Floating Controls */}
+        
         <div className="canvas-floating-controls">
-          {/* Panning Nudge Buttons */}
+          
           <div className="pan-controls-floating">
             <button onClick={() => setPan(p => ({ ...p, y: p.y + 100 }))} className="pan-arrow-btn" title="Geser ke Atas"><ChevronUp size={16} /></button>
             <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>

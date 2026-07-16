@@ -15,7 +15,7 @@ export default function QuizList({
   onDeactivateQuiz,
   onOpenProjector
 }) {
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'table'
+  const [viewMode, setViewMode] = useState('grid'); 
 
   const getRemainingTimeStr = (activeUntil) => {
     const remainingMs = activeUntil - Date.now();
@@ -39,7 +39,7 @@ export default function QuizList({
 
   return (
     <div className="quiz-selection-wrapper">
-      {/* DESKTOP VIEW */}
+      
       <div className="card-box desktop-only">
         <div className="card-box-header flex-between" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
           <div>
@@ -294,7 +294,7 @@ export default function QuizList({
           )}
       </div>
 
-      {/* MOBILE VIEW */}
+      
       <div className="quiz-selection-mobile mobile-only" style={{ paddingBottom: '20px' }}>
         <div style={{ marginBottom: '20px' }}>
           <h2 style={{ fontSize: '1.2rem', margin: '0 0 4px 0', color: 'var(--text-color)' }}>Bank Soal</h2>

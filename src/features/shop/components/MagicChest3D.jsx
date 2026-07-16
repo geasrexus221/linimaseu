@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function MagicChest3D({ isVibrating, isOpen, rarity = 'common' }) {
-  // Rarity colors for the glow and accents
+  
   const colors = {
     common: '#AFAFAF',
     rare: '#1CB0F6',
@@ -12,7 +12,7 @@ export default function MagicChest3D({ isVibrating, isOpen, rarity = 'common' })
   return (
     <div className={`magic-chest-3d-wrapper ${isVibrating ? 'vibrating' : ''} ${isOpen ? 'open' : ''}`}>
       
-      {/* Light rays that appear when opening */}
+      
       {isOpen && (
         <div className="chest-light-rays" style={{ '--glow': glowColor }}>
           <div className="ray r1" />
@@ -24,7 +24,7 @@ export default function MagicChest3D({ isVibrating, isOpen, rarity = 'common' })
       <div className="chest-scene">
         <div className="chest-pivot">
           
-          {/* Base of the chest */}
+          
           <div className="chest-base">
             <div className="c-face c-front">
               <div className="lock-base">
@@ -35,11 +35,11 @@ export default function MagicChest3D({ isVibrating, isOpen, rarity = 'common' })
             <div className="c-face c-left"></div>
             <div className="c-face c-right"></div>
             <div className="c-face c-bottom"></div>
-            {/* The glowing inside */}
+            
             <div className="c-face c-top-inside" style={{ '--glow': glowColor }}></div>
           </div>
 
-          {/* Lid of the chest */}
+          
           <div className="chest-lid">
             <div className="l-face l-front">
               <div className="lock-top"></div>

@@ -36,9 +36,9 @@ export default function BoardMakerSidebarPanel() {
 
   const [showCollection, setShowCollection] = useState(false);
   const [allMaps, setAllMaps] = useState([]);
-  const [botCount_, setBotCount_] = useState(botCount); // local mirror for test
+  const [botCount_, setBotCount_] = useState(botCount); 
 
-  // Status calculations
+  
   const baseCount = tiles.filter(t => t.type === 'base').length;
   const disconnected = tiles.filter(t => {
     const hasOutgoing = (t.next || []).length > 0;
@@ -111,7 +111,7 @@ export default function BoardMakerSidebarPanel() {
 
   return (
     <div className="maker-sidebar-panel">
-      {/* ── Header ─────────────────────────────────────────── */}
+      
       <div className="panel-header">
         <div className="header-icon"><MapIcon size={20} color="#3b82f6" /></div>
         <div className="header-text">
@@ -121,7 +121,7 @@ export default function BoardMakerSidebarPanel() {
       </div>
 
       <div className="panel-scroll-content">
-        {/* MAP NAME */}
+        
         <div className="editor-group">
           <label className="group-label">NAMA PETA</label>
           <input 
@@ -132,7 +132,7 @@ export default function BoardMakerSidebarPanel() {
           />
         </div>
 
-        {/* TOOLS */}
+        
         <div className="editor-group">
           <label className="group-label">TOOLS UTAMA</label>
           <div className="tools-stack">
@@ -154,7 +154,7 @@ export default function BoardMakerSidebarPanel() {
           </div>
         </div>
 
-        {/* PALETTE */}
+        
         <div className="editor-group">
           <label className="group-label">JENIS PETAK</label>
           <div className="palette-grid">
@@ -172,7 +172,7 @@ export default function BoardMakerSidebarPanel() {
           </div>
         </div>
 
-        {/* VALIDATION */}
+        
         <div className="editor-group status-box">
           <label className="group-label">VALIDASI</label>
           <div className="status-list">
@@ -187,7 +187,7 @@ export default function BoardMakerSidebarPanel() {
           </div>
         </div>
 
-        {/* TEST BOT COUNT */}
+        
         <div className="editor-group">
           <label className="group-label">BOT UNTUK TEST</label>
           <div className="bot-selector">
@@ -204,19 +204,19 @@ export default function BoardMakerSidebarPanel() {
         </div>
       </div>
 
-      {/* ── Footer Actions ──────────────────────────────────── */}
+      
       <div className="panel-footer-actions">
-        {/* Preview (most important) */}
+        
         <button className="primary-action-btn preview" onClick={handlePreview}>
           <Eye size={17} /> <span>Preview Papan Ini</span>
         </button>
 
-        {/* Collection */}
+        
         <button className="primary-action-btn collection" onClick={openCollection}>
           <FolderOpen size={17} /> <span>Koleksi Peta Saya</span>
         </button>
 
-        {/* Secondary actions */}
+        
         <div className="action-grid">
           <button className="action-btn-mini" onClick={handleSave} title="Simpan">
             <Save size={15} /><span>Simpan</span>
@@ -233,7 +233,7 @@ export default function BoardMakerSidebarPanel() {
         </div>
       </div>
 
-      {/* ── Collection Modal ────────────────────────────────── */}
+      
       {showCollection && (
         <div className="collection-overlay" onClick={(e) => e.target === e.currentTarget && setShowCollection(false)}>
           <div className="collection-modal">

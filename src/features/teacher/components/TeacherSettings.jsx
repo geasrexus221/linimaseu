@@ -18,13 +18,13 @@ export default function TeacherSettings({
       exit={{ opacity: 0, y: -15 }}
       className="settings-view"
     >
-      {/* DESKTOP VIEW */}
+      
       <div className="card-box desktop-only">
         <h2>Pengaturan Ruang Guru</h2>
         <p>Sesuaikan konfigurasi kelas, batas waktu pengerjaan kuis, dan preferensi dashboard.</p>
         
         <div className="settings-list">
-          {/* KARTU PROFIL GURU */}
+          
           <div className="settings-section-title">PROFIL SAYA</div>
           <div style={{ background: 'var(--primary-bg-light)', borderRadius: '16px', padding: '20px', border: '2px solid #3B82F6', display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '24px' }}>
             <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: '#3B82F6', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '2rem', fontWeight: '900', flexShrink: 0 }}>
@@ -39,7 +39,7 @@ export default function TeacherSettings({
             </button>
           </div>
 
-          {/* Tampilan Tema */}
+          
           <div className="settings-section-title">TAMPILAN & TEMA GLOBAL</div>
           <div className="theme-toggle-container">
             <div 
@@ -58,7 +58,7 @@ export default function TeacherSettings({
             </div>
           </div>
 
-          {/* MOCKUP KATEGORI BARU */}
+          
           <div className="settings-section-title">PREFERENSI NOTIFIKASI</div>
           <div className="settings-row" style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px' }}>
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
@@ -138,14 +138,14 @@ export default function TeacherSettings({
       </div>
 
 
-      {/* MOBILE VIEW (Android Native Settings) */}
+      
       <div className="mobile-settings-container mobile-only" style={{ paddingBottom: '30px' }}>
         <div style={{ marginBottom: '24px' }}>
           <h2 style={{ fontSize: '1.4rem', margin: '0 0 4px 0', color: 'var(--text-color)', fontWeight: '900' }}>Setelan</h2>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0 }}>Kelola konfigurasi ruang kelas Anda.</p>
         </div>
 
-        {/* KARTU PROFIL GURU */}
+        
         <div style={{ background: 'var(--card-bg)', borderRadius: '20px', padding: '20px', border: '2px solid var(--border-color)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', marginBottom: '24px', position: 'relative', boxShadow: '0 4px 0 var(--border-color)' }}>
           <div style={{ width: '70px', height: '70px', borderRadius: '50%', background: '#3B82F6', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1.8rem', fontWeight: '900' }}>
             BD
@@ -159,7 +159,7 @@ export default function TeacherSettings({
           </button>
         </div>
 
-        {/* Tema Global */}
+        
         <h3 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', paddingLeft: '8px' }}>Tampilan</h3>
         <div style={{ background: 'var(--card-bg)', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-color)', marginBottom: '24px' }}>
           <div onClick={() => setTheme('light')} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', borderBottom: '1px solid var(--border-color)', cursor: 'pointer', background: theme === 'light' ? 'var(--primary-bg-light)' : 'transparent' }}>
@@ -182,7 +182,7 @@ export default function TeacherSettings({
           </div>
         </div>
 
-        {/* MOCKUP KATEGORI BARU MOBILE */}
+        
         <h3 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', paddingLeft: '8px' }}>Lainnya</h3>
         <div style={{ background: 'var(--card-bg)', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-color)', marginBottom: '24px' }}>
           
@@ -221,7 +221,7 @@ export default function TeacherSettings({
         </div>
 
 
-        {/* Developer Mode */}
+        
         {isDevMode && (
           <>
             <h3 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', paddingLeft: '8px' }}>Developer Mode</h3>
@@ -241,7 +241,7 @@ export default function TeacherSettings({
           </>
         )}
 
-        {/* Akun & Logout */}
+        
         <h3 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', paddingLeft: '8px' }}>Akun</h3>
         <button 
           onClick={onLogout}

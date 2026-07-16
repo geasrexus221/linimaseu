@@ -4,14 +4,11 @@ import { useStore } from '../../store/useStore';
 import { Dices, ScrollText, Briefcase, Star, User, History, Zap } from 'lucide-react';
 import Dice3D from '../common/Dice3D';
 
-/**
- * JelajahGameplayPanel: The unified sidebar for Jelajah Nusantara gameplay.
- * Consolidates status, logs, and inventory into a single right-panel view.
- */
+
 export default function JelajahGameplayPanel() {
   const [activeTab, setActiveTab] = useState('status');
   
-  // PERFORMANCE: Use selective picking to prevent unnecessary re-renders
+  
   const players = useGameStore(state => state.players);
   const turnIdx = useGameStore(state => state.turnIdx);
   const phase = useGameStore(state => state.phase);
@@ -30,7 +27,7 @@ export default function JelajahGameplayPanel() {
 
   const nextCost = currentPlayer?.artifacts === 0 ? 200 : currentPlayer?.artifacts === 1 ? 400 : 600;
 
-  // Helper to render avatar correctly (image vs emoji)
+  
   const renderAvatar = (avatar, color) => {
     const isUrl = avatar?.startsWith('http') || avatar?.startsWith('/');
     return (
@@ -42,7 +39,7 @@ export default function JelajahGameplayPanel() {
 
   return (
     <div className="gameplay-sidebar-panel">
-      {/* Toast Notification Option 2 */}
+      
       {toastKoinCukup && (
         <div className="coin-toast-alert">
           <span className="toast-icon">🪙</span>
@@ -53,7 +50,7 @@ export default function JelajahGameplayPanel() {
         </div>
       )}
 
-      {/* Quick Stats Bar - ALWAYS VISIBLE */}
+      
       <div className="quick-stats-bar">
         <div className="qs-item tekad" title="Tekad (Daya Tahan)">
           <div className="qs-icon"><Zap size={14} fill="currentColor" /></div>
@@ -87,7 +84,7 @@ export default function JelajahGameplayPanel() {
         </div>
       </div>
 
-      {/* Tabs Navigation */}
+      
       <div className="panel-tabs">
         <button 
           className={`tab-btn ${activeTab === 'status' ? 'active' : ''}`}
@@ -115,7 +112,7 @@ export default function JelajahGameplayPanel() {
       <div className="panel-content-scroll">
         {activeTab === 'status' && (
           <div className="status-tab">
-            {/* Minimal Turn Indicator */}
+            
             <div className="turn-indicator-bar">
               <div className={`indicator-pill ${isMyTurn ? 'me' : 'other'}`}>
                 <div className="pulse-dot"></div>
@@ -129,7 +126,7 @@ export default function JelajahGameplayPanel() {
               </div>
             </div>
 
-            {/* Leaderboard / Opponents */}
+            
             <div className="opponents-section">
               <div className="section-label">PERINGKAT PEMAIN</div>
               <div className="opponents-list">

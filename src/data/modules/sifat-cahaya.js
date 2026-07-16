@@ -195,5 +195,5 @@ export const sifatCahayaPath = [
 
 export const getModulePathData = (moduleId) => {
   if (moduleId === 'cahaya') return sifatCahayaPath;
-  return []; // return empty array if no data
+  return []; 
 };

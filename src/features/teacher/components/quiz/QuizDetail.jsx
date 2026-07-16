@@ -42,7 +42,7 @@ export default function QuizDetail({
 
   return (
     <div>
-      {/* DESKTOP HEADER */}
+      
       <div className="desktop-only" style={{ marginBottom: '16px' }}>
         <button 
           className="back-to-classes-btn"
@@ -56,7 +56,7 @@ export default function QuizDetail({
         </button>
       </div>
 
-      {/* MOBILE HEADER (Action Bar Style) */}
+      
       <div className="mobile-action-bar mobile-only" style={{ display: 'flex', alignItems: 'center', gap: '16px', paddingBottom: '16px', borderBottom: '2px solid var(--border-color)', marginBottom: '16px' }}>
         <button 
           onClick={() => {
@@ -122,7 +122,7 @@ export default function QuizDetail({
           </span>
         </div>
 
-        {/* BATAS DURASI KUIS (Relocated from Settings) */}
+        
         <div style={{ marginTop: '16px', background: '#F0F9FF', border: '1px solid #BAE6FD', borderRadius: '12px', padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
             <h4 style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: '#0284C7' }}>Batas Durasi Kuis</h4>
@@ -157,7 +157,7 @@ export default function QuizDetail({
             )}
           </div>
 
-          {/* Add/Edit Question Inline Form */}
+          
           {showAddQuestionForm && (
             <div 
               style={{ 
@@ -183,7 +183,7 @@ export default function QuizDetail({
                   />
                 </div>
 
-                {/* 1. ANAGRAM FIELDS */}
+                
                 {newQuestionType === 'ANAGRAM' && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-muted)' }}>Kata Jawaban Kunci (Maks 15 huruf, satu kata tanpa spasi)</label>
@@ -202,7 +202,7 @@ export default function QuizDetail({
                   </div>
                 )}
 
-                {/* 2. MATCHING FIELDS */}
+                
                 {newQuestionType === 'MATCHING' && (
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -238,7 +238,7 @@ export default function QuizDetail({
                   </div>
                 )}
 
-                {/* 3. CATEGORIZATION FIELDS */}
+                
                 {newQuestionType === 'CATEGORIZATION' && (
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -267,7 +267,7 @@ export default function QuizDetail({
                   </div>
                 )}
 
-                {/* 4. CLASSIC & BLANKS FIELDS */}
+                
                 {(newQuestionType === 'CLASSIC' || newQuestionType === 'BLANKS' || newQuestionType === '3D_MAP' || newQuestionType === 'GUESS_ARTIFACT') && (
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -369,7 +369,7 @@ export default function QuizDetail({
                       }
 
                       if (editingQuestionId) {
-                        // Edit mode
+                        
                         setQuizCollections(prev => prev.map(c => {
                           if (c.id === selectedCollectionId) {
                             return {
@@ -392,7 +392,7 @@ export default function QuizDetail({
                         }));
                         setEditingQuestionId(null);
                       } else {
-                        // Add mode
+                        
                         const newQ = {
                           id: Date.now().toString(),
                           text: newQuestionText.trim(),
@@ -412,7 +412,7 @@ export default function QuizDetail({
                         }));
                       }
 
-                      // Reset question fields
+                      
                       setNewQuestionText('');
                       setNewQuestionOptionA('');
                       setNewQuestionOptionB('');
@@ -440,7 +440,7 @@ export default function QuizDetail({
           )}
         </div>
 
-        {/* Questions list */}
+        
         {!activeCol.questions || activeCol.questions.length === 0 ? (
           <div style={{ background: 'var(--card-bg)', padding: '30px', borderRadius: '20px', textAlign: 'center', border: '1px solid var(--border-color)', color: 'var(--text-muted)' }}>
             Belum ada pertanyaan kustom di dalam kuis ini.
@@ -527,7 +527,7 @@ export default function QuizDetail({
                         justifyContent: 'center'
                       }}
                     >
-                      {/* Play icon not imported, wait, let's just use text or assume it's omitted. Ah, Play is used but not imported in my snippet. I'll remove Play and just use text for testing, or import Play. I will import Play above. */}
+                      
                       <span>Test</span>
                     </button>
                   )}
@@ -565,7 +565,7 @@ export default function QuizDetail({
                 </div>
               </div>
 
-              {/* Soal Types Render */}
+              
               {q.questionType === 'ANAGRAM' && (
                 <div style={{ background: '#064E3B33', border: '1px solid #10B981', color: '#34D399', padding: '10px 14px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: '700' }}>
                   Kunci Jawaban Huruf: {q.options[0]}

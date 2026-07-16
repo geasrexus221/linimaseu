@@ -20,7 +20,7 @@ export default function ModuleInfoPanel() {
         <h2 style={{ margin: 0, color: 'var(--text-color)', fontWeight: 900, fontSize: '1.4rem' }}>Sifat Cahaya</h2>
       </div>
 
-      {/* Progress Section */}
+      
       <div style={{ background: 'var(--card-bg)', padding: '20px', borderRadius: '16px', border: '2px solid var(--border-color)', boxShadow: '0 8px 20px rgba(0,0,0,0.05)', marginBottom: '20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

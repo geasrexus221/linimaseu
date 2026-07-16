@@ -11,7 +11,7 @@ export default function PathSelectionOverlay() {
   const currentTile = mapData.tiles.find(t => t.id === currentPlayer.positionTileId);
   if (!currentTile || !currentTile.next) return null;
 
-  // Koordinat dasar board (sama dengan di BoardRenderer)
+  
   const minX = Math.min(...mapData.tiles.map(t => t.x));
   const minY = Math.min(...mapData.tiles.map(t => t.y));
 
@@ -27,7 +27,7 @@ export default function PathSelectionOverlay() {
         const dx = nextTile.x - currentTile.x;
         const dy = nextTile.y - currentTile.y;
         
-        // Hitung rotasi grid (Right=0, Down=90, Left=180, Up=-90)
+        
         const rotation = Math.atan2(dy, dx) * (180 / Math.PI);
 
         return (
@@ -46,7 +46,7 @@ export default function PathSelectionOverlay() {
           >
             <div className="arrow-flat-container">
               <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Thick black outline path rendered underneath */}
+                
                 <path 
                   d="M5 12H19M19 12L13 6M19 12L13 18" 
                   stroke="#000000" 
@@ -54,7 +54,7 @@ export default function PathSelectionOverlay() {
                   strokeLinecap="round" 
                   strokeLinejoin="round"
                 />
-                {/* Main white arrow path */}
+                
                 <path 
                   d="M5 12H19M19 12L13 6M19 12L13 18" 
                   stroke="#FFFFFF" 

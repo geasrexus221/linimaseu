@@ -39,7 +39,7 @@ export default function StudentAvatar({ size = 80, showGlow = false, overrideTra
 
   return (
     <div className={`avatar-container ${borderClass}`} style={{ '--avatar-size': `${size}px` }}>
-      {/* SHINY SPARKLES FOR BORDERS */}
+      
       {borderClass === 'border-gold' && (
         <div className="border-sparkles gold">
           <div className="s-icon s1">✨</div>

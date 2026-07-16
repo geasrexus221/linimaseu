@@ -1,10 +1,10 @@
 import { tarikTambangDuelThemes } from '../../tarik-tambang/data/tarikTambangDuelData';
 
-// Map ipasTheme categories to duelThemes and ipasDuelThemes dynamically
+
 const ipasTheme = tarikTambangDuelThemes.find(t => t.id === 'ipas') || { categories: [] };
 const ipasCategories = ipasTheme.categories || [];
 
-// Category 'Sejarah, Geografi, dan Kekayaan Alam' -> mapped to duelThemes (history)
+
 const sejarahCategory = ipasCategories.find(c => c.name.toLowerCase().includes('sejarah')) || { questions: [] };
 export const duelThemes = [
   {
@@ -16,7 +16,7 @@ export const duelThemes = [
   }
 ];
 
-// Other categories -> mapped to ipasDuelThemes
+
 const otherCategories = ipasCategories.filter(c => !c.name.toLowerCase().includes('sejarah'));
 export const ipasDuelThemes = otherCategories.map((cat, idx) => ({
   id: `ipas_cat_${idx}`,

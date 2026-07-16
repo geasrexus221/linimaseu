@@ -36,12 +36,12 @@ export default function SetupScreen() {
   const [warningMessage, setWarningMessage] = useState('');
   const [isOnlineLoading, setIsOnlineLoading] = useState(false);
 
-  // Initial Players State (Slot 0 starts empty to prompt selection)
+  
   const [players, setPlayers] = useState([
-    null, // Slot 1 (Kamu / Utama)
-    null, // Slot 2
-    null, // Slot 3
-    null  // Slot 4
+    null, 
+    null, 
+    null, 
+    null  
   ]);
 
   const [activeArtifactSlot, setActiveArtifactSlot] = useState(null);
@@ -49,7 +49,7 @@ export default function SetupScreen() {
   const [availableMaps, setAvailableMaps] = useState([]);
 
   useEffect(() => {
-    // Load maps from manager (includes official and local custom maps)
+    
     setAvailableMaps(mapManager.getAllMaps());
   }, []);
 
@@ -57,13 +57,13 @@ export default function SetupScreen() {
     soundManager.play('click', 0.5);
     setActiveSlotIdx(idx);
     if (idx === 0) {
-      // Direct character customization for slot 0 (main player)
+      
       setEditName(userName || 'Kamu');
       setEditCharId(1);
       setEditArtifacts([null, null, null]);
       setShowEditModal(true);
     } else {
-      // Open add options modal for slots 1, 2, 3
+      
       setShowPlayerModal(true);
     }
   };
@@ -89,7 +89,7 @@ export default function SetupScreen() {
       setShowPlayerModal(false);
       soundManager.play('success', 0.4);
     } else {
-      // For local friends (Teman Selayar), open customization modal instead of direct adding!
+      
       setShowPlayerModal(false);
       setEditName(`Teman ${activeSlotIdx + 1}`);
       setEditCharId(1);
@@ -108,7 +108,7 @@ export default function SetupScreen() {
       setIsOnlineLoading(false);
       setWarningMessage('Fitur bermain online (Undang Teman) tidak tersedia di versi prototipe ini. Silakan gunakan Teman Selayar atau Lawan AI.');
       soundManager.play('error', 0.5);
-    }, 2000); // 2 seconds simulated loading
+    }, 2000); 
   };
 
   const handleRemovePlayer = (idx) => {
@@ -119,7 +119,7 @@ export default function SetupScreen() {
   };
 
   const handleEditPlayer = (idx) => {
-    // Only allow editing if slot is not empty, and don't restrict human/local/ai
+    
     if (!players[idx]) return;
     soundManager.play('click', 0.5);
     setActiveSlotIdx(idx);
@@ -181,17 +181,17 @@ export default function SetupScreen() {
       computedThemeId = selectedSubject === 'sejarah' ? 'sejarah_umum' : 'ipas_4_5';
     }
 
-    // Deduct consumed action cards from persistent inventory
+    
     const equippedIds = players[0].equippedArtifacts.filter(a => a !== null).map(a => a.id);
     if (equippedIds.length > 0) {
       useStore.getState().consumeArtifacts(equippedIds);
     }
 
-    // Initialize session in Game Store
+    
     useGameStore.getState().initGame(
-      selectedMap.data, // Map data
-      players, // Full array including nulls for empty slots
-      computedThemeId // Quiz Theme ID
+      selectedMap.data, 
+      players, 
+      computedThemeId 
     );
 
     soundManager.play('whoosh', 0.6);
@@ -206,11 +206,11 @@ export default function SetupScreen() {
 
   return (
     <div className="lobby-container">
-      {/* WOODEN TABLE BACKGROUND EFFECT */}
+      
       <div className="table-texture" />
       <div className="table-vignette" />
 
-      {/* HEADER */}
+      
       <header className="lobby-header">
         <button className="back-btn" onClick={() => setGameSubView('arcade')}>
           <ChevronLeft size={28} />
@@ -225,7 +225,7 @@ export default function SetupScreen() {
       </header>
 
       <main className="lobby-content-grid">
-        {/* START PETUALANGAN BUTTON IN THE GRID (TOP) */}
+        
         <div className="start-btn-container">
           <button className="start-voyage-btn" onClick={handleStart}>
             <div className="btn-3d-face">
@@ -237,7 +237,7 @@ export default function SetupScreen() {
         </div>
 
         <div className="right-column">
-          {/* PLAYER SLOTS - 4 SLOTS TOTAL */}
+          
           <section className="lobby-section">
             <div className="section-title">
               <span>PESERTA</span>
@@ -258,7 +258,7 @@ export default function SetupScreen() {
         </div>
 
         <div className="left-column">
-          {/* MAP SELECTION */}
+          
           <section className="lobby-section">
             <div className="section-title">
               <span>PILIH PETA PETUALANGAN</span>
@@ -278,7 +278,7 @@ export default function SetupScreen() {
             </div>
           </section>
 
-          {/* QUIZ THEME SELECTION */}
+          
           <section className="lobby-section">
             <div className="section-title">
               <span>PILIH TEMA KUIS</span>
@@ -317,7 +317,7 @@ export default function SetupScreen() {
         </div>
       </main>
 
-      {/* MODALS */}
+      
       {showArtifactPicker && (
         <ArtifactPicker 
           artifacts={availableCards}
@@ -430,7 +430,7 @@ export default function SetupScreen() {
               </div>
             </div>
 
-            {/* CHARACTER STATS PANEL */}
+            
             <div style={{
               background: isDark ? '#1a0d3b' : '#F9FAFB',
               border: `2px solid ${isDark ? '#2e1957' : '#E5E7EB'}`,
@@ -464,7 +464,7 @@ export default function SetupScreen() {
               </div>
             </div>
 
-            {/* CARD LOADOUT INSIDE EDIT MODAL */}
+            
             <label style={{ fontSize: '0.75rem', fontWeight: 900, marginBottom: '8px', display: 'block', textAlign: 'left', color: isDark ? '#bfcdff' : '#6B7280' }}>BEKAL KARTU AKSI (MAKS 3)</label>
             <div className="artifact-slots-row" style={{ marginBottom: '20px', display: 'flex', gap: '10px' }}>
               {editArtifacts.map((art, idx) => (

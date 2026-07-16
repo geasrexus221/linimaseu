@@ -7,23 +7,23 @@ export default function RefractLightAnimation({ onComplete }) {
   const y = useMotionValue(0);
   const [isSnapped, setIsSnapped] = useState(false);
 
-  // Set drag state back to normal on drag start
+  
   const handleDragStart = () => {
     setIsSnapped(false);
   };
 
-  // Check where the pencil is released
+  
   const handleDragEnd = () => {
     const currentX = x.get();
     const currentY = y.get();
 
-    // Check if the pencil tip/body is dropped inside the water glass zone
+    
     const inWaterGlass = currentX >= 45 && currentX <= 115 && currentY >= 50 && currentY <= 140;
-    // Check if the pencil tip/body is dropped inside the empty glass zone (left side)
+    
     const inEmptyGlass = currentX >= -115 && currentX <= -45 && currentY >= 50 && currentY <= 140;
 
     if (inWaterGlass) {
-      // Snap perfectly inside the water glass
+      
       animate(x, 82, { type: "spring", stiffness: 200, damping: 20 });
       animate(y, 42, { type: "spring", stiffness: 200, damping: 20 });
       setIsSnapped(true);
@@ -34,13 +34,13 @@ export default function RefractLightAnimation({ onComplete }) {
         onComplete();
       }
     } else if (inEmptyGlass) {
-      // Snap perfectly inside the empty glass
+      
       animate(x, -68, { type: "spring", stiffness: 200, damping: 20 });
       animate(y, 42, { type: "spring", stiffness: 200, damping: 20 });
       setIsSnapped(false);
       soundManager.play('click', 0.4);
     } else {
-      // Reset back to top center (slide animation)
+      
       animate(x, 0, { type: "spring", stiffness: 150, damping: 15 });
       animate(y, 0, { type: "spring", stiffness: 150, damping: 15 });
       setIsSnapped(false);
@@ -69,7 +69,7 @@ export default function RefractLightAnimation({ onComplete }) {
       
       <div className="animation-area">
         
-        {/* Glass 1: Empty */}
+        
         <div className="glass empty-glass">
           <div className="glass-label">Tanpa Air</div>
           <div className="glass-body">
@@ -77,7 +77,7 @@ export default function RefractLightAnimation({ onComplete }) {
           </div>
         </div>
 
-        {/* Glass 2: With Water */}
+        
         <div className="glass water-glass">
           <div className="glass-label">Ada Air</div>
           <div className="glass-body">
@@ -85,20 +85,20 @@ export default function RefractLightAnimation({ onComplete }) {
           </div>
         </div>
 
-        {/* OPAQUE WATER CONTAINER (Hides the main pencil behind it) */}
+        
         <div className="water-mask">
-          {/* Refracted Clone Pencil */}
+          
           <motion.div 
             className="clone-motion"
             style={{ x, y }}
           >
             <PencilGraphic isShifted={true} />
           </motion.div>
-          {/* Glass shine over the water */}
+          
           <div className="glass-shine" />
         </div>
 
-        {/* MAIN PENCIL (Always Draggable) */}
+        
         <motion.div 
           className="draggable-pencil"
           style={{ x, y }}

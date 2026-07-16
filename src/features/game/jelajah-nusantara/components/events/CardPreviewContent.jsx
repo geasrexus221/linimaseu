@@ -7,23 +7,23 @@ export default function CardPreviewContent({ card }) {
   return (
     <div className="card-preview-container">
       <div className="preview-card">
-        {/* Cost Badge in Top-Right */}
+        
         <div className="card-cost">
           <Heart size={12} fill="#FF4B4B" color="#FF4B4B" />
           <span>{card.cost}</span>
         </div>
 
-        {/* Illustration Area */}
+        
         <div className="card-illustration" style={{ background: `linear-gradient(135deg, ${card.color}, rgba(255,255,255,0.35))` }}>
           <div className="card-icon">{card.icon}</div>
         </div>
 
-        {/* Card Name Banner */}
+        
         <div className="card-name-banner">
           {card.name}
         </div>
 
-        {/* Card Description/Effect Box */}
+        
         <div className="card-desc-box">
           <p className="card-desc-text">{card.description}</p>
         </div>

@@ -10,7 +10,7 @@ export default function TimePortalOverlay({ color = '#1CB0F6', onComplete }) {
     const completeTimer = setTimeout(() => {
       setPhase('leaving');
       if (onComplete) onComplete();
-    }, 2200); // Slower, more atmospheric duration
+    }, 2200); 
 
     return () => {
       clearTimeout(enterTimer);
@@ -21,20 +21,20 @@ export default function TimePortalOverlay({ color = '#1CB0F6', onComplete }) {
   return (
     <div className={`smooth-portal-wrapper ${phase}`}>
       <div className="portal-container" style={{ '--p-color': color }}>
-        {/* Layered Round Rings */}
+        
         <div className="portal-ring r1" />
         <div className="portal-ring r2" />
         <div className="portal-ring r3" />
         <div className="portal-ring r4" />
         
-        {/* Soft Particles */}
+        
         <div className="soft-particles">
           {[...Array(12)].map((_, i) => (
             <div key={i} className="s-particle" style={{ '--d': `${i * 0.2}s`, '--a': `${i * 30}deg` }} />
           ))}
         </div>
 
-        {/* Pure Glowing Core */}
+        
         <div className="portal-sphere">
           <div className="sphere-glow" />
         </div>

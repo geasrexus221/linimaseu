@@ -5,13 +5,13 @@ export default function ClassmatesListModal({ classmates, onClose, onSelectFrien
   const [activeTab, setActiveTab] = useState('biasa');
   const [friendCode, setFriendCode] = useState('');
 
-  // Mock regular friends
+  
   const regularFriends = [
     { id: 'f1', name: 'Andi', score: 120, avatar: '🦊', isMe: false },
     { id: 'f2', name: 'Siti', score: 95, avatar: '🐰', isMe: false },
   ];
 
-  // Sort by score descending
+  
   const sortedClassmates = [...classmates].sort((a, b) => b.score - a.score);
   const sortedRegularFriends = [...regularFriends].sort((a, b) => b.score - a.score);
 
@@ -32,7 +32,7 @@ export default function ClassmatesListModal({ classmates, onClose, onSelectFrien
           <button className="close-btn" onClick={onClose}><X size={24} /></button>
         </div>
 
-        {/* Add Friend Section */}
+        
         <div className="add-friend-section">
           <div className="input-wrapper">
             <Search size={16} color="#aaa" />
@@ -49,7 +49,7 @@ export default function ClassmatesListModal({ classmates, onClose, onSelectFrien
           </button>
         </div>
 
-        {/* Tabs Section */}
+        
         <div className="tabs-container">
           <button 
             className={`tab-btn ${activeTab === 'biasa' ? 'active' : ''}`}
@@ -65,7 +65,7 @@ export default function ClassmatesListModal({ classmates, onClose, onSelectFrien
           </button>
         </div>
 
-        {/* Friend List Section */}
+        
         <div className="classmates-list">
           {displayList.map((friend, index) => (
             <div 

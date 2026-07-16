@@ -16,7 +16,7 @@ export default function MobileOverview({
   return (
     <div className="mobile-only mobile-dashboard-container" style={{ paddingBottom: '20px' }}>
       
-      {/* PENGUMUMAN (Banner Card) */}
+      
       {announcements.length > 0 && (
         <div style={{ background: '#FEF3C7', borderLeft: '4px solid #F59E0B', padding: '12px', borderRadius: '12px', marginBottom: '20px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
           <Bell size={20} color="#D97706" style={{ marginTop: '2px', flexShrink: 0 }} />
@@ -30,7 +30,7 @@ export default function MobileOverview({
         </div>
       )}
 
-      {/* QUICK ACTIONS (Icon Grid) */}
+      
       <h3 style={{ fontSize: '1rem', margin: '0 0 12px 0', color: 'var(--text-color)' }}>Pintasan</h3>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', marginBottom: '24px' }}>
         <div onClick={() => setActiveMenu('quizzes')} style={{ background: 'var(--card-bg)', borderRadius: '16px', padding: '16px 8px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', border: '2px solid var(--border-color)', boxShadow: '0 4px 0 var(--border-color)' }}>
@@ -47,7 +47,7 @@ export default function MobileOverview({
         </div>
       </div>
 
-      {/* TUGAS & PR BERJALAN (Horizontal Scroll) */}
+      
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
         <h3 style={{ fontSize: '1rem', margin: 0, color: 'var(--text-color)' }}>Tugas & PR Berjalan</h3>
       </div>
@@ -69,7 +69,7 @@ export default function MobileOverview({
         ))}
       </div>
       <div style={{ display: 'flex', gap: '16px', overflowX: 'auto', paddingBottom: '12px', margin: '0 -12px', padding: '0 12px 16px 12px', scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}>
-        {/* Card 1 */}
+        
         <div style={{ minWidth: '220px', background: 'var(--card-bg)', borderRadius: '16px', padding: '16px', border: '2px solid var(--border-color)', scrollSnapAlign: 'center', boxShadow: '0 4px 0 var(--border-color)' }}>
           <div style={{ fontSize: '0.85rem', fontWeight: '800', marginBottom: '8px', color: '#10B981' }}>IPAS 1</div>
           <div style={{ fontSize: '0.9rem', fontWeight: '700', marginBottom: '12px', color: 'var(--text-color)' }}>Kuis Ekosistem</div>
@@ -81,7 +81,7 @@ export default function MobileOverview({
             <div style={{ height: '100%', width: '71%', background: '#10B981', borderRadius: '4px' }}></div>
           </div>
         </div>
-        {/* Card 2 */}
+        
         <div style={{ minWidth: '220px', background: 'var(--card-bg)', borderRadius: '16px', padding: '16px', border: '2px solid var(--border-color)', scrollSnapAlign: 'center', boxShadow: '0 4px 0 var(--border-color)' }}>
           <div style={{ fontSize: '0.85rem', fontWeight: '800', marginBottom: '8px', color: '#3B82F6' }}>MATEMATIKA</div>
           <div style={{ fontSize: '0.9rem', fontWeight: '700', marginBottom: '12px', color: 'var(--text-color)' }}>PR Pecahan</div>
@@ -95,10 +95,10 @@ export default function MobileOverview({
         </div>
       </div>
 
-      {/* FEED: AKTIVITAS & TO-DO (Vertical List) */}
+      
       <h3 style={{ fontSize: '1rem', margin: '16px 0 12px 0', color: 'var(--text-color)' }}>Timeline Kelas</h3>
       <div style={{ background: 'var(--card-bg)', borderRadius: '16px', border: '2px solid var(--border-color)', overflow: 'hidden', boxShadow: '0 4px 0 var(--border-color)' }}>
-        {/* To-Do Items (Priority) */}
+        
         <div style={{ padding: '16px', borderBottom: '1px solid var(--border-color)', background: '#FEF2F2' }}>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
             <div style={{ width: '8px', height: '8px', background: '#EF4444', borderRadius: '50%' }}></div>
@@ -112,7 +112,7 @@ export default function MobileOverview({
           </div>
         </div>
         
-        {/* Recent Activity */}
+        
         <div style={{ padding: '16px', borderBottom: '1px solid var(--border-color)' }}>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
             <div style={{ width: '8px', height: '8px', background: '#10B981', borderRadius: '50%', marginTop: '6px' }}></div>

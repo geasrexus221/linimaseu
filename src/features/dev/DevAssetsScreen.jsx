@@ -30,7 +30,7 @@ import DuelTargetSelectionContent from '../game/jelajah-nusantara/components/eve
 import AddStudentModal from '../teacher/components/modals/AddStudentModal';
 import StudentDetailModal from '../teacher/components/modals/StudentDetailModal';
 
-// Import Image Sprites
+
 import CerminSvg from '../../assets/UI/Character/cermin.svg';
 import KuatSvg from '../../assets/UI/Character/kuat.svg';
 import Karakter1Svg from '../../assets/UI/Character/karakter1.svg';
@@ -49,7 +49,7 @@ import BgSvg from '../../assets/UI BG/bg.svg';
 import BushSvg from '../../assets/UI BG/bush.svg';
 import PathSvg from '../../assets/UI BG/path.svg';
 
-// Import Audio Files
+
 import BlinkMp3 from '../../assets/audio/blink.mp3';
 import CorrectMp3 from '../../assets/audio/correct.mp3';
 import ErrorWav from '../../assets/audio/error.wav';
@@ -73,7 +73,7 @@ export default function DevAssetsScreen() {
   const [copiedId, setCopiedId] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [customText, setCustomText] = useState('Lini Masa Sejarah Indonesia SD Kelas 5 & 6');
-  const [activePopup, setActivePopup] = useState(null); // 'reward', 'shop', 'node', 'settings', 'victory', 'jelajah_help', 'recovery', 'add_student', 'student_detail'
+  const [activePopup, setActivePopup] = useState(null); 
   const [helpPage, setHelpPage] = useState(0);
   const [addStudentTab, setAddStudentTab] = useState('manual');
   const [addStudentName, setAddStudentName] = useState('');
@@ -87,7 +87,7 @@ export default function DevAssetsScreen() {
   const [settingsSubView, setSettingsSubView] = useState('main');
   const [cameraStream, setCameraStream] = useState(null);
   const [isTargetDetected, setIsTargetDetected] = useState(false);
-  const [arTarget, setArTarget] = useState('cermin'); // 'cermin' | 'karakter' | 'podium'
+  const [arTarget, setArTarget] = useState('cermin'); 
   const videoRef = React.useRef(null);
 
   const startCamera = async () => {
@@ -246,7 +246,7 @@ export default function DevAssetsScreen() {
   ];
 
   const LUCIDE_ICONS_LIST = [
-    // Menu Utama
+    
     { name: 'LayoutDashboard', component: <LayoutDashboard size={24} /> },
     { name: 'BookOpen', component: <BookOpen size={24} /> },
     { name: 'ClipboardCheck', component: <ClipboardCheck size={24} /> },
@@ -255,7 +255,7 @@ export default function DevAssetsScreen() {
     { name: 'User', component: <User size={24} /> },
     { name: 'Settings', component: <Settings size={24} /> },
     
-    // UI Navigasi & Kontrol
+    
     { name: 'ChevronLeft', component: <ChevronLeft size={24} /> },
     { name: 'ArrowLeft', component: <ArrowLeft size={24} /> },
     { name: 'ArrowRight', component: <ArrowRight size={24} /> },
@@ -269,14 +269,14 @@ export default function DevAssetsScreen() {
     { name: 'Map', component: <Map size={24} /> },
     { name: 'LogOut', component: <LogOut size={24} /> },
 
-    // Notifikasi & Info
+    
     { name: 'Info', component: <Info size={24} /> },
     { name: 'HelpCircle', component: <HelpCircle size={24} /> },
     { name: 'Bell', component: <Bell size={24} /> },
     { name: 'Calendar', component: <Calendar size={24} /> },
     { name: 'Clock', component: <Clock size={24} /> },
 
-    // Game & Hadiah
+    
     { name: 'Award', component: <Award size={24} /> },
     { name: 'Crown', component: <Crown size={24} /> },
     { name: 'Medal', component: <Medal size={24} /> },
@@ -296,7 +296,7 @@ export default function DevAssetsScreen() {
     { name: 'CheckCircle', component: <CheckCircle size={24} /> },
     { name: 'Trash2', component: <Trash2 size={24} /> },
 
-    // Pendidikan
+    
     { name: 'Book', component: <Book size={24} /> },
     { name: 'GraduationCap', component: <GraduationCap size={24} /> },
     { name: 'School', component: <School size={24} /> },
@@ -304,7 +304,7 @@ export default function DevAssetsScreen() {
     { name: 'PenTool', component: <PenTool size={24} /> },
     { name: 'Edit3', component: <Edit3 size={24} /> },
 
-    // Media & Audio
+    
     { name: 'Play', component: <Play size={24} /> },
     { name: 'Pause', component: <Pause size={24} /> },
     { name: 'VolumeX', component: <VolumeX size={24} /> },
@@ -312,7 +312,7 @@ export default function DevAssetsScreen() {
     { name: 'Music', component: <Music size={24} /> },
     { name: 'Image', component: <Image size={24} /> },
 
-    // Sosial
+    
     { name: 'Users', component: <Users size={24} /> },
     { name: 'UserCheck', component: <UserCheck size={24} /> },
     { name: 'MessageSquare', component: <MessageSquare size={24} /> },
@@ -437,7 +437,7 @@ export default function DevAssetsScreen() {
         </div>
       </header>
 
-      {/* Tabs Filter */}
+      
       <div className="filter-navigation">
         <div className="tabs-wrapper">
           {tabs.map(t => {
@@ -468,7 +468,7 @@ export default function DevAssetsScreen() {
         )}
       </div>
 
-      {/* Visual Toggles Controls */}
+      
       <div className="view-toggles-bar">
         <div className="toggle-control-item">
           <span className="toggle-label">Sembunyikan Deskripsi</span>
@@ -497,7 +497,7 @@ export default function DevAssetsScreen() {
       </div>
 
       <div className="assets-viewport">
-        {/* ================= SPRITES ================= */}
+        
         {(activeTab === 'all' || activeTab === 'sprites') && (
           <section className="viewport-section">
             <h3 className="section-title-label">Gambar & Sprite ({filteredSprites.length})</h3>
@@ -528,7 +528,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= AUDIO ================= */}
+        
         {(activeTab === 'all' || activeTab === 'audio') && (
           <section className="viewport-section">
             <h3 className="section-title-label">Audio & SFX ({filteredAudio.length})</h3>
@@ -555,7 +555,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= ICONS ================= */}
+        
         {(activeTab === 'all' || activeTab === 'icons') && (
           <section className="viewport-section">
             <h3 className="section-title-label">Ikon Aplikasi (Lucide Icons)</h3>
@@ -595,7 +595,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= FONTS ================= */}
+        
         {activeTab === 'fonts' && (
           <section className="viewport-section">
             <h3 className="section-title-label">Typography</h3>
@@ -605,7 +605,7 @@ export default function DevAssetsScreen() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
               
-              {/* 1. OUTFIT (Display & Heading Font) */}
+              
               <div className="typography-specimen-card" style={{ 
                 background: 'white', 
                 borderRadius: '24px', 
@@ -619,13 +619,13 @@ export default function DevAssetsScreen() {
                 color: '#1F2937',
                 fontFamily: "'Outfit', sans-serif"
               }}>
-                {/* Left Side: Massive Aa */}
+                
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, width: '180px', borderRight: '2px solid #E5E7EB', paddingRight: '40px' }}>
                   <span style={{ fontSize: '9rem', fontWeight: '950', lineHeight: 1, color: '#1F2937' }}>Aa</span>
                   <span style={{ fontSize: '2.2rem', fontWeight: '800', marginTop: '10px', color: '#1F2937', letterSpacing: '-0.5px' }}>Outfit</span>
                 </div>
 
-                {/* Right Side: Spec Table */}
+                
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', borderBottom: '2px solid #E5E7EB', paddingBottom: '12px', marginBottom: '24px' }}>
                     <span style={{ fontWeight: '900', color: '#4B5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '3.5px solid #10B981', paddingBottom: '6px', width: 'fit-content' }}>Style</span>
@@ -634,21 +634,21 @@ export default function DevAssetsScreen() {
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                    {/* Row 1: Heading 1 */}
+                    
                     <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
                       <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '950', fontSize: '44px', color: '#111827', margin: 0, padding: 0, lineHeight: 1.1 }}>Heading 1</span>
                       <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '950', fontSize: '1.1rem', color: '#111827' }}>Super Bold</span>
                       <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '900', fontSize: '1.5rem', color: '#111827' }}>44</span>
                     </div>
 
-                    {/* Row 2: Heading 2 */}
+                    
                     <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
                       <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '800', fontSize: '36px', color: '#1F2937', margin: 0, padding: 0, lineHeight: 1.1 }}>Heading 2</span>
                       <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '800', fontSize: '1rem', color: '#4B5563' }}>Extra Bold</span>
                       <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '800', fontSize: '1.3rem', color: '#1F2937' }}>36</span>
                     </div>
 
-                    {/* Row 3: Sub-Heading */}
+                    
                     <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
                       <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '600', fontSize: '24px', color: '#374151', margin: 0, padding: 0, lineHeight: 1.1 }}>Sub-Heading</span>
                       <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '600', fontSize: '0.95rem', color: '#4B5563' }}>Semi Bold</span>
@@ -658,7 +658,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* 2. NUNITO (Body & UI Font) */}
+              
               <div className="typography-specimen-card" style={{ 
                 background: 'white', 
                 borderRadius: '24px', 
@@ -672,13 +672,13 @@ export default function DevAssetsScreen() {
                 color: '#1F2937',
                 fontFamily: "'Nunito', sans-serif"
               }}>
-                {/* Left Side: Massive Aa */}
+                
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, width: '180px', borderRight: '2px solid #E5E7EB', paddingRight: '40px' }}>
                   <span style={{ fontSize: '9rem', fontWeight: '800', lineHeight: 1, color: '#1F2937' }}>Aa</span>
                   <span style={{ fontSize: '2.2rem', fontWeight: '900', marginTop: '10px', color: '#1F2937', letterSpacing: '-0.5px' }}>Nunito</span>
                 </div>
 
-                {/* Right Side: Spec Table */}
+                
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', borderBottom: '2px solid #E5E7EB', paddingBottom: '12px', marginBottom: '24px' }}>
                     <span style={{ fontWeight: '900', color: '#4B5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '3.5px solid #10B981', paddingBottom: '6px', width: 'fit-content' }}>Style</span>
@@ -687,21 +687,21 @@ export default function DevAssetsScreen() {
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                    {/* Row 1: Main Text */}
+                    
                     <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
                       <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '700', fontSize: '20px', color: '#1F2937', margin: 0, padding: 0, lineHeight: 1.1 }}>Main Text</span>
                       <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '700', fontSize: '1rem', color: '#4B5563' }}>Bold</span>
                       <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '700', fontSize: '1.3rem', color: '#1F2937' }}>20</span>
                     </div>
 
-                    {/* Row 2: Menu */}
+                    
                     <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
                       <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '600', fontSize: '18px', color: '#374151', margin: 0, padding: 0, lineHeight: 1.1 }}>Menu</span>
                       <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '600', fontSize: '0.95rem', color: '#4B5563' }}>Medium</span>
                       <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '600', fontSize: '1.2rem', color: '#374151' }}>18</span>
                     </div>
 
-                    {/* Row 3: Body Text */}
+                    
                     <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
                       <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '400', fontSize: '16px', color: '#4B5563', margin: 0, padding: 0, lineHeight: 1.1 }}>Body Text</span>
                       <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '400', fontSize: '0.9rem', color: '#6B7280' }}>Regular</span>
@@ -711,7 +711,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* 3. FREDOKA (Game Title & Score Font) */}
+              
               <div className="typography-specimen-card" style={{ 
                 background: 'white', 
                 borderRadius: '24px', 
@@ -725,13 +725,13 @@ export default function DevAssetsScreen() {
                 color: '#1F2937',
                 fontFamily: "'Fredoka', sans-serif"
               }}>
-                {/* Left Side: Massive Aa */}
+                
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, width: '180px', borderRight: '2px solid #E5E7EB', paddingRight: '40px' }}>
                   <span style={{ fontSize: '9rem', fontWeight: '700', lineHeight: 1, color: '#1F2937' }}>Aa</span>
                   <span style={{ fontSize: '2.2rem', fontWeight: '800', marginTop: '10px', color: '#1F2937', letterSpacing: '-0.5px' }}>Fredoka</span>
                 </div>
 
-                {/* Right Side: Spec Table */}
+                
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', borderBottom: '2px solid #E5E7EB', paddingBottom: '12px', marginBottom: '24px' }}>
                     <span style={{ fontWeight: '900', color: '#4B5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '3.5px solid #10B981', paddingBottom: '6px', width: 'fit-content' }}>Style</span>
@@ -740,14 +740,14 @@ export default function DevAssetsScreen() {
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                    {/* Row 1: Game Title */}
+                    
                     <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
                       <span style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: '700', fontSize: '40px', color: '#111827', margin: 0, padding: 0, lineHeight: 1.1 }}>Game Title</span>
                       <span style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: '700', fontSize: '1rem', color: '#111827' }}>Bold Rounded</span>
                       <span style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: '700', fontSize: '1.4rem', color: '#111827' }}>40</span>
                     </div>
 
-                    {/* Row 2: Score Display */}
+                    
                     <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
                       <span style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: '600', fontSize: '32px', color: '#1F2937', margin: 0, padding: 0, lineHeight: 1.1 }}>Score Display</span>
                       <span style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: '600', fontSize: '0.95rem', color: '#4B5563' }}>Medium Rounded</span>
@@ -761,7 +761,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= COLORS ================= */}
+        
         {(activeTab === 'all' || activeTab === 'colors') && (
           <section className="viewport-section" style={{ marginTop: '20px' }}>
             <h3 className="section-title-label">Warna & Palet Sistem</h3>
@@ -813,7 +813,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= POP-UPS ================= */}
+        
         {(activeTab === 'all' || activeTab === 'popups') && (
           <section className="viewport-section" style={{ marginTop: '20px' }}>
             <h3 className="section-title-label">Menu & Pop-up Dialog (Live Inline Previews)</h3>
@@ -826,7 +826,7 @@ export default function DevAssetsScreen() {
               marginTop: '20px' 
             }}>
               
-              {/* 1. Event Kuis Jejak Pengetahuan */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>1. KUIS JEJAK PENGETAHUAN</span>
                 <div className="event-sheet-overlay">
@@ -856,7 +856,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* 2. Event Pertarungan Penjaga Pos */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>2. PERTARUNGAN PENJAGA POS</span>
                 <div className="event-sheet-overlay">
@@ -887,7 +887,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* 3. Event Persimpangan (Choice) */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>3. PERSIMPANGAN JALAN</span>
                 <div className="event-sheet-overlay">
@@ -914,7 +914,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* 4. Event Dapat Kartu Aksi (Card Preview) */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>4. DAPAT KARTU AKSI</span>
                 <div className="event-sheet-overlay">
@@ -934,7 +934,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* 5. Event Buang Kartu (Discard Card) */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>5. BUANG KARTU (TAS PENUH)</span>
                 <div className="event-sheet-overlay">
@@ -964,7 +964,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* 6. Event Undangan Duel Cendekiawan */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>6. UNDANGAN DUEL CENDEKIAWAN</span>
                 <div className="event-sheet-overlay">
@@ -990,7 +990,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* 7. Event Pilih Lawan Duel */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>7. PILIH LAWAN DUEL</span>
                 <div className="event-sheet-overlay">
@@ -1015,7 +1015,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* 8. Event Beli Peti di Markas */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>8. BELI PETI DI MARKAS</span>
                 <div className="event-sheet-overlay">
@@ -1041,19 +1041,19 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* 9. Modal Panduan Bermain (JelajahHelpModal) */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2px solid var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#10B981', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>9. MODAL PANDUAN BERMAIN</span>
                 <JelajahHelpModal isOpen={true} onClose={() => {}} />
               </div>
 
-              {/* 10. Modal Pengaturan Game (GameSettingsModal) */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2px solid var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#10B981', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>10. PENGATURAN GAME</span>
                 <GameSettingsModal isOpen={true} onClose={() => {}} />
               </div>
 
-              {/* 11. Modal Tas / Inventori (InventoryDetailList) */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2px solid var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#10B981', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>11. TAS & KARTU AKSI</span>
                 <InventoryDetailList 
@@ -1073,7 +1073,7 @@ export default function DevAssetsScreen() {
                 />
               </div>
 
-              {/* 12. Modal Kemenangan (VictoryModal) */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#EF4444', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>12. MODAL KEMENANGAN</span>
                 <div className="victory-overlay" style={{ background: 'none', position: 'relative', inset: 'auto', zIndex: 1, padding: 0, backdropFilter: 'none' }}>
@@ -1146,7 +1146,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* 13. Modal Pemulihan Karakter (Recovery) */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#EF4444', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>13. PEMULIHAN KARAKTER</span>
                 <div className="event-sheet-overlay">
@@ -1172,13 +1172,13 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* 14. Overlay Giliran Pemain (TurnOverlay) */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2px solid var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#10B981', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>14. OVERLAY GILIRAN BARU</span>
                 <TurnOverlay isVisible={true} playerName="Budi (Kamu)" playerColor="#1CB0F6" />
               </div>
 
-              {/* 15. Tambah Murid Guru (AddStudentModal) */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2px solid var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#8B5CF6', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>15. TAMBAH MURID (GURU)</span>
                 <AddStudentModal 
@@ -1189,7 +1189,7 @@ export default function DevAssetsScreen() {
                 />
               </div>
 
-              {/* 16. Detail Murid & Rapor Guru (StudentDetailModal) */}
+              
               <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2px solid var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <span style={{ fontSize: '0.75rem', background: '#8B5CF6', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>16. DETAIL & RAPOR MURID</span>
                 <StudentDetailModal 
@@ -1225,7 +1225,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= BUTTONS ================= */}
+        
         {(activeTab === 'all' || activeTab === 'buttons') && (
           <section className="viewport-section" style={{ marginTop: '20px' }}>
             <h3 className="section-title-label">Koleksi Gaya Tombol Aplikasi</h3>
@@ -1274,7 +1274,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= COMPONENT NAVIGATOR PREVIEW ================= */}
+        
         {(activeTab === 'all' || activeTab === 'navigation') && (
           <section className="viewport-section" style={{ marginTop: '20px' }}>
             <h3 className="section-title-label">Komponen Navigator</h3>
@@ -1282,7 +1282,7 @@ export default function DevAssetsScreen() {
             <h4 className="icon-group-title">Navigator Vertikal (Sidebar Nav)</h4>
             <div className="mock-navigator-row-grid">
               
-              {/* Sidebar Active Preview */}
+              
               <div className="mock-navigator-column-card">
                 <h5>Semua Status Aktif (Active Preview)</h5>
                 <div className="mock-sidebar-container">
@@ -1303,7 +1303,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* Sidebar Inactive Preview */}
+              
               <div className="mock-navigator-column-card">
                 <h5>Semua Status Tidak Aktif (Inactive Preview)</h5>
                 <div className="mock-sidebar-container">
@@ -1323,7 +1323,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* Sidebar Interactive Simulator */}
+              
               <div className="mock-navigator-column-card">
                 <h5>Simulator Interaktif (Hover & Klik)</h5>
                 <div className="mock-sidebar-container">
@@ -1354,7 +1354,7 @@ export default function DevAssetsScreen() {
             <h4 className="icon-group-title" style={{ marginTop: '30px' }}>Navigator Horizontal (Mobile Tab Bar)</h4>
             
             <div className="mock-tabbar-vertical-stack">
-              {/* Horizontal Tabbar All Active Preview */}
+              
               <div className="mock-tabbar-preview-box">
                 <h5>Semua Status Aktif (Active Preview)</h5>
                 <div className="mock-pop-tabbar">
@@ -1377,7 +1377,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* Horizontal Tabbar All Inactive Preview */}
+              
               <div className="mock-tabbar-preview-box">
                 <h5>Semua Status Tidak Aktif (Inactive Preview)</h5>
                 <div className="mock-pop-tabbar">
@@ -1400,7 +1400,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* Horizontal Tabbar Interactive Simulator */}
+              
               <div className="mock-tabbar-preview-box">
                 <h5>Simulator Interaktif (Klik Tab)</h5>
                 <div className="mock-pop-tabbar">
@@ -1434,7 +1434,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= JELAJAH NUSANTARA GAMEPLAY UI ================= */}
+        
         {(activeTab === 'all' || activeTab === 'gameplay') && (
           <section className="viewport-section" style={{ marginTop: '20px' }}>
             <h3 className="section-title-label">UI Elemen Jelajah Nusantara</h3>
@@ -1442,7 +1442,7 @@ export default function DevAssetsScreen() {
               Koleksi seluruh elemen antarmuka, bilah status, tombol aksi, dan widget khusus yang digunakan pada layar permainan Jelajah Nusantara.
             </p>
             
-            {/* 1. TOP HEADER WIDGETS */}
+            
             <h4 className="icon-group-title">1. Bilah Status Atas (Top Header HUD)</h4>
             <div className="game-hud-row-container">
               <div className="game-hud-preview-card">
@@ -1482,7 +1482,7 @@ export default function DevAssetsScreen() {
               </div>
             </div>
 
-            {/* 2. FLOATING & BUBBLE BANNER */}
+            
             <h4 className="icon-group-title" style={{ marginTop: '30px' }}>2. Tombol Aksi Mengambang & Gelembung Dialog</h4>
             <div className="game-hud-row-container">
               
@@ -1511,7 +1511,7 @@ export default function DevAssetsScreen() {
 
             </div>
 
-            {/* 3. BOTTOM CONTROLS & PLAYER BADGES */}
+            
             <h4 className="icon-group-title" style={{ marginTop: '30px' }}>3. Kontrol Aksi Bawah & Kartu Pemain (Bottom HUD & Badges)</h4>
             
             <div className="mock-bottom-hud-layout-preview">
@@ -1549,20 +1549,20 @@ export default function DevAssetsScreen() {
                 <h5>Bar Tombol Bawah (Bottom Bar Controls)</h5>
                 <div className="mock-bottom-controls-bar">
                   
-                  {/* Tas Button */}
+                  
                   <button className="mock-bottom-tas-btn" onClick={() => soundManager.play('click')}>
                     <span className="tas-icon">💼</span>
                     <span className="tas-label">TAS</span>
                     <span className="tas-count">1/3</span>
                   </button>
 
-                  {/* Putar Dadu */}
+                  
                   <button className="mock-bottom-dadu-btn" onClick={() => soundManager.play('click')}>
                     <span className="dadu-icon">🎲</span>
                     <span className="dadu-label">PUTAR DADU</span>
                   </button>
 
-                  {/* Chat Log Button */}
+                  
                   <button className="mock-bottom-chat-btn" onClick={() => soundManager.play('click')}>
                     💬
                   </button>
@@ -1571,28 +1571,28 @@ export default function DevAssetsScreen() {
               </div>
             </div>
 
-            {/* 4. DAFTAR KARTU AKSI JELAJAH NUSANTARA */}
+            
             <h4 className="icon-group-title" style={{ marginTop: '30px' }}>4. Daftar Kartu Aksi Jelajah Nusantara (Action Cards Gallery)</h4>
             <div className="jelajah-cards-assets-grid">
               {actionCards.map((card, idx) => (
                 <div key={idx} className="dev-tcg-card-item">
-                  {/* Cost Badge in Top-Right */}
+                  
                   <div className="dev-tcg-card-cost">
                     <Heart size={10} fill="#FF4B4B" color="#FF4B4B" />
                     <span>{card.cost}</span>
                   </div>
 
-                  {/* Illustration Area */}
+                  
                   <div className="dev-tcg-card-illustration" style={{ background: `linear-gradient(135deg, ${card.color || '#FFF'}, rgba(255,255,255,0.35))` }}>
                     <div className="dev-tcg-card-icon">{card.icon || '🎴'}</div>
                   </div>
 
-                  {/* Card Name Banner */}
+                  
                   <div className="dev-tcg-card-name-banner">
                     {card.name}
                   </div>
 
-                  {/* Card Description/Effect Box */}
+                  
                   <div className="dev-tcg-card-desc-box">
                     <p className="dev-tcg-card-desc-text">{card.description}</p>
                   </div>
@@ -1603,7 +1603,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= ADU CENDEKIAWAN GAMEPLAY UI ================= */}
+        
         {(activeTab === 'all' || activeTab === 'cendekiawan') && (
           <section className="viewport-section" style={{ marginTop: '20px' }}>
             <h3 className="section-title-label">UI Elemen Adu Cendekiawan</h3>
@@ -1611,11 +1611,11 @@ export default function DevAssetsScreen() {
               Galeri komponen antarmuka duel kuis pertarungan tarik tambang / adu kecerdasan.
             </p>
 
-            {/* 1. CLASH HP BARS */}
+            
             <h4 className="icon-group-title">1. Panel Clash HP & Timer (HP Bars & Countdown)</h4>
             <div className="cendekiawan-hud-box">
               <div className="mock-hp-fighting-container">
-                {/* Player HP */}
+                
                 <div className="mock-hp-bar-side player-side">
                   <div className="mock-hp-label-row">
                     <span className="mock-hp-side-name">Kamu</span>
@@ -1626,12 +1626,12 @@ export default function DevAssetsScreen() {
                   </div>
                 </div>
 
-                {/* Center Badge / Timer */}
+                
                 <div className="mock-clash-vs-badge">
                   <span>15s</span>
                 </div>
 
-                {/* Bot HP */}
+                
                 <div className="mock-hp-bar-side bot-side">
                   <div className="mock-hp-label-row">
                     <span className="mock-hp-side-val">7/10 HP</span>
@@ -1644,7 +1644,7 @@ export default function DevAssetsScreen() {
               </div>
             </div>
 
-            {/* 2. ACTION MODE SELECTOR */}
+            
             <h4 className="icon-group-title" style={{ marginTop: '30px' }}>2. Pemilih Mode Aksi Duel (Action Mode Selector)</h4>
             <div className="cendekiawan-hud-box">
               <div className="mock-action-mode-selector">
@@ -1657,23 +1657,23 @@ export default function DevAssetsScreen() {
               </div>
             </div>
 
-            {/* 3. MULTIPLE CHOICE QUESTION BOX */}
+            
             <h4 className="icon-group-title" style={{ marginTop: '30px' }}>3. Panel Pertanyaan & Pilihan Jawaban (Quiz & Options)</h4>
             <div className="cendekiawan-hud-box">
               <div className="mock-quiz-panel">
-                {/* Timer Bar */}
+                
                 <div className="mock-timer-wrapper">
                   <div className="mock-timer-bar pts-3-bar" style={{ width: '75%' }}></div>
                 </div>
                 
-                {/* Points multiplier legend */}
+                
                 <div className="mock-timer-points-legend">
                   <span className="legend-segment pts-1">1+</span>
                   <span className="legend-segment pts-2">2+</span>
                   <span className="legend-segment pts-3 active">3+</span>
                 </div>
 
-                {/* Question */}
+                
                 <div className="mock-question-box">
                   <h2>Siapakah tokoh yang membacakan teks Proklamasi Kemerdekaan Indonesia?</h2>
                   <div className="mock-active-item-badge">
@@ -1681,7 +1681,7 @@ export default function DevAssetsScreen() {
                   </div>
                 </div>
 
-                {/* Answers */}
+                
                 <div className="mock-options-grid">
                   <button className="mock-opt-btn selected" onClick={() => soundManager.play('click')}>
                     Ir. Soekarno
@@ -1699,7 +1699,7 @@ export default function DevAssetsScreen() {
               </div>
             </div>
 
-            {/* 4. BOOSTER CARD ITEMS */}
+            
             <h4 className="icon-group-title" style={{ marginTop: '30px' }}>4. Kartu Bantuan / Booster (Battle Booster Cards)</h4>
             <div className="mock-booster-cards-row">
               {[
@@ -1720,7 +1720,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= DEVELOPER SANDBOX ================= */}
+        
         {(activeTab === 'all' || activeTab === 'sandbox') && (
           <section className="viewport-section" style={{ marginTop: '20px' }}>
             <h3 className="section-title-label">Simulator State Pengembang</h3>
@@ -1792,7 +1792,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= SCREEN VIEWS REGISTRY ================= */}
+        
         {(activeTab === 'all' || activeTab === 'views') && (
           <section className="viewport-section" style={{ marginTop: '20px' }}>
             <h3 className="section-title-label">Alur Layar & Peta Navigasi</h3>
@@ -1819,7 +1819,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= SHOP CATALOG DATA ================= */}
+        
         {(activeTab === 'all' || activeTab === 'shopData') && (
           <section className="viewport-section" style={{ marginTop: '20px' }}>
             <h3 className="section-title-label">Katalog Toko & Aksesori</h3>
@@ -1859,7 +1859,7 @@ export default function DevAssetsScreen() {
           </section>
         )}
 
-        {/* ================= UJI COBA AR (AR SANDBOX) ================= */}
+        
         {activeTab === 'arSandbox' && (
           <section className="viewport-section" style={{ marginTop: '20px' }}>
             <h3 className="section-title-label">Uji Coba AR & Kamera (AR Sandbox)</h3>
@@ -1868,7 +1868,7 @@ export default function DevAssetsScreen() {
             </p>
 
             <div className="ar-sandbox-layout">
-              {/* Left Panel: Camera View */}
+              
               <div className="ar-camera-panel">
                 <div className="ar-viewport-box">
                   {cameraStream ? (
@@ -1885,7 +1885,7 @@ export default function DevAssetsScreen() {
                     </div>
                   )}
 
-                  {/* Scanning Laser Line Overlay */}
+                  
                   {cameraStream && !isTargetDetected && (
                     <div className="ar-scanning-overlay">
                       <div className="ar-scan-corners" />
@@ -1894,7 +1894,7 @@ export default function DevAssetsScreen() {
                     </div>
                   )}
 
-                  {/* AR Object Projection (Mock 3D Model) */}
+                  
                   {cameraStream && isTargetDetected && (
                     <div className="ar-object-overlay">
                       <div className="ar-3d-model-wrapper">
@@ -1950,7 +1950,7 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
 
-              {/* Right Panel: AR Configurations */}
+              
               <div className="ar-config-panel">
                 <div className="ar-card-config-box">
                   <h4>1. Pilih Kartu Target Simulasi</h4>
@@ -2020,7 +2020,7 @@ export default function DevAssetsScreen() {
         )}
       </div>
 
-      {/* Lightbox / Gambar Full Size Preview */}
+      
       {previewImage && (
         <div className="assets-lightbox" onClick={() => setPreviewImage(null)}>
           <div className="lightbox-content" onClick={e => e.stopPropagation()}>
@@ -2045,7 +2045,7 @@ export default function DevAssetsScreen() {
           </div>
         </div>
       )}
-      {/* Lightbox / Test Overlay for Popups */}
+      
       {activePopup && (
         <div className="assets-lightbox-overlay" onClick={() => setActivePopup(null)}>
           <div 
@@ -2123,7 +2123,7 @@ export default function DevAssetsScreen() {
                 </header>
 
                 <div className="settings-popup-body">
-                  {/* MAIN VIEW */}
+                  
                   {settingsSubView === 'main' && (
                     <div className="settings-main-menu-list">
                       <div className="settings-menu-item" onClick={() => { soundManager.play('click'); setSettingsSubView('profile'); }}>
@@ -2145,7 +2145,7 @@ export default function DevAssetsScreen() {
                     </div>
                   )}
 
-                  {/* PROFILE VIEW */}
+                  
                   {settingsSubView === 'profile' && (
                     <div className="settings-form-content">
                       <div className="form-group-item">
@@ -2191,7 +2191,7 @@ export default function DevAssetsScreen() {
                     </div>
                   )}
 
-                  {/* NOTIFICATIONS VIEW */}
+                  
                   {settingsSubView === 'notifications' && (
                     <div className="settings-form-content">
                       <div className="popup-toggle-row">
@@ -2232,7 +2232,7 @@ export default function DevAssetsScreen() {
                     </div>
                   )}
 
-                  {/* PRIVACY VIEW */}
+                  
                   {settingsSubView === 'privacy' && (
                     <div className="settings-text-content">
                       <p><strong>Penyimpanan Lokal:</strong> Data Anda disimpan secara lokal di perangkat Anda (localStorage).</p>
@@ -2240,7 +2240,7 @@ export default function DevAssetsScreen() {
                     </div>
                   )}
 
-                  {/* ABOUT VIEW */}
+                  
                   {settingsSubView === 'about' && (
                     <div className="settings-about-content">
                       <span style={{ fontSize: '2.5rem' }}>⏳</span>
@@ -2265,21 +2265,21 @@ export default function DevAssetsScreen() {
                   </p>
                 </div>
 
-                {/* Simulated Podiums */}
+                
                 <div className="mock-podiums" style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end', gap: '20px', margin: '30px 0', borderBottom: '3px solid var(--border-color)', paddingBottom: '10px' }}>
-                  {/* Rank 2 */}
+                  
                   <div className="mock-podium-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '80px' }}>
                     <div style={{ fontSize: '2rem', marginBottom: '4px' }}>🐱</div>
                     <div style={{ fontWeight: '800', fontSize: '0.85rem' }}>Santi</div>
                     <div style={{ height: '60px', width: '100%', background: '#E5E7EB', border: '2px solid #9CA3AF', borderBottom: 'none', display: 'flex', alignItems: 'center', justify: 'center', fontWeight: '900', color: '#9CA3AF', borderTopLeftRadius: '12px', borderTopRightRadius: '12px' }}>2</div>
                   </div>
-                  {/* Rank 1 */}
+                  
                   <div className="mock-podium-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '90px' }}>
                     <div style={{ fontSize: '2.5rem', marginBottom: '4px' }}>🐰👑</div>
                     <div style={{ fontWeight: '900', fontSize: '0.95rem', color: '#D97706' }}>Budi</div>
                     <div style={{ height: '90px', width: '100%', background: '#FEF3C7', border: '2px solid #F59E0B', borderBottom: 'none', display: 'flex', alignItems: 'center', justify: 'center', fontWeight: '900', color: '#F59E0B', borderTopLeftRadius: '12px', borderTopRightRadius: '12px' }}>1</div>
                   </div>
-                  {/* Rank 3 */}
+                  
                   <div className="mock-podium-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '80px' }}>
                     <div style={{ fontSize: '2rem', marginBottom: '4px' }}>🦊</div>
                     <div style={{ fontWeight: '800', fontSize: '0.85rem' }}>Bimo</div>
@@ -2287,7 +2287,7 @@ export default function DevAssetsScreen() {
                   </div>
                 </div>
 
-                {/* Score list */}
+                
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', background: '#F0FDF4', border: '2px solid #86EFAC', borderRadius: '16px' }}>
                     <span style={{ fontWeight: '800' }}>🥇 Budi (Kamu)</span>
@@ -2360,7 +2360,7 @@ export default function DevAssetsScreen() {
                   )}
                 </div>
 
-                {/* Pagination Controls */}
+                
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '20px', borderTop: '2px solid var(--border-color)', paddingTop: '15px' }}>
                   <button 
                     className="chunky-btn primary-blue" 
@@ -2441,7 +2441,7 @@ export default function DevAssetsScreen() {
                   <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 950 }}>Tambah Murid</h3>
                 </div>
 
-                {/* Tab buttons */}
+                
                 <div style={{ display: 'flex', gap: '8px', borderBottom: '2px solid var(--border-color)', marginBottom: '20px', paddingBottom: '10px' }}>
                   <button 
                     onClick={() => { soundManager.play('click'); setAddStudentTab('manual'); }}
@@ -2537,7 +2537,7 @@ export default function DevAssetsScreen() {
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', maxHeight: '350px', overflowY: 'auto', paddingRight: '6px' }}>
-                  {/* Left Column: Stats & Absensi */}
+                  
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                     <h4 style={{ margin: '0 0 5px 0', fontSize: '0.95rem', fontWeight: '900', color: 'var(--text-color)', borderBottom: '1.5px solid var(--border-color)', paddingBottom: '4px' }}>Statistik Aktivitas</h4>
                     
@@ -2567,7 +2567,7 @@ export default function DevAssetsScreen() {
                     </div>
                   </div>
 
-                  {/* Right Column: Academic Records */}
+                  
                   <div>
                     <h4 style={{ margin: '0 0 5px 0', fontSize: '0.95rem', fontWeight: '900', color: 'var(--text-color)', borderBottom: '1.5px solid var(--border-color)', paddingBottom: '4px' }}>Daftar Nilai Kuis (Rapor)</h4>
                     

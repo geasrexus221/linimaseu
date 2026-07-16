@@ -61,7 +61,7 @@ export default function PlayerSlot({ player, onAddClick, onClick, onRemove, isFi
           <StudentAvatar size={50} showGlow={player.type === 'human'} />
         )}
         
-        {/* DELETE BUTTON (Only if onRemove is provided) */}
+        
         {onRemove && (
           <button className="remove-btn" onClick={(e) => {
             e.stopPropagation();

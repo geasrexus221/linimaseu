@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { soundEngine } from '../../features/game/jelajah-nusantara/logic/soundEngine';
 
-// Pemetaan rotasi untuk setiap sisi dadu
+
 const getBaseRotation = (value) => {
   switch (value) {
     case 1: return { x: 0, y: 0 };
@@ -26,18 +26,18 @@ export default function Dice3D({ value = 1, isRolling = false, onRollComplete, s
       
       const base = getBaseRotation(value);
       
-      // Hitung putaran tambahan agar dadu berputar liar (2-4 putaran penuh)
+      
       const extraSpinsX = (Math.floor(Math.random() * 3) + 2) * 360;
       const extraSpinsY = (Math.floor(Math.random() * 3) + 2) * 360;
       
-      // Tambahkan ke rotasi saat ini agar putarannya selalu maju dan mulus
+      
       const nextX = Math.floor(currentRot.current.x / 360) * 360 + extraSpinsX + base.x;
       const nextY = Math.floor(currentRot.current.y / 360) * 360 + extraSpinsY + base.y;
       
       setRotation({ x: nextX, y: nextY });
       currentRot.current = { x: nextX, y: nextY };
 
-      // Tunggu animasi selesai (misal 1.5 detik)
+      
       const timer = setTimeout(() => {
         setBouncing(false);
         soundEngine.playDiceResult(value);
@@ -48,7 +48,7 @@ export default function Dice3D({ value = 1, isRolling = false, onRollComplete, s
     }
   }, [isRolling, value, onRollComplete]);
 
-  // Fungsi pembantu untuk membuat titik-titik dadu
+  
   const renderDots = (count) => {
     return Array.from({ length: count }).map((_, i) => (
       <div key={i} className="dice-dot" />
@@ -73,7 +73,7 @@ export default function Dice3D({ value = 1, isRolling = false, onRollComplete, s
           <div className="dice-face bottom">{renderDots(6)}</div>
         </div>
         
-        {/* Efek bayangan di lantai */}
+        
         <div className={`dice-shadow ${bouncing ? 'bouncing-shadow' : ''}`} />
       </div>
 

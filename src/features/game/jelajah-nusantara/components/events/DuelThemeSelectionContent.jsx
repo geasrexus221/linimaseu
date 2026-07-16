@@ -4,7 +4,7 @@ import { soundEngine } from '../../logic/soundEngine';
 export default function DuelThemeSelectionContent({ themes, onSelect }) {
   return (
     <div className="theme-selection">
-      {/* Category selection banner */}
+      
       <div className="theme-selection-banner">
         💡 <strong>Kategori Duel:</strong> Pilih topik paling sulit agar peluang lawan menjawab salah lebih besar!
       </div>

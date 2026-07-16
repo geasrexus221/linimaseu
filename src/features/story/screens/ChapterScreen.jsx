@@ -88,7 +88,7 @@ export default function ChapterScreen() {
       backgroundAttachment: 'local',
       minHeight: '100%'
     }}>
-      {/* Top Banner */}
+      
       <div className="chapter-banner">
         <button 
           onClick={onBack}
@@ -107,7 +107,7 @@ export default function ChapterScreen() {
         </div>
       </div>
 
-      {/* Zig-zag Path */}
+      
       <div className="chapter-path">
         {currentStory.chapters.map((chapter, index) => {
           const status = getStatus(chapter.id);
@@ -152,7 +152,7 @@ export default function ChapterScreen() {
                   )}
                 </div>
 
-                {/* Reward Chest for Last Node */}
+                
                 {isLast && (
                   <div className={`reward-chest-container ${status === 'completed' ? 'unlocked' : 'locked'}`}>
                     <div className="chest-bubble">HADIAH!</div>
@@ -174,7 +174,7 @@ export default function ChapterScreen() {
         })}
       </div>
 
-      {/* Chapter Synopsis Modal */}
+      
       {selectedChapter && (
         <div className="synopsis-modal-overlay">
           <div className="synopsis-card">
@@ -204,7 +204,7 @@ export default function ChapterScreen() {
         </div>
       )}
 
-      {/* Biography Modal */}
+      
       {showBio && (
         <div className="bio-modal-overlay">
           <div className="bio-modal-content">
@@ -239,48 +239,7 @@ export default function ChapterScreen() {
           overflow-x: hidden;
           animation: chapterFadeIn 1s ease-out forwards;
         }
-        @media (max-width: 600px) {
-          /* Scale down the horizontal offsets for mobile */
-          :global(.chapter-node-pos-1) { transform: translateX(-40px) !important; }
-          :global(.chapter-node-pos-2) { transform: translateX(50px) !important; }
-          :global(.chapter-node-pos-3) { transform: translateX(0px) !important; }
-          :global(.chapter-node-pos-4) { transform: translateX(-65px) !important; }
-          :global(.chapter-node-pos-5) { transform: translateX(55px) !important; }
-          
-          .chapter-path { gap: 120px !important; padding: 40px 0 100px !important; }
-          .char-ring { width: 100px !important; height: 100px !important; }
-          .char-node { width: 80px !important; height: 80px !important; }
-        }
-        @keyframes chapterFadeIn {
-          from { opacity: 0; filter: brightness(2); }
-          to { opacity: 1; filter: brightness(1); }
-        }
-
-        .path-connector-container {
-          position: absolute;
-          height: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: space-around;
-          transform-origin: 0 10px;
-          z-index: 1;
-          pointer-events: none;
-        }
-        .dot {
-          width: 14px;
-          height: 14px;
-          background-color: rgba(255, 255, 255, 0.6);
-          border-radius: 50%;
-          border: 2px solid rgba(0,0,0,0.05);
-        }
-
-        /* Bio Modal Styles */
-        .bio-modal-overlay {
-          position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-          display: flex; justify-content: center;
-          align-items: center; z-index: 3000; padding: 20px;
-          pointer-events: none; /* Let clicks pass through outside the content */
-        }
+        @media (max-width: 600px) 
         .bio-modal-content {
           pointer-events: auto; /* Re-enable clicks for content */
           background: var(--card-bg); width: 100%; max-width: 450px;

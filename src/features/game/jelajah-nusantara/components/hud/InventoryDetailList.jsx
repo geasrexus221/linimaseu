@@ -13,7 +13,7 @@ export default function InventoryDetailList({ player, onClose, isTestMode }) {
 
   if (!player) return null;
 
-  // Fill up 3 slots
+  
   const slots = [0, 1, 2].map(idx => player.inventory[idx] || null);
 
   return (
@@ -32,7 +32,7 @@ export default function InventoryDetailList({ player, onClose, isTestMode }) {
       </div>
 
       <div className="window-content">
-        {/* STATS SECTION */}
+        
         <div className="stats-dashboard">
           <div className="stat-card">
             <div className="stat-icon tekad"><Zap size={20} fill="#FFC800" /></div>
@@ -70,34 +70,34 @@ export default function InventoryDetailList({ player, onClose, isTestMode }) {
           <span>KANTONG KARTU AKSI (MAX 3)</span>
         </div>
 
-        {/* CARDS SECTION */}
+        
         <div className="inventory-slots">
           {slots.map((card, idx) => (
             <div key={idx} className={`inventory-slot ${card ? 'filled' : 'empty'}`}>
               {card ? (
                 <div className="card-item-full">
-                  {/* Cost Badge in Top-Right */}
+                  
                   <div className="card-cost-box">
                     <Heart size={10} fill="#FF4B4B" color="#FF4B4B" />
                     <span>{card.cost}</span>
                   </div>
 
-                  {/* Illustration Area */}
+                  
                   <div className="card-illustration-full" style={{ background: `linear-gradient(135deg, ${card.color}, rgba(255,255,255,0.35))` }}>
                     <div className="card-icon-box">{card.icon}</div>
                   </div>
 
-                  {/* Card Name Banner */}
+                  
                   <div className="card-name-banner-full">
                     {card.name}
                   </div>
 
-                  {/* Card Description/Effect Box */}
+                  
                   <div className="card-desc-box-full">
                     <p className="card-desc-text-full">{card.description}</p>
                   </div>
 
-                  {/* Action Button */}
+                  
                   <div className="card-use-action-box">
                     <button
                       className="card-use-btn"
@@ -124,7 +124,7 @@ export default function InventoryDetailList({ player, onClose, isTestMode }) {
           ))}
         </div>
 
-        {/* CHEAT MENU SECTION */}
+        
         {isTestMode && (
           <div className="cheat-menu-section">
             <div className="section-divider">

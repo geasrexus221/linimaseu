@@ -15,7 +15,7 @@ export default function StartScreen({ onStart }) {
         </div>
 
         <div className="selection-grid">
-          {/* MURID CARD */}
+          
           <div className="duo-card student" onClick={onStart}>
             <div className="duo-card-top">
               <div className="duo-icon-box">
@@ -28,7 +28,7 @@ export default function StartScreen({ onStart }) {
             </div>
           </div>
 
-          {/* GURU CARD */}
+          
           <div className="duo-card teacher" onClick={onStart}>
             <div className="duo-card-top">
               <div className="duo-icon-box">

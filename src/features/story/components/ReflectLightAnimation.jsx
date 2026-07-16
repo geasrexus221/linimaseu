@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { soundManager } from '../../../utils/SoundManager';
 
 export default function ReflectLightAnimation({ onComplete }) {
-  // 'none' | 'straight' | 'down' | 'up'
+  
   const [mirrorState, setMirrorState] = useState('none');
   const isHit = mirrorState === 'up';
 
@@ -23,7 +23,7 @@ export default function ReflectLightAnimation({ onComplete }) {
       <div className="title">Pilih posisi cermin yang tepat agar cahaya mengenai target!</div>
       
       <div className="animation-area">
-        {/* Flashlight */}
+        
         <div className="flashlight">
           <svg width="52" height="52" viewBox="0 0 24 24" style={{ display: 'block' }}>
             <rect x="3" y="10" width="11" height="4" rx="1" fill="#4B5563" stroke="#374151" strokeWidth="0.8" />
@@ -35,13 +35,13 @@ export default function ReflectLightAnimation({ onComplete }) {
           </svg>
         </div>
 
-        {/* Target Star */}
+        
         <div className={`target-star ${isHit ? 'lit' : 'dark'}`}>⭐</div>
 
-        {/* The Incident Beam (always active) */}
+        
         <div className="beam incident-beam" />
 
-        {/* The Mirror */}
+        
         <div className="mirror-wrapper">
           {mirrorState !== 'none' && (
             <motion.div 
@@ -55,7 +55,7 @@ export default function ReflectLightAnimation({ onComplete }) {
             />
           )}
 
-          {/* The Reflected Beam */}
+          
           <AnimatePresence>
             {mirrorState !== 'none' && (
               <motion.div 

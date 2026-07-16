@@ -16,13 +16,13 @@ export default function ProfileMainScreen() {
   const { streak, stars, completedChapters, userName, ownedArtifacts } = useStore();
   const { setProfileSubView } = useNavigationStore();
   
-  // Register Desktop Stats Panel for this screen
+  
   useRegisterRightPanel(DesktopStatsPanel, 'profile-main');
   
   const [showClassmates, setShowClassmates] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
 
-  // Combine ME with classmates for ranking
+  
   const baseClassmates = MOCK_CLASSROOMS['KELAS1'].students;
   const allInClass = [
     ...baseClassmates,
@@ -31,14 +31,14 @@ export default function ProfileMainScreen() {
 
   return (
     <div className="profile-main-container">
-      {/* Playful Header Background */}
+      
       <div className="profile-bg-header">
         <div className="wave w1" />
         <div className="wave w2" />
         <div className="wave w3" />
       </div>
 
-      {/* Profile Header Card */}
+      
       <div className="profile-top-card">
         <div className="avatar-section">
           <div className="avatar-glow-ring">
@@ -73,7 +73,7 @@ export default function ProfileMainScreen() {
       </div>
 
       <div className="profile-scroll-content content-container">
-        {/* Artifact Book Bar - Premium Design */}
+        
         <div className="artifact-bar-premium" onClick={() => setProfileSubView('collection')}>
           <div className="bar-icon-box">
             <Book size={24} color="white" fill="white" />
@@ -87,7 +87,7 @@ export default function ProfileMainScreen() {
           </div>
         </div>
 
-        {/* Modular Components */}
+        
         <StatsGrid 
           streak={streak} 
           accuracy={85} 
@@ -101,7 +101,7 @@ export default function ProfileMainScreen() {
         <AchievementBadge />
       </div>
 
-      {/* Modals */}
+      
       {showClassmates && (
         <ClassmatesListModal 
           classmates={allInClass} 

@@ -29,9 +29,9 @@ export default function DuelInvitationContent({ opponent, onChoice }) {
 
   return (
     <div className="invitation-container">
-      {/* Challenger vs Opponent Faceoff */}
+      
       <div className="faceoff-arena">
-        {/* CHALLENGER (LEFT) */}
+        
         <div className="faceoff-fighter">
           <div className="fighter-podium-wrapper">
             <img src={getChallengerSprite()} alt={challenger?.name} className="fighter-sprite" />
@@ -45,10 +45,10 @@ export default function DuelInvitationContent({ opponent, onChoice }) {
           </div>
         </div>
 
-        {/* VS SPLIT */}
+        
         <div className="faceoff-vs">VS</div>
 
-        {/* OPPONENT (RIGHT) */}
+        
         <div className="faceoff-fighter">
           <div className="fighter-podium-wrapper">
             <img src={getOpponentSprite()} alt={opponent?.name} className="fighter-sprite" />
@@ -63,7 +63,7 @@ export default function DuelInvitationContent({ opponent, onChoice }) {
         </div>
       </div>
 
-      {/* Invitation Message Card */}
+      
       <div className="invitation-msg-card">
         <span className="notice-icon">⚔️</span>
         <p>Kamu berpapasan dengan <strong>{opponent?.name}</strong>! Ingin memulai duel karakter?</p>

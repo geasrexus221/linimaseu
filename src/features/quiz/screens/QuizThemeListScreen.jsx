@@ -18,7 +18,7 @@ export default function QuizThemeListScreen() {
     color: pillarColor 
   } = selectedPillar || {};
 
-  const [selectedCount, setSelectedCount] = useState(10); // Default 10 soal
+  const [selectedCount, setSelectedCount] = useState(10); 
   const themes = (QUIZ_THEMES[pillarId] || [])
     .filter(t => selectedKelas === 'Semua' || t.kelas === selectedKelas)
     .map((t) => {
@@ -44,7 +44,7 @@ export default function QuizThemeListScreen() {
         <div className="header-content">
           <h2 className="pillar-title">{pillarName}</h2>
           
-          {/* Difficulty Switcher Bar */}
+          
           <div className="difficulty-switcher">
             {difficulties.map((diff) => (
               <button 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { X, Zap, Target, Award, Book, ChevronRight, ChevronLeft, Star } from 'lucide-react';
 import { actionCards } from '../../features/game/jelajah-nusantara/data/cards';
 
-// Seeded random helper based on friend's name/ID
+
 const getSeededRandom = (seedString) => {
   let hash = 0;
   for (let i = 0; i < seedString.length; i++) {
@@ -24,10 +24,10 @@ const FRIEND_ACHIEVEMENTS = [
 const resolveFriendData = (friend, rankValue) => {
   const rand = getSeededRandom(friend.name + friend.id);
 
-  // 1. Accuracy: between 72% and 96%
+  
   const accuracy = 72 + Math.floor(rand() * 25);
 
-  // 2. Title based on score/rank
+  
   let title = "PENGELANA AWAL";
   if (friend.score > 1400) {
     title = "LEGENDA NUSANTARA";
@@ -37,25 +37,25 @@ const resolveFriendData = (friend, rankValue) => {
     title = "PENJELAJAH AKTIF";
   }
 
-  // 3. Mock owned cards collection
-  const ownedCardsCount = 3 + Math.floor(rand() * 6); // 3 to 8 unique cards
+  
+  const ownedCardsCount = 3 + Math.floor(rand() * 6); 
   const shuffledCards = [...actionCards].sort(() => rand() - 0.5);
   const ownedCards = shuffledCards.slice(0, ownedCardsCount).map(card => ({
     ...card,
-    count: 1 + Math.floor(rand() * 3) // count 1 to 3
+    count: 1 + Math.floor(rand() * 3) 
   }));
 
-  // Sorting logic (Epic > Rare > Common)
+  
   const rarityOrder = { epic: 0, rare: 1, common: 2 };
   ownedCards.sort((a, b) => rarityOrder[a.rarity] - rarityOrder[b.rarity]);
 
-  // 4. Mock Weekly Chart Values
+  
   const weeklyValues = Array.from({ length: 7 }, () => 15 + Math.floor(rand() * 80));
   const maxWeeklyIndex = weeklyValues.indexOf(Math.max(...weeklyValues));
   const daysName = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
   const maxDayName = daysName[maxWeeklyIndex];
 
-  // 5. Mock Achievements (active / grayscale status for the 4 badges)
+  
   const activeBadges = [
     rand() > 0.35,
     rand() > 0.45,
@@ -75,7 +75,7 @@ const resolveFriendData = (friend, rankValue) => {
 };
 
 export default function FriendProfileModal({ friend, rank, onClose }) {
-  const [viewMode, setViewMode] = useState('main'); // 'main' or 'collection'
+  const [viewMode, setViewMode] = useState('main'); 
   const [selectedItem, setSelectedItem] = useState(null);
   
   if (!friend) return null;
@@ -108,7 +108,7 @@ export default function FriendProfileModal({ friend, rank, onClose }) {
               </div>
 
               <div className="inner-content-wrapper">
-                {/* StatsGrid */}
+                
                 <div className="stats-grid-wrapper">
                   <div className="stat-card-3d orange">
                     <div className="stat-card-content">
@@ -145,7 +145,7 @@ export default function FriendProfileModal({ friend, rank, onClose }) {
                   </div>
                 </div>
 
-                {/* Tas Bekal Kartu Bar */}
+                
                 <div className="artifact-bar-premium" onClick={() => setViewMode('collection')}>
                   <div className="bar-icon-box">
                     <Book size={22} color="white" fill="white" />
@@ -159,7 +159,7 @@ export default function FriendProfileModal({ friend, rank, onClose }) {
                   </div>
                 </div>
 
-                {/* Weekly Chart */}
+                
                 <div className="weekly-chart-card">
                   <div className="chart-header">
                     <h3>Laporan Mingguan</h3>
@@ -186,7 +186,7 @@ export default function FriendProfileModal({ friend, rank, onClose }) {
                   </p>
                 </div>
 
-                {/* Achievements */}
+                
                 <div className="achievement-section-card">
                   <h3 className="section-title">Medali Pencapaian</h3>
                   <div className="badge-list-fun">
@@ -211,7 +211,7 @@ export default function FriendProfileModal({ friend, rank, onClose }) {
           </>
         ) : (
           <>
-            {/* COLLECTION VIEW */}
+            
             <header className="collection-header">
               <button className="back-btn-3d" onClick={() => setViewMode('main')}>
                 <ChevronLeft size={28} />
@@ -260,7 +260,7 @@ export default function FriendProfileModal({ friend, rank, onClose }) {
         )}
       </div>
 
-      {/* ITEM DETAIL POPUP */}
+      
       {selectedItem && (
         <div className="item-detail-overlay-friend" onClick={() => setSelectedItem(null)}>
           <div className="detail-modal-friend" onClick={e => e.stopPropagation()}>

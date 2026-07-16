@@ -14,7 +14,7 @@ import { soundManager } from './utils/SoundManager'
 function App() {
   const { hasStarted, setHasStarted, currentView, quizSubView, gameSubView, jelajahSubView, tarikTambangPlay } = useNavigationStore();
   const { activeTab, setActiveTab } = useStore();
-  const [userRole, setUserRole] = useState(null); // 'student' or 'teacher'
+  const [userRole, setUserRole] = useState(null); 
 
   React.useEffect(() => {
     const unlockAudio = () => {
@@ -47,7 +47,7 @@ function App() {
     return <AuthRouter onAuthSuccess={handleAuthSuccess} />
   }
 
-  // Redirect to Teacher Dashboard if logged in as teacher
+  
   if (userRole === 'teacher') {
     return <TeacherDashboard onLogout={handleLogout} />
   }

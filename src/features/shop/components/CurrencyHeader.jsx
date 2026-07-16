@@ -3,7 +3,7 @@ import { Star, Crown } from 'lucide-react';
 import { useStore } from '../../../store/useStore';
 
 export default function CurrencyHeader() {
-  const { stars, streak } = useStore(); // Streak acts as torches/obor
+  const { stars, streak } = useStore(); 
 
   return (
     <div className="currency-header-box">

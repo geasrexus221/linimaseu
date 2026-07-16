@@ -1,4 +1,4 @@
-/* Global Nunito Font & Outfit Aliasing */
+
 @font-face {
   font-family: 'Nunito';
   font-style: normal;
@@ -35,7 +35,7 @@
   src: url(https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDBImRTM.ttf) format('truetype');
 }
 
-/* Map Outfit to Nunito so hardcoded Outfit fonts render as Nunito */
+
 @font-face {
   font-family: 'Outfit';
   font-style: normal;
@@ -76,21 +76,21 @@
   --primary-color: #f4c365;
   --primary-color-dark: #d1a54c;
   --secondary-color: #1cb0f6;
-  --background-color: #faf9f6; /* Soft Cream, not pure white */
+  --background-color: #faf9f6; 
   --card-bg: #ffffff;
   --text-color: #4b4b4b;
-  --text-muted: #737373; /* Darker gray for better contrast in light mode */
+  --text-muted: #737373; 
   --accent-color: #58cc02;
   --border-color: #e5e5e5;
   --font-main: 'Nunito', 'Outfit', system-ui, sans-serif;
   --header-height: 55px;
   --tabbar-height: 75px;
   
-  /* Sidebar Colors (Light Mode) */
-  --sidebar-bg: #49CAE3; /* Custom Teal requested by user */
-  --sidebar-border: #3ab2c9; /* Slightly darker teal for border */
   
-  /* Semantic state colors (Light Mode) */
+  --sidebar-bg: #49CAE3; 
+  --sidebar-border: #3ab2c9; 
+  
+  
   --success-bg: #ECFDF5;
   --success-text: #10B981;
   --warning-bg: #FEF3C7;
@@ -100,12 +100,12 @@
   --primary-bg-light: #EEF2F6;
   --primary-text: #3B82F6;
 
-  /* Fluid Layout Tokens */
+  
   --max-content-width: 900px;
   --sidebar-width: 300px;
   --right-panel-width: 300px;
   --container-padding: 24px;
-  --shop-bg: #9BD2FE; /* Slightly darker sky blue for shop background */
+  --shop-bg: #9BD2FE; 
 }
 
 @media (max-width: 1024px) {
@@ -115,7 +115,7 @@
 }
 
 [data-theme='dark'] {
-  --background-color: #1e1e2d; /* Deep Navy, not pure black */
+  --background-color: #1e1e2d; 
   --card-bg: #2a2a3d;
   --text-color: #e0e0e0;
   --text-muted: #888899;
@@ -126,7 +126,7 @@
   --sidebar-border: var(--border-color);
   --shop-bg: var(--background-color);
 
-  /* Semantic state colors (Dark Mode) */
+  
   --success-bg: rgba(16, 185, 129, 0.15);
   --success-text: #10B981;
   --warning-bg: rgba(245, 158, 11, 0.15);
@@ -147,12 +147,12 @@ html, body, #root {
   width: 100%;
   height: 100%;
   height: 100dvh;
-  overflow: hidden; /* Main viewport remains locked */
+  overflow: hidden; 
   font-family: var(--font-main);
   background-color: var(--background-color);
   color: var(--text-color);
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none; /* Cegah teks terseleksi saat scroll di mobile */
+  -webkit-user-select: none; 
   user-select: none;
 }
 
@@ -162,7 +162,7 @@ input, textarea, select {
   pointer-events: auto;
 }
 
-/* Custom Scrollbar (Duolingo Style) */
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -194,7 +194,7 @@ input, textarea, select {
   background-color: var(--background-color);
 }
 
-/* Header Styles */
+
 .header {
   height: var(--header-height);
   background-color: var(--primary-color);
@@ -214,7 +214,7 @@ input, textarea, select {
   font-weight: 800;
 }
 
-/* TabBar Styles */
+
 .tabbar {
   height: var(--tabbar-height);
   background-color: var(--card-bg);
@@ -239,7 +239,7 @@ input, textarea, select {
   transform: scale(0.85);
 }
 
-/* Characters Grid (Double-Ring Style) */
+
 .story-grid {
   flex: 1;
   overflow-y: auto;
@@ -264,13 +264,13 @@ input, textarea, select {
   position: relative;
 }
 
-/* Outer Ring (Progress style) */
+
 .char-ring {
   width: 130px;
   height: 130px;
   border-radius: 50%;
   border: 6px solid #e5e5e5;
-  /* Inactive color */
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -280,11 +280,11 @@ input, textarea, select {
 
 .char-ring.active {
   border-color: #ffc800;
-  /* Active yellow ring */
+  
   animation: float-soft 3s ease-in-out infinite;
 }
 
-/* Inner Circle (The character node) */
+
 .char-node {
   width: 100px;
   height: 100px;
@@ -296,15 +296,15 @@ input, textarea, select {
   cursor: pointer;
   box-shadow: 0 6px 0 var(--border-color);
   border: 4px solid var(--card-bg);
-  /* Gap effect */
+  
 }
 
 .char-node.active {
   background-color: #ffc800;
-  /* Warna tema aktif, bukan putih */
+  
   box-shadow: 0 6px 0 #d1a54c;
   border: 4px solid white;
-  /* Tetap pertahankan jarak putih tipis di pinggir */
+  
 }
 
 .char-node.active:active {
@@ -325,7 +325,7 @@ input, textarea, select {
   font-size: 1rem;
 }
 
-/* Small Crown Badge */
+
 .crown-badge {
   position: absolute;
   bottom: 0px;
@@ -346,7 +346,7 @@ input, textarea, select {
   }
 }
 
-/* Floating Badges (Start Screen etc) */
+
 .btn-primary {
   font-family: var(--font-main);
   background-color: var(--primary-color);
@@ -375,7 +375,7 @@ input, textarea, select {
   background-color: var(--background-color);
 }
 
-/* Chapter Screen Styles */
+
 .chapter-container {
   flex: 1;
   overflow-y: auto;
@@ -422,7 +422,7 @@ input, textarea, select {
   align-items: center;
 }
 
-/* Zig-zag Path for Chapters */
+
 .chapter-path {
   display: flex;
   flex-direction: column;
@@ -451,7 +451,7 @@ input, textarea, select {
   transform: translateX(80px);
 }
 
-/* Start Bubble */
+
 .start-bubble {
   position: absolute;
   top: -45px;
@@ -465,7 +465,7 @@ input, textarea, select {
   border: 2px solid var(--border-color);
 }
 
-/* Visual Novel Styles */
+
 .vn-container {
   position: absolute;
   top: 0;
@@ -551,7 +551,7 @@ input, textarea, select {
   animation: pulse 1.5s infinite;
 }
 
-/* Quiz Screen Styles */
+
 .quiz-container {
   flex: 1;
   display: flex;
@@ -620,7 +620,7 @@ input, textarea, select {
   box-shadow: 0 6px 0 var(--accent-color-red, #ff4b4b);
 }
 
-/* --- ADAPTIVE UTILITIES --- */
+
 
 .content-container {
   width: 100%;
@@ -643,7 +643,7 @@ input, textarea, select {
   }
 }
 
-/* Duolingo Hover Effect (PC Only) */
+
 @media (hover: hover) {
   .btn-hover-lift:hover {
     transform: translateY(-2px);

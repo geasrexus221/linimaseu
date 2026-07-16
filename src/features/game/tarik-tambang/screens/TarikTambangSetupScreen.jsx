@@ -23,14 +23,14 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
   const [timeLimit, setTimeLimit] = useState(20);
   const [showOnlineModal, setShowOnlineModal] = useState(false);
 
-  // Participant slots state: [Slot 1 (Kamu), Slot 2 (Lawan)]
+  
   const [players, setPlayers] = useState([
-    null, // Slot 1 (Kamu)
-    null  // Slot 2 (Lawan)
+    null, 
+    null  
   ]);
   const [activeSlotIdx, setActiveSlotIdx] = useState(null);
   
-  // Modals & UI States
+  
   const [showEditModal, setShowEditModal] = useState(false);
   const [showOpponentModal, setShowOpponentModal] = useState(false);
   const [showBotDifficultyModal, setShowBotDifficultyModal] = useState(false);
@@ -39,13 +39,13 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
   const [isOnlineLoading, setIsOnlineLoading] = useState(false);
   const [warningMessage, setWarningMessage] = useState('');
 
-  // Modal Edit states
+  
   const [editName, setEditName] = useState('Kamu');
   const [editCharId, setEditCharId] = useState(1);
   const [editArtifacts, setEditArtifacts] = useState([null, null, null]);
 
-  // Consumable items & character states
-  const [selectedChar, setSelectedChar] = useState(1); // 1 = 🤠, 2 = 👩‍🚀
+  
+  const [selectedChar, setSelectedChar] = useState(1); 
   const [equippedItems, setEquippedItems] = useState([null, null, null]);
   const [showArtifactPicker, setShowArtifactPicker] = useState(false);
   const [activeArtifactSlot, setActiveArtifactSlot] = useState(null);
@@ -102,13 +102,13 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
     soundManager.play('click', 0.5);
     setActiveSlotIdx(idx);
     if (idx === 0) {
-      // Direct customization for slot 0 (main player)
+      
       setEditName('Kamu');
       setEditCharId(selectedChar);
       setEditArtifacts(equippedItems);
       setShowEditModal(true);
     } else {
-      // Open opponent selector modal for slot 1
+      
       setShowOpponentModal(true);
     }
   };
@@ -124,7 +124,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
       setShowEditModal(true);
     } else {
       if (players[1].type === 'ai') {
-        setShowBotViewModal(true); // Show read-only bot info
+        setShowBotViewModal(true); 
       } else {
         setShowOpponentModal(true);
       }
@@ -183,11 +183,11 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
     const diffConfig = DIFFICULTIES.find(d => d.id === diff);
     const cardCount = diffConfig?.cardCount ?? 0;
 
-    // Pick random cards from aduCendekiawanItems pool
+    
     const allItemIds = ['tt_compas', 'tt_weight', 'tt_shield', 'tt_hourglass', 'tt_magnet', 'tt_stun', 'tt_heal_potion', 'tt_book_bomb', 'tt_telescope'];
     const shuffled = [...allItemIds].sort(() => 0.5 - Math.random());
     const botItemIds = shuffled.slice(0, cardCount);
-    // Pad to 3 slots
+    
     const botArtifacts = [
       botItemIds[0] ? { id: botItemIds[0] } : null,
       botItemIds[1] ? { id: botItemIds[1] } : null,
@@ -203,7 +203,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
       difficulty: diff,
       characterId: randomChar,
       equippedArtifacts: botArtifacts,
-      botItemIds // store for game screen to use
+      botItemIds 
     };
     setPlayers(newPlayers);
     setDifficulty(diff);
@@ -248,11 +248,11 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
 
   return (
     <div className="lobby-container">
-      {/* Dynamic Classroom Grid Backdrop */}
+      
       <div className="table-texture" />
       <div className="table-vignette" />
 
-      {/* HEADER */}
+      
       <header className="lobby-header">
         <button className="back-btn" onClick={onBack}>
           <ChevronLeft size={28} />
@@ -267,7 +267,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
       </header>
 
       <main className="lobby-content-grid">
-        {/* START DUEL BUTTON IN THE GRID (TOP) */}
+        
         <div className="start-btn-container">
           <button className="start-voyage-btn" onClick={handleStart}>
             <div className="btn-3d-face">
@@ -278,7 +278,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
           </button>
         </div>
 
-        {/* RIGHT COLUMN (SWAPPED TO TOP ON MOBILE): PESERTA (2 SLOTS) */}
+        
         <div className="right-column">
           <section className="lobby-section">
             <div className="section-title">
@@ -299,9 +299,9 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
           </section>
         </div>
 
-        {/* LEFT COLUMN: Configuration settings */}
+        
         <div className="left-column">
-          {/* Combined Section: PENGATURAN KUIS */}
+          
           <section className="lobby-section">
             <div className="section-title">
               <span>PENGATURAN KUIS</span>
@@ -331,7 +331,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
             </div>
           </section>
 
-          {/* Combined Section: ATURAN DUEL */}
+          
           <section className="lobby-section">
             <div className="section-title">
               <span>ATURAN DUEL</span>
@@ -358,7 +358,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
         </div>
       </main>
 
-      {/* Online Players Modal */}
+      
       {showOnlineModal && (
         <OnlinePlayersModal 
           onClose={() => setShowOnlineModal(false)}
@@ -370,9 +370,9 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
         />
       )}
 
-      {/* Artifact Picker Modal - rendered AFTER edit modal so it appears on top */}
+      
 
-      {/* Player Slot 1 Customization Modal */}
+      
       {showEditModal && (
         <div className="modal-overlay" onClick={() => setShowEditModal(false)}>
           <div className="player-option-modal" style={{ maxWidth: '400px' }} onClick={e => e.stopPropagation()}>
@@ -385,9 +385,9 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
               </div>
             </div>
 
-            {/* PENGATURAN KARAKTER: Character slot + 3 vertical item slots */}
+            
             <div style={{ display: 'flex', gap: '20px', marginBottom: '20px', alignItems: 'stretch' }}>
-              {/* Left side: Character slot */}
+              
               <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <label style={{ fontSize: '0.75rem', fontWeight: 900, color: isDark ? '#bfcdff' : '#6B7280', textAlign: 'left' }}>KARAKTER</label>
                 <div 
@@ -410,7 +410,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
                         style={{ height: '80px', objectFit: 'contain', marginBottom: '4px' }}
                       />
                       <span style={{ fontSize: '0.75rem', fontWeight: 955, color: isDark ? '#fff' : '#1F2937' }}>Karakter {editCharId}</span>
-                      {/* Passive Skill Description */}
+                      
                       <div style={{
                         marginTop: '6px', padding: '5px 8px',
                         background: isDark ? 'rgba(88,204,2,0.12)' : 'rgba(88,204,2,0.1)',
@@ -435,7 +435,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
                 </div>
               </div>
 
-              {/* Right side: 3 vertical item slots */}
+              
               <div style={{ flex: '1.2', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <label style={{ fontSize: '0.75rem', fontWeight: 900, color: isDark ? '#bfcdff' : '#6B7280', textAlign: 'left' }}>BEKAL KARTU AKSI</label>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', flex: '1', justifyContent: 'space-between' }}>
@@ -510,7 +510,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
         </div>
       )}
 
-      {/* Artifact Picker Modal - above edit modal in DOM order so z-index stacks correctly */}
+      
       {showArtifactPicker && (
         <ArtifactPicker
           artifacts={availableItems}
@@ -520,7 +520,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
         />
       )}
 
-      {/* Character Selector Modal inside Edit Modal */}
+      
       {showCharPickerModal && (
         <div className="modal-overlay" style={{ zIndex: 4500 }} onClick={() => setShowCharPickerModal(false)}>
           <div className="player-option-modal" style={{ maxWidth: '340px' }} onClick={e => e.stopPropagation()}>
@@ -560,7 +560,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
         </div>
       )}
 
-      {/* Opponent Selector Modal */}
+      
       {showOpponentModal && (
         <div className="modal-overlay" onClick={() => setShowOpponentModal(false)}>
           <div className="player-option-modal" onClick={e => e.stopPropagation()}>
@@ -582,13 +582,13 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
         </div>
       )}
 
-      {/* Bot Info Modal (Read-only) */}
+      
       {showBotViewModal && players[1] && (
         <div className="modal-overlay" onClick={() => setShowBotViewModal(false)}>
           <div className="player-option-modal" style={{ maxWidth: '380px' }} onClick={e => e.stopPropagation()}>
             <h3 style={{ marginBottom: '4px' }}>Peserta</h3>
 
-            {/* Bot name + difficulty badge */}
+            
             <div style={{ marginBottom: '16px', textAlign: 'left' }}>
               <label style={{ fontSize: '0.75rem', fontWeight: 900, marginBottom: '6px', display: 'block', color: isDark ? '#bfcdff' : '#6B7280' }}>NAMA PESERTA</label>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 12px', background: isDark ? '#1a0a3a' : '#F3F4F6', borderRadius: '12px', border: '3px solid ' + (isDark ? '#2e1957' : '#E5E7EB') }}>
@@ -603,9 +603,9 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
               </div>
             </div>
 
-            {/* Character + Item Slots (read-only) */}
+            
             <div style={{ display: 'flex', gap: '20px', marginBottom: '20px', alignItems: 'stretch' }}>
-              {/* Left: Character */}
+              
               <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <label style={{ fontSize: '0.75rem', fontWeight: 900, color: isDark ? '#bfcdff' : '#6B7280', textAlign: 'left' }}>KARAKTER</label>
                 <div style={{
@@ -622,7 +622,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
                     style={{ height: '80px', objectFit: 'contain', marginBottom: '4px' }}
                   />
                   <span style={{ fontSize: '0.75rem', fontWeight: 955, color: isDark ? '#fff' : '#1F2937' }}>Karakter {players[1].characterId}</span>
-                  {/* Passive skill badge */}
+                  
                   <div style={{ marginTop: '6px', padding: '5px 8px', background: isDark ? 'rgba(88,204,2,0.12)' : 'rgba(88,204,2,0.1)', borderRadius: '10px', border: '1.5px solid rgba(88,204,2,0.3)', width: '100%', boxSizing: 'border-box' }}>
                     <div style={{ fontSize: '0.55rem', fontWeight: 900, color: '#58CC02', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '2px' }}>⚡ Skill Pasif</div>
                     <div style={{ fontSize: '0.65rem', fontWeight: 700, color: isDark ? '#aaffaa' : '#166534', lineHeight: '1.3' }}>
@@ -632,12 +632,12 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
                 </div>
               </div>
 
-              {/* Right: 3 Item Slots (read-only) */}
+              
               <div style={{ flex: '1.2', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <label style={{ fontSize: '0.75rem', fontWeight: 900, color: isDark ? '#bfcdff' : '#6B7280', textAlign: 'left' }}>BEKAL KARTU AKSI</label>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', flex: '1', justifyContent: 'space-between' }}>
                   {(players[1].equippedArtifacts || [null, null, null]).map((art, idx) => {
-                    // Resolve full item info from id
+                    
                     const itemInfo = art?.id ? aduCendekiawanItems.find(i => i.id === art.id) : null;
                     return (
                       <div
@@ -673,7 +673,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
         </div>
       )}
 
-      {/* Bot Difficulty Selector Modal */}
+      
       {showBotDifficultyModal && (
         <div className="modal-overlay" onClick={() => setShowBotDifficultyModal(false)}>
           <div className="player-option-modal" style={{ maxWidth: '360px' }} onClick={e => e.stopPropagation()}>
@@ -699,7 +699,7 @@ export default function TarikTambangSetupScreen({ onBack, onStart }) {
         </div>
       )}
 
-      {/* Online Loading Modal */}
+      
       {isOnlineLoading && (
         <div className="modal-overlay" style={{ zIndex: 5000, background: 'rgba(0,0,0,0.85)' }}>
           <div className="player-option-modal" style={{ maxWidth: '300px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>

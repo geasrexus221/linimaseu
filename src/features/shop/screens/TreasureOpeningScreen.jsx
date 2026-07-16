@@ -11,23 +11,23 @@ export default function TreasureOpeningScreen() {
   const { addArtifact, ownedArtifacts } = useStore();
   const { setShopSubView, shopGachaCount } = useNavigationStore();
   
-  const [step, setStep] = useState('waiting'); // waiting, opening, opened, results
+  const [step, setStep] = useState('waiting'); 
   const [resultItems, setResultItems] = useState([]);
   const [highestRarity, setHighestRarity] = useState('common');
   const [revealedIndices, setRevealedIndices] = useState([]);
-  const [selectedDetail, setSelectedDetail] = useState(null); // Item for popup
+  const [selectedDetail, setSelectedDetail] = useState(null); 
   const [isFlashActive, setIsFlashActive] = useState(false);
   const [showShockwave, setShowShockwave] = useState(false);
   
-  // Track IDs already owned before this gacha
+  
   const [preOwnedIds, setPreOwnedIds] = useState([]);
 
   const startOpening = () => {
-    // Save currently owned IDs
-    setPreOwnedIds(ownedArtifacts.map(a => a.id));
-    setStep('opening'); // triggers vibrate
     
-    // Draw items using the externalized logic
+    setPreOwnedIds(ownedArtifacts.map(a => a.id));
+    setStep('opening'); 
+    
+    
     const drawn = drawFromGachaPool(SHOP_CATALOG.gachaPool, shopGachaCount);
     
     setResultItems(drawn);
@@ -45,7 +45,7 @@ export default function TreasureOpeningScreen() {
       setStep('opened');
       soundManager.play('chest_open', 0.6);
       
-      // Trigger dramatic effects if Epic
+      
       if (finalRarity === 'epic') {
         setIsFlashActive(true);
         setShowShockwave(true);
@@ -53,7 +53,7 @@ export default function TreasureOpeningScreen() {
         setTimeout(() => setShowShockwave(false), 1000);
       }
 
-      // Wait for lid to open and light to shine for 1.5s, then show results
+      
       setTimeout(() => {
         setStep('results');
         soundManager.play('success', 0.5);
@@ -61,7 +61,7 @@ export default function TreasureOpeningScreen() {
       }, 1500);
     };
 
-    // Play whoosh SFX
+    
     soundManager.play('whoosh', 0.65);
 
     const whooshAudio = soundManager.sounds?.whoosh;
@@ -70,33 +70,33 @@ export default function TreasureOpeningScreen() {
         whooshAudio.onended = null;
         proceedToOpen();
       };
-      // Fallback timer: whoosh is usually ~1-1.5s, so 2.5s fallback is super safe
+      
       setTimeout(proceedToOpen, 2500);
     } else {
-      // If sound manager is disabled or audio not available, open after standard 1.5s vibrate
+      
       setTimeout(proceedToOpen, 1500);
     }
   };
 
   const revealAll = () => {
-    // Filter out indices that are already revealed
+    
     const unrevealedIndices = resultItems
       .map((_, i) => i)
       .filter(i => !revealedIndices.includes(i));
 
     if (unrevealedIndices.length === 0) return;
 
-    // Reveal one by one with a delay of 200ms
+    
     unrevealedIndices.forEach((idx, stepIndex) => {
       setTimeout(() => {
         setRevealedIndices(prev => {
           if (prev.includes(idx)) return prev;
           const next = [...prev, idx];
           
-          // Play squash sound when a card is revealed!
+          
           soundManager.play('squash', 0.6);
 
-          // If it is Epic, trigger epic dramatic flash and shockwave effects exactly as it opens
+          
           if (resultItems[idx].rarity === 'epic') {
             setIsFlashActive(true);
             setTimeout(() => setIsFlashActive(false), 500);
@@ -106,20 +106,20 @@ export default function TreasureOpeningScreen() {
 
           return next;
         });
-      }, stepIndex * 200); // 200ms delay between each card opening
+      }, stepIndex * 200); 
     });
   };
 
   const revealOneOrShowDetail = (index) => {
     if (!revealedIndices.includes(index)) {
-      // If single reveal is Epic, add a small flash!
+      
       if (resultItems[index].rarity === 'epic') {
         setIsFlashActive(true);
         setTimeout(() => setIsFlashActive(false), 300);
         setShowShockwave(true);
         setTimeout(() => setShowShockwave(false), 1000);
       }
-      soundManager.play('squash', 0.6); // 🔊 Play squash sound!
+      soundManager.play('squash', 0.6); 
       setRevealedIndices([...revealedIndices, index]);
     } else {
       setSelectedDetail(resultItems[index]);
@@ -128,14 +128,14 @@ export default function TreasureOpeningScreen() {
 
   return (
     <div className={`opening-screen-container ${highestRarity} ${step}`}>
-      {/* SCREEN FLASH */}
+      
       {isFlashActive && <div className="screen-flash" />}
       
-      {/* SHOCKWAVE */}
+      
       {showShockwave && <div className="shockwave" />}
 
-      {/* BACKGROUND EFFECTS */}
-      {/* BACKGROUND EFFECTS - ONLY SHOW RAYS WHEN OPENED */}
+      
+      
       {(step === 'opened' || step === 'results') && (
         <div className="magic-portal-bg">
           <div className="portal-rays" />
@@ -145,7 +145,7 @@ export default function TreasureOpeningScreen() {
       
       <div className="stars-layer" />
       
-      {/* FLOATING SYMBOLS BACKGROUND */}
+      
       <div className="floating-symbols">
         <div className="symbol s1">⚡</div>
         <div className="symbol s2">🍱</div>
@@ -163,7 +163,7 @@ export default function TreasureOpeningScreen() {
         </>
       )}
 
-      {/* CHEST SECTION */}
+      
       {(step === 'waiting' || step === 'opening' || step === 'opened' || (step === 'results' && shopGachaCount === 1)) && (
         <div className={`chest-focus ${step === 'results' ? 'fade-up' : ''} ${isFlashActive ? 'shake-hard' : ''}`}>
           <MagicChest3D 
@@ -174,7 +174,7 @@ export default function TreasureOpeningScreen() {
         </div>
       )}
 
-      {/* WAITING VIEW */}
+      
       {step === 'waiting' && (
         <div className="waiting-text">
           <h2>Peti Ajaib Siap Dibuka!</h2>
@@ -186,12 +186,12 @@ export default function TreasureOpeningScreen() {
         </div>
       )}
 
-      {/* OPENING VIEW */}
+      
       {step === 'opening' && (
         <h2 className="opening-label">MEMBUKA...</h2>
       )}
 
-      {/* RESULT VIEW - SINGLE */}
+      
       {step === 'results' && shopGachaCount === 1 && resultItems.length === 1 && (
         <div className="result-view-single">
           <div className="result-card-3d">
@@ -221,7 +221,7 @@ export default function TreasureOpeningScreen() {
         </div>
       )}
 
-      {/* RESULT VIEW - MULTIPLE (GRID) */}
+      
       {step === 'results' && shopGachaCount > 1 && (
         <div className="result-view-grid">
           
@@ -237,11 +237,11 @@ export default function TreasureOpeningScreen() {
                   data-rarity={item.rarity}
                 >
                   <div className="gacha-card-inner">
-                    {/* BACK OF CARD */}
+                    
                     <div className="gacha-card-back">
                       <span className="question-mark">?</span>
                     </div>
-                    {/* FRONT OF CARD */}
+                    
                     <div className="gacha-card-front">
                       {isNew && <div className="card-new-tag">BARU</div>}
                       <span className="card-icon">{item.icon}</span>
@@ -273,7 +273,7 @@ export default function TreasureOpeningScreen() {
         </div>
       )}
 
-      {/* ITEM DETAIL POPUP */}
+      
       {selectedDetail && (
         <div className="item-detail-overlay" onClick={() => setSelectedDetail(null)}>
           <div className="detail-modal" onClick={e => e.stopPropagation()}>

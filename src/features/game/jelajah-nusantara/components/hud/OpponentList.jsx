@@ -8,7 +8,7 @@ export default function OpponentList({ players, turnIdx }) {
   const theme = useStore((state) => state.theme);
   const isDark = theme === 'dark';
 
-  // Urutkan pemain: Giliran sekarang di atas, diikuti giliran berikutnya, lalu yang sudah lewat di bawah.
+  
   const sortedPlayers = [
     ...players.slice(turnIdx),
     ...players.slice(0, turnIdx)
@@ -25,18 +25,18 @@ export default function OpponentList({ players, turnIdx }) {
 
         return (
           <div key={player.id} className={`opponent-card-wrapper ${isActive ? 'active' : ''}`}>
-            {/* 1. Left Circle - Character Avatar */}
+            
             <div className="character-circle" style={{ borderColor: isActive ? player.color : '#8B521E' }}>
               <img src={charSvg} alt="char" className="avatar-img-circle" />
-              {/* Tiny Badge at bottom of circle */}
+              
               <div className="circle-bottom-badge">
                 {player.id === 'player-1' ? 'KAMU' : player.type === 'ai' ? 'BOT' : 'TEMAN'}
               </div>
             </div>
 
-            {/* 2. Right Body - Header and Stats */}
+            
             <div className="card-right-body">
-              {/* Header Banner (Player slot and Name) */}
+              
               <div className="card-header-banner" style={{ 
                 backgroundColor: player.color, 
                 borderColor: isActive ? player.color : '#8B521E' 
@@ -47,7 +47,7 @@ export default function OpponentList({ players, turnIdx }) {
                 </div>
               </div>
 
-              {/* Main Plate (Compact Stats Row: Tekad/HP, Pijar, Artefak, Kartu) */}
+              
               <div className="card-main-plate" style={{ borderColor: isActive ? player.color : '#8B521E' }}>
                 <div className="stats-row">
                   <span className="val tekad">❤️{player.tekad}</span>

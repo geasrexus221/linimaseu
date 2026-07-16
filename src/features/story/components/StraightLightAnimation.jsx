@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 export default function StraightLightAnimation({ onComplete }) {
-  // Initial positions are randomized/misaligned
+  
   const [sliderVal1, setSliderVal1] = useState(20);
   const [sliderVal2, setSliderVal2] = useState(80);
   const [sliderVal3, setSliderVal3] = useState(35);
 
-  // Map slider value 0-100 to offsetY -60 to 60
+  
   const offsetY1 = (sliderVal1 - 50) * 1.2;
   const offsetY2 = (sliderVal2 - 50) * 1.2;
   const offsetY3 = (sliderVal3 - 50) * 1.2;
 
-  // Aligned if the hole is in the center (tolerance of 12)
+  
   const isAligned1 = Math.abs(offsetY1) <= 12;
   const isAligned2 = Math.abs(offsetY2) <= 12;
   const isAligned3 = Math.abs(offsetY3) <= 12;
@@ -30,7 +30,7 @@ export default function StraightLightAnimation({ onComplete }) {
       <div className="title">Geser semua tuas agar lubang karton sejajar!</div>
       
       <div className="animation-area">
-        {/* Flashlight */}
+        
         <div className="flashlight">
           <svg width="52" height="52" viewBox="0 0 24 24" style={{ display: 'block' }}>
             <rect x="3" y="10" width="11" height="4" rx="1" fill="#4B5563" stroke="#374151" strokeWidth="0.8" />
@@ -42,20 +42,20 @@ export default function StraightLightAnimation({ onComplete }) {
           </svg>
         </div>
 
-        {/* The Light Beams */}
-        {/* Beam 1: Flashlight to Cardboard 1 (Always active) */}
+        
+        
         <div className="beam beam-1" />
         
-        {/* Beam 2: Cardboard 1 to Cardboard 2 (Only if Cardboard 1 is aligned) */}
+        
         {isAligned1 && <div className="beam beam-2" />}
         
-        {/* Beam 3: Cardboard 2 to Cardboard 3 (Only if 1 and 2 are aligned) */}
+        
         {isAligned1 && isAligned2 && <div className="beam beam-3" />}
         
-        {/* Beam 4: Cardboard 3 to Target (Only if all 3 are aligned) */}
+        
         {allAligned && <div className="beam beam-4" />}
 
-        {/* Movable Cardboard 1 */}
+        
         <motion.div 
           className="cardboard cb-1"
           animate={{ y: offsetY1 }}
@@ -64,7 +64,7 @@ export default function StraightLightAnimation({ onComplete }) {
           <div className="hole" />
         </motion.div>
         
-        {/* Movable Cardboard 2 */}
+        
         <motion.div 
           className="cardboard cb-2"
           animate={{ y: offsetY2 }}
@@ -73,7 +73,7 @@ export default function StraightLightAnimation({ onComplete }) {
           <div className="hole" />
         </motion.div>
         
-        {/* Movable Cardboard 3 */}
+        
         <motion.div 
           className="cardboard cb-3"
           animate={{ y: offsetY3 }}
@@ -82,13 +82,13 @@ export default function StraightLightAnimation({ onComplete }) {
           <div className="hole" />
         </motion.div>
 
-        {/* Target Object */}
+        
         <div className={`target-object ${allAligned ? 'lit' : 'dark'}`}>
           🌻
         </div>
       </div>
 
-      {/* Control Sliders */}
+      
       <div className="control-panel">
         <div className="slider-row">
           <div className="slider-label-row">

@@ -19,7 +19,7 @@ export default function StudentManagement({
   handleOpenStudentDetail,
   setShowAddStudentModal
 }) {
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'table'
+  const [viewMode, setViewMode] = useState('grid'); 
 
   const toggleAttendance = (e, key) => {
     e.stopPropagation();
@@ -42,9 +42,9 @@ export default function StudentManagement({
       className="students-view"
     >
       {!selectedClassroom ? (
-        // TINGKAT 1: Daftar Kelas
+        
         <div className="classroom-selection-wrapper">
-          {/* DESKTOP VIEW */}
+          
           <div className="classroom-selection-view desktop-only">
             <div className="card-box-header flex-between">
               <div>
@@ -215,7 +215,7 @@ export default function StudentManagement({
             )}
           </div>
 
-          {/* MOBILE VIEW */}
+          
           <div className="classroom-selection-mobile mobile-only" style={{ paddingBottom: '20px' }}>
             <div style={{ marginBottom: '20px' }}>
               <h2 style={{ fontSize: '1.2rem', margin: '0 0 4px 0', color: 'var(--text-color)' }}>Daftar Kelas</h2>
@@ -251,9 +251,9 @@ export default function StudentManagement({
           </div>
         </div>
       ) : (
-        // TINGKAT 2: Daftar Murid di dalam Kelas Terpilih
+        
         <div className="card-box">
-          {/* DESKTOP HEADER */}
+          
           <div className="card-box-header flex-between desktop-only">
             <div>
               <button 
@@ -274,7 +274,7 @@ export default function StudentManagement({
             </button>
           </div>
 
-          {/* MOBILE HEADER (Action Bar Style) */}
+          
           <div className="mobile-action-bar mobile-only" style={{ display: 'flex', alignItems: 'center', gap: '16px', paddingBottom: '16px', borderBottom: '2px solid var(--border-color)', marginBottom: '16px' }}>
             <button 
               onClick={() => setSelectedClassroom(null)}
@@ -294,7 +294,7 @@ export default function StudentManagement({
             </button>
           </div>
 
-          {/* KODE AKSES KELAS (Responsive) */}
+          
           <div style={{ background: '#F0F9FF', border: '1px solid #BAE6FD', borderRadius: '12px', padding: '16px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
             <div>
               <h4 style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: '#0284C7' }}>Kode Akses Kelas</h4>
@@ -305,7 +305,7 @@ export default function StudentManagement({
             </div>
           </div>
 
-          {/* DESKTOP VIEW - Table representation */}
+          
           <div className="table-responsive desktop-only">
             <table className="teacher-table">
               <thead>
@@ -364,7 +364,7 @@ export default function StudentManagement({
             </table>
           </div>
 
-          {/* MOBILE VIEW - Beautiful card grid for Android */}
+          
           <div className="student-cards-mobile mobile-only">
             {sortedStudents.map((student) => {
               const { mockNIS, mockID, isOnline, hasFinishedTask } = student;

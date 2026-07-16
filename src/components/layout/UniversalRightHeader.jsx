@@ -3,16 +3,13 @@ import { Heart, Flame, Star } from 'lucide-react';
 import { useStore } from '../../store/useStore';
 import StudentAvatar from '../common/StudentAvatar';
 
-/**
- * UniversalRightHeader: A compact, premium header for the right sidebar.
- * Shows user profile and key stats (Hearts, Streak, Crowns) across all modes.
- */
+
 export default function UniversalRightHeader() {
   const { userName, streak, crowns, hearts } = useStore();
 
   return (
     <div className="universal-right-header">
-      {/* Profile Section */}
+      
       <div className="profile-mini-box">
         <div className="mini-avatar">
           <StudentAvatar size={42} />
@@ -23,7 +20,7 @@ export default function UniversalRightHeader() {
         </div>
       </div>
 
-      {/* Stats Row */}
+      
       <div className="stats-compact-row">
         <div className="stat-item heart">
           <Heart size={14} fill="#FF4B4B" color="#FF4B4B" />

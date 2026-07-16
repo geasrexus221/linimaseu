@@ -8,7 +8,7 @@ export default function CardBurningOverlay({ activeCard }) {
   useEffect(() => {
     console.log("[DEBUG] activeCard changed:", activeCard);
     if (activeCard) {
-      // Spawn particles
+      
       const newParticles = Array.from({ length: 20 }).map((_, i) => ({
         id: i,
         x: Math.random() * 200 - 100,
@@ -25,7 +25,7 @@ export default function CardBurningOverlay({ activeCard }) {
   const getCardColor = () => {
     if (!activeCard) return '#58CC02';
     if (activeCard.color) return activeCard.color;
-    // Fallback for Adu Cendekiawan card rarities
+    
     if (activeCard.rarity === 'epic') return '#CE82FF';
     if (activeCard.rarity === 'rare') return '#1CB0F6';
     return '#58CC02';
@@ -41,7 +41,7 @@ export default function CardBurningOverlay({ activeCard }) {
           exit={{ opacity: 0 }}
         >
           <div className="burning-card-wrapper">
-            {/* The Main Card */}
+            
             <motion.div 
               className="burning-card-main"
               initial={{ scale: 0, rotate: -20, y: 100 }}
@@ -53,7 +53,7 @@ export default function CardBurningOverlay({ activeCard }) {
               transition={{ duration: 0.5, times: [0, 0.7, 1], ease: "easeOut" }}
             >
               <div className="burning-card-face">
-                {/* Cost Badge in Top-Right (Only for cards with cost) */}
+                
                 {activeCard.cost !== undefined && (
                   <div className="burning-card-cost">
                     <Heart size={14} fill="#FF4B4B" color="#FF4B4B" />
@@ -61,7 +61,7 @@ export default function CardBurningOverlay({ activeCard }) {
                   </div>
                 )}
 
-                {/* Illustration Area */}
+                
                 <div 
                   className="burning-card-illustration" 
                   style={{ background: `linear-gradient(135deg, ${getCardColor()}, rgba(255,255,255,0.35))` }}
@@ -69,23 +69,23 @@ export default function CardBurningOverlay({ activeCard }) {
                   <div className="burning-card-icon">{activeCard.icon}</div>
                 </div>
 
-                {/* Card Name Banner */}
+                
                 <div className="burning-card-name-banner">
                   {activeCard.name}
                 </div>
 
-                {/* Card Description/Effect Box */}
+                
                 <div className="burning-card-desc-box">
                   <p className="burning-card-desc-text">
                     {activeCard.description || activeCard.desc}
                   </p>
                 </div>
 
-                {/* Mask/Erosion Animation */}
+                
                 <div className="burning-erosion-mask" />
               </div>
 
-              {/* Sparks Particles */}
+              
               {particles.map(p => (
                 <motion.div
                   key={p.id}

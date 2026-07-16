@@ -16,7 +16,7 @@ export default function ClassroomModal({
 }) {
   return (
     <>
-      {/* Add Classroom Modal Popup */}
+      
       <AnimatePresence>
         {showAddModal && (
           <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
@@ -84,7 +84,7 @@ export default function ClassroomModal({
         )}
       </AnimatePresence>
 
-      {/* Edit Classroom Modal Popup */}
+      
       <AnimatePresence>
         {showEditModal && (
           <div className="modal-overlay" onClick={() => setShowEditModal(null)}>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function TransparentLightAnimation({ onComplete }) {
-  const [material, setMaterial] = useState('none'); // 'none', 'glass', 'paper', 'wood'
+  const [material, setMaterial] = useState('none'); 
 
   useEffect(() => {
     if (material !== 'none' && onComplete) {
@@ -33,12 +33,12 @@ export default function TransparentLightAnimation({ onComplete }) {
       <div className="title">Pilih benda untuk menghalangi cahaya!</div>
       
       <div className="animation-area">
-        {/* Wall */}
+        
         <div className="wall" style={{ filter: getWallBrightness() }}>
           🧱 Tembok
         </div>
 
-        {/* Flashlight */}
+        
         <div className="flashlight">
           <svg width="56" height="56" viewBox="0 0 24 24" style={{ display: 'block' }}>
             <rect x="3" y="10" width="11" height="4" rx="1" fill="#4B5563" stroke="#374151" strokeWidth="0.8" />
@@ -50,10 +50,10 @@ export default function TransparentLightAnimation({ onComplete }) {
           </svg>
         </div>
 
-        {/* Pre-material beam */}
+        
         <div className="beam pre-beam" />
 
-        {/* Active Material */}
+        
         <AnimatePresence mode="wait">
           {material !== 'none' && (
             <motion.div
@@ -71,7 +71,7 @@ export default function TransparentLightAnimation({ onComplete }) {
           )}
         </AnimatePresence>
 
-        {/* Post-material beam */}
+        
         <motion.div 
           className="beam post-beam"
           animate={{ opacity: getBeamOpacity() }}
@@ -79,7 +79,7 @@ export default function TransparentLightAnimation({ onComplete }) {
         />
       </div>
 
-      {/* Controls */}
+      
       <div className="controls">
         <button 
           className={`mat-btn glass ${material === 'glass' ? 'active' : ''}`}

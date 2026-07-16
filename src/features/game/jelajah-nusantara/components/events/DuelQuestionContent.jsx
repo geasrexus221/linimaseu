@@ -14,16 +14,16 @@ export default function DuelQuestionContent({ activeEvent, question, opponent, o
   useEffect(() => {
     if (isResolved || isConfirmed || isAI) return;
     if (timeLeft <= 0) {
-      onAnswer(-1); // Timer out: automatic loss
+      onAnswer(-1); 
       return;
     }
     const timer = setInterval(() => setTimeLeft(t => t - 1), 1000);
     return () => clearInterval(timer);
   }, [timeLeft, isResolved, isConfirmed, isAI, onAnswer]);
 
-  // AI Logic
+  
   useEffect(() => {
-    // Reset AI state when a new question starts
+    
     if (!isResolved) {
       aiStarted.current = false;
     }
@@ -34,7 +34,7 @@ export default function DuelQuestionContent({ activeEvent, question, opponent, o
       aiStarted.current = true;
       const thinkTime = 2000 + Math.random() * 2000;
       const timer = setTimeout(() => {
-        // 50/50 success rate for bots
+        
         const isCorrect = Math.random() < 0.5;
         const answer = isCorrect ? question.correct : (question.correct + 1) % 4;
         
@@ -47,7 +47,7 @@ export default function DuelQuestionContent({ activeEvent, question, opponent, o
           soundEngine.playSound('blink');
         }
 
-        // Auto-continue for AI after showing the answer for 2.5 seconds
+        
         setTimeout(() => {
           onAnswer(answer);
         }, 2500);
@@ -58,7 +58,7 @@ export default function DuelQuestionContent({ activeEvent, question, opponent, o
 
   return (
     <div className="duel-question-container">
-      {/* Turn Info Banner / Outcome Banner */}
+      
       {isResolved ? (
         <div className={`duel-outcome-banner ${activeEvent.result === 'LOSE' ? 'correct-status' : 'incorrect-status'}`}>
           <div className="banner-content">

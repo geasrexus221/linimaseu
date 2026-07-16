@@ -37,7 +37,7 @@ export default function QuizMissionsScreen() {
       color: '#ce82ff'
     }
   ].map(p => {
-    // Only count themes that actually have questions in the registry AND match the selected class
+    
     const themes = QUIZ_THEMES[p.id] || [];
     const activeThemes = themes.filter(t => {
       const hasQuestions = ALL_QUIZ_QUESTIONS[t.id];
@@ -57,7 +57,7 @@ export default function QuizMissionsScreen() {
         <h2 className="missions-title">Misi Kuis IPAS</h2>
         <p className="missions-subtitle">Pilih pilar ilmu yang ingin kamu jelajahi hari ini.</p>
         
-        {/* Class Filter Bar */}
+        
         <div className="class-filter-bar">
           {['Semua', 4, 5, 6].map(kelas => (
             <button 

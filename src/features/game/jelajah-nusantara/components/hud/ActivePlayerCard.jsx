@@ -7,7 +7,7 @@ export default function ActivePlayerCard({ player, onClick }) {
   const theme = useStore((state) => state.theme);
   const isDark = theme === 'dark';
 
-  // Refs untuk mendeteksi perubahan nilai (trigger animasi)
+  
   const prevTekad = React.useRef(player?.tekad);
   const prevKoin = React.useRef(player?.koin);
   const [pulseTekad, setPulseTekad] = React.useState(false);

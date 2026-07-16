@@ -13,7 +13,7 @@ export default function IntroScreen() {
   const isDark = theme === 'dark';
   const { setGameSubView, setJelajahSubView } = useNavigationStore();
   
-  // Register 'Penjelajah Online' in the right sidebar while on this screen
+  
   useRegisterRightPanel(GameOnlinePlayersPanel, 'jelajah-intro');
   
   const [showOnlineModal, setShowOnlineModal] = useState(false);
@@ -25,19 +25,19 @@ export default function IntroScreen() {
       useObor();
       setJelajahSubView('setup');
     } else {
-      // Custom toast or modal would be better, but keep simple for now
+      
       alert('Obor kamu habis! Tunggu sampai terisi kembali.');
     }
   };
 
   const handleInvite = (player) => {
     setInvitedPlayer(player);
-    // Don't close the online modal, so it stays behind the invite loading overlay
+    
   };
 
   return (
     <div className="game-intro-container">
-      {/* Dynamic Background */}
+      
       <div className="bg-map-pattern" />
       <div className="floating-clouds">
         <div className="cloud c1">☁️</div>
@@ -45,7 +45,7 @@ export default function IntroScreen() {
         <div className="cloud c3">☁️</div>
       </div>
 
-      {/* Header Area */}
+      
       <header className="intro-header">
         <button className="back-btn-3d" onClick={() => setGameSubView('arcade')}>
           <ChevronLeft size={24} />
@@ -61,7 +61,7 @@ export default function IntroScreen() {
       </header>
 
       <div className="intro-main-scrollable">
-        {/* Title & Badge Section */}
+        
         <div className="title-section-pop">
           <div className="game-category-tag">PETUALANGAN SERU</div>
           <h1 className="game-main-title">
@@ -71,7 +71,7 @@ export default function IntroScreen() {
           <div className="title-underline" />
         </div>
 
-        {/* Hero Visual Section */}
+        
         <div className="adventure-hero-box">
           <div className="hero-island-platform">
             <div className="island-emoji">🏝️</div>
@@ -83,7 +83,7 @@ export default function IntroScreen() {
             </div>
           </div>
           
-          {/* Game Description */}
+          
           <div className="game-description-box">
             <p>
               "Jelajahi pulau-pulau legendaris Nusantara, pecahkan misteri sejarah, 
@@ -92,7 +92,7 @@ export default function IntroScreen() {
           </div>
         </div>
 
-        {/* Main Actions */}
+        
         <div className="primary-actions-stack">
           <button className="giant-play-btn" onClick={handleStart}>
             <div className="play-btn-face">
@@ -136,7 +136,7 @@ export default function IntroScreen() {
         </div>
       </div>
 
-      {/* Modals */}
+      
       {showOnlineModal && (
         <OnlinePlayersModal 
           onClose={() => setShowOnlineModal(false)} 

@@ -5,7 +5,7 @@ import { SHOP_CATALOG } from '../data/shop/catalog';
 export const useStore = create(
   persist(
     (set) => ({
-      // Stats
+      
       userName: 'Nama Siswa',
       userTitle: 'Pencari Jejak',
       theme: 'light',
@@ -33,13 +33,13 @@ export const useStore = create(
       musicVolume: 0.5,
       isDevMode: false,
       
-      // Progress
+      
       unlockedNodes: ['cahaya-node-1'],
       claimedRewards: [],
       unlockedChapters: [1],
       completedChapters: [],
       
-      // Teacher / Global
+      
       globalAnnouncements: [
         {
           id: 'default-1',
@@ -51,7 +51,7 @@ export const useStore = create(
         }
       ],
       
-      // Actions
+      
       setUserName: (name) => set({ userName: name }),
       setTheme: (theme) => set({ theme }),
       setSoundEnabled: (enabled) => set({ soundEnabled: enabled }),
@@ -89,7 +89,7 @@ export const useStore = create(
         const thirtyMinutes = 30 * 60 * 1000;
         const updates = {};
 
-        // Obor Regen
+        
         if (state.streak < state.maxStreak) {
           const elapsed = now - state.lastRegenTime;
           if (elapsed >= thirtyMinutes) {
@@ -101,7 +101,7 @@ export const useStore = create(
           updates.lastRegenTime = now;
         }
 
-        // Heart Regen
+        
         if (state.hearts < state.maxHearts) {
           const elapsedHeart = now - state.lastHeartRegenTime;
           if (elapsedHeart >= thirtyMinutes) {

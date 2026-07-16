@@ -10,14 +10,14 @@ export default function ArtifactCollectionScreen() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [activeTab, setActiveTab] = useState('all');
 
-  // Resolve inventory items { id, count } to actionCards
+  
   const resolvedArtifacts = ownedArtifacts.map(owned => {
     const card = actionCards.find(c => c.id === owned.id);
     if (!card || (owned.count || 0) <= 0) return null;
     return { ...card, count: owned.count };
   }).filter(c => c !== null);
 
-  // Sorting logic (Epic > Rare > Common)
+  
   const rarityOrder = { epic: 0, rare: 1, common: 2 };
   const sortedArtifacts = [...resolvedArtifacts].sort((a, b) => 
     rarityOrder[a.rarity] - rarityOrder[b.rarity]
@@ -36,7 +36,7 @@ export default function ArtifactCollectionScreen() {
 
   return (
     <div className="collection-screen-container">
-      {/* Playful Header */}
+      
       <header className="collection-header">
         <button className="back-btn-3d" onClick={() => setProfileSubView('main')}>
           <ChevronLeft size={28} />
@@ -48,7 +48,7 @@ export default function ArtifactCollectionScreen() {
         <div style={{ width: 45 }}></div>
       </header>
 
-      {/* FILTER TABS */}
+      
       <div className="collection-tabs">
         {tabs.map(tab => (
           <button 
@@ -89,7 +89,7 @@ export default function ArtifactCollectionScreen() {
         )}
       </div>
 
-      {/* Detail Overlay - Fun Look */}
+      
       {selectedItem && (
         <div className="artifact-detail-overlay">
           <div className="detail-modal-fun">

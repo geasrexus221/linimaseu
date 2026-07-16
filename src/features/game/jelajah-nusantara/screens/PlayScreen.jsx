@@ -14,7 +14,7 @@ import { keyboardManager } from '../../../../utils/KeyboardManager';
 import { soundEngine } from '../logic/soundEngine';
 import { useStore } from '../../../../store/useStore';
 
-// Modular HUD Components
+
 import OpponentList from '../components/hud/OpponentList';
 import ActionTray from '../components/hud/ActionTray';
 import GameLogPill from '../components/hud/GameLogPill';
@@ -28,7 +28,7 @@ import JelajahHelpModal from '../components/hud/JelajahHelpModal';
 export default function PlayScreen({ isTestMode }) {
   const setJelajahSubView = useNavigationStore(state => state.setJelajahSubView);
 
-  // Audio State & Sync
+  
   const musicVolume = useStore(state => state.musicVolume);
   const sfxVolume = useStore(state => state.sfxVolume);
   const soundEnabled = useStore(state => state.soundEnabled);
@@ -44,7 +44,7 @@ export default function PlayScreen({ isTestMode }) {
     soundEngine.syncSettings();
   }, [musicVolume, sfxVolume, soundEnabled]);
 
-  // PERFORMANCE: Use selective picking to prevent unnecessary re-renders
+  
   const mapData = useGameStore(state => state.mapData);
   const players = useGameStore(state => state.players);
   const turnIdx = useGameStore(state => state.turnIdx);
@@ -90,7 +90,7 @@ export default function PlayScreen({ isTestMode }) {
   const [helpOpen, setHelpOpen] = useState(false);
   const [isZooming, setIsZooming] = useState(false);
 
-  // Flying Particles Animation State & Logic
+  
   const [flyingParticles, setFlyingParticles] = useState([]);
   const [pijarBounce, setPijarBounce] = useState(false);
   const [tekadBounce, setTekadBounce] = useState(false);
@@ -100,7 +100,7 @@ export default function PlayScreen({ isTestMode }) {
     const baseType = isLose ? type.replace('-lose', '') : type;
     const emoji = baseType === 'pijar' ? '🪙' : '❤️';
 
-    // Get active player pawn screen coordinates
+    
     let startX = window.innerWidth / 2;
     let startY = window.innerHeight / 2;
 
@@ -120,15 +120,15 @@ export default function PlayScreen({ isTestMode }) {
         const speed = 25 + Math.random() * 35;
 
         const peakX = Math.cos(angle) * speed;
-        const peakY = -50 - Math.random() * 40; // Fountain peak (upwards)
+        const peakY = -50 - Math.random() * 40; 
 
         const fallX = peakX * 1.4 + (Math.random() - 0.5) * 20;
-        const fallY = 100 + Math.random() * 50; // Fall (downwards)
+        const fallY = 100 + Math.random() * 50; 
 
         return {
           id: `${type}-${Date.now()}-${i}-${Math.random()}`,
           emoji,
-          type, // e.g. 'pijar-lose'
+          type, 
           startX,
           startY,
           peakX,
@@ -138,7 +138,7 @@ export default function PlayScreen({ isTestMode }) {
           rotMid: `${(Math.random() - 0.5) * 60}deg`,
           rotPeak: `${(Math.random() - 0.5) * 180}deg`,
           rotFall: `${(Math.random() - 0.5) * 360}deg`,
-          delay: i * 0.05, // Rapid burst delay
+          delay: i * 0.05, 
         };
       });
       setFlyingParticles(prev => [...prev, ...newParticles]);
@@ -150,10 +150,10 @@ export default function PlayScreen({ isTestMode }) {
       const newParticles = Array.from({ length: 5 }).map((_, i) => ({
         id: `${type}-${Date.now()}-${i}-${Math.random()}`,
         emoji,
-        type, // e.g. 'pijar'
+        type, 
         startX,
         startY,
-        delay: i * 0.18, // Staggered stream delay
+        delay: i * 0.18, 
       }));
       setFlyingParticles(prev => [...prev, ...newParticles]);
 
@@ -163,11 +163,11 @@ export default function PlayScreen({ isTestMode }) {
     }
   };
 
-  // Watch triggers in store to run particle animation (works even at max/converted stats)
+  
   const prevTriggersRef = useRef({ pijar: 0, tekad: 0, pijarLose: 0, tekadLose: 0 });
 
   useEffect(() => {
-    // Initial mount check to avoid flying animation on loading
+    
     if (prevTriggersRef.current.pijar === 0 && prevTriggersRef.current.tekad === 0 &&
       prevTriggersRef.current.pijarLose === 0 && prevTriggersRef.current.tekadLose === 0) {
       prevTriggersRef.current = {
@@ -179,7 +179,7 @@ export default function PlayScreen({ isTestMode }) {
       return;
     }
 
-    // 1. Pijar Gain (Fly to HUD)
+    
     if (pijarFlyTrigger > prevTriggersRef.current.pijar) {
       spawnParticles('pijar');
       setPijarBounce(true);
@@ -188,7 +188,7 @@ export default function PlayScreen({ isTestMode }) {
       setTimeout(() => soundEngine.playSound('squash'), 800);
       setTimeout(() => setPijarBounce(false), 1300);
     }
-    // 2. Tekad Gain (Fly to HUD)
+    
     if (tekadFlyTrigger > prevTriggersRef.current.tekad) {
       spawnParticles('tekad');
       setTekadBounce(true);
@@ -198,12 +198,12 @@ export default function PlayScreen({ isTestMode }) {
       setTimeout(() => setTekadBounce(false), 1300);
     }
 
-    // 3. Pijar Loss (Scatter from Player)
+    
     if (pijarLoseTrigger > prevTriggersRef.current.pijarLose) {
       spawnParticles('pijar-lose');
       soundEngine.playSound('glass');
     }
-    // 4. Tekad Loss (Scatter from Player)
+    
     if (tekadLoseTrigger > prevTriggersRef.current.tekadLose) {
       spawnParticles('tekad-lose');
       const currentPlayer = players[turnIdx];
@@ -222,7 +222,7 @@ export default function PlayScreen({ isTestMode }) {
     };
   }, [pijarFlyTrigger, tekadFlyTrigger, pijarLoseTrigger, tekadLoseTrigger, players, turnIdx, mapData]);
 
-  // Initial Intro Zoom: Start zoomed out to show the arena, then zoom in to the active player
+  
   useEffect(() => {
     setCameraZoom(0.6);
     setCameraPan({ x: 0, y: 0 });
@@ -234,10 +234,10 @@ export default function PlayScreen({ isTestMode }) {
     return () => clearTimeout(timer);
   }, []);
 
-  // Register the new modular gameplay panel for the right sidebar (Only on Desktop)
+  
   useRegisterRightPanel(isDesktop ? JelajahGameplayPanel : null, 'jelajah-gameplay');
 
-  // 1. Resize Handling & Device Detection
+  
   useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
@@ -253,7 +253,7 @@ export default function PlayScreen({ isTestMode }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // 2. Camera Controls
+  
   const resetCamera = () => {
     setCameraZoom(1.6);
     setCameraPan({ x: 0, y: 0 });
@@ -261,13 +261,13 @@ export default function PlayScreen({ isTestMode }) {
 
   const setAutoZoomEnabled = useGameStore(state => state.setAutoZoomEnabled);
 
-  // 3. Recenter Camera Pan on Turn Change (Kembali ke player baru tanpa zoom out)
+  
   useEffect(() => {
     setCameraPan({ x: 0, y: 0 });
     setAutoZoomEnabled(true);
   }, [turnIdx]);
 
-  // 4. Game Initialization (Only for Test Mode)
+  
   useEffect(() => {
     if (isTestMode && (!mapData || players.length === 0)) {
       const testMap = { tiles: mapManager.getTestMap() };
@@ -280,7 +280,7 @@ export default function PlayScreen({ isTestMode }) {
     if (phase !== 'WAITING_ROLL') return;
     const val = manualVal ? cheatDice(manualVal) : rollDice();
     setTimeout(() => {
-      setAutoZoomEnabled(true); // Re-enable camera focus lock right when movement starts
+      setAutoZoomEnabled(true); 
       startMoving(val);
     }, 2000);
   };
@@ -292,7 +292,7 @@ export default function PlayScreen({ isTestMode }) {
     if (winner) setShowVictory(true);
   }, [winner]);
 
-  // 6. AI Bot Turn Trigger (Movement & Recovery)
+  
   useEffect(() => {
     if (!currentPlayer || currentPlayer.type !== 'ai') return;
 
@@ -311,7 +311,7 @@ export default function PlayScreen({ isTestMode }) {
     }
   }, [phase, currentPlayer]);
 
-  // 7. Keyboard Shortcuts
+  
   useEffect(() => {
     const onSpacePress = () => {
       if (isLocalHuman && phase === 'WAITING_ROLL') {
@@ -329,7 +329,7 @@ export default function PlayScreen({ isTestMode }) {
     <LandscapeWrapper disableRotation={true}>
       <div className={`play-screen-main ${isLowGraphics ? 'low-graphics' : ''}`} ref={containerRef}>
 
-        {/* Render flying particles */}
+        
         {!isLowGraphics && flyingParticles.map(p => (
           <div
             key={p.id}
@@ -364,14 +364,14 @@ export default function PlayScreen({ isTestMode }) {
           />
         </div>
 
-        {/* Dynamic Dice Animation in Center */}
+        
         <div className={`center-dice ${showDiceDisplay ? 'visible' : ''}`}>
           <Dice3D value={diceValue} isRolling={phase === 'ROLLING'} size={Math.min(viewSize.h * 0.25, 120)} />
         </div>
 
-        {/* NEW UNIFIED TOP HUD (Visible on both Desktop and Mobile) */}
+        
         <div className="game-hud-top-bar">
-          {/* Top Left: Pijar Plate (+ Hanging tab) & Tekad Plate side-by-side */}
+          
           <div className="hud-left-group">
             <div className="hud-plate-container top-left">
               <div className={`hud-plate-main pijar-plate ${pijarBounce ? 'bounce-active' : ''}`} onClick={() => setInventoryOpen(true)}>
@@ -388,7 +388,7 @@ export default function PlayScreen({ isTestMode }) {
                 </div>
               </div>
 
-              {/* Hanging Tab for Artifacts */}
+              
               <div className="hud-hanging-tab">
                 <div className="hanging-icon-star">📦</div>
                 <div className="artifact-slots-row">
@@ -405,7 +405,7 @@ export default function PlayScreen({ isTestMode }) {
               </div>
             </div>
 
-            {/* Tekad Plate next to Pijar Plate */}
+            
             <div className="hud-plate-container tekad-plate-container">
               <div className={`hud-plate-main tekad-plate ${tekadBounce ? 'bounce-active' : ''}`}>
                 <div className="hud-plate-icon-circle gem-red">
@@ -419,7 +419,7 @@ export default function PlayScreen({ isTestMode }) {
             </div>
           </div>
 
-          {/* Top Right: Help and Settings Buttons */}
+          
           <div className="hud-right-group" style={{ display: 'flex', gap: '8px', pointerEvents: 'auto' }}>
             <button className="hud-help-btn" onClick={() => { console.log("[DEBUG] Help button clicked!"); setHelpOpen(true); }} title="Panduan">
               <HelpCircle size={20} />
@@ -430,17 +430,17 @@ export default function PlayScreen({ isTestMode }) {
           </div>
         </div>
 
-        {/* Top Center Info Banner (Game Logs) - Unified for both PC & Mobile */}
+        
         <div className="top-center-banner">
           {gameLogs[0] && phase !== 'IDLE' && <GameLogPill log={gameLogs[0]} />}
         </div>
 
-        {/* DESKTOP HUD - Minimal Overlay */}
+        
         {isDesktop && (
           <div className="hud-layer desktop-overlay">
-            {/* Settings button removed from top-left-hud and integrated into unified top-right HUD */}
+            
 
-            {/* Floating Roll Button for PC - Centered & Premium */}
+            
             <div className="bottom-center-hud" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
               {isLocalHuman && phase === 'WAITING_ROLL' && (
                 <button className="premium-roll-trigger" onClick={() => handleRollClick()}>
@@ -518,19 +518,19 @@ export default function PlayScreen({ isTestMode }) {
           </div>
         )}
 
-        {/* MOBILE HUD - Vertical Portrait Redesign */}
+        
         {!isDesktop && (
           <div className="hud-layer mobile-portrait-overlay">
-            {/* Top resources bar removed and replaced with unified top HUD */}
+            
 
-            {/* 2. Left Side - Opponent List */}
+            
             <div className="left-floating-column">
               <div className="opponents-stack">
                 <OpponentList players={players} turnIdx={turnIdx} />
               </div>
             </div>
 
-            {/* 3. Right Side - Util Buttons */}
+            
             <div className="right-floating-column">
               <button className="floating-action-badge camera-reset" onClick={() => resetCamera()}>
                 <div className="badge-icon">🔄</div>
@@ -549,9 +549,9 @@ export default function PlayScreen({ isTestMode }) {
             </div>
 
 
-            {/* 5. Bottom Control Panel */}
+            
             <div className="bottom-control-panel">
-              {/* Left: Inventory Bag (Tas) */}
+              
               <div className="bottom-panel-left">
                 <button className="get-dice-btn" onClick={() => setInventoryOpen(true)}>
                   <div className="dice-stock-icon">💼</div>
@@ -560,7 +560,7 @@ export default function PlayScreen({ isTestMode }) {
                 </button>
               </div>
 
-              {/* Center: Dice Roll Plate */}
+              
               <div className="bottom-panel-center" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
                 {isLocalHuman && phase === 'WAITING_ROLL' ? (
                   <button className="premium-roll-trigger" onClick={() => handleRollClick()} style={{ padding: '3px', borderRadius: '18px', boxShadow: '0 6px 0 #1899D6' }}>
@@ -580,7 +580,7 @@ export default function PlayScreen({ isTestMode }) {
                 )}
               </div>
 
-              {/* Right: Chat Button */}
+              
               <div className="bottom-panel-right">
                 <button className="chat-btn" onClick={() => alert("Fitur Chat Belum Tersedia")} style={{ zIndex: 10 }}>
                   <MessageSquare size={20} />

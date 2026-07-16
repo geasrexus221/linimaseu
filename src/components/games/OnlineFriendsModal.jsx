@@ -6,12 +6,12 @@ export default function OnlineFriendsModal({ onClose, onInvite }) {
   const [filterAvailable, setFilterAvailable] = useState(false);
   const classmates = MOCK_CLASSROOMS['KELAS1'].students;
 
-  // Simulate online status
+  
   const onlineFriends = classmates.map((s, idx) => ({
     ...s,
-    // First 12 are online for simulation
+    
     isOnline: idx < 12,
-    // Some are available, some are busy
+    
     isAvailable: idx < 12 && idx % 3 !== 0 
   })).filter(s => s.isOnline);
 

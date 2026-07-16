@@ -4,11 +4,11 @@ import { Check } from 'lucide-react';
 export default function ItemCard({ item, onBuy, isOwned }) {
   const { name, price, icon, color, rarity } = item;
 
-  // Determine card header background based on rarity or custom color
+  
   const headerBg = rarity === 'epic' ? '#FFD700' : rarity === 'rare' ? '#1CB0F6' : color || '#f4c265';
   const shadowBg = rarity === 'epic' ? '#D97706' : rarity === 'rare' ? '#1485BA' : '#d1a34b';
 
-  // Cute corner badge for premium or cheap items
+  
   const showBadge = null;
 
   return (

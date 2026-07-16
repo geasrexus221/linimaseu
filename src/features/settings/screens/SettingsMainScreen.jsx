@@ -16,7 +16,7 @@ export default function SettingsMainScreen() {
     setShowDevMode(isDevMode);
   }, [isDevMode]);
 
-  // Register Desktop Stats Panel for this screen
+  
   useRegisterRightPanel(DesktopStatsPanel, 'settings-main');
 
   return (
@@ -26,7 +26,7 @@ export default function SettingsMainScreen() {
       </header>
 
       <div className="settings-content">
-        {/* Seksi Tampilan */}
+        
         <section className="settings-group">
           <h3 className="group-title">Tampilan</h3>
           <div className="theme-toggle-container">
@@ -47,7 +47,7 @@ export default function SettingsMainScreen() {
           </div>
         </section>
 
-        {/* Seksi Umum */}
+        
         <section className="settings-group">
           <h3 className="group-title">Akun & Privasi</h3>
           <div className="items-container">
@@ -63,7 +63,7 @@ export default function SettingsMainScreen() {
           </div>
         </section>
 
-        {/* Seksi Lainnya */}
+        
         <section className="settings-group">
           <h3 className="group-title">Tentang</h3>
           <div className="items-container">
@@ -81,9 +81,9 @@ export default function SettingsMainScreen() {
           </div>
         </section>
 
-        {/* --- HAPUS BAGIAN INI SAAT PRODUKSI --- */}
+        
         {isDevMode && showDevMode && <DevModeSection />}
-        {/* -------------------------------------- */}
+        
 
         <div className="footer-credits">
           <p>© 2026 Project Lini Masa</p>

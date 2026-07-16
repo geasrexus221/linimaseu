@@ -20,7 +20,7 @@ export default function DesktopOverview({
 }) {
   return (
     <div className="desktop-only">
-      {/* SECTION PINTASAN AKSI (Quick Actions) */}
+      
       <div className="quick-actions-section" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', margin: '24px 0' }}>
         <button className="quick-action-btn" onClick={() => setActiveMenu('quizzes')}>
           <Plus size={18} />
@@ -41,7 +41,7 @@ export default function DesktopOverview({
         </button>
       </div>
 
-      {/* PENGUMUMAN SAAT INI */}
+      
       {announcements.length > 0 && (
         <div style={{ background: '#FEF3C7', borderLeft: '4px solid #F59E0B', padding: '16px 20px', borderRadius: '12px', marginBottom: '24px', margin: '12px 0 24px 0' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
@@ -72,13 +72,13 @@ export default function DesktopOverview({
         </div>
       )}
 
-      {/* 2-Column Dashboard Main Section */}
+      
       <div className="dashboard-columns-grid">
         
-        {/* KOLOM KIRI (70% Width - Pusat Monitoring Tugas & Materi) */}
+        
         <div className="dashboard-column-left-main">
           
-          {/* Card Tugas & PR Berjalan */}
+          
           <div className="dashboard-card-navy">
             <div className="card-navy-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
               <h3 style={{ margin: 0 }}>Tugas & PR Berjalan</h3>
@@ -122,7 +122,7 @@ export default function DesktopOverview({
             </div>
           </div>
 
-          {/* Card Diagnostik Materi */}
+          
           <div className="dashboard-card-navy">
             <div className="card-navy-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px', marginBottom: '16px' }}>
               <h3 style={{ margin: 0 }}>Diagnostik Materi</h3>
@@ -130,7 +130,7 @@ export default function DesktopOverview({
                 value={selectedDiagnosticClassId}
                 onChange={(e) => {
                   setSelectedDiagnosticClassId(e.target.value);
-                  setSelectedDiagnosticTopicIndex(0); // Reset selected topic to first one
+                  setSelectedDiagnosticTopicIndex(0); 
                 }}
                 style={{
                   padding: '6px 12px',
@@ -183,7 +183,7 @@ export default function DesktopOverview({
                 );
               })}
 
-              {/* Detail area for active selected topic */}
+              
               {(() => {
                 const activeTopic = getDiagnosticData(selectedDiagnosticClassId)[selectedDiagnosticTopicIndex] || getDiagnosticData(selectedDiagnosticClassId)[0];
                 if (!activeTopic) return null;
@@ -193,7 +193,7 @@ export default function DesktopOverview({
                       Detail Topik: {activeTopic.topic}
                     </h4>
                     
-                    {/* Mastery Distribution */}
+                    
                     <div style={{ marginBottom: '16px' }}>
                       <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', display: 'block', marginBottom: '8px' }}>
                         Distribusi Pemahaman Siswa:
@@ -214,7 +214,7 @@ export default function DesktopOverview({
                       </div>
                     </div>
 
-                    {/* Underperforming Students */}
+                    
                     <div style={{ marginBottom: '16px' }}>
                       <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600', display: 'block', marginBottom: '6px' }}>
                         Siswa Butuh Bantuan:
@@ -245,7 +245,7 @@ export default function DesktopOverview({
                       )}
                     </div>
 
-                    {/* Action Buttons */}
+                    
                     <div style={{ display: 'flex', gap: '8px' }}>
                       <button 
                         onClick={() => alert(`Mengirimkan sesi ulasan khusus topik "${activeTopic.topic}" ke siswa yang memerlukan.`)}
@@ -290,10 +290,10 @@ export default function DesktopOverview({
 
         </div>
 
-        {/* KOLOM KANAN (30% Width - Pusat Perhatian & Tindakan) */}
+        
         <div className="dashboard-column-right-main">
 
-          {/* Card Perlu Tindakan Guru */}
+          
           <div className="dashboard-card-navy">
             <div className="card-navy-header">
               <h3>Perlu Tindakan Guru</h3>
