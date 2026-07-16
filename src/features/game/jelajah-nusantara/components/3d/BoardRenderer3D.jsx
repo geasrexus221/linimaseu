@@ -200,7 +200,7 @@ const BoardRenderer3D = React.memo(({ mapData, players = [] }) => {
               top: 0,
               transform: `translate3d(${tile.x * TILE_STEP + TILE_SIZE / 2 + offset.x}px, ${tile.y * TILE_STEP + TILE_SIZE / 2 + offset.y}px, 30px) translate(-50%, -50%)`,
               transformStyle: 'preserve-3d',
-              zIndex: 5000,
+              zIndex: 20000,
               transition: 'transform 0.6s cubic-bezier(0.45, 0.05, 0.55, 0.95)',
               overflow: 'visible',
               willChange: 'transform',

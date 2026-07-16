@@ -80,8 +80,82 @@ const Tile3D = memo(({ tile, onClick, isTeleportActive }) => {
           filter: 'none',
         }}
       >
+        <defs>
+          {/* Base Player Gradients */}
+          <linearGradient id="grad-base-1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#4ADE80" />
+            <stop offset="100%" stopColor="#16A34A" />
+          </linearGradient>
+          <linearGradient id="grad-base-2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#F472B6" />
+            <stop offset="100%" stopColor="#DB2777" />
+          </linearGradient>
+          <linearGradient id="grad-base-3" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#FDE047" />
+            <stop offset="100%" stopColor="#CA8A04" />
+          </linearGradient>
+          <linearGradient id="grad-base-4" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#60A5FA" />
+            <stop offset="100%" stopColor="#2563EB" />
+          </linearGradient>
+
+          {/* Event Tile Gradients */}
+          <linearGradient id="grad-jejak" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#FBBF24" />
+            <stop offset="100%" stopColor="#D97706" />
+          </linearGradient>
+          <linearGradient id="grad-peti" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#F59E0B" />
+            <stop offset="100%" stopColor="#B45309" />
+          </linearGradient>
+          <linearGradient id="grad-kartu" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#818CF8" />
+            <stop offset="100%" stopColor="#4F46E5" />
+          </linearGradient>
+          <linearGradient id="grad-jebakan" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#F87171" />
+            <stop offset="100%" stopColor="#DC2626" />
+          </linearGradient>
+          <linearGradient id="grad-jebakan_mundur" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#22D3EE" />
+            <stop offset="100%" stopColor="#0891B2" />
+          </linearGradient>
+          <linearGradient id="grad-jebakan_pijar" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#C084FC" />
+            <stop offset="100%" stopColor="#7C3AED" />
+          </linearGradient>
+          <linearGradient id="grad-penjaga" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#F472B6" />
+            <stop offset="100%" stopColor="#DB2777" />
+          </linearGradient>
+          <linearGradient id="grad-warp" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#A78BFA" />
+            <stop offset="100%" stopColor="#6D28D9" />
+          </linearGradient>
+          <linearGradient id="grad-turn_indicator" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#34D399" />
+            <stop offset="100%" stopColor="#059669" />
+          </linearGradient>
+          <linearGradient id="grad-biasa" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#475569" />
+            <stop offset="100%" stopColor="#1E293B" />
+          </linearGradient>
+          <linearGradient id="grad-angin" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#94A3B8" />
+            <stop offset="100%" stopColor="#475569" />
+          </linearGradient>
+          <linearGradient id="grad-situs" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#FBBF24" />
+            <stop offset="100%" stopColor="#D97706" />
+          </linearGradient>
+          <linearGradient id="grad-belok" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#FB923C" />
+            <stop offset="100%" stopColor="#EA580C" />
+          </linearGradient>
+        </defs>
+
         {/* Path 1: Top Face main */}
-        <path fill={colorTop} d="M78.71,34.33c.86.64,1.79,1.22,2.82,1.71.84.27,1.22,1.35.4,1.86-1.24.79-2.49,1.56-3.76,2.3-10.4,6.13-20.95,12.21-31.45,18.26-.97.56-2,1.03-3.02,1.5-1.22.2-1.56.55-1.02,1.06-.1.23-.05.49.15.78-.19.22.02.35.61.41.06-.37.39-.33.5,0,.62-.17.76.27.4,1.32.18,1.63.25,3.25.21,4.88,0,.62-.29,1.14-.86,1.56-.04.01-.09-.01-.13,0-.74-.16-.88-.77-.42-1.84-.29-1.65-.38-3.5-.18-5.17-.51-.09-.94-.27-1.29-.54v-1.54c-2.71-1.53-5.46-3.13-8.24-4.79l-.29.1c-10.3-5.96-20.49-11.89-30.56-17.79-.58-.45-1.05-1.01-1.4-1.69.49-.38,1.01-.7,1.54-1.02,12.33-7.53,25.16-14.31,37.59-21.67,1.59-.58,2.64-.33,4.11.39,11.39,6.7,22.87,13.25,34.27,19.92Z"/>
+        <path fill={tile.type === 'base' && tile.owner != null ? `url(#grad-base-${tile.owner})` : `url(#grad-${tile.type})`} d="M78.71,34.33c.86.64,1.79,1.22,2.82,1.71.84.27,1.22,1.35.4,1.86-1.24.79-2.49,1.56-3.76,2.3-10.4,6.13-20.95,12.21-31.45,18.26-.97.56-2,1.03-3.02,1.5-1.22.2-1.56.55-1.02,1.06-.1.23-.05.49.15.78-.19.22.02.35.61.41.06-.37.39-.33.5,0,.62-.17.76.27.4,1.32.18,1.63.25,3.25.21,4.88,0,.62-.29,1.14-.86,1.56-.04.01-.09-.01-.13,0-.74-.16-.88-.77-.42-1.84-.29-1.65-.38-3.5-.18-5.17-.51-.09-.94-.27-1.29-.54v-1.54c-2.71-1.53-5.46-3.13-8.24-4.79l-.29.1c-10.3-5.96-20.49-11.89-30.56-17.79-.58-.45-1.05-1.01-1.4-1.69.49-.38,1.01-.7,1.54-1.02,12.33-7.53,25.16-14.31,37.59-21.67,1.59-.58,2.64-.33,4.11.39,11.39,6.7,22.87,13.25,34.27,19.92Z"/>
         
         {/* Path 2: Left Side Wall */}
         <path fill={colorSide} d="M1.2,36.71c.69.09.54.49.82.87.52.71,4.02,2.51,5.03,3.09,5.48,3.21,11.05,6.43,16.58,9.68,2.74,1.61,5.61,3.31,8.31,4.94.51.3.96.39,1.52.79,2.66,1.61,5.32,3.15,7.98,4.62l.03.5c-.4.53-.44.88-.13,1.06,1.23.4,1.44,1.32.61,2.76.29.77.21,1.35,0,2.11l.29,1.25c.77,1.62-1.01,1.86-2.17,1.45-.98-.41-1.91-.97-2.83-1.48-12.24-6.78-24.08-14.34-36.23-21.27-.45-.37-.77-.88-.93-1.44.16-2.32-.24-4.97-.01-7.25.09-.91.49-1.18,1.13-1.68Z"/>
@@ -90,54 +164,74 @@ const Tile3D = memo(({ tile, onClick, isTeleportActive }) => {
         <path fill={colorSide} opacity="0.85" d="M43.96,62.21c-.31-.36,0-.59.94-.7l1.19-.94c7.91-4.56,16-9.24,23.77-13.78.04-.03.06-.1.07-.19,4.35-2.18,8.57-4.76,12.73-7.36,1.19-1.44,1.45-.09.68.93.29,1.16.29,2.36,0,3.61.24,1.05.25,2.03,0,2.93-1.06,1.2-5.34,3.39-6.96,4.35-10.82,6.4-21.73,12.76-32.67,18.9.1-.34.56-.89.59-1.2.04-.43.03-1.44.04-1.98.03-.96-.29-2.82-.22-3.49.05-.4.55-.67-.16-1.08Z"/>
         
         {/* Path 4: Top Face Highlight */}
-        <path fill={colorTop} opacity="0.9" d="M83.33,46.71c.11-.95-.26-2.02-.25-2.93,0-.67.28-1.56.26-2.26-.01-.44-.28-1-.25-1.37.02-.34.37-.58.47-.91.05-.16.13-.47-.16-.41-.22.15-.42.5-.62.63-2.3,1.39-4.68,2.91-7.08,4.29-1.83,1.05-3.67,2.17-5.61,2.96l.12.24c-.64.14-1.14.64-1.63.94-3.54,2.16-7.19,4.14-10.77,6.24-3.85,2.25-7.71,4.36-11.58,6.66-.36.22-1.09.91-1.26.99-.24.11-.51.02-.75.13-.14.06-.22.3-.25.31-.09.04-.36-.03-.5,0-.53.07-.75-.28-.68-1.04-.71-.58-.4-.98.93-1.21,10.1-6.02,20.43-11.77,30.57-17.75,2.51-1.48,5.03-2.95,7.5-4.5.24-.25.52-.8.27-1.09-.48-.57-2.06-1.19-2.77-1.67-.22-.14-.56-.32-.57-.62,1.15.67,4.77,2.36,5.1,3.59.07.27.14,1.02.16,1.34.11,1.66-.06,3.5-.13,5.13-.05,1.03.24,1.47-.5,2.31Z"/>
+        <path fill={tile.type === 'base' && tile.owner != null ? `url(#grad-base-${tile.owner})` : `url(#grad-${tile.type})`} opacity="0.9" d="M83.33,46.71c.11-.95-.26-2.02-.25-2.93,0-.67.28-1.56.26-2.26-.01-.44-.28-1-.25-1.37.02-.34.37-.58.47-.91.05-.16.13-.47-.16-.41-.22.15-.42.5-.62.63-2.3,1.39-4.68,2.91-7.08,4.29-1.83,1.05-3.67,2.17-5.61,2.96l.12.24c-.64.14-1.14.64-1.63.94-3.54,2.16-7.19,4.14-10.77,6.24-3.85,2.25-7.71,4.36-11.58,6.66-.36.22-1.09.91-1.26.99-.24.11-.51.02-.75.13-.14.06-.22.3-.25.31-.09.04-.36-.03-.5,0-.53.07-.75-.28-.68-1.04-.71-.58-.4-.98.93-1.21,10.1-6.02,20.43-11.77,30.57-17.75,2.51-1.48,5.03-2.95,7.5-4.5.24-.25.52-.8.27-1.09-.48-.57-2.06-1.19-2.77-1.67-.22-.14-.56-.32-.57-.62,1.15.67,4.77,2.36,5.1,3.59.07.27.14,1.02.16,1.34.11,1.66-.06,3.5-.13,5.13-.05,1.03.24,1.47-.5,2.31Z"/>
         <path fill={colorHighlight} d="M83.33,46.71c.11-.95-.26-2.02-.25-2.93,0-.67.28-1.56.26-2.26-.01-.44-.28-1-.25-1.37.02-.34.37-.58.47-.91.05-.16.13-.47-.16-.41-.22.15-.42.5-.62.63-2.3,1.39-4.68,2.91-7.08,4.29-1.83,1.05-3.67,2.17-5.61,2.96l.12.24c-.64.14-1.14.64-1.63.94-3.54,2.16-7.19,4.14-10.77,6.24-3.85,2.25-7.71,4.36-11.58,6.66-.36.22-1.09.91-1.26.99-.24.11-.51.02-.75.13-.14.06-.22.3-.25.31-.09.04-.36-.03-.5,0-.53.07-.75-.28-.68-1.04-.71-.58-.4-.98.93-1.21,10.1-6.02,20.43-11.77,30.57-17.75,2.51-1.48,5.03-2.95,7.5-4.5.24-.25.52-.8.27-1.09-.48-.57-2.06-1.19-2.77-1.67-.22-.14-.56-.32-.57-.62,1.15.67,4.77,2.36,5.1,3.59.07.27.14,1.02.16,1.34.11,1.66-.06,3.5-.13,5.13-.05,1.03.24,1.47-.5,2.31Z"/>
         
         {/* Path 5: Bottom Detail / Shadow Edge */}
         <path fill={colorSide} opacity="0.6" d="M33.45,56.08c1.92.97,3.8,2.07,5.68,3.14.25.14.63.43.93.59s1.78.8,1.84.88c.2.3-.06,1.59.07,1.74.05.06.79.12.99.2.66.25.13.36.15.73.07,1.2.06,2.19.09,3.4.01.42.24.97.22,1.36-.05.74-.68.98.17,1.83-.06.02-.13.1-.25.13-.67.14-1.34.18-2,.13-.63-.1-.7-.15-1.25-.38.59,0,1.5.11,1.94-.37s.04-.7-.03-1.09-.27-1.06-.28-1.24c-.02-.34.22-.78.22-1.12,0-.33-.23-.67-.23-1,0-.48.62-1.1.51-1.86-.09-.58-1.23-.43-1.36-1.16-.06-.36.53-.53.36-1.19-.09-.36-1.94-1.07-2.34-1.31-1.82-1.07-3.72-2.18-5.41-3.4Z"/>
+
+        {/* Path 6: Concentric Outline Border for premium print detail */}
+        <path 
+          fill="none" 
+          stroke="rgba(255, 255, 255, 0.28)" 
+          strokeWidth="1.2" 
+          d="M42,17.3 L76.4,36 L42,54.7 L7.6,36 Z" 
+        />
+
+        {/* Flat Isometric Icon */}
+        {!isBase && (() => {
+          const iconSize = 22;
+          const iconColor = '#FFFFFF';
+          let iconComponent = null;
+          switch (tile.type) {
+            case 'jejak':
+              iconComponent = <HelpCircle size={iconSize} color={iconColor} strokeWidth={3.0} />;
+              break;
+            case 'peti':
+              iconComponent = <Vault size={iconSize} color={iconColor} strokeWidth={3.0} />;
+              break;
+            case 'kartu':
+              iconComponent = <Layers size={iconSize} color={iconColor} strokeWidth={3.0} />;
+              break;
+            case 'jebakan':
+              iconComponent = <ChevronLeft size={iconSize} color={iconColor} strokeWidth={3.0} />;
+              break;
+            case 'jebakan_mundur':
+              iconComponent = <Wind size={iconSize} color={iconColor} strokeWidth={3.0} />;
+              break;
+            case 'jebakan_pijar':
+              iconComponent = <Flame size={iconSize} color={iconColor} strokeWidth={3.0} />;
+              break;
+            case 'penjaga':
+              iconComponent = <Swords size={iconSize} color={iconColor} strokeWidth={3.0} />;
+              break;
+            case 'warp':
+              iconComponent = <Waypoints size={iconSize} color={iconColor} strokeWidth={3.0} />;
+              break;
+            case 'turn_indicator':
+              iconComponent = <Calendar size={iconSize} color={iconColor} strokeWidth={3.0} />;
+              break;
+            default:
+              return null;
+          }
+          
+          if (!iconComponent) return null;
+          
+          return (
+            <g 
+              transform="translate(42, 33) scale(1, 0.54) rotate(45)" 
+              style={{ 
+                filter: 'drop-shadow(0px 1px 1px rgba(0,0,0,0.45))',
+                pointerEvents: 'none'
+              }}
+            >
+              <g transform="translate(-11, -11)">
+                {iconComponent}
+              </g>
+            </g>
+          );
+        })()}
       </svg>
-      
-      {/* TILE TYPE VECTOR INDICATORS (Floating on top of the 2.5D surface, centered at (42, 21)) */}
-      {!isBase && (
-        <div style={{
-          position: 'absolute',
-          left: '50%',
-          top: '25%', // Centered in the top rhombus face of the 2.5D tile
-          transform: 'translate(-50%, -50%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          pointerEvents: 'none',
-          zIndex: 5,
-        }}>
-          {(() => {
-            const iconSize = 28;
-            const iconColor = '#FFFFFF';
-            switch (tile.type) {
-              case 'jejak':
-                return <HelpCircle size={iconSize} color={iconColor} strokeWidth={2.5} />;
-              case 'peti':
-                return <Vault size={iconSize} color={iconColor} strokeWidth={2.5} />;
-              case 'kartu':
-                return <Layers size={iconSize} color={iconColor} strokeWidth={2.5} />;
-              case 'jebakan':
-                return <ChevronLeft size={iconSize} color={iconColor} strokeWidth={2.5} />;
-              case 'jebakan_mundur':
-                return <Wind size={iconSize} color={iconColor} strokeWidth={2.5} />;
-              case 'jebakan_pijar':
-                return <Flame size={iconSize} color={iconColor} strokeWidth={2.5} />;
-              case 'penjaga':
-                return <Swords size={iconSize} color={iconColor} strokeWidth={2.5} />;
-              case 'warp':
-                return <Waypoints size={iconSize} color={iconColor} strokeWidth={2.5} />;
-              case 'turn_indicator':
-                return <Calendar size={iconSize} color={iconColor} strokeWidth={2.5} />;
-              default:
-                return null;
-            }
-          })()}
-        </div>
-      )}
 
       {/* 3D hologram overlay for turn_indicator */}
       {tile.type === 'turn_indicator' && (

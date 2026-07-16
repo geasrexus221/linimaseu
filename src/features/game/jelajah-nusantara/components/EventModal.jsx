@@ -73,6 +73,31 @@ export default function EventModal() {
 
   if (!activeEvent) return null;
 
+  const getEventGraphic = () => {
+    switch (activeEvent.type) {
+      case 'jejak':
+        return { emoji: '💡', color: '#FBBF24' };
+      case 'penjaga':
+        return { emoji: '🛡️', color: '#EF4444' };
+      case 'base_choice':
+      case 'base_purchase':
+      case 'base_purchase_success':
+        return { emoji: '🏰', color: '#3B82F6' };
+      case 'discard_card_choice':
+      case 'kartu':
+        return { emoji: '🃏', color: '#EC4899' };
+      case 'duel_invitation':
+      case 'duel_target_selection':
+      case 'duel_defense_selection':
+      case 'duel_battle':
+        return { emoji: '⚔️', color: '#F59E0B' };
+      default:
+        return { emoji: '🌟', color: '#10B981' };
+    }
+  };
+
+  const graphic = getEventGraphic();
+
   const isQuiz = activeEvent.type === 'jejak';
   const isBattle = activeEvent.type === 'penjaga';
   const isBaseChoice = activeEvent.type === 'base_choice';
@@ -90,6 +115,13 @@ export default function EventModal() {
             <div className="title-stack" style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
               <h2 className="event-title" style={{ fontSize: '1.4rem', fontWeight: 950, color: '#4A2E1B', margin: 0, textTransform: 'uppercase', letterSpacing: '1px', textShadow: '0 1px 0 rgba(255,255,255,0.5)' }}>{activeEvent.title}</h2>
               <p className="event-msg">{activeEvent.message}</p>
+            </div>
+            
+            {/* Desktop-only graphic card to fill space */}
+            <div className="desktop-graphic-card">
+              <div className="glowing-orb" style={{ '--glow-color': graphic.color }}>
+                <span className="floating-emoji">{graphic.emoji}</span>
+              </div>
             </div>
           </div>
 
@@ -192,11 +224,12 @@ export default function EventModal() {
           .event-sheet-container {
             pointer-events: auto;
             border-radius: 40px !important;
-            max-height: 80vh !important;
+            max-height: 85vh !important;
             border: 4px dashed #6A3E16 !important;
             box-shadow: 0 20px 60px rgba(106,62,22,0.4), inset 0 0 30px rgba(106,62,22,0.1) !important;
-            width: auto !important;
-            min-width: 600px;
+            width: 90% !important;
+            max-width: 950px !important;
+            margin: 0 auto;
           }
           .sheet-handle { display: none; }
         }
@@ -253,23 +286,84 @@ export default function EventModal() {
           display: flex; flex-direction: column; gap: 10px;
         }
         @media (min-width: 850px) {
-          .sheet-layout { flex-direction: row; align-items: center; }
+          .sheet-layout { flex-direction: row; align-items: stretch; gap: 24px; }
         }
 
         .sheet-header {
           display: flex; align-items: center; gap: 10px; min-width: 280px;
         }
+        
+        @media (min-width: 1024px) {
+          .sheet-header {
+            flex: 1;
+            padding: 24px 16px;
+            background: rgba(106, 62, 22, 0.04);
+            border-radius: 28px;
+            border: 2px dashed rgba(106, 62, 22, 0.15);
+            justify-content: center;
+            min-height: 320px;
+          }
+        }
+        
+        .desktop-graphic-card {
+          display: none;
+        }
+        
+        @media (min-width: 1024px) {
+          .desktop-graphic-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+          }
+          
+          .glowing-orb {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 35px var(--glow-color), inset 0 0 15px rgba(255,255,255,0.6);
+            border: 4px solid white;
+          }
+          
+          .floating-emoji {
+            font-size: 5.5rem;
+            animation: iconBounce 3s infinite ease-in-out;
+            user-select: none;
+          }
+        }
+
         .event-badge {
           display: none;
         }
         .title-stack { flex: 1; }
         .event-title { margin: 0; font-size: 1.4rem; font-weight: 900; color: #4A2E1B; text-transform: uppercase; line-height: 1.2; text-shadow: 0 1px 0 rgba(255,255,255,0.4); }
+        
+        @media (min-width: 1024px) {
+          .event-title {
+            font-size: 2.1rem !important;
+            line-height: 1.25 !important;
+          }
+        }
+        
         .event-msg { 
           margin: 4px 0 0; font-size: 0.9rem; font-weight: 700; 
           color: ${activeEvent.result === 'LOSE' || activeEvent.result === 'WRONG' ? '#EF4444' : '#58CC02'}; 
         }
+        
+        @media (min-width: 1024px) {
+          .event-msg {
+            font-size: 1.2rem !important;
+            margin-top: 10px !important;
+          }
+        }
 
-        .sheet-body { flex: 2; width: 100%; }
+        .sheet-body { flex: 1.4; width: 100%; display: flex; flex-direction: column; justify-content: center; }
         
         .sheet-footer { flex: 1; width: 100%; margin-top: 5px; }
         .sheet-footer.content-integrated { margin-top: 10px; }
@@ -290,7 +384,7 @@ export default function EventModal() {
         }
         @keyframes iconBounce {
           0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+          50% { transform: translateY(-8px); }
         }
       `}</style>
     </div>

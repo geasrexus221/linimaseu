@@ -174,6 +174,34 @@ export default function QuizContent({ question, onAnswer }) {
           box-shadow: none !important;
         }
 
+        @media (min-width: 1024px) {
+          .quiz-container { gap: 14px; }
+          .question-box {
+            padding: 20px 24px;
+            font-size: 1.25rem;
+            border-radius: 20px;
+            line-height: 1.6;
+          }
+          .options-grid {
+            gap: 14px;
+            margin-top: 12px;
+          }
+          .option-btn {
+            padding: 14px 20px;
+            border-radius: 20px;
+            min-height: 64px;
+          }
+          .opt-idx {
+            width: 32px;
+            height: 32px;
+            font-size: 1.05rem;
+            border-radius: 8px;
+          }
+          .opt-text {
+            font-size: 1.05rem;
+          }
+        }
+
         @media (max-height: 500px) {
           .quiz-container { gap: 6px !important; }
           .question-box { padding: 8px 12px !important; font-size: 0.8rem !important; border-radius: 10px !important; }

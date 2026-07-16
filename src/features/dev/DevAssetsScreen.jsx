@@ -12,7 +12,23 @@ import {
   Award, Crown, Medal, Flag, Key, Lock, Sword, Shield, Book, GraduationCap, School, Compass, PenTool, Edit3, Lightbulb, Camera,
   Play, Pause, VolumeX, Volume2, Users, UserCheck, MessageSquare, Share2
 } from 'lucide-react';
+import { useGameStore } from '../../store/useGameStore';
 import { soundManager } from '../../utils/SoundManager';
+
+import JelajahHelpModal from '../game/jelajah-nusantara/components/hud/JelajahHelpModal';
+import GameSettingsModal from '../game/jelajah-nusantara/components/hud/GameSettingsModal';
+import InventoryDetailList from '../game/jelajah-nusantara/components/hud/InventoryDetailList';
+import TurnOverlay from '../game/jelajah-nusantara/components/hud/TurnOverlay';
+import QuizContent from '../game/jelajah-nusantara/components/events/QuizContent';
+import BattleContent from '../game/jelajah-nusantara/components/events/BattleContent';
+import ChoiceContent from '../game/jelajah-nusantara/components/events/ChoiceContent';
+import BasePurchaseContent from '../game/jelajah-nusantara/components/events/BasePurchaseContent';
+import CardPreviewContent from '../game/jelajah-nusantara/components/events/CardPreviewContent';
+import DiscardCardContent from '../game/jelajah-nusantara/components/events/DiscardCardContent';
+import DuelInvitationContent from '../game/jelajah-nusantara/components/events/DuelInvitationContent';
+import DuelTargetSelectionContent from '../game/jelajah-nusantara/components/events/DuelTargetSelectionContent';
+import AddStudentModal from '../teacher/components/modals/AddStudentModal';
+import StudentDetailModal from '../teacher/components/modals/StudentDetailModal';
 
 // Import Image Sprites
 import CerminSvg from '../../assets/UI/Character/cermin.svg';
@@ -57,7 +73,14 @@ export default function DevAssetsScreen() {
   const [copiedId, setCopiedId] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [customText, setCustomText] = useState('Lini Masa Sejarah Indonesia SD Kelas 5 & 6');
-  const [activePopup, setActivePopup] = useState(null); // 'reward', 'shop', 'node'
+  const [activePopup, setActivePopup] = useState(null); // 'reward', 'shop', 'node', 'settings', 'victory', 'jelajah_help', 'recovery', 'add_student', 'student_detail'
+  const [helpPage, setHelpPage] = useState(0);
+  const [addStudentTab, setAddStudentTab] = useState('manual');
+  const [addStudentName, setAddStudentName] = useState('');
+  const [addStudentNis, setAddStudentNis] = useState('');
+  const [copiedInvite, setCopiedInvite] = useState(false);
+  const [studentDetailName, setStudentDetailName] = useState('Budi Santoso');
+  const [studentDetailNis, setStudentDetailNis] = useState('10293847');
   const [activeSimTab, setActiveSimTab] = useState('dashboard');
   const [hideDescriptions, setHideDescriptions] = useState(false);
   const [hideFrames, setHideFrames] = useState(false);
@@ -99,6 +122,40 @@ export default function DevAssetsScreen() {
       videoRef.current.srcObject = cameraStream;
     }
   }, [cameraStream]);
+
+  React.useEffect(() => {
+    const originalState = useGameStore.getState();
+
+    useGameStore.setState({
+      players: [
+        {
+          name: 'Budi (Kamu)',
+          characterId: 1,
+          koin: 150,
+          tekad: 80,
+          inventory: [
+            { name: 'Kartu Pijar', icon: '🕯️', desc: 'Maju 3 langkah otomatis tanpa putar dadu.' },
+            { name: 'Kartu Tekad', icon: '❤️', desc: 'Pulihkan kembali 20 poin Tekad karaktermu.' }
+          ],
+          stats: { serangan: 2, pertahanan: 1, kelincahan: -1 }
+        },
+        {
+          name: 'Santi (AI)',
+          characterId: 2,
+          koin: 100,
+          tekad: 90,
+          inventory: [],
+          stats: { serangan: 0, pertahanan: 2, kelincahan: 1 }
+        }
+      ],
+      turnIdx: 0,
+      remainingSteps: 3
+    });
+
+    return () => {
+      useGameStore.setState(originalState);
+    };
+  }, []);
 
   const { 
     stars, addStars, hearts, addHearts, resetHearts, streak, setStreak,
@@ -541,44 +598,165 @@ export default function DevAssetsScreen() {
         {/* ================= FONTS ================= */}
         {activeTab === 'fonts' && (
           <section className="viewport-section">
-            <h3 className="section-title-label">Font & Tipografi</h3>
-            
-            <div className="font-specimen-card">
-              <div className="font-meta-group">
-                <h3>Font Keluarga: Outfit (Google Fonts)</h3>
-                <p>Outfit adalah font sans-serif modern geometric, dioptimalkan untuk keterbacaan yang sangat baik pada UI game belajar.</p>
+            <h3 className="section-title-label">Typography</h3>
+            <p className="section-desc-text" style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '30px', fontWeight: '600' }}>
+              Spesifikasi keluarga huruf dan hierarki teks yang digunakan secara konsisten di seluruh antarmuka aplikasi.
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+              
+              {/* 1. OUTFIT (Display & Heading Font) */}
+              <div className="typography-specimen-card" style={{ 
+                background: 'white', 
+                borderRadius: '24px', 
+                border: '2.5px solid var(--border-color)', 
+                padding: '40px', 
+                display: 'flex', 
+                flexDirection: 'row', 
+                gap: '50px',
+                alignItems: 'center',
+                boxShadow: '0 8px 30px rgba(0,0,0,0.03)',
+                color: '#1F2937',
+                fontFamily: "'Outfit', sans-serif"
+              }}>
+                {/* Left Side: Massive Aa */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, width: '180px', borderRight: '2px solid #E5E7EB', paddingRight: '40px' }}>
+                  <span style={{ fontSize: '9rem', fontWeight: '950', lineHeight: 1, color: '#1F2937' }}>Aa</span>
+                  <span style={{ fontSize: '2.2rem', fontWeight: '800', marginTop: '10px', color: '#1F2937', letterSpacing: '-0.5px' }}>Outfit</span>
+                </div>
+
+                {/* Right Side: Spec Table */}
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', borderBottom: '2px solid #E5E7EB', paddingBottom: '12px', marginBottom: '24px' }}>
+                    <span style={{ fontWeight: '900', color: '#4B5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '3.5px solid #10B981', paddingBottom: '6px', width: 'fit-content' }}>Style</span>
+                    <span style={{ fontWeight: '900', color: '#4B5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '3.5px solid #10B981', paddingBottom: '6px', width: 'fit-content' }}>Weight</span>
+                    <span style={{ fontWeight: '900', color: '#4B5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '3.5px solid #10B981', paddingBottom: '6px', width: 'fit-content' }}>Point</span>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                    {/* Row 1: Heading 1 */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '950', fontSize: '44px', color: '#111827', margin: 0, padding: 0, lineHeight: 1.1 }}>Heading 1</span>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '950', fontSize: '1.1rem', color: '#111827' }}>Super Bold</span>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '900', fontSize: '1.5rem', color: '#111827' }}>44</span>
+                    </div>
+
+                    {/* Row 2: Heading 2 */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '800', fontSize: '36px', color: '#1F2937', margin: 0, padding: 0, lineHeight: 1.1 }}>Heading 2</span>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '800', fontSize: '1rem', color: '#4B5563' }}>Extra Bold</span>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '800', fontSize: '1.3rem', color: '#1F2937' }}>36</span>
+                    </div>
+
+                    {/* Row 3: Sub-Heading */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '600', fontSize: '24px', color: '#374151', margin: 0, padding: 0, lineHeight: 1.1 }}>Sub-Heading</span>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '600', fontSize: '0.95rem', color: '#4B5563' }}>Semi Bold</span>
+                      <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: '600', fontSize: '1.2rem', color: '#374151' }}>24</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* Teks Input Kustom */}
-              <div className="custom-input-tester">
-                <label>Uji Teks Kustom:</label>
-                <input 
-                  type="text" 
-                  value={customText} 
-                  onChange={e => setCustomText(e.target.value)} 
-                  placeholder="Ketik teks di sini untuk melihat rendering font..."
-                />
+              {/* 2. NUNITO (Body & UI Font) */}
+              <div className="typography-specimen-card" style={{ 
+                background: 'white', 
+                borderRadius: '24px', 
+                border: '2.5px solid var(--border-color)', 
+                padding: '40px', 
+                display: 'flex', 
+                flexDirection: 'row', 
+                gap: '50px',
+                alignItems: 'center',
+                boxShadow: '0 8px 30px rgba(0,0,0,0.03)',
+                color: '#1F2937',
+                fontFamily: "'Nunito', sans-serif"
+              }}>
+                {/* Left Side: Massive Aa */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, width: '180px', borderRight: '2px solid #E5E7EB', paddingRight: '40px' }}>
+                  <span style={{ fontSize: '9rem', fontWeight: '800', lineHeight: 1, color: '#1F2937' }}>Aa</span>
+                  <span style={{ fontSize: '2.2rem', fontWeight: '900', marginTop: '10px', color: '#1F2937', letterSpacing: '-0.5px' }}>Nunito</span>
+                </div>
+
+                {/* Right Side: Spec Table */}
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', borderBottom: '2px solid #E5E7EB', paddingBottom: '12px', marginBottom: '24px' }}>
+                    <span style={{ fontWeight: '900', color: '#4B5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '3.5px solid #10B981', paddingBottom: '6px', width: 'fit-content' }}>Style</span>
+                    <span style={{ fontWeight: '900', color: '#4B5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '3.5px solid #10B981', paddingBottom: '6px', width: 'fit-content' }}>Weight</span>
+                    <span style={{ fontWeight: '900', color: '#4B5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '3.5px solid #10B981', paddingBottom: '6px', width: 'fit-content' }}>Point</span>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                    {/* Row 1: Main Text */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
+                      <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '700', fontSize: '20px', color: '#1F2937', margin: 0, padding: 0, lineHeight: 1.1 }}>Main Text</span>
+                      <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '700', fontSize: '1rem', color: '#4B5563' }}>Bold</span>
+                      <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '700', fontSize: '1.3rem', color: '#1F2937' }}>20</span>
+                    </div>
+
+                    {/* Row 2: Menu */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
+                      <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '600', fontSize: '18px', color: '#374151', margin: 0, padding: 0, lineHeight: 1.1 }}>Menu</span>
+                      <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '600', fontSize: '0.95rem', color: '#4B5563' }}>Medium</span>
+                      <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '600', fontSize: '1.2rem', color: '#374151' }}>18</span>
+                    </div>
+
+                    {/* Row 3: Body Text */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
+                      <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '400', fontSize: '16px', color: '#4B5563', margin: 0, padding: 0, lineHeight: 1.1 }}>Body Text</span>
+                      <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '400', fontSize: '0.9rem', color: '#6B7280' }}>Regular</span>
+                      <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: '400', fontSize: '1.1rem', color: '#4B5563' }}>16</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* Tampilan Specimen */}
-              <div className="specimen-renders">
-                <div className="render-row">
-                  <span className="render-label">Font Weight 950 (Super Bold):</span>
-                  <h1 style={{ fontWeight: 950, fontSize: '2rem' }}>{customText}</h1>
+              {/* 3. FREDOKA (Game Title & Score Font) */}
+              <div className="typography-specimen-card" style={{ 
+                background: 'white', 
+                borderRadius: '24px', 
+                border: '2.5px solid var(--border-color)', 
+                padding: '40px', 
+                display: 'flex', 
+                flexDirection: 'row', 
+                gap: '50px',
+                alignItems: 'center',
+                boxShadow: '0 8px 30px rgba(0,0,0,0.03)',
+                color: '#1F2937',
+                fontFamily: "'Fredoka', sans-serif"
+              }}>
+                {/* Left Side: Massive Aa */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, width: '180px', borderRight: '2px solid #E5E7EB', paddingRight: '40px' }}>
+                  <span style={{ fontSize: '9rem', fontWeight: '700', lineHeight: 1, color: '#1F2937' }}>Aa</span>
+                  <span style={{ fontSize: '2.2rem', fontWeight: '800', marginTop: '10px', color: '#1F2937', letterSpacing: '-0.5px' }}>Fredoka</span>
                 </div>
-                <div className="render-row">
-                  <span className="render-label">Font Weight 800 (Extra Bold / Judul):</span>
-                  <h2 style={{ fontWeight: 800, fontSize: '1.6rem' }}>{customText}</h2>
-                </div>
-                <div className="render-row">
-                  <span className="render-label">Font Weight 600 (Semibold / Paragraf Utama):</span>
-                  <p style={{ fontWeight: 600, fontSize: '1.1rem' }}>{customText}</p>
-                </div>
-                <div className="render-row">
-                  <span className="render-label">Font Weight 400 (Regular / Keterangan):</span>
-                  <span style={{ fontWeight: 400, fontSize: '0.95rem' }}>{customText}</span>
+
+                {/* Right Side: Spec Table */}
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', borderBottom: '2px solid #E5E7EB', paddingBottom: '12px', marginBottom: '24px' }}>
+                    <span style={{ fontWeight: '900', color: '#4B5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '3.5px solid #10B981', paddingBottom: '6px', width: 'fit-content' }}>Style</span>
+                    <span style={{ fontWeight: '900', color: '#4B5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '3.5px solid #10B981', paddingBottom: '6px', width: 'fit-content' }}>Weight</span>
+                    <span style={{ fontWeight: '900', color: '#4B5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '3.5px solid #10B981', paddingBottom: '6px', width: 'fit-content' }}>Point</span>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                    {/* Row 1: Game Title */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
+                      <span style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: '700', fontSize: '40px', color: '#111827', margin: 0, padding: 0, lineHeight: 1.1 }}>Game Title</span>
+                      <span style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: '700', fontSize: '1rem', color: '#111827' }}>Bold Rounded</span>
+                      <span style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: '700', fontSize: '1.4rem', color: '#111827' }}>40</span>
+                    </div>
+
+                    {/* Row 2: Score Display */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr 1fr', alignItems: 'center' }}>
+                      <span style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: '600', fontSize: '32px', color: '#1F2937', margin: 0, padding: 0, lineHeight: 1.1 }}>Score Display</span>
+                      <span style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: '600', fontSize: '0.95rem', color: '#4B5563' }}>Medium Rounded</span>
+                      <span style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: '600', fontSize: '1.25rem', color: '#1F2937' }}>32</span>
+                    </div>
+                  </div>
                 </div>
               </div>
+
             </div>
           </section>
         )}
@@ -638,47 +816,411 @@ export default function DevAssetsScreen() {
         {/* ================= POP-UPS ================= */}
         {(activeTab === 'all' || activeTab === 'popups') && (
           <section className="viewport-section" style={{ marginTop: '20px' }}>
-            <h3 className="section-title-label">Menu & Pop-up Dialog</h3>
-            <div className="popups-preview-list">
-              <div className="popup-trigger-row">
-                <button 
-                  className="chunky-btn primary-blue"
-                  onClick={() => { soundManager.play('click'); setActivePopup('reward'); }}
-                >
-                  <span className="btn-face">Picu Modal Harta Karun</span>
-                </button>
-                <p>Menampilkan modal dialog peti harta karun saat memenangkan materi/kuis dengan perolehan bintang.</p>
+            <h3 className="section-title-label">Menu & Pop-up Dialog (Live Inline Previews)</h3>
+            
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+              gap: '30px', 
+              width: '100%', 
+              marginTop: '20px' 
+            }}>
+              
+              {/* 1. Event Kuis Jejak Pengetahuan */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>1. KUIS JEJAK PENGETAHUAN</span>
+                <div className="event-sheet-overlay">
+                  <div className="event-sheet-container" style={{ width: '100%' }}>
+                    <div className="sheet-layout">
+                      <div className="sheet-header">
+                        <div className="title-stack">
+                          <h2 className="event-title">KUIS JEJAK PENGETAHUAN</h2>
+                          <p className="event-msg">Jawab pertanyaan berikut untuk mendapatkan koin emas!</p>
+                        </div>
+                      </div>
+                      <div className="sheet-body">
+                        <QuizContent 
+                          question={{
+                            question: "Siapakah tokoh yang membacakan naskah Proklamasi Kemerdekaan Indonesia pada tanggal 17 Agustus 1945?",
+                            options: ["Drs. Moh. Hatta", "Ir. Soekarno", "Sutan Syahrir", "Mr. Ahmad Soebardjo"],
+                            correct: 1
+                          }} 
+                          onAnswer={(ansIdx) => {
+                            soundManager.play(ansIdx === 1 ? 'success' : 'error');
+                            alert(`Jawaban Anda: Opsi ${ansIdx + 1}`);
+                          }} 
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="popup-trigger-row" style={{ marginTop: '20px' }}>
-                <button 
-                  className="chunky-btn primary-yellow"
-                  onClick={() => { soundManager.play('click'); setActivePopup('shop'); }}
-                >
-                  <span className="btn-face" style={{ color: '#4b4b4b' }}>Picu Modal Konfirmasi Beli</span>
-                </button>
-                <p>Menampilkan dialog konfirmasi pembelian barang di toko (isinya menukarkan poin bintang).</p>
+              {/* 2. Event Pertarungan Penjaga Pos */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>2. PERTARUNGAN PENJAGA POS</span>
+                <div className="event-sheet-overlay">
+                  <div className="event-sheet-container" style={{ width: '100%' }}>
+                    <div className="sheet-layout">
+                      <div className="sheet-header">
+                        <div className="title-stack">
+                          <h2 className="event-title">PENJAGA POS SRIWIJAYA</h2>
+                          <p className="event-msg">Kalahkan Penjaga Pos untuk melewati rintangan jalan ini!</p>
+                        </div>
+                      </div>
+                      <div className="sheet-body">
+                        <BattleContent 
+                          player={{ name: 'Budi (Kamu)', characterId: 1, tekad: 80, koin: 150 }}
+                          guardian={{ name: 'Prajurit Sriwijaya', power: 4, emoji: '👹' }} 
+                          playerRoll={null} 
+                          isRolling={false}
+                          isPending={true}
+                          onRoll={() => {
+                            soundManager.play('dice_roll');
+                            alert("Dadu diputar!");
+                          }}
+                          loser={null}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="popup-trigger-row" style={{ marginTop: '20px' }}>
-                <button 
-                  className="chunky-btn primary-green"
-                  onClick={() => { soundManager.play('click'); setActivePopup('node'); }}
-                >
-                  <span className="btn-face">Picu Pop-up Info Node</span>
-                </button>
-                <p>Menampilkan tooltip/popup mini di atas bulatan petualangan untuk mulai belajar/kuis.</p>
+              {/* 3. Event Persimpangan (Choice) */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>3. PERSIMPANGAN JALAN</span>
+                <div className="event-sheet-overlay">
+                  <div className="event-sheet-container" style={{ width: '100%' }}>
+                    <div className="sheet-layout">
+                      <div className="sheet-header">
+                        <div className="title-stack">
+                          <h2 className="event-title">PERSIMPANGAN UTAMA</h2>
+                          <p className="event-msg">Pilihlah jalur lintasan perjalananmu berikutnya!</p>
+                        </div>
+                      </div>
+                      <div className="sheet-body">
+                        <ChoiceContent 
+                          message="Kamu tiba di persimpangan jalan kuno kerajaan Nusantara. Pilih jalanmu!" 
+                          remainingSteps={3}
+                          onChoice={(choice) => {
+                            soundManager.play('click');
+                            alert(`Arah yang dipilih: Jalur ${choice}`);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="popup-trigger-row" style={{ marginTop: '20px' }}>
-                <button 
-                  className="chunky-btn primary-blue"
-                  onClick={() => { soundManager.play('click'); setSettingsSubView('main'); setActivePopup('settings'); }}
-                >
-                  <span className="btn-face">Picu Modal Pengaturan (Settings Menu)</span>
-                </button>
-                <p>Menampilkan dialog prototipe menu pengaturan interaktif (Profil, Notifikasi, Privasi, Tentang).</p>
+              {/* 4. Event Dapat Kartu Aksi (Card Preview) */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>4. DAPAT KARTU AKSI</span>
+                <div className="event-sheet-overlay">
+                  <div className="event-sheet-container" style={{ width: '100%' }}>
+                    <div className="sheet-layout">
+                      <div className="sheet-header">
+                        <div className="title-stack">
+                          <h2 className="event-title">KARTU BARU DIPEROLEH</h2>
+                          <p className="event-msg">Kartu aksi ini ditambahkan ke kantong tasmu!</p>
+                        </div>
+                      </div>
+                      <div className="sheet-body">
+                        <CardPreviewContent card={{ name: 'Langkah Warp', icon: '🌀', description: 'Teleportasi langsung ke ubin mana saja di papan permainan.', cost: 20, color: '#3B82F6' }} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              {/* 5. Event Buang Kartu (Discard Card) */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>5. BUANG KARTU (TAS PENUH)</span>
+                <div className="event-sheet-overlay">
+                  <div className="event-sheet-container" style={{ width: '100%' }}>
+                    <div className="sheet-layout">
+                      <div className="sheet-header">
+                        <div className="title-stack">
+                          <h2 className="event-title">TAS PENUH!</h2>
+                          <p className="event-msg">Pilihlah salah satu kartu untuk dibuang agar bisa menyimpan kartu baru.</p>
+                        </div>
+                      </div>
+                      <div className="sheet-body">
+                        <DiscardCardContent 
+                          currentInventory={[
+                            { instanceId: 'card-1', name: 'Kartu Pijar', icon: '🕯️', description: 'Maju 3 langkah' },
+                            { instanceId: 'card-2', name: 'Kartu Tekad', icon: '❤️', description: 'Pulihkan 20 Tekad' }
+                          ]}
+                          newCard={{ instanceId: 'card-3', name: 'Kartu Warp', icon: '🌀', description: 'Warp teleportasi' }}
+                          onDiscard={(instanceId) => {
+                            soundManager.play('click');
+                            alert(`Kartu dengan ID ${instanceId} dibuang.`);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 6. Event Undangan Duel Cendekiawan */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>6. UNDANGAN DUEL CENDEKIAWAN</span>
+                <div className="event-sheet-overlay">
+                  <div className="event-sheet-container" style={{ width: '100%' }}>
+                    <div className="sheet-layout">
+                      <div className="sheet-header">
+                        <div className="title-stack">
+                          <h2 className="event-title">TANTANGAN DUEL</h2>
+                          <p className="event-msg">Pemain lain mengajakmu berduel kecerdasan sejarah!</p>
+                        </div>
+                      </div>
+                      <div className="sheet-body">
+                        <DuelInvitationContent 
+                          opponent={{ name: 'Santi (AI)', characterId: 2, stats: { serangan: 0, pertahanan: 2, kelincahan: 1 } }} 
+                          onChoice={(choice) => {
+                            soundManager.play('click');
+                            alert(`Pilihan tantangan: ${choice}`);
+                          }} 
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 7. Event Pilih Lawan Duel */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>7. PILIH LAWAN DUEL</span>
+                <div className="event-sheet-overlay">
+                  <div className="event-sheet-container" style={{ width: '100%' }}>
+                    <div className="sheet-layout">
+                      <div className="sheet-header">
+                        <div className="title-stack">
+                          <h2 className="event-title">PILIH TARGET DUEL</h2>
+                          <p className="event-msg">Pilihlah salah satu penjelajah di lintasan untuk diajak berduel.</p>
+                        </div>
+                      </div>
+                      <div className="sheet-body">
+                        <DuelTargetSelectionContent 
+                          onSelectTarget={(target) => {
+                            soundManager.play('click');
+                            alert(`Target dipilih: ${target}`);
+                          }} 
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 8. Event Beli Peti di Markas */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#38B6FF', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>8. BELI PETI DI MARKAS</span>
+                <div className="event-sheet-overlay">
+                  <div className="event-sheet-container" style={{ width: '100%' }}>
+                    <div className="sheet-layout">
+                      <div className="sheet-header">
+                        <div className="title-stack">
+                          <h2 className="event-title">KUNJUNGAN MARKAS</h2>
+                          <p className="event-msg">Tukarkan koin emasmu untuk membeli peti kemenangan!</p>
+                        </div>
+                      </div>
+                      <div className="sheet-body">
+                        <BasePurchaseContent 
+                          cost={200} 
+                          onChoice={(choice) => {
+                            soundManager.play('click');
+                            alert(`Beli peti: ${choice}`);
+                          }} 
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 9. Modal Panduan Bermain (JelajahHelpModal) */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2px solid var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#10B981', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>9. MODAL PANDUAN BERMAIN</span>
+                <JelajahHelpModal isOpen={true} onClose={() => {}} />
+              </div>
+
+              {/* 10. Modal Pengaturan Game (GameSettingsModal) */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2px solid var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#10B981', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>10. PENGATURAN GAME</span>
+                <GameSettingsModal isOpen={true} onClose={() => {}} />
+              </div>
+
+              {/* 11. Modal Tas / Inventori (InventoryDetailList) */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2px solid var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#10B981', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>11. TAS & KARTU AKSI</span>
+                <InventoryDetailList 
+                  player={{
+                    name: 'Budi (Kamu)',
+                    characterId: 1,
+                    koin: 150,
+                    tekad: 80,
+                    inventory: [
+                      { name: 'Kartu Pijar', icon: '🕯️', desc: 'Maju 3 langkah otomatis tanpa putar dadu.' },
+                      { name: 'Kartu Tekad', icon: '❤️', desc: 'Pulihkan kembali 20 poin Tekad karaktermu.' },
+                      { name: 'Kartu Warp', icon: '🌀', desc: 'Teleportasi langsung ke ubin mana saja di papan.' }
+                    ]
+                  }} 
+                  isTestMode={true} 
+                  onClose={() => {}} 
+                />
+              </div>
+
+              {/* 12. Modal Kemenangan (VictoryModal) */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#EF4444', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>12. MODAL KEMENANGAN</span>
+                <div className="victory-overlay" style={{ background: 'none', position: 'relative', inset: 'auto', zIndex: 1, padding: 0, backdropFilter: 'none' }}>
+                  <div className="victory-popup" style={{ border: '2px solid var(--border-color)', boxShadow: 'none' }}>
+                    <div className="popup-header">
+                      <div className="trophy-badge">🏆</div>
+                      <h2 className="popup-title">HASIL AKHIR</h2>
+                      <p className="popup-subtitle">🏆 <strong>Budi (Kamu)</strong> pemenang!</p>
+                    </div>
+                    <div className="podium-row">
+                      <div className="podium-col col-rank-2" style={{ opacity: 1 }}>
+                        <div className="podium-avatar-wrap silver-ring">
+                          <div className="podium-avatar-crop">
+                            <span style={{ fontSize: '1.8rem' }}>🐱</span>
+                          </div>
+                          <div className="rank-badge rank-2-badge">2</div>
+                        </div>
+                        <span className="podium-name">Santi</span>
+                        <div className="podium-block block-2" />
+                      </div>
+                      <div className="podium-col col-rank-1" style={{ opacity: 1 }}>
+                        <div className="winner-crown">👑</div>
+                        <div className="podium-avatar-wrap gold-ring">
+                          <div className="podium-avatar-crop gold-bg">
+                            <span style={{ fontSize: '2.2rem' }}>🐰</span>
+                          </div>
+                          <div className="rank-badge rank-1-badge">1</div>
+                        </div>
+                        <span className="podium-name name-gold">Budi (Kamu)</span>
+                        <div className="podium-block block-1" />
+                      </div>
+                      <div className="podium-col col-rank-3" style={{ opacity: 1 }}>
+                        <div className="podium-avatar-wrap bronze-ring">
+                          <div className="podium-avatar-crop">
+                            <span style={{ fontSize: '1.8rem' }}>🦊</span>
+                          </div>
+                          <div className="rank-badge rank-3-badge">3</div>
+                        </div>
+                        <span className="podium-name">Bimo</span>
+                        <div className="podium-block block-3" />
+                      </div>
+                    </div>
+                    <div className="score-strips">
+                      <div className="score-strip is-you">
+                        <span className="strip-rank-num">#1</span>
+                        <div className="strip-info">
+                          <span className="strip-name">Budi (Kamu) <span className="you-tag">KAMU</span></span>
+                        </div>
+                        <div className="strip-scores">
+                          <span className="score-pill peti">3 Peti</span>
+                          <span className="score-pill koin">250 Koin</span>
+                        </div>
+                      </div>
+                      <div className="score-strip">
+                        <span className="strip-rank-num">#2</span>
+                        <div className="strip-info">
+                          <span className="strip-name">Santi</span>
+                        </div>
+                        <div className="strip-scores">
+                          <span className="score-pill peti">2 Peti</span>
+                          <span className="score-pill koin">180 Koin</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="reward-box">
+                      <Star size={18} color="#D97706" fill="#FACC15" />
+                      <span>+400 Bintang diperoleh!</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 13. Modal Pemulihan Karakter (Recovery) */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2.5px dashed var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#EF4444', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>13. PEMULIHAN KARAKTER</span>
+                <div className="event-sheet-overlay">
+                  <div className="event-sheet-container" style={{ borderColor: '#EF4444' }}>
+                    <div className="sheet-layout">
+                      <div className="sheet-header" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', width: '100%' }}>
+                        <div className="title-stack">
+                          <h2 className="event-title" style={{ color: '#EF4444' }}>TUMBANG!</h2>
+                          <p className="event-msg">Karaktermu pingsan karena kehabisan poin Tekad!</p>
+                        </div>
+                      </div>
+                      <div className="sheet-body" style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '3.5rem', margin: '15px 0' }}>🐰💤</div>
+                        <div style={{ background: '#FEF2F2', border: '2.5px dashed #FCA5A5', borderRadius: '16px', padding: '12px', marginBottom: '20px', color: '#991B1B', fontWeight: '800' }}>
+                          🎲 Putar dadu pemulihan dan dapatkan angka <strong>5 atau 6</strong> untuk bangkit kembali!
+                        </div>
+                        <button className="chunky-btn primary-red" style={{ width: '100%' }} onClick={() => soundManager.play('dice_roll')}>
+                          <span className="btn-face">PUTAR DADU PEMULIHAN</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 14. Overlay Giliran Pemain (TurnOverlay) */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2px solid var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#10B981', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>14. OVERLAY GILIRAN BARU</span>
+                <TurnOverlay isVisible={true} playerName="Budi (Kamu)" playerColor="#1CB0F6" />
+              </div>
+
+              {/* 15. Tambah Murid Guru (AddStudentModal) */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2px solid var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#8B5CF6', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>15. TAMBAH MURID (GURU)</span>
+                <AddStudentModal 
+                  isOpen={true} 
+                  onClose={() => {}} 
+                  activeClassroom={{ id: 'class-1', name: 'Kelas 5-A' }} 
+                  onAddStudent={(std) => alert(`Murid ditambahkan: ${std.name}`)} 
+                />
+              </div>
+
+              {/* 16. Detail Murid & Rapor Guru (StudentDetailModal) */}
+              <div className="inline-popup-container" style={{ display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', border: '2px solid var(--border-color)', borderRadius: '28px', padding: '24px', position: 'relative', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                <span style={{ fontSize: '0.75rem', background: '#8B5CF6', color: 'white', padding: '3px 10px', borderRadius: '50px', fontWeight: '900', position: 'absolute', top: '-12px', left: '20px', zIndex: 5 }}>16. DETAIL & RAPOR MURID</span>
+                <StudentDetailModal 
+                  selectedStudent={{
+                    id: 'stud-1',
+                    name: studentDetailName,
+                    nis: studentDetailNis,
+                    score: 85,
+                    attendance: 100
+                  }}
+                  onClose={() => {}}
+                  activeClassroom={{ name: 'Kelas 5-A' }}
+                  getStudentRecord={(id, score) => ({
+                    academic: [
+                      { subject: 'Kerajaan Kutai', score: 90, classAvg: 75, dateShared: '2026-06-01', dateCompleted: '2026-06-02' },
+                      { subject: 'Kerajaan Tarumanegara', score: 80, classAvg: 70, dateShared: '2026-06-05', dateCompleted: '2026-06-07' },
+                      { subject: 'Kerajaan Sriwijaya', score: 85, classAvg: 80, dateShared: '2026-06-10', dateCompleted: '2026-06-12' }
+                    ],
+                    attendance: {
+                      'Minggu 1': 'Hadir',
+                      'Minggu 2': 'Hadir',
+                      'Minggu 3': 'Sakit',
+                      'Minggu 4': 'Hadir',
+                      'Minggu 5': 'Hadir'
+                    },
+                    notes: 'Murid sangat aktif mengikuti materi sejarah dan game isometrik.'
+                  })}
+                  onSave={() => alert('Rapor murid disimpan!')}
+                />
+              </div>
+
             </div>
           </section>
         )}
@@ -1506,7 +2048,14 @@ export default function DevAssetsScreen() {
       {/* Lightbox / Test Overlay for Popups */}
       {activePopup && (
         <div className="assets-lightbox-overlay" onClick={() => setActivePopup(null)}>
-          <div className="assets-lightbox-modal" onClick={e => e.stopPropagation()}>
+          <div 
+            className="assets-lightbox-modal" 
+            style={{ 
+              maxWidth: (activePopup === 'student_detail' || activePopup === 'victory') ? '750px' : '450px',
+              width: (activePopup === 'student_detail' || activePopup === 'victory') ? '95%' : '90%'
+            }}
+            onClick={e => e.stopPropagation()}
+          >
             <button className="modal-close-x" onClick={() => setActivePopup(null)}>✕</button>
 
             {activePopup === 'reward' && (
@@ -1703,10 +2252,423 @@ export default function DevAssetsScreen() {
                 </div>
               </div>
             )}
+
+            {activePopup === 'victory' && (
+              <div className="custom-popup-victory" style={{ width: '100%' }}>
+                <div className="victory-header" style={{ textAlign: 'center', marginBottom: '20px' }}>
+                  <div className="trophy-badge" style={{ display: 'inline-flex', background: '#FEF3C7', padding: '16px', borderRadius: '50%', marginBottom: '12px', border: '3px solid #F59E0B' }}>
+                    <Trophy size={48} color="#F59E0B" />
+                  </div>
+                  <h2 className="victory-title" style={{ fontSize: '1.8rem', fontWeight: 950, color: 'var(--text-color)', margin: '0 0 4px 0' }}>HASIL AKHIR</h2>
+                  <p className="victory-subtitle" style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: '700' }}>
+                    🏆 <strong>Budi (Kamu)</strong> memenangkan petualangan!
+                  </p>
+                </div>
+
+                {/* Simulated Podiums */}
+                <div className="mock-podiums" style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end', gap: '20px', margin: '30px 0', borderBottom: '3px solid var(--border-color)', paddingBottom: '10px' }}>
+                  {/* Rank 2 */}
+                  <div className="mock-podium-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '80px' }}>
+                    <div style={{ fontSize: '2rem', marginBottom: '4px' }}>🐱</div>
+                    <div style={{ fontWeight: '800', fontSize: '0.85rem' }}>Santi</div>
+                    <div style={{ height: '60px', width: '100%', background: '#E5E7EB', border: '2px solid #9CA3AF', borderBottom: 'none', display: 'flex', alignItems: 'center', justify: 'center', fontWeight: '900', color: '#9CA3AF', borderTopLeftRadius: '12px', borderTopRightRadius: '12px' }}>2</div>
+                  </div>
+                  {/* Rank 1 */}
+                  <div className="mock-podium-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '90px' }}>
+                    <div style={{ fontSize: '2.5rem', marginBottom: '4px' }}>🐰👑</div>
+                    <div style={{ fontWeight: '900', fontSize: '0.95rem', color: '#D97706' }}>Budi</div>
+                    <div style={{ height: '90px', width: '100%', background: '#FEF3C7', border: '2px solid #F59E0B', borderBottom: 'none', display: 'flex', alignItems: 'center', justify: 'center', fontWeight: '900', color: '#F59E0B', borderTopLeftRadius: '12px', borderTopRightRadius: '12px' }}>1</div>
+                  </div>
+                  {/* Rank 3 */}
+                  <div className="mock-podium-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '80px' }}>
+                    <div style={{ fontSize: '2rem', marginBottom: '4px' }}>🦊</div>
+                    <div style={{ fontWeight: '800', fontSize: '0.85rem' }}>Bimo</div>
+                    <div style={{ height: '45px', width: '100%', background: '#FEE2E2', border: '2px solid #F87171', borderBottom: 'none', display: 'flex', alignItems: 'center', justify: 'center', fontWeight: '900', color: '#F87171', borderTopLeftRadius: '12px', borderTopRightRadius: '12px' }}>3</div>
+                  </div>
+                </div>
+
+                {/* Score list */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', background: '#F0FDF4', border: '2px solid #86EFAC', borderRadius: '16px' }}>
+                    <span style={{ fontWeight: '800' }}>🥇 Budi (Kamu)</span>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                      <span style={{ background: '#DCFCE7', padding: '2px 8px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '700' }}>📦 3 Peti</span>
+                      <span style={{ background: '#FEF9C3', padding: '2px 8px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '700' }}>🪙 250</span>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', background: 'var(--background-color)', border: '2px solid var(--border-color)', borderRadius: '16px' }}>
+                    <span style={{ fontWeight: '700' }}>🥈 Santi</span>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                      <span style={{ background: '#F3F4F6', padding: '2px 8px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '700' }}>📦 2 Peti</span>
+                      <span style={{ background: '#FEF9C3', padding: '2px 8px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '700' }}>🪙 180</span>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', background: 'var(--background-color)', border: '2px solid var(--border-color)', borderRadius: '16px' }}>
+                    <span style={{ fontWeight: '700' }}>🥉 Bimo</span>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                      <span style={{ background: '#F3F4F6', padding: '2px 8px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '700' }}>📦 1 Peti</span>
+                      <span style={{ background: '#FEF9C3', padding: '2px 8px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '700' }}>🪙 120</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '12px' }}>
+                  <button className="chunky-btn primary-blue" style={{ flex: 1 }} onClick={() => setActivePopup(null)}>
+                    <span className="btn-face">KEMBALI KE MENU</span>
+                  </button>
+                  <button className="chunky-btn primary-green" style={{ flex: 1 }} onClick={() => { soundManager.play('success'); setActivePopup(null); }}>
+                    <span className="btn-face">MAIN LAGI</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {activePopup === 'jelajah_help' && (
+              <div className="custom-popup-help" style={{ width: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '2px solid var(--border-color)', paddingBottom: '12px', marginBottom: '16px' }}>
+                  <HelpCircle size={24} color="#1CB0F6" />
+                  <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 950 }}>Panduan Bermain</h3>
+                </div>
+
+                <div style={{ minHeight: '220px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '10px 0' }}>
+                  {helpPage === 0 && (
+                    <>
+                      <div style={{ fontSize: '3rem', marginBottom: '16px' }}>🏰📦</div>
+                      <h4 style={{ margin: '0 0 8px 0', fontSize: '1.1rem', fontWeight: 900 }}>Cara Menang!</h4>
+                      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: '1.5', fontWeight: '600' }}>
+                        Tujuan utamamu adalah mengumpulkan Koin Emas di lintasan dan membawanya pulang untuk mengisi <strong>3 Peti Harta Karun</strong> di <strong>Markasmu</strong>!
+                      </p>
+                    </>
+                  )}
+                  {helpPage === 1 && (
+                    <>
+                      <div style={{ fontSize: '3rem', marginBottom: '16px' }}>🎲🚶</div>
+                      <h4 style={{ margin: '0 0 8px 0', fontSize: '1.1rem', fontWeight: 900 }}>Putar Dadu & Jalan</h4>
+                      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: '1.5', fontWeight: '600' }}>
+                        Putar dadu pada giliranmu, lalu jalankan pion karaktermu menyusuri ubin papan permainan sesuai angka yang diperoleh.
+                      </p>
+                    </>
+                  )}
+                  {helpPage === 2 && (
+                    <>
+                      <div style={{ fontSize: '3rem', marginBottom: '16px' }}>⚔️📜</div>
+                      <h4 style={{ margin: '0 0 8px 0', fontSize: '1.1rem', fontWeight: 900 }}>Ubin Kuis & Penjaga</h4>
+                      <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: '1.5', fontWeight: '600' }}>
+                        Mendarat di ubin kuis akan memicu pertanyaan sejarah. Jawab benar untuk koin, atau hadapi pertarungan sengit saat mendarat di ubin Penjaga Pos!
+                      </p>
+                    </>
+                  )}
+                </div>
+
+                {/* Pagination Controls */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '20px', borderTop: '2px solid var(--border-color)', paddingTop: '15px' }}>
+                  <button 
+                    className="chunky-btn primary-blue" 
+                    style={{ visibility: helpPage > 0 ? 'visible' : 'hidden', padding: '6px 12px' }}
+                    onClick={() => { soundManager.play('click'); setHelpPage(p => p - 1); }}
+                  >
+                    <span className="btn-face">Sebelumnya</span>
+                  </button>
+                  
+                  <div style={{ display: 'flex', gap: '6px' }}>
+                    {[0, 1, 2].map(idx => (
+                      <div 
+                        key={idx} 
+                        style={{ 
+                          width: '8px', 
+                          height: '8px', 
+                          borderRadius: '50%', 
+                          background: helpPage === idx ? '#1CB0F6' : 'var(--border-color)',
+                          transition: 'all 0.2s' 
+                        }} 
+                      />
+                    ))}
+                  </div>
+
+                  <button 
+                    className="chunky-btn primary-green" 
+                    style={{ padding: '6px 12px' }}
+                    onClick={() => {
+                      soundManager.play('click');
+                      if (helpPage < 2) {
+                        setHelpPage(p => p + 1);
+                      } else {
+                        setActivePopup(null);
+                      }
+                    }}
+                  >
+                    <span className="btn-face">{helpPage === 2 ? 'SELESAI' : 'Selanjutnya'}</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {activePopup === 'recovery' && (
+              <div className="custom-popup-recovery" style={{ width: '100%', textAlign: 'center' }}>
+                <h2 style={{ fontSize: '1.6rem', color: '#EF4444', fontWeight: 950, margin: '0 0 10px 0', letterSpacing: '1px' }}>TUMBANG!</h2>
+                
+                <div style={{ fontSize: '3rem', margin: '20px 0' }}>
+                  🐰💤
+                </div>
+
+                <p style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-color)', marginBottom: '15px' }}>
+                  Karaktermu pingsan karena kehabisan Tekad!
+                </p>
+
+                <div style={{ background: '#FEF2F2', border: '2px dashed #FCA5A5', borderRadius: '16px', padding: '12px', marginBottom: '20px', fontSize: '0.85rem', color: '#991B1B', fontWeight: '600' }}>
+                  🎲 Dapatkan angka <strong>5 atau 6</strong> pada dadu pemulihan untuk segera bangkit berdiri!
+                </div>
+
+                <button 
+                  className="chunky-btn primary-red" 
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    soundManager.play('dice_roll');
+                    const rollVal = Math.floor(Math.random() * 6) + 1;
+                    alert(`Hasil Dadu Pemulihan: ${rollVal}. ` + (rollVal >= 5 ? 'Selamat! Karakter Bangkit!' : 'Gagal Bangkit, Coba lagi giliran berikutnya.'));
+                    setActivePopup(null);
+                  }}
+                >
+                  <span className="btn-face">PUTAR DADU PEMULIHAN</span>
+                </button>
+              </div>
+            )}
+
+            {activePopup === 'add_student' && (
+              <div className="custom-popup-add-student" style={{ width: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+                  <Users size={24} color="#10B981" />
+                  <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 950 }}>Tambah Murid</h3>
+                </div>
+
+                {/* Tab buttons */}
+                <div style={{ display: 'flex', gap: '8px', borderBottom: '2px solid var(--border-color)', marginBottom: '20px', paddingBottom: '10px' }}>
+                  <button 
+                    onClick={() => { soundManager.play('click'); setAddStudentTab('manual'); }}
+                    style={{ flex: 1, padding: '8px 12px', background: addStudentTab === 'manual' ? '#10B981' : 'transparent', color: addStudentTab === 'manual' ? 'white' : 'var(--text-color)', border: 'none', borderRadius: '8px', fontWeight: '800', cursor: 'pointer', transition: 'all 0.2s' }}
+                  >
+                    Input Manual
+                  </button>
+                  <button 
+                    onClick={() => { soundManager.play('click'); setAddStudentTab('invite'); }}
+                    style={{ flex: 1, padding: '8px 12px', background: addStudentTab === 'invite' ? '#3B82F6' : 'transparent', color: addStudentTab === 'invite' ? 'white' : 'var(--text-color)', border: 'none', borderRadius: '8px', fontWeight: '800', cursor: 'pointer', transition: 'all 0.2s' }}
+                  >
+                    Undang via Kode
+                  </button>
+                </div>
+
+                {addStudentTab === 'manual' ? (
+                  <form onSubmit={(e) => { e.preventDefault(); soundManager.play('success'); alert(`Sukses menambahkan murid ${addStudentName} (NIS: ${addStudentNis})`); setActivePopup(null); }} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', textAlign: 'left' }}>
+                      <label style={{ fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-color)' }}>Nama Lengkap Murid</label>
+                      <input 
+                        type="text" 
+                        value={addStudentName} 
+                        onChange={(e) => setAddStudentName(e.target.value)} 
+                        placeholder="Cth: Budi Santoso"
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: '12px', border: '2.2px solid var(--border-color)', outline: 'none', fontWeight: '700', background: 'var(--card-bg)', color: 'var(--text-color)' }}
+                        required
+                      />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', textAlign: 'left' }}>
+                      <label style={{ fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-color)' }}>NIS / NISN</label>
+                      <input 
+                        type="text" 
+                        value={addStudentNis} 
+                        onChange={(e) => setAddStudentNis(e.target.value)} 
+                        placeholder="Cth: 10293847"
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: '12px', border: '2.2px solid var(--border-color)', outline: 'none', fontWeight: '700', background: 'var(--card-bg)', color: 'var(--text-color)' }}
+                        required
+                      />
+                    </div>
+                    <div style={{ padding: '10px', background: '#FEF3C7', borderLeft: '4px solid #F59E0B', borderRadius: '8px', fontSize: '0.75rem', color: '#92400E', lineHeight: '1.4', textAlign: 'left' }}>
+                      <strong>Catatan:</strong> Murid ini akan dibuatkan akun otomatis. Kata sandi bawaan (default) adalah: <strong>123456</strong>
+                    </div>
+                    <button type="submit" className="chunky-btn primary-green" style={{ width: '100%', marginTop: '10px' }}>
+                      <span className="btn-face">TAMBAHKAN MURID</span>
+                    </button>
+                  </form>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px 0' }}>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '15px', textAlign: 'left' }}>
+                      Bagikan kode berikut ke siswa agar mereka bisa bergabung dengan kelas secara mandiri:
+                    </p>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: '12px 16px', background: 'var(--background-color)', border: '2px solid var(--border-color)', borderRadius: '16px', marginBottom: '20px' }}>
+                      <code style={{ fontSize: '1.25rem', fontWeight: '900', color: '#3B82F6', letterSpacing: '1px' }}>LMS-5A-DEV</code>
+                      <button 
+                        onClick={() => {
+                          soundManager.play('success');
+                          setCopiedInvite(true);
+                          setTimeout(() => setCopiedInvite(false), 2000);
+                        }}
+                        style={{ marginLeft: 'auto', background: '#3B82F6', color: 'white', border: 'none', padding: '6px 12px', borderRadius: '8px', fontWeight: '800', cursor: 'pointer', fontSize: '0.8rem' }}
+                      >
+                        {copiedInvite ? 'Tersalin!' : 'Salin'}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {activePopup === 'student_detail' && (
+              <div className="custom-popup-student-detail" style={{ width: '100%', textAlign: 'left' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px', borderBottom: '2px solid var(--border-color)', paddingBottom: '16px', marginBottom: '20px' }}>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#3B82F6', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '900', fontSize: '1.2rem' }}>
+                    {(studentDetailName || '').split(' ').filter(Boolean).map(n => n[0]).join('').substring(0, 2).toUpperCase()}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <input 
+                      type="text"
+                      value={studentDetailName}
+                      onChange={(e) => setStudentDetailName(e.target.value)}
+                      style={{ fontSize: '1.25rem', fontWeight: '950', border: 'none', background: 'transparent', outline: 'none', width: '100%', color: 'var(--text-color)' }}
+                    />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginTop: '2px' }}>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '700' }}>NIS:</span>
+                      <input 
+                        type="text"
+                        value={studentDetailNis}
+                        onChange={(e) => setStudentDetailNis(e.target.value)}
+                        style={{ fontSize: '0.75rem', border: 'none', background: 'transparent', outline: 'none', width: '120px', color: 'var(--text-muted)', fontWeight: '800' }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', maxHeight: '350px', overflowY: 'auto', paddingRight: '6px' }}>
+                  {/* Left Column: Stats & Absensi */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                    <h4 style={{ margin: '0 0 5px 0', fontSize: '0.95rem', fontWeight: '900', color: 'var(--text-color)', borderBottom: '1.5px solid var(--border-color)', paddingBottom: '4px' }}>Statistik Aktivitas</h4>
+                    
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--background-color)', borderRadius: '8px' }}>
+                        <span style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--text-muted)' }}>Akurasi Jawaban</span>
+                        <span style={{ fontSize: '0.8rem', fontWeight: '900', color: '#10B981' }}>85%</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--background-color)', borderRadius: '8px' }}>
+                        <span style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--text-muted)' }}>Kuis Selesai</span>
+                        <span style={{ fontSize: '0.8rem', fontWeight: '900', color: '#3B82F6' }}>24 / 30</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--background-color)', borderRadius: '8px' }}>
+                        <span style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--text-muted)' }}>Kehadiran</span>
+                        <span style={{ fontSize: '0.8rem', fontWeight: '900', color: '#10B981' }}>100% (5/5 Hadir)</span>
+                      </div>
+                    </div>
+
+                    <h4 style={{ margin: '10px 0 5px 0', fontSize: '0.95rem', fontWeight: '900', color: 'var(--text-color)', borderBottom: '1.5px solid var(--border-color)', paddingBottom: '4px' }}>Kehadiran Mingguan</h4>
+                    <div style={{ display: 'flex', gap: '6px' }}>
+                      {['M1', 'M2', 'M3', 'M4', 'M5'].map(m => (
+                        <div key={m} style={{ flex: 1, textAlign: 'center', background: '#DCFCE7', color: '#15803D', padding: '6px 4px', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '900', border: '1px solid #86EFAC' }}>
+                          {m}
+                          <div style={{ fontSize: '0.55rem', marginTop: '2px', opacity: 0.8 }}>Hadir</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right Column: Academic Records */}
+                  <div>
+                    <h4 style={{ margin: '0 0 5px 0', fontSize: '0.95rem', fontWeight: '900', color: 'var(--text-color)', borderBottom: '1.5px solid var(--border-color)', paddingBottom: '4px' }}>Daftar Nilai Kuis (Rapor)</h4>
+                    
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '10px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--background-color)', borderRadius: '8px', borderLeft: '4px solid #10B981' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <span style={{ fontSize: '0.8rem', fontWeight: '800' }}>Sejarah: Kerajaan Kutai</span>
+                          <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Selesai: 14/07/2026</span>
+                        </div>
+                        <span style={{ fontSize: '0.95rem', fontWeight: '900', color: '#10B981' }}>90</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--background-color)', borderRadius: '8px', borderLeft: '4px solid #10B981' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <span style={{ fontSize: '0.8rem', fontWeight: '800' }}>Sejarah: Kerajaan Tarumanegara</span>
+                          <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Selesai: 12/07/2026</span>
+                        </div>
+                        <span style={{ fontSize: '0.95rem', fontWeight: '900', color: '#10B981' }}>85</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--background-color)', borderRadius: '8px', borderLeft: '4px solid #F59E0B' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <span style={{ fontSize: '0.8rem', fontWeight: '800' }}>Sifat Cahaya: Pembiasan</span>
+                          <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Selesai: 10/07/2026</span>
+                        </div>
+                        <span style={{ fontSize: '0.95rem', fontWeight: '900', color: '#F59E0B' }}>70</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'flex-end', borderTop: '2px solid var(--border-color)', paddingTop: '15px' }}>
+                  <button className="chunky-btn primary-red" style={{ padding: '8px 16px' }} onClick={() => { if (confirm('Reset kemajuan murid?')) { soundManager.play('error'); setActivePopup(null); } }}>
+                    <span className="btn-face">Reset Progress</span>
+                  </button>
+                  <button className="chunky-btn primary-green" style={{ padding: '8px 16px' }} onClick={() => { soundManager.play('success'); alert(`Sukses menyimpan data ${studentDetailName}`); setActivePopup(null); }}>
+                    <span className="btn-face">Simpan & Tutup</span>
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
-      <style jsx>{`
+      <style>{`
+        /* Overrides to make fixed modals render inline inside the preview cards */
+        .inline-popup-container .settings-overlay,
+        .inline-popup-container .help-modal-overlay,
+        .inline-popup-container .inventory-window-overlay,
+        .inline-popup-container .event-sheet-overlay,
+        .inline-popup-container .modal-overlay {
+          position: relative !important;
+          inset: auto !important;
+          width: 100% !important;
+          height: auto !important;
+          min-height: auto !important;
+          background: none !important;
+          backdrop-filter: none !important;
+          z-index: 1 !important;
+          padding: 0 !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          animation: none !important;
+          box-shadow: none !important;
+        }
+
+        .inline-popup-container .settings-card,
+        .inline-popup-container .help-modal-card,
+        .inline-popup-container .inventory-window,
+        .inline-popup-container .event-sheet-container,
+        .inline-popup-container .modal-content,
+        .inline-popup-container .student-detail-modal {
+          position: relative !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          height: auto !important;
+          max-height: none !important;
+          margin: 0 !important;
+          box-shadow: none !important;
+          border-radius: 20px !important;
+          border: 2px solid var(--border-color) !important;
+          transform: none !important;
+          animation: none !important;
+          padding: 20px !important;
+        }
+
+        .inline-popup-container .turn-overlay {
+          position: relative !important;
+          top: auto !important;
+          left: auto !important;
+          z-index: 1 !important;
+          width: 100% !important;
+          display: flex !important;
+          justify-content: center !important;
+          animation: none !important;
+        }
+
+        .inline-popup-container .turn-card {
+          animation: none !important;
+          box-shadow: none !important;
+        }
+
         .dev-assets-container {
           flex: 1;
           display: flex;
